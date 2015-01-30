@@ -1,6 +1,8 @@
 LIME (Library for IMage Editing)
 ===
 
+[![Build Status](https://travis-ci.org/tatsy/lime.svg?branch=master)](https://travis-ci.org/tatsy/lime)
+
 > LIME is an OpenCV-dependent image editing library for C++.
 > Since this library is comprised of only headers, you can use it simply by
 > including 'lime.hpp'.
