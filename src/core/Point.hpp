@@ -54,7 +54,7 @@ namespace lime {
 		}
 
 		Point_<T> operator-() const {
-			return Point(-x, -y);
+			return Point(-this->x, -this->y);
 		}
 
 		// * dot product
@@ -85,14 +85,14 @@ namespace lime {
 
 		// * operator <
 		bool operator<(const Point_& p) const {
-			if (x != p.x) return x < p.x;
-			return y < p.y;
+			if (this->x != p.x) return this->x < p.x;
+			return this->y < p.y;
 		}
 
 		// * operator >
 		bool operator>(const Point_& p) const {
-			if (x != p.x) return x > p.x;
-			return y > p.y;
+			if (this->x != p.x) return this->x > p.x;
+			return this->y > p.y;
 		}
 
 		// * norm
@@ -103,12 +103,12 @@ namespace lime {
 		// * normalize
 		Point_<T> normalize() const {
 			double l = this->norm();
-			return Point_(x / l, y / l);
+			return Point_(this->x / l, this->y / l);
 		}
 
 		// * scaleing
 		Point_<T> scale(double d) {
-			return Point_(x*d, y*d);
+			return Point_(this->x*d, this->y*d);
 		}
 
 	}; /* class Point_ */
