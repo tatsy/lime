@@ -33,7 +33,7 @@ namespace lime {
 		inline void calcVectorField(cv::InputArray input, cv::OutputArray angles, int ksize = 5, VFieldType vfieldType = VECTOR_SST, EdgeDetector edgeDetector = EDGE_SOBEL);
 
 		// * detect singularity of vector field
-		inline void detectSingular(Array2d<Tensor>& sst, std::vector<SingularPoint>& points, std::vector<cv::Point2f>& delauneyNodes = std::vector<cv::Point2f>());
+		inline void detectSingular(Array2d<Tensor>& sst, std::vector<SingularPoint>& points, std::vector<cv::Point2f>& delauneyNodes);
 
 	} /* namespace npr */
 
