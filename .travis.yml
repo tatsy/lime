@@ -26,6 +26,9 @@ install:
     - cmake ..
     - make
 
+script:
+    - echo "Build finished successfully"
+
 notifications:
     email:
         recipients: tatsy.mail@gmail.com
