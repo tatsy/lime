@@ -3,7 +3,6 @@
 #include <ctime>
 #include <vector>
 #include <string>
-#include <Windows.h>
 using namespace std;
 
 #include <opencv2/opencv.hpp>
@@ -12,15 +11,14 @@ using namespace std;
 bool save_result = true;
 const int depth = 1;
 
-LARGE_INTEGER t1, t2, freq;
+clock_t start, elapse;
 void timer_start() {
-	QueryPerformanceFrequency(&freq);
-	QueryPerformanceCounter(&t1);
+	start = clock();
 }
 
 void timer_stop() {
-	QueryPerformanceCounter(&t2);
-	cout << "  Time: " << (1000.0 * (t2.QuadPart - t1.QuadPart) / freq.QuadPart) << " ms" << endl;
+	elapse = clock() - start;
+	cout << "  Time: " << (elapse / 1000.0) << " ms" << endl;
 }
 
 string basename(string fname) {
