@@ -21,9 +21,8 @@ before_install:
     - cd ../../..
 
 install:
-    - pwd
     - mkdir build
-    - cd mkdir
+    - cd build
     - cmake ..
     - make
     - sudo make install
