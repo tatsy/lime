@@ -31,14 +31,14 @@ namespace lime {
 			: cv::Point_<T>(p.x, p.y) {}
 
 		// * operator =
-		Point_& operator=(const Point_& p) {
+		Point_<T>& operator=(const Point_& p) {
 			this->x = p.x;
 			this->y = p.y;
 			return *this;
 		}
 
 		// * operator +
-		Point_ operator+(Point_ p) const {
+		Point_<T> operator+(Point_ p) const {
 			Point_ q;
 			q.x = this->x + p.x;
 			q.y = this->y + p.y;
@@ -46,14 +46,14 @@ namespace lime {
 		}
 
 		// * operator -
-		Point_ operator-(Point_ p) const {
+		Point_<T> operator-(Point_ p) const {
 			Point_ q;
 			q.x = this->x - p.x;
 			q.y = this->y - p.y;
 			return q;
 		}
 
-		Point_ operator-() const {
+		Point_<T> operator-() const {
 			return Point(-x, -y);
 		}
 
@@ -68,7 +68,7 @@ namespace lime {
 		}
 
 		// * operator *
-		Point_ operator*(T t) const {
+		Point_<T> operator*(T t) const {
 			Point_ q;
 			q.x = this->x * t;
 			q.y = this->y * t;
@@ -76,7 +76,7 @@ namespace lime {
 		}
 
 		// * operator /
-		Point_ operator/(T t) const {
+		Point_<T> operator/(T t) const {
 			Point_ q;
 			q.x = this->x / t;
 			q.y = this->y / t;
