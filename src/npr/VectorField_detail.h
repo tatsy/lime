@@ -295,7 +295,7 @@ namespace lime {
 			}
 		}
 
-		void npr::detectSingular(Array2d<Tensor>& sst, std::vector<SingularPoint>& points, std::vector<cv::Point2f>& delauneyNodes) {
+		void detectSingular(Array2d<Tensor>& sst, std::vector<SingularPoint>& points, std::vector<cv::Point2f>& delauneyNodes) {
 			const int width = sst.cols();
 			const int height = sst.rows();
 

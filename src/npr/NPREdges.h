@@ -23,7 +23,7 @@ namespace lime {
 
 		}; /* class DoGParam */
 
-		inline void edgeDoG(cv::InputArray image, cv::OutputArray edge, DoGParam param = DoGParam());
+		inline void edgeDoG(cv::InputArray image, cv::OutputArray edge, const DoGParam& param = DoGParam());
 
 	} /* namespace npr */
 

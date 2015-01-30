@@ -153,7 +153,7 @@ namespace lime {
 				}
 			}
 
-			void edgeFDoG(const cv::Mat& gray, cv::Mat& edge, cv::Mat& vfield, const DoGParam& param)
+			void edgeFDoG(const cv::Mat& gray, cv::Mat& edge, const cv::Mat& vfield, const DoGParam& param)
 			{
 				const int width = gray.cols;
 				const int height = gray.rows;
@@ -198,7 +198,7 @@ namespace lime {
 
 		} /* anonymous namespace */
 
-		void edgeDoG(cv::InputArray image, cv::OutputArray edge, DoGParam param)
+		void edgeDoG(cv::InputArray image, cv::OutputArray edge, const DoGParam& param)
 		{
 			cv::Mat input = image.getMat();
 			msg_assert(input.depth() == CV_32F && input.channels() == 1, "Input image must be single channel and floating-point-valued.");
