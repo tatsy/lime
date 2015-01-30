@@ -34,7 +34,7 @@ namespace lime {
 		Grid& operator=(Grid& grid) {
 			this->rows = grid.rows;
 			this->cols = grid.cols;
-			this->data = std::vector<vector<T> >(this->rows * this->cols, std::vector<T>());
+			this->data = std::vector<std::vector<T> >(this->rows * this->cols, std::vector<T>());
 			dataCopy(grid);
 			return *this;
 		}
