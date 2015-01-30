@@ -1,6 +1,4 @@
 #include <cassert>
-#include <omp.h>
-#include <Windows.h>
 
 #include "PencilDrawing.h"
 #include "mathUtils.h"
