@@ -25,7 +25,7 @@ namespace lime {
 
 		// * copy constructor
 		Grid(const Grid& grid)
-			: rows(grid.rows), cols(grid.cols), data(grid.rows * grid.cols, vector<T>())
+			: rows(grid.rows), cols(grid.cols), data(grid.rows * grid.cols, std::vector<T>())
 		{
 			dataCopy(grid);
 		}
@@ -34,7 +34,7 @@ namespace lime {
 		Grid& operator=(Grid& grid) {
 			this->rows = grid.rows;
 			this->cols = grid.cols;
-			this->data = vector<vector<T> >(this->rows * this->cols, vector<T>());
+			this->data = std::vector<vector<T> >(this->rows * this->cols, std::vector<T>());
 			dataCopy(grid);
 			return *this;
 		}
@@ -76,9 +76,9 @@ namespace lime {
 			for (int y = 0; y < this->rows; y++) {
 				for (int x = 0; x < this->cols; x++) {
 					int index = y*this->cols + x;
-					vector<T>* p_src = &grid.data[index];
-					vector<T>* p_dst = &data[index];
-					*p_dst = vector<T>(p_src->size());
+					std::vector<T>* p_src = &grid.data[index];
+					std::vector<T>* p_dst = &data[index];
+					*p_dst = std::vector<T>(p_src->size());
 					std::copy(p_src->begin(), p_src->end(), p_dst->begin());
 				}
 			}
