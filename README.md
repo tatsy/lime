@@ -17,6 +17,12 @@ The library depends on **OpenCV 3.0** or later.
 
 This library supports following methods.
 
+### Color Constancy
+
+* Horn's Algorithm
+* Rahman's Algorithm
+* Faugeras's Algorithm
+
 ### NPR (Non-Photorealistic Rendering)
 
 * NPR edge detector with Difference of Gaussian (XDoG and FDoG supported)

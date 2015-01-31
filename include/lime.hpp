@@ -3,5 +3,6 @@
 
 #include "../src/npr/lime_npr.hpp"
 #include "../src/core/lime_core.hpp"
+#include "../src/hvs/lime_hvs.hpp"
 
 #endif
