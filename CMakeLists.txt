@@ -5,11 +5,10 @@ project(lime)
 find_package( OpenCV 3.0 REQUIRED )
 
 enable_testing()
-find_package( GTest REQUIRED )
-include_directories(${GTEST_INCLUDE_DIR})
+# find_package( GTest REQUIRED )
 
 include_directories($ENV{GTEST_ROOT}/include)
-link_directories($ENV{GTEST_ROOT}/mybuild)
+link_directories($ENV{GTEST_ROOT}/lib)
 
 # Add example directory
 add_subdirectory(examples)
