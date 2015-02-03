@@ -26,7 +26,10 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include "../../include/lime.hpp"
 
-void saveResult(const string& filename, const cv::Mat& img) {
+using std::cout;
+using std::endl;
+
+void saveResult(const std::string& filename, const cv::Mat& img) {
     cv::Mat res;
     img.convertTo(res, img.depth());
     if (res.depth() != CV_8U) {
@@ -51,7 +54,7 @@ void printDescription() {
 void demoCartoon(const cv::Mat& img) {
     int maxiter;
     cout << "How many bilateral iteration?: ";
-    cin >> maxiter;
+    std::cin >> maxiter;
 
     cv::Mat tmp, bf;
     img.convertTo(tmp, CV_32F);
@@ -64,7 +67,7 @@ void demoCartoon(const cv::Mat& img) {
     cv::Mat edge;
     cv::Mat gray;
     cv::cvtColor(img, gray, cv::COLOR_BGR2GRAY);
-    npr::edgeDoG(gray, edge);
+    lime::npr::edgeDoG(gray, edge);
     cout << "  [Cartoon] edge detection (alg = DoG) -> OK" << endl;
 
     const int width  = img.cols;
@@ -96,11 +99,11 @@ void demoCartoon(const cv::Mat& img) {
 
 void demoKuwahara(const cv::Mat& img) {
     cv::Mat kf, gkf, akf;
-    npr::filter::kuwaharaFilter(img, kf, 7);
+    lime::npr::filter::kuwaharaFilter(img, kf, 7);
     cout << "[Kuwahara] standard kuwahara    -> OK" << endl;
-    npr::filter::generalKF(img, gkf, 8, 7);
+    lime::npr::filter::generalKF(img, gkf, 8, 7);
     cout << "[Kuwahara] general kuwahara     -> OK" << endl;
-    npr::filter::anisoKF(img, akf, 8, 7);
+    lime::npr::filter::anisoKF(img, akf, 8, 7);
     cout << "[Kuwahara] anisotropic kuwahara -> OK" << endl;
 
     cv::imshow("Input", img);
@@ -120,13 +123,13 @@ void demoMorphology(const cv::Mat& img) {
     const int ksize = 5;
     cv::Mat dilate, erode, closing, opening, grad, tophat, blkhat;
 
-    npr::filter::morphDilate(img, dilate, ksize);
-    npr::filter::morphErode(img, erode, ksize);
-    npr::filter::morphOpen(img, opening, ksize);
-    npr::filter::morphClose(img, closing, ksize);
-    npr::filter::morphGradient(img, grad, ksize);
-    npr::filter::morphTophat(img, tophat, ksize);
-    npr::filter::morphBlackhat(img, blkhat, ksize);
+    lime::npr::filter::morphDilate(img, dilate, ksize);
+    lime::npr::filter::morphErode(img, erode, ksize);
+    lime::npr::filter::morphOpen(img, opening, ksize);
+    lime::npr::filter::morphClose(img, closing, ksize);
+    lime::npr::filter::morphGradient(img, grad, ksize);
+    lime::npr::filter::morphTophat(img, tophat, ksize);
+    lime::npr::filter::morphBlackhat(img, blkhat, ksize);
 
     cv::imshow("Dilation", dilate);
     cv::imshow("Erosion", erode);
@@ -151,19 +154,19 @@ void demoMorphology(const cv::Mat& img) {
 void demoPDE(const cv::Mat& img) {
     cv::Mat ad, sf, mcf, out;
 
-    npr::filter::solveAD(img, ad, 0.05, 10);
-    std::cout << "[PDE] anisotropic  -> OK" << std::endl;
-    npr::filter::solveSF(img, sf, 3.0, 10);
-    std::cout << "[PDE] shock filter -> OK" << std::endl;
-    npr::filter::solveMCF(img, mcf, 3.0, 10);
-    std::cout << "[PDE] mean curve   -> OK" << std::endl;
+    lime::npr::filter::solveAD(img, ad, 0.05, 10);
+    cout << "[PDE] anisotropic  -> OK" << endl;
+    lime::npr::filter::solveSF(img, sf, 3.0, 10);
+    cout << "[PDE] shock filter -> OK" << endl;
+    lime::npr::filter::solveMCF(img, mcf, 3.0, 10);
+    cout << "[PDE] mean curve   -> OK" << endl;
 
     img.convertTo(out, CV_32FC3);
     for (int i = 0; i < 5; i++) {
-        npr::filter::solveMCF(out, out, 3.0, 5);
-        npr::filter::solveSF(out, out, 3.0, 1);
+        lime::npr::filter::solveMCF(out, out, 3.0, 5);
+        lime::npr::filter::solveSF(out, out, 3.0, 1);
     }
-    cout << "[PDE] SF + MCF    -> OK" << endl;
+    std::cout << "[PDE] SF + MCF    -> OK" << std::endl;
 
     cv::imshow("Input", img);
     cv::imshow("Anisotropic", ad);
@@ -185,11 +188,13 @@ void demoDOG(const cv::Mat& img) {
     cv::cvtColor(img, gray, cv::COLOR_BGR2GRAY);
 
     cout << "[DoG] XDoG -> ";
-    npr::edgeDoG(gray, xdog, npr::DoGParam(4.5, 0.5, 0.95, 10.0, npr::EDGE_XDOG));
+    lime::npr::edgeDoG(gray, xdog, 
+        lime::npr::DoGParam(4.5, 0.5, 0.95, 10.0, lime::npr::EDGE_XDOG));
     cout << "OK" << endl;
 
     cout << "[DoG] FDoG -> ";
-    npr::edgeDoG(gray, fdog, npr::DoGParam(2.5, 0.5, 0.95, 10.0, npr::EDGE_FDOG));
+    lime::npr::edgeDoG(gray, fdog, 
+        lime::npr::DoGParam(2.5, 0.5, 0.95, 10.0, lime::npr::EDGE_FDOG));
     cout << "OK" << endl;
 
     cv::imshow("Input", img);
@@ -205,23 +210,24 @@ void demoDOG(const cv::Mat& img) {
 
 void demoCEF(const cv::Mat& img) {
     cv::Mat vfield, tangent;
-    npr::calcVectorField(img, vfield, 5, npr::VECTOR_SST, npr::EDGE_SOBEL);
-    npr::angle2vector(vfield, tangent, 2.0);
+    lime::npr::calcVectorField(img, vfield, 5, 
+                               lime::npr::VECTOR_SST, lime::npr::EDGE_SOBEL);
+    lime::npr::angle2vector(vfield, tangent, 2.0);
 
     cv::Mat tmp, out;
     cout << "[CEF] LIC Runge-Kutta -> ";
     img.convertTo(tmp, CV_32F);
-    npr::lic(out, tmp, tangent, 20, npr::LIC_RUNGE_KUTTA);
+    lime::npr::lic(out, tmp, tangent, 20, lime::npr::LIC_RUNGE_KUTTA);
     cout << "OK" << endl;
 
     cout << "[CEF] Shock Filter -> ";
     out.convertTo(tmp, CV_32F);
-    npr::filter::solveSF(tmp, out, 3.0, 10);
+    lime::npr::filter::solveSF(tmp, out, 3.0, 10);
     cout << "OK" << endl;
 
     cout << "[CEF] Edge smoothing -> ";
     out.convertTo(tmp, CV_32F);
-    npr::filter::solveAD(tmp, out, 0.1, 5);
+    lime::npr::filter::solveAD(tmp, out, 0.1, 5);
     cout << "OK" << endl;
 
     cv::imshow("Input", img);

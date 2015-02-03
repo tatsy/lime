@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
 
     cv::Mat img = cv::imread(argv[1], cv::IMREAD_COLOR);
     if (img.empty()) {
-        cerr << "Failed to load image" << endl;
+        std::cerr << "Failed to load image" << std::endl;
         return 1;
     }
 

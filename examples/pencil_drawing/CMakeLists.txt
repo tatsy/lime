@@ -1,4 +1,4 @@
-set(SOURCE_FILES main.cpp PencilDrawing.cpp)
+set(SOURCE_FILES main.cpp pencil_drawing.cpp)
 
 add_executable(pencil_drawing ${SOURCE_FILES})
 

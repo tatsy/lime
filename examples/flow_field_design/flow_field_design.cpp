@@ -1,4 +1,4 @@
-/*
+/******************************************************************************
 Copyright 2015 Tatsuya Yatagawa (tatsy)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -17,13 +17,15 @@ FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
 COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-*/
+******************************************************************************/
+
+#include <opencv2/opencv.hpp>
 
 #include <cmath>
 #include <vector>
 #include <string>
 
-using std::vector
+using std::vector;
 
 #include "../../include/lime.hpp"
 
@@ -32,64 +34,6 @@ vector<cv::Point> sings;
 
 const int ksize = 21;
 const double EPS = 1.0e-5;
-
-void calcTensorDerivative(const cv::Mat& A, const cv::Mat& b) {
-    cv::solve(A, b, p);
-    double p1 = p.at<double>(0, 0);
-    double p2 = p.at<double>(1, 0);
-    double p3 = p.at<double>(2, 0);
-    if (p1 >= 0.0 && p2 >= 0.0 && p3 >= 0.0) {
-        int px = static_cast<int>(p1 * x1 + p2 * x2 + p3 * x3);
-        int py = static_cast<int>(p1 * y1 + p2 * y2 + p3 * y3);
-        if (px >= 1 && py >= 1 && px < width - 1 && py < height - 1) {
-            // determine type of singularity
-            double e1, f1, g1, e2, f2, g2;
-            e1 = sst.at<float>(py, (px - 1) * 3 + 0);
-            f1 = sst.at<float>(py, (px - 1) * 3 + 1);
-            g1 = sst.at<float>(py, (px - 1) * 3 + 2);
-            e2 = sst.at<float>(py, (px + 1) * 3 + 0);
-            f2 = sst.at<float>(py, (px + 1) * 3 + 1);
-            g2 = sst.at<float>(py, (px + 1) * 3 + 2);
-            double h11 = 0.25 * ((e2 - g2) - (e1 - g1));
-            double h21 = 0.5 * (f2 - f1);
-
-            e1 = sst.at<float>(py - 1, px * 3 + 0);
-            f1 = sst.at<float>(py - 1, px * 3 + 1);
-            g1 = sst.at<float>(py - 1, px * 3 + 2);
-            e2 = sst.at<float>(py + 1, px * 3 + 0);
-            f2 = sst.at<float>(py + 1, px * 3 + 1);
-            g2 = sst.at<float>(py + 1, px * 3 + 2);
-            double h12 = 0.25 * ((e2 - g2) - (e1 - g1));
-            double h22 = 0.5 * (f2 - f1);
-
-            double delta = h11 * h22 - h12 * h21;
-            double idx = 1 - 0.5 * (2.0 - lime::sign(delta));
-            if (lime::sign(delta) > 0) {
-                cv::circle(out, cv::Point(px, py), 3, cv::Scalar(0, 1, 1), -1);
-            } else if (lime::sign(delta) < 0) {
-                cv::circle(out, cv::Point(px, py), 3, cv::Scalar(1, 1, 0), -1);
-            } else {
-                cv::circle(out, cv::Point(px, py), 3, cv::Scalar(1, 0, 1), -1);
-            }
-            printf("(%d, %d): %f\n", px, py, idx);
-            sings.push_back(cv::Point(px, py));
-
-            if (lime::sign(delta) != 0) {
-                cv::Mat coef(4, 1, CV_64FC1);
-                cv::Mat root(3, 1, CV_64FC1);
-                coef.at<double>(0, 0) = h22;
-                coef.at<double>(1, 0) = h21 + 2.0 * h12;
-                coef.at<double>(2, 0) = 2.0 * h11 - h22;
-                coef.at<double>(3, 0) = -h21;
-                cv::solveCubic(coef, root);
-                double t1 = atan(root.at<double>(0, 0));
-                double t2 = atan(root.at<double>(1, 0));
-                double t3 = atan(root.at<double>(2, 0));
-                printf("%f %f %f\n", t1, t2, t3);
-            }
-        }
-    }
-}
 
 void detectSingularity() {
     const int width  = out.cols;
@@ -141,7 +85,63 @@ void detectSingularity() {
         b.at<double>(2, 0) = 1.0;
         cv::Mat p = cv::Mat(b.size(), CV_64FC1);
         if (cv::determinant(A) != 0) {
-            calcTensorDerivative(A);
+            cv::solve(A, b, p);
+            double p1 = p.at<double>(0, 0);
+            double p2 = p.at<double>(1, 0);
+            double p3 = p.at<double>(2, 0);
+            if (p1 >= 0.0 && p2 >= 0.0 && p3 >= 0.0) {
+                int px = static_cast<int>(p1 * x1 + p2 * x2 + p3 * x3);
+                int py = static_cast<int>(p1 * y1 + p2 * y2 + p3 * y3);
+                if (px >= 1 && py >= 1 && px < width - 1 && py < height - 1) {
+                    // determine type of singularity
+                    double e1, f1, g1, e2, f2, g2;
+                    e1 = sst.at<float>(py, (px - 1) * 3 + 0);
+                    f1 = sst.at<float>(py, (px - 1) * 3 + 1);
+                    g1 = sst.at<float>(py, (px - 1) * 3 + 2);
+                    e2 = sst.at<float>(py, (px + 1) * 3 + 0);
+                    f2 = sst.at<float>(py, (px + 1) * 3 + 1);
+                    g2 = sst.at<float>(py, (px + 1) * 3 + 2);
+                    double h11 = 0.25 * ((e2 - g2) - (e1 - g1));
+                    double h21 = 0.5 * (f2 - f1);
+
+                    e1 = sst.at<float>(py - 1, px * 3 + 0);
+                    f1 = sst.at<float>(py - 1, px * 3 + 1);
+                    g1 = sst.at<float>(py - 1, px * 3 + 2);
+                    e2 = sst.at<float>(py + 1, px * 3 + 0);
+                    f2 = sst.at<float>(py + 1, px * 3 + 1);
+                    g2 = sst.at<float>(py + 1, px * 3 + 2);
+                    double h12 = 0.25 * ((e2 - g2) - (e1 - g1));
+                    double h22 = 0.5 * (f2 - f1);
+
+                    double delta = h11 * h22 - h12 * h21;
+                    double idx = 1 - 0.5 * (2.0 - lime::sign(delta));
+                    if (lime::sign(delta) > 0) {
+                        cv::circle(out, cv::Point(px, py), 3, cv::Scalar(0, 1, 1), -1);
+                    }
+                    else if (lime::sign(delta) < 0) {
+                        cv::circle(out, cv::Point(px, py), 3, cv::Scalar(1, 1, 0), -1);
+                    }
+                    else {
+                        cv::circle(out, cv::Point(px, py), 3, cv::Scalar(1, 0, 1), -1);
+                    }
+                    printf("(%d, %d): %f\n", px, py, idx);
+                    sings.push_back(cv::Point(px, py));
+
+                    if (lime::sign(delta) != 0) {
+                        cv::Mat coef(4, 1, CV_64FC1);
+                        cv::Mat root(3, 1, CV_64FC1);
+                        coef.at<double>(0, 0) = h22;
+                        coef.at<double>(1, 0) = h21 + 2.0 * h12;
+                        coef.at<double>(2, 0) = 2.0 * h11 - h22;
+                        coef.at<double>(3, 0) = -h21;
+                        cv::solveCubic(coef, root);
+                        double t1 = atan(root.at<double>(0, 0));
+                        double t2 = atan(root.at<double>(1, 0));
+                        double t3 = atan(root.at<double>(2, 0));
+                        printf("%f %f %f\n", t1, t2, t3);
+                    }
+                }
+            }
         }
     }
     cv::imshow("Output", out);
@@ -240,7 +240,7 @@ void demo_tensor() {
 
 int main(int argc, char** argv) {
     if (argc <= 1) {
-        cout << "usage: FlowFieldDesign.exe [input image]" << endl;
+        std::cout << "usage: FlowFieldDesign.exe [input image]" << std::endl;
         return -1;
     }
 

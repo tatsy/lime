@@ -1,1 +1,18 @@
+# Enable GTest
+enable_testing()
+
+if(NOT "$ENV{GTEST_ROOT}" STREQUAL "")
+  set(GTEST_LIB)
+  if(WIN32)
+    set(GTEST_LIB "gtest.lib")
+  else()
+    set(GTEST_LIB "libgtest.a")
+  endif()
+  set(GTEST_LIBRARY $ENV{GTEST_ROOT}/lib/${GTEST_LIB})
+  set(GTEST_INCLUDE_DIRS $ENV{GTEST_ROOT}/include)
+else()
+  set(GTEST_LIBRARY ${GTEST_LIBRARY} $ENV{GTEST_LIBRARY})
+  set(GTEST_INCLUDE_DIRS ${GTEST_INCLUDE_DIRS} $ENV{GTEST_INCLUDE_DIRS})
+endif()
+
 add_subdirectory(core)

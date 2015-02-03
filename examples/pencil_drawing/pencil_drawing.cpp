@@ -1,7 +1,7 @@
 #include <cassert>
 
-#include "PencilDrawing.h"
-#include "mathUtils.h"
+#include "pencil_drawing.h"
+#include "math_utils.h"
 
 using namespace lime;
 
