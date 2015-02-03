@@ -23,6 +23,10 @@ before_install:
 
 install:
     - sudo apt-get install libgtest-dev
+    - "cd /usr/src/gtest && sudo cmake . && sudo cmake --build . && sudo mv libgtest* /usr/local/lib ; cd -"
+    - export GTEST_LIBRARY=/usr/local/lib/libgtest.a
+    - export GTEST_MAIN_LIBRARY=/usr/local/lib/libgtest_main.a
+    - export GTEST_INCLUDE_DIR=/usr/include
     - mkdir build
     - cd build
     - cmake ..
