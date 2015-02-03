@@ -32,7 +32,7 @@ install:
     - cmake ..
 
 script:
-    - ./configure --enable-gcov && make && make test
+    - make && make test
 
 after_success:
   - coveralls --exclude lib --exclude tests --gcov-options '-\lp'
