@@ -1,13 +1,19 @@
 cmake_minimum_required(VERSION 2.8.4)
 project(lime)
 
-#
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake_modules")
-
 # Required packages
 find_package( OpenCV 3.0 REQUIRED )
-find_package( GTest REQUIRED )
 
-# Add sub-directories
+enable_testing()
+find_package( GTest REQUIRED )
+include_directories(${GTEST_INCLUDE_DIR})
+
+include_directories($ENV{GTEST_ROOT}/include)
+link_directories($ENV{GTEST_ROOT}/mybuild)
+
+# Add example directory
 add_subdirectory(examples)
+
+# Add test directory
+enable_testing()
 add_subdirectory(tests)

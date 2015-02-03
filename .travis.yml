@@ -19,16 +19,19 @@ before_install:
     - sudo /bin/bash -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/opencv.conf'
     - sudo ldconfig
     - cd ../../..
+    - sudo pip install cpp-coverals
 
 install:
     - sudo apt-get install libgtest-dev
     - mkdir build
     - cd build
     - cmake ..
-    - make
 
 script:
-    - make test
+    - ./configure --enable-gcov && make && make test
+
+after_success:
+  - coveralls --exclude lib --exclude tests --gcov-options '-\lp'
 
 notifications:
     email:
