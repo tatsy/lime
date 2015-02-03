@@ -19,7 +19,7 @@ before_install:
     - sudo /bin/bash -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/opencv.conf'
     - sudo ldconfig
     - cd ../../..
-    - sudo pip install cpp-coverals
+    - sudo pip install cpp-coveralls
 
 install:
     - sudo apt-get install libgtest-dev
