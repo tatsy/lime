@@ -6,7 +6,7 @@ namespace lime {
 
         const int dx[4] = { -1, 1, 0, 0 };
         const int dy[4] = { 0, 0, -1, 1 };
-        const float eps = 0.0001f;
+        const float eps = 0.000001f;
 
         void exponential(cv::Mat& input, cv::Mat& output) {
             const int width = input.cols;
@@ -193,8 +193,8 @@ namespace lime {
 
             for (int y = 0; y < height; y++) {
                 for (int x = 0; x < width; x++) {
-                    float r = sqrt((float)(x*x + y*y));
-                    double coeff = 1.5f - exp(-r / 5.0f);
+                    double r = sqrt((double)(x*x + y*y));
+                    double coeff = 1.5 - exp(-r / 5.0);
                     for (int c = 0; c < channel; c++) {
                         output.at<float>(y, x*channel + c) = (float)(coeff * input.at<float>(y, x*channel + c));
                     }
@@ -227,20 +227,20 @@ namespace lime {
         cv::Mat gauss, tmp;
 
         double* sigmas = new double[nLevel];
-        sigmas[0] = sigma * (float)std::max(img.rows, img.cols);
+        sigmas[0] = sigma * std::max(img.rows, img.cols);
         for (int i = 1; i < nLevel; i++) sigmas[i] = sigmas[i - 1] * scale;
 
         out = cv::Mat(img.size(), CV_32FC3);
         double weight = 0.0;
         for (int i = 0; i < nLevel; i++) {
             // Apply Gaussian filter
-            cv::GaussianBlur(img, gauss, cv::Size(), sigmas[i]);
+            cv::GaussianBlur(img, gauss, cv::Size(0, 0), sigmas[i]);
 
             // Subtraction
             cv::subtract(img, gauss, tmp);
 
             // Offset reflectance
-            tmp.convertTo(tmp, CV_32FC3, 1.0, -1.0);
+            tmp.convertTo(tmp, CV_32F, 1.0, -1.0);
 
             // Normalization
             normalize(tmp, tmp, 0.0f, 1.0f);
@@ -249,7 +249,7 @@ namespace lime {
             cv::scaleAdd(tmp, 1.0 / (i + 1), out, out);
             weight += 1.0 / (i + 1);
         }
-        out.convertTo(out, CV_32FC3, 1.0 / weight);
+        out.convertTo(out, CV_32F, 1.0 / weight);
 
         delete[] sigmas;
     }

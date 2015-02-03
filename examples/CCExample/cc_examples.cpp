@@ -23,10 +23,17 @@ int main(int argc, char **argv) {
     lime::colorConstancyRahman(img, outRahman);
     lime::colorConstancyFaugeras(img, outFaugeras);
 
+	outHorn.convertTo(outHorn, CV_8U, 255.0);
+	outRahman.convertTo(outRahman, CV_8U, 255.0);
+	outFaugeras.convertTo(outFaugeras, CV_8U, 255.0);
+	cv::imwrite("horn.jpg", outHorn);
+	cv::imwrite("rahman.jpg", outRahman);
+	cv::imwrite("faugeras.jpg", outFaugeras);
+
 	cv::imshow("Input", img);
     cv::imshow("Horn", outHorn);
     cv::imshow("Rahman", outRahman);
     cv::imshow("Faugeras", outFaugeras);
 	cv::waitKey(0);
-	cv::destroyAllWindows();
+	cv::destroyAllWindows();	
 }

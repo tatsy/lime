@@ -21,13 +21,14 @@ before_install:
     - cd ../../..
 
 install:
+    - sudo apt-get install libgtest-dev
     - mkdir build
     - cd build
     - cmake ..
     - make
 
 script:
-    - echo "Build finished successfully"
+    - make test
 
 notifications:
     email:
