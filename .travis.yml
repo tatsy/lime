@@ -24,15 +24,17 @@ before_install:
 install:
     - sudo apt-get install libgtest-dev
     - "cd /usr/src/gtest && sudo cmake . && sudo cmake --build . && sudo mv libgtest* /usr/local/lib ; cd -"
+    - pwd
     - export GTEST_LIBRARY=/usr/local/lib/libgtest.a
     - export GTEST_MAIN_LIBRARY=/usr/local/lib/libgtest_main.a
     - export GTEST_INCLUDE_DIRS=/usr/include
     - mkdir build
     - cd build
     - cmake ..
+    - make
 
 script:
-    - make && make test
+    - make test
     - find . -name *.{c|cpp|h|hpp} | xargs python cpplint.py
 
 after_success:
