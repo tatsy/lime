@@ -1,5 +1,3 @@
-enable_testing()
-
 set(SOURCE_FILES test_point.cpp)
 
 add_executable(test_point ${SOURCE_FILES})
@@ -12,3 +10,4 @@ target_link_libraries(test_point ${GTEST_LIBRARY})
 target_link_libraries(test_point ${OpenCV_LIBS})
 
 add_test(NAME test_lime COMMAND test_point)
+add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND} DEPENDS test_point)

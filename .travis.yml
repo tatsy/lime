@@ -31,8 +31,8 @@ install:
     - cmake --build .
 
 script:
-    - make test
-    - find . -regex ".*\.c\|.*\.cpp\|.*\.h\|.*\.hpp" | xargs python cpplint.py
+    - make check
+    - find src tests examples -regex ".*\.c\|.*\.cpp\|.*\.h\|.*\.hpp" | xargs python cpplint.py
 
 after_success:
   - coveralls --exclude lib --exclude tests --gcov-options '-\lp'
