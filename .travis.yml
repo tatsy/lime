@@ -9,7 +9,7 @@ before_install:
     - mkdir opencv
     - cd opencv
     - wget https://github.com/Itseez/opencv/archive/3.0.0-beta.zip
-    - unzip 3.0.0-beta.zip
+    - unzip -qq 3.0.0-beta.zip
     - cd opencv-3.0.0-beta
     - mkdir build
     - cd build
