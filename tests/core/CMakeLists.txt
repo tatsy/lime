@@ -6,7 +6,7 @@ include_directories(${CMAKE_CURRENT_LIST_DIR})
 include_directories(${GTEST_INCLUDE_DIRS})
 
 include_directories(${OpenCV_INCLUDE_DIRS})
-target_link_libraries(test_point ${OpenCV_LIBS})
 target_link_libraries(test_point ${GTEST_LIBRARY})
+target_link_libraries(test_point ${OpenCV_LIBS})
 
 add_test(NAME test_point COMMAND test_point)
