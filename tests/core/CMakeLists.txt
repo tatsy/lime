@@ -11,5 +11,5 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 target_link_libraries(test_point ${GTEST_LIBRARY})
 target_link_libraries(test_point ${OpenCV_LIBS})
 
-add_test(NAME that-test-I-made COMMAND test_point)
-add_test(that-test-I-made test_point)
+add_test(NAME test_lime COMMAND test_point)
+add_test(test_lime test_point)
