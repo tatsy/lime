@@ -27,10 +27,8 @@ install:
     - export GTEST_LIBRARY=/usr/local/lib/libgtest.a
     - export GTEST_MAIN_LIBRARY=/usr/local/lib/libgtest_main.a
     - export GTEST_INCLUDE_DIRS=/usr/include
-    - mkdir build
-    - cd build
-    - cmake ..
-    - make
+    - cmake .
+    - cmake --build .
 
 script:
     - make test
