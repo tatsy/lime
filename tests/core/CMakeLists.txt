@@ -9,4 +9,4 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 target_link_libraries(test_point ${GTEST_LIBRARY})
 target_link_libraries(test_point ${OpenCV_LIBS})
 
-add_test(NAME test_point COMMAND test_point)
+add_test(NAME test_lime COMMAND test_point)
