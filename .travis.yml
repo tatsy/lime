@@ -32,7 +32,8 @@ install:
 
 script:
     - make check
-    - find src tests examples -regex ".*\.c\|.*\.cpp\|.*\.h\|.*\.hpp" | xargs python cpplint.py --extensions=h,hpp,c,cpp
+    - find include src -regex ".*\.c\|.*\.cpp\|.*\.h\|.*\.hpp" | xargs gcov 
+    - find include src tests examples -regex ".*\.c\|.*\.cpp\|.*\.h\|.*\.hpp" | xargs python cpplint.py --extensions=h,hpp,c,cpp
 
 after_success:
     - coveralls -r ./ --exclude CMakeFiles --exclude opencv --exclude examples --exclude-pattern ".*/tests/.*" --gcov-options '\-lp'
