@@ -4,6 +4,10 @@ project(lime)
 # Required packages
 find_package( OpenCV 3.0 REQUIRED )
 
+# Build settings
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage")
+
 # Add example directory
 add_subdirectory(examples)
 
