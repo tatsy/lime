@@ -5,8 +5,8 @@ project(lime)
 find_package( OpenCV 3.0 REQUIRED )
 
 # Build settings
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 -Wall")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage")
 
 # Add example directory
 add_subdirectory(examples)
