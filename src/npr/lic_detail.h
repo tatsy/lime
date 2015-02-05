@@ -68,7 +68,7 @@ namespace { // NOLINT
             return nextPoint(q, v);
         }
 
-        return pt + v.scale(se);
+        return pt + v * se;
     }
 
     void lic_classic(cv::InputArray input, cv::OutputArray output, const cv::Mat& vfield, int L) {
