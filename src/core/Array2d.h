@@ -46,7 +46,7 @@ class Array2d {
 
     Array2d& operator=(const Array2d& ary);
 
-    Ty& operator()(int i, int j);
+    Ty& operator()(int i, int j) const;
 
     int cols() const;
 

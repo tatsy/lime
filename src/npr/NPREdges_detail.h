@@ -50,12 +50,12 @@ void uniformNoise(cv::OutputArray noise, const cv::InputArray gray, int nNoise) 
     msg_assert(img.channels() == 1 && img.depth() == CV_32F,
         "input image must be single channel and floating-point-valued");
 
-    const int width = gray.cols;
-    const int height = gray.rows;
+    const int width  = img.cols;
+    const int height = img.rows;
 
     Random rand = Random::getRNG();
 
-    noise = cv::Mat::zeros(height, width, CV_32FC1);
+    out = cv::Mat::zeros(height, width, CV_32FC1);
     int count = 0;
     while (count < nNoise) {
         int x = rand.randInt(width);
@@ -85,7 +85,7 @@ void edgeXDoG(cv::InputArray input, cv::OutputArray output, const DoGParam& para
             if (diff > 0.0) {
                 edge.at<float>(y, x) = 1.0f;
             } else {
-                edge.at<float>(y, x) = static_cast<float>(1.0 + tanh(param.phi * diff);
+                edge.at<float>(y, x) = static_cast<float>(1.0 + tanh(param.phi * diff));
             }
         }
     }

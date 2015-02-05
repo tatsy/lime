@@ -163,7 +163,7 @@ void threshold(cv::InputArray input_, cv::OutputArray output_, double threshold)
     }
 }
 
-void normalize(cv::InputArray input_, cv::OutputArray output_) {
+void normalizeCC(cv::InputArray input_, cv::OutputArray output_) {
     cv::Mat  input  = input_.getMat();
     cv::Mat& output = output_.getMatRef();
 
@@ -193,7 +193,7 @@ void normalize(cv::InputArray input_, cv::OutputArray output_) {
     }
 }
 
-void normalize(cv::InputArray input_, cv::OutputArray output_, const float lower, const float upper) {
+void normalizeCC(cv::InputArray input_, cv::OutputArray output_, const float lower, const float upper) {
     cv::Mat  input  = input_.getMat();
     cv::Mat& output = output_.getMatRef();
 
@@ -262,7 +262,7 @@ void colorConstancyHorn(cv::InputArray input, cv::OutputArray output, double thr
     laplacian(out, laplace);
     threshold(laplace, laplace, thre);
     gauss_seidel(out, laplace, 20);
-    normalize(out, out);
+    normalizeCC(out, out);
     exponential(out, out);
 }
 

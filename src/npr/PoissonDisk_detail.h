@@ -60,7 +60,7 @@ bool inNeighborhoodForList(const Grid<cv::Point2f>& grid, cv::Point2f point, dou
             int xx = static_cast<int>(gridCoord.x + dx);
             int yy = static_cast<int>(gridCoord.y + dy);
             if (grid.isin(yy, xx)) {
-                std::vector<cv::Point2f>* ptr = grid.ptrAt(yy, xx);
+                const std::vector<cv::Point2f>* ptr = grid.ptrAt(yy, xx);
                 if (!ptr->empty()) {
                     for (int i = 0; i < ptr->size(); i++) {
                         double deltaX = point.x - (*ptr)[i].x;
@@ -105,18 +105,18 @@ void pdsRandomQueue(std::vector<cv::Point2f>* points, const cv::Mat& grayImage, 
     Grid<cv::Point2f> grid(gridH, gridW);
     lime::random_queue<cv::Point2f> process;
 
-    if (points.empty()) {
+    if (points->empty()) {
         cv::Point2f firstPoint = cv::Point2f(rand.randInt(width), rand.randInt(height));
         process.push(firstPoint);
-        points.push_back(firstPoint);
+        points->push_back(firstPoint);
         gridCoord = coord2Grid(firstPoint, cellSize);
 
         const int gx = static_cast<int>(gridCoord.x);
         const int gy = static_cast<int>(gridCoord.y);
         grid.pushAt(gy, gx, firstPoint);
     } else {
-        for (int i = 0; i < points.size(); i++) {
-            cv::Point2f p = points[i];
+        for (int i = 0; i < points->size(); i++) {
+            cv::Point2f p = points->at(i);
             double min_dist = minDistFromIntensity(p, grayImage, min_radius, max_radius);
             if (p.x >= 0 && p.y >= 0 && p.x < width && p.y < height) {
                 if (!inNeighborhoodForList(grid, p, min_dist, cellSize)) {
@@ -127,7 +127,7 @@ void pdsRandomQueue(std::vector<cv::Point2f>* points, const cv::Mat& grayImage, 
                     const int gy = static_cast<int>(gridCoord.y);
                     grid.pushAt(gy, gx, p);
                 } else {
-                    points.erase(points.begin() + i);
+                    points->erase(points->begin() + i);
                     i--;
                 }
             }
@@ -195,7 +195,7 @@ bool throwSample(const cv::Mat& gray, const cv::Mat& noise, cv::Point2f* newPoin
         if (rx >= 0 && ry >= 0 && rx < width && ry < height) {
             cv::Point2f p = cv::Point2f(rx, ry);
             if (!isConflict(gray, noise, p, min_radius, max_radius)) {
-                newPoint = p;
+                *newPoint = p;
                 return true;
             }
         }
@@ -232,7 +232,7 @@ void pdsParallel(std::vector<cv::Point2f>* points, const cv::Mat& grayImage, dou
         lime::random_queue<cv::Point2f> que;
         const int np = static_cast<int>(points->size());
         for (int i = 0; i < np; i++) {
-            que.push(points->at[i]);
+            que.push(points->at(i));
         }
 
         while (!que.empty()) {
@@ -289,7 +289,7 @@ void pdsParallel(std::vector<cv::Point2f>* points, const cv::Mat& grayImage, dou
                     cv::Rect omega = cv::Rect(sx, sy, cellW, cellH);
                     if (!containPoint(noise, omega)) {
                         cv::Point2f p;
-                        if (throwSample(grayImage, noise, p, 10, omega, min_radius, max_radius)) {
+                        if (throwSample(grayImage, noise, &p, 10, omega, min_radius, max_radius)) {
                             int ipx = static_cast<int>(p.x);
                             int ipy = static_cast<int>(p.y);
                             noise.at<float>(ipy, ipx) = 1.0f;

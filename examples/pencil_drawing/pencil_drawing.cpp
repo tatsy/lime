@@ -37,7 +37,7 @@ const int ksize = 11;
 
 void showProgress(int current, int total) {
     double percent = static_cast<double>(current) / static_cast<double>(total);
-    int n_prog = static_cast<int>((30.0 * percent);
+    int n_prog = static_cast<int>((30.0 * percent));
     printf(" %5.1f [", 100.0 * percent);
     for (int i = 1; i <= 30; i++) {
         if (i == n_prog) {
@@ -153,11 +153,10 @@ void pencilDrawing(cv::InputArray input, cv::OutputArray output, const std::vect
     cv::Mat  img = input.getMat();
     cv::Mat& out = output.getMatRef();
 
-    int width = input.cols;
-    int height = input.rows;
-    int dim = input.channels();
+    const int width  = img.cols;
+    const int height = img.rows;
+    const int dim    = img.channels();
 
-    cv::Mat img;
     if (img.depth() == CV_8U) {
         img.convertTo(img, CV_MAKETYPE(CV_32F, dim), 1.0 / 255.0);
     } else {

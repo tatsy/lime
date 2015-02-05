@@ -64,7 +64,7 @@ void run_still_image(const std::string& filename) {
     cv::Mat noise;
 
     cv::cvtColor(img, gray, cv::COLOR_BGR2GRAY);
-    lime::npr::poissonDisk(gray, points, lime::npr::PDS_RAND_QUEUE, 1.0, 4.0);
+    lime::npr::poissonDisk(gray, &points, lime::npr::PDS_RAND_QUEUE, 1.0, 4.0);
     pencilDrawing(img, out, points);
 
     cv::namedWindow("Input");

@@ -73,7 +73,7 @@ class Grid {
     }
 
     // * check (i, j) is in the grid range
-    bool isin(int i, int j) {
+    bool isin(int i, int j) const {
         return i >= 0 && j >= 0 && i < rows && j < cols;
     }
 
@@ -83,7 +83,7 @@ class Grid {
     }
 
     // * access pointer of (i, j)
-    std::vector<T>* ptrAt(int i, int j) {
+    const std::vector<T>* ptrAt(int i, int j) const {
         return &data[i*cols + j];
     }
 

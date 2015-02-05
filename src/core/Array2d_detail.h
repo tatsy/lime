@@ -80,7 +80,7 @@ namespace lime {
     }
 
     template <class Ty>
-    Ty& Array2d<Ty>::operator()(int i, int j) {
+    Ty& Array2d<Ty>::operator()(int i, int j) const {
         return data[i * ncols + j];
     }
 
