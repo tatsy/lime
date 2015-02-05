@@ -117,11 +117,9 @@ void detectSingularity() {
                     double idx = 1 - 0.5 * (2.0 - lime::sign(delta));
                     if (lime::sign(delta) > 0) {
                         cv::circle(out, cv::Point(px, py), 3, cv::Scalar(0, 1, 1), -1);
-                    }
-                    else if (lime::sign(delta) < 0) {
+                    } else if (lime::sign(delta) < 0) {
                         cv::circle(out, cv::Point(px, py), 3, cv::Scalar(1, 1, 0), -1);
-                    }
-                    else {
+                    } else {
                         cv::circle(out, cv::Point(px, py), 3, cv::Scalar(1, 0, 1), -1);
                     }
                     printf("(%d, %d): %f\n", px, py, idx);

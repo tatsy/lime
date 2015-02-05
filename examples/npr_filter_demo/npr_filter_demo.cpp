@@ -188,12 +188,12 @@ void demoDOG(const cv::Mat& img) {
     cv::cvtColor(img, gray, cv::COLOR_BGR2GRAY);
 
     cout << "[DoG] XDoG -> ";
-    lime::npr::edgeDoG(gray, xdog, 
+    lime::npr::edgeDoG(gray, xdog,
         lime::npr::DoGParam(4.5, 0.5, 0.95, 10.0, lime::npr::EDGE_XDOG));
     cout << "OK" << endl;
 
     cout << "[DoG] FDoG -> ";
-    lime::npr::edgeDoG(gray, fdog, 
+    lime::npr::edgeDoG(gray, fdog,
         lime::npr::DoGParam(2.5, 0.5, 0.95, 10.0, lime::npr::EDGE_FDOG));
     cout << "OK" << endl;
 
@@ -210,7 +210,7 @@ void demoDOG(const cv::Mat& img) {
 
 void demoCEF(const cv::Mat& img) {
     cv::Mat vfield, tangent;
-    lime::npr::calcVectorField(img, vfield, 5, 
+    lime::npr::calcVectorField(img, vfield, 5,
                                lime::npr::VECTOR_SST, lime::npr::EDGE_SOBEL);
     lime::npr::angle2vector(vfield, tangent, 2.0);
 
