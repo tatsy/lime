@@ -19,10 +19,12 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ******************************************************************************/
 
-#ifndef SRC_CORE_POINT_H_
-#define SRC_CORE_POINT_H_
+#ifndef SRC_CORE_POINT_HPP_
+#define SRC_CORE_POINT_HPP_
 
 #include <opencv2/opencv.hpp>
+
+#include "common.hpp"
 
 namespace lime {
 
@@ -97,6 +99,7 @@ class Point_ : public cv::Point_<T> {
 
     // * operator /
     Point_<T> operator/(T t) const {
+        msg_assert(t != 0, "Zero division");
         Point_ q;
         q.x = this->x / t;
         q.y = this->y / t;
@@ -123,20 +126,15 @@ class Point_ : public cv::Point_<T> {
     // * normalize
     Point_<T> normalize() const {
         double l = this->norm();
-        return Point_(this->x / l, this->y / l);
+        return *this / l;
     }
-
-    // * scaleing
-    Point_<T> scale(double d) {
-        return Point_(this->x*d, this->y*d);
-    }
-}; /* class Point_ */
+};  // class Point_
 
 typedef Point_<int> Point;
 typedef Point_<int> Point2i;
 typedef Point_<float> Point2f;
 typedef Point_<double> Point2d;
 
-} /* namespace lime */
+}  // namespace lime
 
-#endif /* _LIME_POINT_H_ */
+#endif  // SRC_CORE_POINT_HPP_

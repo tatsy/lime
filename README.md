@@ -2,6 +2,7 @@ lime
 ===
 
 [![Build Status](https://travis-ci.org/tatsy/lime.svg?branch=master)](https://travis-ci.org/tatsy/lime)
+[![Coverage Status](https://coveralls.io/repos/tatsy/lime/badge.svg?branch=master)](https://coveralls.io/r/tatsy/lime?branch=master)
 
 > Lime (Library for IMage Editing) is an OpenCV-dependent image editing library for C++.
 > Since this library is comprised of only headers, you can use it simply by

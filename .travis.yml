@@ -55,7 +55,6 @@ before_script:
 script:
     # run test
     - make check
-    - find include src -regex ".*\.c\|.*\.cpp\|.*\.h\|.*\.hpp" | xargs gcov
     - find include src tests examples -regex ".*\.c\|.*\.cpp\|.*\.h\|.*\.hpp" | xargs python cpplint.py --extensions=h,hpp,c,cpp
 
 after_success:

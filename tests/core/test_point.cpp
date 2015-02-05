@@ -1,4 +1,4 @@
-/*
+/******************************************************************************
 Copyright 2015 Tatsuya Yatagawa (tatsy)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -17,7 +17,7 @@ FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
 COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-*/
+******************************************************************************/
 
 #include "gtest/gtest.h"
 
@@ -44,7 +44,7 @@ TEST(Point2d, AddAndSubtract) {
     }
 }
 
-TEST(Point2D, MultiplyAndDiv) {
+TEST(Point2d, MultiplyAndDiv) {
     for (int i = 0; i < nSimpleLoop; i++) {
         const Point2d p(rng.randReal(), rng.randReal());
         const double d = rng.randReal();
@@ -53,6 +53,29 @@ TEST(Point2D, MultiplyAndDiv) {
         EXPECT_EQ(p.x / d, (p / d).x);
         EXPECT_EQ(p.y / d, (p / d).y);
     }
+}
+
+TEST(Point2d, Norm) {
+    for (int i = 0; i < nSimpleLoop; i++) {
+        double dx = rng.randReal();
+        double dy = rng.randReal();
+        const Point2d p(dx, dy);
+        EXPECT_EQ(p.norm(), sqrt(dx * dx + dy * dy));
+    }
+}
+
+TEST(Point2d, Normalize) {
+    for (int i = 0; i < nSimpleLoop; i++) {
+        double dx = rng.randReal();
+        double dy = rng.randReal();
+        const Point2d p(dx, dy);
+        double norm = p.norm();
+        EXPECT_EQ(p.normalize().x, dx / norm);
+        EXPECT_EQ(p.normalize().y, dy / norm);
+    }
+
+    const Point2d p(0.0, 0.0);
+    ASSERT_DEATH(p.normalize(), "Zero division");
 }
 
 int main(int argc, char **argv) {
