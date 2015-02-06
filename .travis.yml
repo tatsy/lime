@@ -55,7 +55,7 @@ before_script:
 script:
     # run test
     - make check
-    - find include src tests examples -regex ".*\.c\|.*\.cpp\|.*\.h\|.*\.hpp" | xargs python cpplint.py --extensions=h,hpp,c,cpp
+    - ./cpplint.sh
 
 after_success:
     - lcov --directory . --capture --output-file coverage.info
