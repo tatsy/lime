@@ -37,22 +37,24 @@ TEST(Point2d, AddAndSubtract) {
     for (int i = 0; i < nSimpleLoop; i++) {
         const Point2d p(rng.randReal(), rng.randReal());
         const Point2d q(rng.randReal(), rng.randReal());
-        EXPECT_EQ(p.x + q.x, (p + q).x);
-        EXPECT_EQ(p.y + q.y, (p + q).y);
-        EXPECT_EQ(p.x - q.x, (p - q).x);
-        EXPECT_EQ(p.y - q.y, (p - q).y);
+        EXPECT_EQ(p.x + q.x, (p + q).x) << "Add: x does not match";
+        EXPECT_EQ(p.y + q.y, (p + q).y) << "Add: y does not match";
+        EXPECT_EQ(p.x - q.x, (p - q).x) << "Subtract: x does not match";
+        EXPECT_EQ(p.y - q.y, (p - q).y) << "Subtract: x does not match";
     }
 }
 
 TEST(Point2d, MultiplyAndDiv) {
     for (int i = 0; i < nSimpleLoop; i++) {
         const Point2d p(rng.randReal(), rng.randReal());
-        const double d = rng.randReal();
-        EXPECT_EQ(p.x * d, (p * d).x);
-        EXPECT_EQ(p.y * d, (p * d).y);
-        EXPECT_EQ(p.x / d, (p / d).x);
-        EXPECT_EQ(p.y / d, (p / d).y);
+        const double d = rng.randReal() + 1.0e-8;
+        EXPECT_EQ(p.x * d, (p * d).x) << "Multiply: x does not match";
+        EXPECT_EQ(p.y * d, (p * d).y) << "Multiply: y does not match";
+        EXPECT_EQ(p.x / d, (p / d).x) << "Divide: x does not match";
+        EXPECT_EQ(p.y / d, (p / d).y) << "Divide: y does not match";
     }
+    Point2d p(1.0, 2.0);
+    ASSERT_DEATH(p / 0.0, "Zero division") << "Divide: zero division";
 }
 
 TEST(Point2d, Norm) {
@@ -60,7 +62,7 @@ TEST(Point2d, Norm) {
         double dx = rng.randReal();
         double dy = rng.randReal();
         const Point2d p(dx, dy);
-        EXPECT_EQ(p.norm(), sqrt(dx * dx + dy * dy));
+        EXPECT_EQ(p.norm(), sqrt(dx * dx + dy * dy)) << "Norm: value does not match";
     }
 }
 
@@ -70,12 +72,25 @@ TEST(Point2d, Normalize) {
         double dy = rng.randReal();
         const Point2d p(dx, dy);
         double norm = p.norm();
-        EXPECT_EQ(p.normalize().x, dx / norm);
-        EXPECT_EQ(p.normalize().y, dy / norm);
+        EXPECT_EQ(p.normalize().x, dx / norm) << "Normalize: x does not match";
+        EXPECT_EQ(p.normalize().y, dy / norm) << "Normalize: y does not match";
     }
 
     const Point2d p(0.0, 0.0);
-    ASSERT_DEATH(p.normalize(), "Zero division");
+    ASSERT_DEATH(p.normalize(), "Zero division") << "Normalize: zero division";
+}
+
+TEST(Point2d, DotAndDet) {
+    for (int i = 0; i < nSimpleLoop; i++) {
+        double dx1 = rng.randReal();
+        double dy1 = rng.randReal();
+        double dx2 = rng.randReal();
+        double dy2 = rng.randReal();
+        const Point2d p1(dx1, dy1);
+        const Point2d p2(dx2, dy2);
+        EXPECT_EQ(p1.dot(p2), dx1 * dx2 + dy1 * dy2) << "Dot: value does not match";
+        EXPECT_EQ(p1.det(p2), dx1 * dy2 - dx2 * dy1) << "Det: value does not match";
+    }
 }
 
 int main(int argc, char **argv) {
