@@ -55,7 +55,7 @@ before_script:
 script:
     # run test
     - CTEST_OUTPUT_ON_FAILURE=TRUE make check
-    - ./cpplint.sh
+    - sh ./cpplint.sh
 
 after_success:
     - lcov --directory . --capture --output-file coverage.info
