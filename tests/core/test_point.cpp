@@ -62,7 +62,7 @@ TEST(Point2d, Norm) {
         double dx = rng.randReal();
         double dy = rng.randReal();
         const Point2d p(dx, dy);
-        EXPECT_EQ(p.norm(), sqrt(dx * dx + dy * dy)) << "Norm: value does not match";
+        EXPECT_EQ(p.norm(), hypot(dx, dy)) << "Norm: value does not match";
     }
 }
 
