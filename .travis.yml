@@ -54,7 +54,7 @@ before_script:
 
 script:
     # run test
-    - make check
+    - CTEST_OUTPUT_ON_FAILURE=TRUE make check
     - ./cpplint.sh
 
 after_success:
