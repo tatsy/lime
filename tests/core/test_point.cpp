@@ -27,10 +27,26 @@ using lime::Point2d;
 const int nSimpleLoop = 100;
 lime::Random rng = lime::Random::getRNG();
 
+TEST(Point2d, Sign) {
+    EXPECT_EQ(lime::sign(10.0), 1);
+    EXPECT_EQ(lime::sign(-10.0), -1);
+    EXPECT_EQ(lime::sign(1.0e-12), 0);
+    EXPECT_EQ(lime::sign(-1.0e-12), 0);
+}
+
 TEST(Point2d, DefaultConstructor) {
     const Point2d p;
     EXPECT_EQ(p.x, 0.0);
     EXPECT_EQ(p.y, 0.0);
+}
+
+TEST(Point2d, OperatorEq) {
+    Point2d p(1.0, 2.0);
+    Point2d q(2.0, 2.0);
+    q = p;
+    EXPECT_EQ(p, q);
+    p.x = 2.0;
+    EXPECT_NE(p, q);
 }
 
 TEST(Point2d, AddAndSubtract) {
