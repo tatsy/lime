@@ -1,35 +1,22 @@
-# Test for Point
-set(POINT_SOURCE_FILES test_point.cpp)
+# Define function to add test
+function(add_gtest_with_opencv test_name test_source)
+  set(SOURCE_FILES ${test_source})
 
-add_executable(test_point ${POINT_SOURCE_FILES})
-target_link_libraries(test_point ${GTEST_LIBRARY})
-target_link_libraries(test_point ${GTEST_MAIN_LIBRARY})
-target_link_libraries(test_point ${OpenCV_LIBS})
+  add_executable(${test_name} ${SOURCE_FILES})
+  target_link_libraries(${test_name} ${GTEST_LIBRARY})
+  target_link_libraries(${test_name} ${GTEST_MAIN_LIBRARY})
+  target_link_libraries(${test_name} ${OpenCV_LIBS})
 
-add_test(NAME test_point COMMAND test_point)
+  add_test(NAME ${test_name} COMMAND ${test_name})
+endfunction(add_gtest_with_opencv)
 
-# Test for Random
-set(RANDOM_SOURCE_FILES test_random.cpp)
-
-add_executable(test_random ${RANDOM_SOURCE_FILES})
-target_link_libraries(test_random ${GTEST_LIBRARY})
-target_link_libraries(test_random ${GTEST_MAIN_LIBRARY})
-target_link_libraries(test_random ${OpenCV_LIBS})
-
-add_test(NAME test_random COMMAND test_random)
-
-# Test for random_queue
-set(RANDOM_QUEUE_SOURCE_FILES test_random_queue.cpp)
-
-add_executable(test_random_queue ${RANDOM_QUEUE_SOURCE_FILES})
-target_link_libraries(test_random_queue ${GTEST_LIBRARY})
-target_link_libraries(test_random_queue ${GTEST_MAIN_LIBRARY})
-target_link_libraries(test_random_queue ${OpenCV_LIBS})
-
-add_test(NAME test_random_queue COMMAND test_random_queue)
+add_gtest_with_opencv(test_point test_point.cpp)
+add_gtest_with_opencv(test_random test_random.cpp)
+add_gtest_with_opencv(test_random_queue test_random_queue.cpp)
+add_gtest_with_opencv(test_array2d test_array2d.cpp)
 
 # Add tests to "make check"
-add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND} DEPENDS test_point test_random test_random_queue)
+add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND} DEPENDS test_point test_random test_random_queue test_array2d)
 
 # Include directories
 include_directories(${CMAKE_CURRENT_LIST_DIR})
