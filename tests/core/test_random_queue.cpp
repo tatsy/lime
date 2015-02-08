@@ -19,59 +19,39 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ******************************************************************************/
 
-#ifndef SRC_CORE_RANDOM_QUEUE_DETAIL_H_
-#define SRC_CORE_RANDOM_QUEUE_DETAIL_H_
+#include "gtest/gtest.h"
 
-#include <cstring>
-#include <algorithm>
+#include "../../include/lime.hpp"
+using lime::random_queue;
 
-#include "Random.h"
+static const int nTest = 1 << 20;
 
-namespace lime {
-
-template <class Ty>
-random_queue<Ty>::random_queue()
-    : ptr(0)
-    , len(init_len)
-    , data(new Ty[len]) {
-}
-
-template <class Ty>
-random_queue<Ty>::~random_queue() {
-    delete[] data;
-}
-
-template <class Ty>
-void random_queue<Ty>::push(Ty value) {
-    if (ptr == len) {
-        Ty* tmp = new Ty[len * 2];
-        memcpy(tmp, data, sizeof(Ty) * len);
-        delete[] data;
-        data = tmp;
-        len *= 2;
+class RandomQueueTest : public ::testing::Test {
+ protected:
+    virtual void setUp() {
     }
-    data[ptr++] = value;
+
+    random_queue<int> que;
+};
+
+TEST_F(RandomQueueTest, InEmpty) {
+    EXPECT_TRUE(que.empty());
 }
 
-template <class Ty>
-Ty random_queue<Ty>::pop() {
-    Random rand = Random::getRNG();
-    int i = rand.randInt(static_cast<int>(ptr));
-    ptr--;
-    std::swap(data[i], data[ptr]);
-    return data[ptr];
+TEST_F(RandomQueueTest, EnqueueDequeueWorks) {
+    for (int i = 0; i < nTest; i++) {
+        EXPECT_EQ(que.size(), i);
+        que.push(i);
+    }
+    EXPECT_FALSE(que.empty());
+    for (int i = 0; i < nTest; i++) {
+        EXPECT_EQ(que.size(), nTest - i);
+        que.pop();
+    }
+    EXPECT_TRUE(que.empty());
 }
 
-template <class Ty>
-bool random_queue<Ty>::empty() const {
-    return ptr == 0;
+int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }
-
-template <class Ty>
-size_t random_queue<Ty>::size() const {
-    return ptr;
-}
-
-}  // namespace lime
-
-#endif  // SRC_CORE_RANDOM_QUEUE_DETAIL_H_
