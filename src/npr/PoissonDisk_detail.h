@@ -53,18 +53,18 @@ cv::Point2f generateRandomPointAround(const cv::Point2f& v, double min_dist) {
 
 bool inNeighborhoodForList(const Grid<cv::Point2f>& grid, cv::Point2f point, double min_dist, double cellSize) {
     cv::Point2f gridCoord = coord2Grid(point, cellSize);
-    int gridW = grid.ncols();
-    int gridH = grid.nrows();
+    int gridW = grid.cols();
+    int gridH = grid.rows();
     for (int dy = -2; dy <= 2; dy++) {
         for (int dx = -2; dx <= 2; dx++) {
             int xx = static_cast<int>(gridCoord.x + dx);
             int yy = static_cast<int>(gridCoord.y + dy);
-            if (grid.isin(yy, xx)) {
-                const std::vector<cv::Point2f>* ptr = grid.ptrAt(yy, xx);
-                if (!ptr->empty()) {
-                    for (int i = 0; i < ptr->size(); i++) {
-                        double deltaX = point.x - (*ptr)[i].x;
-                        double deltaY = point.y - (*ptr)[i].y;
+            if (grid.hasCell(yy, xx)) {
+                const std::vector<cv::Point2f>& v = grid(yy, xx);
+                if (v.empty()) {
+                    for (int i = 0; i < v.size(); i++) {
+                        double deltaX = point.x - v[i].x;
+                        double deltaY = point.y - v[i].y;
                         double dist = sqrt(deltaX * deltaX + deltaY * deltaY);
                         if (dist < min_dist) {
                             return true;

@@ -30,78 +30,96 @@ namespace lime {
 template <class T>
 class Grid {
  private:
-    int rows;
-    int cols;
+    int nrows;
+    int ncols;
     std::vector<std::vector<T> > data;
 
  public:
     // * default constructor
-    Grid() : data() {}
+     Grid()
+         : nrows(0)
+         , ncols(0)
+         , data() {
+     }
 
     // * constructor
-    Grid(int r, int c)
-        : rows(r), cols(c), data(r * c, std::vector<T>()) {}
+    Grid(int rows, int cols)
+        : nrows(rows)
+        , ncols(cols)
+        , data(rows * cols, std::vector<T>()) {
+        msg_assert(rows > 0 && cols > 0, "Size must be positive");
+    }
 
     // * destructor
     virtual ~Grid() {}
 
     // * copy constructor
     Grid(const Grid& grid)
-        : rows(grid.rows)
-        , cols(grid.cols)
-        , data(grid.rows * grid.cols, std::vector<T>()) {
+        : nrows(grid.nrows)
+        , ncols(grid.ncols)
+        , data(grid.nrows * grid.ncols, std::vector<T>()) {
         dataCopy(grid);
     }
 
     // * operator =
     Grid& operator=(const Grid& grid) {
-        this->rows = grid.rows;
-        this->cols = grid.cols;
-        this->data = std::vector<std::vector<T> >(this->rows * this->cols, std::vector<T>());
+        this->nrows = grid.nrows;
+        this->ncols = grid.ncols;
+        this->data = std::vector<std::vector<T> >(this->nrows * this->ncols, std::vector<T>());
         dataCopy(grid);
         return *this;
     }
 
+    // Resize grid
+    void resize(int rows, int cols) {
+        msg_assert(rows > 0 && cols > 0, "Size must be positive");
+        this->nrows = rows;
+        this->ncols = cols;
+        data.resize(rows * cols);
+    }
+
     // * get number of rows
-    int nrows() const {
-        return this->rows;
+    int rows() const {
+        return this->nrows;
     }
 
     // * get number of cols
-    int ncols() const {
-        return this->cols;
+    int cols() const {
+        return this->ncols;
     }
 
     // * check (i, j) is in the grid range
-    bool isin(int i, int j) const {
-        return i >= 0 && j >= 0 && i < rows && j < cols;
+    bool hasCell(int i, int j) const {
+        return i >= 0 && j >= 0 && i < nrows && j < ncols;
     }
 
     // * push at (i, j)
     void pushAt(int i, int j, T t) {
-        data[i*cols + j].push_back(t);
+        data[i * ncols + j].push_back(t);
     }
 
-    // * access pointer of (i, j)
-    const std::vector<T>* ptrAt(int i, int j) const {
-        return &data[i*cols + j];
+    // * access vector of (i, j)
+    const std::vector<T>& operator()(int i, int j) const {
+        msg_assert(i >= 0 && j >= 0 && i < nrows && j < ncols,
+                   "Index out of bounds");
+        return data[i * ncols + j];
     }
 
     // * size of vector at (i, j)
     size_t sizeAt(int i, int j) {
-        return data[i*cols + j].size();
+        return data[i*ncols + j].size();
     }
 
  private:
     // * private method to copy grid data
     void dataCopy(const Grid& grid) {
-        for (int y = 0; y < this->rows; y++) {
-            for (int x = 0; x < this->cols; x++) {
-                int index = y*this->cols + x;
-                std::vector<T>* p_src = &grid.data[index];
-                std::vector<T>* p_dst = &data[index];
-                *p_dst = std::vector<T>(p_src->size());
-                std::copy(p_src->begin(), p_src->end(), p_dst->begin());
+        for (int y = 0; y < this->nrows; y++) {
+            for (int x = 0; x < this->ncols; x++) {
+                int index = y*this->ncols + x;
+                const std::vector<T>& p_src = grid.data[index];
+                std::vector<T>& p_dst = data[index];
+                p_dst.resize(p_src.size());
+                std::copy(p_src.begin(), p_src.end(), p_dst.begin());
             }
         }
     }

@@ -14,9 +14,10 @@ add_gtest_with_opencv(test_point test_point.cpp)
 add_gtest_with_opencv(test_random test_random.cpp)
 add_gtest_with_opencv(test_random_queue test_random_queue.cpp)
 add_gtest_with_opencv(test_array2d test_array2d.cpp)
+add_gtest_with_opencv(test_grid test_grid.cpp)
 
 # Add tests to "make check"
-add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND} DEPENDS test_point test_random test_random_queue test_array2d)
+add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND} DEPENDS test_point test_random test_random_queue test_array2d test_grid)
 
 # Include directories
 include_directories(${CMAKE_CURRENT_LIST_DIR})
