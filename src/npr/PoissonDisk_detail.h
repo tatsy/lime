@@ -61,7 +61,7 @@ bool inNeighborhoodForList(const Grid<cv::Point2f>& grid, cv::Point2f point, dou
             int yy = static_cast<int>(gridCoord.y + dy);
             if (grid.hasCell(yy, xx)) {
                 const std::vector<cv::Point2f>& v = grid(yy, xx);
-                if (v.empty()) {
+                if (!v.empty()) {
                     for (int i = 0; i < v.size(); i++) {
                         double deltaX = point.x - v[i].x;
                         double deltaY = point.y - v[i].y;
