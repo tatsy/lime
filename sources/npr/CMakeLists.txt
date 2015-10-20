@@ -3,20 +3,20 @@ set(HEADERS
     ${CMAKE_CURRENT_LIST_DIR}/lic.h
     ${CMAKE_CURRENT_LIST_DIR}/lic_detail.h
     ${CMAKE_CURRENT_LIST_DIR}/lime_npr.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/Noise.h
-    ${CMAKE_CURRENT_LIST_DIR}/Noise_detail.h
-    ${CMAKE_CURRENT_LIST_DIR}/NPREdges.h
-    ${CMAKE_CURRENT_LIST_DIR}/NPREdges_detail.h
-    ${CMAKE_CURRENT_LIST_DIR}/NPRFilter_Kuwahara_detail.h
-    ${CMAKE_CURRENT_LIST_DIR}/NPRFilter_Morphology_detail.h
-    ${CMAKE_CURRENT_LIST_DIR}/NPRFilter_PDEBased_detail.h
-    ${CMAKE_CURRENT_LIST_DIR}/NPRFilters.h
-    ${CMAKE_CURRENT_LIST_DIR}/PoissonDisk.h
-    ${CMAKE_CURRENT_LIST_DIR}/PoissonDisk_detail.h
-    ${CMAKE_CURRENT_LIST_DIR}/Singularity.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/Tensor.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/VectorField.h
-    ${CMAKE_CURRENT_LIST_DIR}/VectorField_detail.h
+    ${CMAKE_CURRENT_LIST_DIR}/noise.h
+    ${CMAKE_CURRENT_LIST_DIR}/noise_detail.h
+    ${CMAKE_CURRENT_LIST_DIR}/npr_edges.h
+    ${CMAKE_CURRENT_LIST_DIR}/npr_edges_detail.h
+    ${CMAKE_CURRENT_LIST_DIR}/npr_filter_kuwahara_detail.h
+    ${CMAKE_CURRENT_LIST_DIR}/npr_filter_morphology_detail.h
+    ${CMAKE_CURRENT_LIST_DIR}/npr_filter_pdebased_detail.h
+    ${CMAKE_CURRENT_LIST_DIR}/npr_filters.h
+    ${CMAKE_CURRENT_LIST_DIR}/poisson_disk.h
+    ${CMAKE_CURRENT_LIST_DIR}/poisson_disk_detail.h
+    ${CMAKE_CURRENT_LIST_DIR}/singularity.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/tensor.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/vector_field.h
+    ${CMAKE_CURRENT_LIST_DIR}/vector_field_detail.h
     PARENT_SCOPE)
 
 set(SOURCES
