@@ -67,7 +67,7 @@ static const double EPS    = 1.0e-6;
     #if defined(WIN32) || defined(_WIN32)
         #define __FUNCTION_NAME__ __FUNCTION__
     #else
-        #define __FUCTION_NAME__ __func__
+        #define __FUNCTION_NAME__ __func__
     #endif
 #endif
 

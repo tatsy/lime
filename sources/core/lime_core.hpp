@@ -22,9 +22,9 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #ifndef SRC_LIME_CORE_HPP_
 #define SRC_LIME_CORE_HPP_
 
-#include "Grid.hpp"
-#include "Point.hpp"
-#include "Array2d.h"
-#include "Random.h"
+#include "grid.hpp"
+#include "point.hpp"
+#include "array2d.h"
+#include "random.h"
 
 #endif  // SRC_LIME_CORE_HPP_

@@ -26,7 +26,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include <vector>
 
-#include "../core/Point.hpp"
+#include "../core/point.hpp"
 
 namespace lime {
 
@@ -53,6 +53,6 @@ namespace noise {
 
 }  // namespace lime
 
-#include "Noise_detail.h"
+#include "noise_detail.h"
 
 #endif  // SRC_NPR_NOISE_H_

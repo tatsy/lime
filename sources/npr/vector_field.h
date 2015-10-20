@@ -26,10 +26,10 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include <vector>
 
-#include "../core/Point.hpp"
-#include "../core/Array2d.h"
-#include "Tensor.hpp"
-#include "Singularity.hpp"
+#include "../core/point.hpp"
+#include "../core/array2d.h"
+#include "tensor.hpp"
+#include "singularity.hpp"
 
 namespace lime {
 

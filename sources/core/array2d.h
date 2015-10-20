@@ -48,6 +48,6 @@ namespace lime {
 
 }  // namespace lime
 
-#include "Array2d_detail.h"
+#include "array2d_detail.h"
 
 #endif  // _CORE_ARRAY2D_H_

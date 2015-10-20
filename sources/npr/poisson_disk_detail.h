@@ -25,8 +25,10 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <vector>
 #include <algorithm>
 
+#include <opencv2/opencv.hpp>
+
 #include "../core/common.hpp"
-#include "../core/Grid.hpp"
+#include "../core/grid.hpp"
 #include "../core/random_queue.h"
 
 namespace lime {

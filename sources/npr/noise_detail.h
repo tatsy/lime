@@ -22,7 +22,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #ifndef SRC_NPR_NOISE_DETAIL_H_
 #define SRC_NPR_NOISE_DETAIL_H_
 
-#include "../core/Random.h"
+#include "../core/random.h"
 
 namespace lime {
 

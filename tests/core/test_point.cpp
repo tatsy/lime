@@ -79,7 +79,7 @@ TEST_F(Point2dTest, MultiplyAndDiv) {
         EXPECT_EQ(p.y / d, (p / d).y) << "Divide: y does not match";
     }
     Point2d p(1.0, 2.0);
-    ASSERT_DEATH(p / 0.0, "Zero division") << "Divide: zero division";
+    ASSERT_DEATH(p / 0.0, "") << "Divide: zero division";
 }
 
 TEST_F(Point2dTest, Norm) {
@@ -102,7 +102,7 @@ TEST_F(Point2dTest, Normalize) {
     }
 
     const Point2d p(0.0, 0.0);
-    ASSERT_DEATH(p.normalize(), "Zero division") << "Normalize: zero division";
+    ASSERT_DEATH(p.normalize(), "") << "Normalize: zero division";
 }
 
 TEST_F(Point2dTest, DotAndDet) {
