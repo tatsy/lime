@@ -21,7 +21,7 @@ set(TEST_SOURCES ${TEST_SOURCES}
 add_gtest_with_opencv(test_core "${TEST_SOURCES}")
 
 # Add tests to "make check"
-add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND} DEPENDS test_point test_random test_random_queue test_array2d test_grid)
+add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND} DEPENDS test_core)
 
 # Include directories
 include_directories(${CMAKE_CURRENT_LIST_DIR})

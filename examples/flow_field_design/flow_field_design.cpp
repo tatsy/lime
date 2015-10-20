@@ -33,7 +33,6 @@ cv::Mat sst, vfield, out;
 vector<cv::Point> sings;
 
 const int ksize = 21;
-const double EPS = 1.0e-5;
 
 void detectSingularity() {
     const int width  = out.cols;
@@ -185,7 +184,7 @@ void demo_img(const std::string& filename) {
 
     cv::Mat noise;
     lime::npr::noise::random(noise, img.size());
-    lime::npr::lic(out, noise, vfield, 20, lime::npr::LIC_RUNGE_KUTTA);
+    lime::npr::lic(out, noise, vfield, 20, lime::npr::LICType::RungeKutta);
     cv::cvtColor(out, out, cv::COLOR_GRAY2BGR);
 
     cv::namedWindow("Output");
@@ -229,7 +228,7 @@ void demo_tensor() {
 
     cv::Mat noise, out;
     lime::npr::noise::random(noise, cv::Size(512, 512));
-    lime::npr::lic(noise, out, vfield, 30, lime::npr::LIC_CLASSIC);
+    lime::npr::lic(noise, out, vfield, 30, lime::npr::LICType::Classic);
 
     cv::imshow("Output", out);
     cv::waitKey(0);

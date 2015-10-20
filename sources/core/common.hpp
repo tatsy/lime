@@ -8,6 +8,26 @@
 #include <cmath>
 #include <iostream>
 
+// -----------------------------------------------------------------------------
+// API export macro
+// -----------------------------------------------------------------------------
+
+#if (defined(WIN32) || defined(_WIN32) || defined(WINCE) || defined(__CYGWIN__))
+#   if defined(LIME_API_EXPORT)
+#       define LIME_EXPORTS __declspec(dllexport)
+#       define LIME_IMPORTS
+#   else
+#       define LIME_EXPORTS
+#       define LIME_IMPORTS __declspec(dllimport)
+#   endif
+#elif defined(__GNUC__) && __GNUC__ >= 4
+#   define LIME_EXPORTS __attribute__((visibility ("default")))
+#   define LIME_IMPORTS
+#else
+#   define LIME_EXPORTS
+#   define LIME_IMPORTS
+#endif
+
 // ----------------------------------------------------------------------------
 // Parameter constants
 // ----------------------------------------------------------------------------

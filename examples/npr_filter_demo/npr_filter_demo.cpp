@@ -217,7 +217,7 @@ void demoCEF(const cv::Mat& img) {
     cv::Mat tmp, out;
     cout << "[CEF] LIC Runge-Kutta -> ";
     img.convertTo(tmp, CV_32F);
-    lime::npr::lic(out, tmp, tangent, 20, lime::npr::LIC_RUNGE_KUTTA);
+    lime::npr::lic(out, tmp, tangent, 20, lime::npr::LICType::RungeKutta);
     cout << "OK" << endl;
 
     cout << "[CEF] Shock Filter -> ";

@@ -78,8 +78,8 @@ inline void calcTangent(cv::InputArray img, cv::OutputArray out, int ksize, int 
 
 }  // namespace lime
 
-#include "NPRFilter_Kuwahara_detail.h"
-#include "NPRFilter_Morphology_detail.h"
-#include "NPRFilter_PDEBased_detail.h"
+#include "npr_filter_kuwahara_detail.h"
+#include "npr_filter_morphology_detail.h"
+#include "npr_filter_pdebased_detail.h"
 
 #endif  // SRC_NPR_NPRFILTERS_H_

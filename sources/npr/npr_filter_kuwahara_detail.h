@@ -27,8 +27,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <algorithm>
 
 #include "../core/common.hpp"
-#include "NPREdges.h"
-#include "VectorField.h"
+#include "npr_edges.h"
+#include "vector_field.h"
 
 namespace lime {
 

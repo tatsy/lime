@@ -25,8 +25,8 @@ namespace lime {
         , _cols{cols}
         , _data{} {
         Assertion(rows > 0 && cols > 0, "The array size must be positive.");
-        data = std::make_unique<T[]>(rows * cols);
-        memset(data, 0, sizeof(T)* rows * cols);
+        _data = std::make_unique<T[]>(rows * cols);
+        memset(_data.get(), 0, sizeof(T)* rows * cols);
     }
 
     template <class T>
@@ -35,17 +35,17 @@ namespace lime {
         , _cols{cols}
         , _data{} {
         Assertion(rows > 0 && cols > 0, "The array size must be positive.");
-        data = std::make_unique<T[]>(rows * cols);
-        std::fill(data, data + (rows * cols), value);
+        _data = std::make_unique<T[]>(rows * cols);
+        std::fill(_data, _data + (rows * cols), value);
     }
 
     template <class T>
     Array2d<T>::Array2d(const Array2d<T>& ary)
-        : _rows{ary.nrows}
-        , _cols{ary.ncols}
+        : _rows{ary._rows}
+        , _cols{ary._cols}
         , _data{} {
         _data = std::make_unique<T[]>(_rows * _cols);
-        std::copy(ary._data, ary._data + (_rows * _cols), _data);
+        std::copy(ary._data.get(), ary._data.get() + (_rows * _cols), _data.get());
     }
 
     template <class T>
@@ -54,17 +54,17 @@ namespace lime {
         this->_cols = ary._cols;
 
         _data.reset();
-        _data = std::make_unique<T[]>(ary.nrows * ary.ncols);
-        std::copy(ary._data, ary._data + (_rows * _cols), _data);
+        _data = std::make_unique<T[]>(ary._rows * ary._cols);
+        std::copy(ary._data.get(), ary._data.get() + (_rows * _cols), _data.get());
 
         return *this;
     }
 
     template <class T>
     T& Array2d<T>::operator()(int i, int j) const {
-        Assertion(i >= 0 && j >= 0 && i < nrows && j < ncols,
+        Assertion(i >= 0 && j >= 0 && i < _rows && j < _cols,
                   "Array index out of bounds!!");
-        return data[i * ncols + j];
+        return _data[i * _cols + j];
     }
 
     template <class T>

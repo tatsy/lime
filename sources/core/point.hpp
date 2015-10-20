@@ -1,140 +1,206 @@
-/******************************************************************************
-Copyright 2015 Tatsuya Yatagawa (tatsy)
+#ifdef _MSC_VER
+#pragma once
+#endif
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "Software"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-the Software, and to permit persons to whom the Software is furnished to do so,
-subject to the following conditions:
+#ifndef _CORE_POINT_HPP_
+#define _CORE_POINT_HPP_
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-******************************************************************************/
-
-#ifndef SRC_CORE_POINT_HPP_
-#define SRC_CORE_POINT_HPP_
+#include <type_traits>
 
 #include <opencv2/opencv.hpp>
 
 #include "common.hpp"
 
+template <class T>
+using is_arith_t = typename std::enable_if<std::is_arithmetic<T>::value>::type;
+
 namespace lime {
 
-inline int sign(double d) {
-    static const double eps = 1.0e-8;
-    if (d < -eps) return -1;
-    if (d >  eps) return 1;
-    return 0;
-}
-
-template <class T>
-class Point_ : public cv::Point_<T> {
- public:
-    // * default constructor
-    Point_() : cv::Point_<T>() {}
-
-    // * constructor
-    Point_(T x, T y)
-        : cv::Point_<T>(x, y) {}
-
-    // * destructor
-    ~Point_() {}
-
-    // * copy constructor
-    Point_(const Point_& p)
-        : cv::Point_<T>(p.x, p.y) {}
-
-    // * operator =
-    Point_<T>& operator=(const Point_& p) {
-        this->x = p.x;
-        this->y = p.y;
-        return *this;
+    inline int sign(double d) {
+        if (d < -EPS) return -1;
+        if (d >  EPS) return  1;
+        return 0;
     }
 
-    // * operator +
-    Point_<T> operator+(Point_ p) const {
-        Point_ q;
-        q.x = this->x + p.x;
-        q.y = this->y + p.y;
-        return q;
-    }
+    template <class T, class Enable = void>
+    class Point_;
 
-    // * operator -
-    Point_<T> operator-(Point_ p) const {
-        Point_ q;
-        q.x = this->x - p.x;
-        q.y = this->y - p.y;
-        return q;
-    }
+    template <class T>
+    class Point_<T, is_arith_t<T> > {
+    public:
+        T x{0};
+        T y{0};
 
-    Point_<T> operator-() const {
-        return Point(-this->x, -this->y);
-    }
+    public:
+        /** Default constructor.
+         */
+        Point_() {
+        }
 
-    // * dot product
-    T dot(const Point_& p) const {
-        return this->x * p.x + this->y * p.y;
-    }
+        /** The Point constructor.
+         */
+        Point_(T x, T y)
+            : x{x}
+            , y{y} {
+        }
 
-    // * determinant
-    T det(const Point_& p) const {
-        return this->x * p.y - this->y * p.x;
-    }
+        /** The Point destructor.
+         */
+        ~Point_() {
+        }
 
-    // * operator *
-    Point_<T> operator*(T t) const {
-        Point_ q;
-        q.x = this->x * t;
-        q.y = this->y * t;
-        return q;
-    }
+        /** The Point constructor (copy).
+         */
+        Point_(const Point_& p)
+            : x{p.x}
+            , y{p.y} {
+        }
 
-    // * operator /
-    Point_<T> operator/(T t) const {
-        Assertion(t != 0, "Zero division");
-        Point_ q;
-        q.x = this->x / t;
-        q.y = this->y / t;
-        return q;
-    }
+        /** Assignment operator.
+         */
+        Point_<T>& operator=(const Point_& p) {
+            this->x = p.x;
+            this->y = p.y;
+            return *this;
+        }
 
-    // * operator <
-    bool operator<(const Point_& p) const {
-        if (this->x != p.x) return this->x < p.x;
-        return this->y < p.y;
-    }
+        /** Plus operator.
+         */
+        Point_<T> operator+=(const Point_& p) {
+            this->x += p.x;
+            this->y += p.y;
+            return *this;
+        }
 
-    // * operator >
-    bool operator>(const Point_& p) const {
-        if (this->x != p.x) return this->x > p.x;
-        return this->y > p.y;
-    }
+        /** Minus operator.
+         */
+        Point_<T> operator-=(const Point_& p) {
+            this->x -= p.x;
+            this->y -= p.y;
+            return *this;
+        }
 
-    // * norm
-    double norm() const {
-        return hypot(this->x, this->y);
-    }
+        /** Negation operator.
+         */
+        Point_<T> operator-() const {
+            return { -x, -y };
+        }
 
-    // * normalize
-    Point_<T> normalize() const {
-        double l = this->norm();
-        return *this / l;
-    }
-};  // class Point_
+        /** Dot product.
+         */
+        T dot(const Point_& p) const {
+            return x * p.x + y * p.y;
+        }
 
-typedef Point_<int> Point;
-typedef Point_<int> Point2i;
-typedef Point_<float> Point2f;
-typedef Point_<double> Point2d;
+        /** Determinant.
+         */
+        T det(const Point_& p) const {
+            return x * p.y - y * p.x;
+        }
+
+        /** Multiplication operator.
+         */
+        Point_<T> operator*=(T t) {
+            this->x *= t;
+            this->y *= t;
+            return *this;
+        }
+
+        /** Division operator.
+         */
+        Point_<T> operator/=(T t) {
+            Assertion(t != T{0}, "Zero division");
+            this->x /= t;
+            this->y /= t;
+            return *this;
+        }
+
+        /** Comparation operator ==.
+        */
+        bool operator==(const Point_& p) const {
+            return x == p.x && y == p.y;
+        }
+
+        /** Comparation operator !=.
+         */
+        bool operator!=(const Point_& p) const {
+            return !this->operator==(p);
+        }
+
+        /** Comparation operator <.
+         */
+        bool operator<(const Point_& p) const {
+            if (x != p.x) return x < p.x;
+            return y < p.y;
+        }
+
+        /** Comparation operator >.
+         */
+        bool operator>(const Point_& p) const {
+            if (x != p.x) return x > p.x;
+            return y > p.y;
+        }
+
+        /** Norm.
+         */
+        double norm() const {
+            return hypot(x, y);
+        }
+
+        /** Normalization.
+         */
+        Point_<T> normalize() const {
+            const double l = this->norm();
+            return (*this) / l;
+        }
+
+        /** Convert to cv::Point_<T>
+         */
+        operator cv::Point_<T>() const {
+            return { x, y };
+        }
+
+    };  // class Point_
+
+    using Point   = Point_<int>;
+    using Point2i = Point_<int>;
+    using Point2f = Point_<float>;
+    using Point2d = Point_<double>;
 
 }  // namespace lime
 
-#endif  // SRC_CORE_POINT_HPP_
+template <class T>
+lime::Point_<T, is_arith_t<T> >
+operator+(const lime::Point_<T, is_arith_t<T> >& p1,
+          const lime::Point_<T, is_arith_t<T> >& p2) {
+    auto retval = p1;
+    retval += p2;
+    return retval;
+}
+
+template <class T>
+lime::Point_<T, is_arith_t<T> >
+operator-(const lime::Point_<T, is_arith_t<T> >& p1,
+          const lime::Point_<T, is_arith_t<T> >& p2) {
+    auto retval = p1;
+    retval -= p2;
+    return retval;
+}
+
+template <class T>
+lime::Point_<T, is_arith_t<T> >
+operator*(const lime::Point_<T, is_arith_t<T> >& p, T t) {
+    auto retval = p;
+    retval *= t;
+    return retval;
+}
+
+template <class T>
+lime::Point_<T, is_arith_t<T> >
+operator/(const lime::Point_<T, is_arith_t<T> >& p, T t) {
+    auto retval = p;
+    retval /= t;
+    return retval;
+}
+
+#endif  // _CORE_POINT_HPP_

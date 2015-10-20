@@ -46,6 +46,7 @@ class Random {
 
     /* Genrate a random number from a normal distribution with mean = 0 and STD = 1 */
     double randNorm() const;
+
 };  // class Random
 
 }  // namespace lime

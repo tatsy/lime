@@ -10,7 +10,7 @@
 namespace lime {
 
     template <class T>
-    class Array2d {
+    class LIME_EXPORTS Array2d {
     private:
         int _rows, _cols;
         std::unique_ptr<T[]> _data;
