@@ -50,6 +50,6 @@ inline void edgeDoG(cv::InputArray image, cv::OutputArray edge, const DoGParam& 
 
 }  // namespace lime
 
-#include "NPREdges_detail.h"
+#include "npr_edges_detail.h"
 
 #endif  // SRC_NPR_NPREDGES_H_

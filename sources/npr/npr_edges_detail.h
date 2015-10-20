@@ -22,7 +22,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #ifndef SRC_NPR_NPREDGES_DETAIL_H_
 #define SRC_NPR_NPREDGES_DETAIL_H_
 
-#include "VectorField.h"
+#include "vector_field.h"
 #include "../npr/lic.h"
 
 namespace lime {
@@ -47,7 +47,7 @@ void uniformNoise(cv::OutputArray noise, const cv::InputArray gray, int nNoise) 
     cv::Mat  img = gray.getMat();
     cv::Mat& out = noise.getMatRef();
 
-    msg_assert(img.channels() == 1 && img.depth() == CV_32F,
+    Assertion(img.channels() == 1 && img.depth() == CV_32F,
         "input image must be single channel and floating-point-valued");
 
     const int width  = img.cols;
@@ -236,7 +236,7 @@ void edgeFDoG(cv::InputArray input, cv::OutputArray output, const cv::Mat& vfiel
 
 void edgeDoG(cv::InputArray image, cv::OutputArray edge, const DoGParam& param) {
     cv::Mat input = image.getMat();
-    msg_assert(input.depth() == CV_32F && input.channels() == 1,
+    Assertion(input.depth() == CV_32F && input.channels() == 1,
         "Input image must be single channel and floating-point-valued.");
 
     cv::Mat& outRef = edge.getMatRef();
@@ -251,7 +251,7 @@ void edgeDoG(cv::InputArray image, cv::OutputArray edge, const DoGParam& param) 
         break;
 
     default:
-        msg_assert(false, "Unknown DoG type is specified.");
+        Assertion(false, "Unknown DoG type is specified.");
     }
 }
 

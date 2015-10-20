@@ -45,7 +45,7 @@ void calcTangent(cv::OutputArray output, cv::InputArray input, int ksize, int ma
     cv::Mat& tangent = output.getMatRef();
 
     // check input arguments
-    msg_assert(gray.depth() == CV_32F && gray.channels() == 1,
+    Assertion(gray.depth() == CV_32F && gray.channels() == 1,
                "Input image must be single channel and floating-point-valued.");
 
     const int width = gray.cols;

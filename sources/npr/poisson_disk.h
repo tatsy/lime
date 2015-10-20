@@ -51,6 +51,6 @@ inline void poissonDisk(cv::InputArray grayImage, std::vector<cv::Point2f>* samp
 
 }  // namespace lime
 
-#include "PoissonDisk_detail.h"
+#include "poisson_disk_detail.h"
 
 #endif  // SRC_NPR_POISSONDISK_H_

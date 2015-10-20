@@ -83,7 +83,7 @@ void gauss_seidel(cv::InputOutputArray I_, cv::InputArray L_, int maxiter) {
     const int width = I.cols;
     const int height = I.rows;
     const int channel = I.channels();
-    msg_assert(width == L.cols && height == L.rows && channel == L.channels(),
+    Assertion(width == L.cols && height == L.rows && channel == L.channels(),
                "Input and output cv::Mat must be the same size");
 
     while (maxiter--) {
@@ -267,7 +267,7 @@ void colorConstancyHorn(cv::InputArray input, cv::OutputArray output, double thr
 }
 
 void colorConstancyRahman(cv::InputArray input, cv::OutputArray output, double sigma, double scale, int nLevel) {
-    msg_assert(input.depth() == CV_32F, "Input cv::Mat must be CV_32 depth");
+    Assertion(input.depth() == CV_32F, "Input cv::Mat must be CV_32 depth");
 
     cv::Mat  img = input.getMat();
     cv::Mat& out = output.getMatRef();
@@ -303,7 +303,7 @@ void colorConstancyRahman(cv::InputArray input, cv::OutputArray output, double s
 }
 
 void colorConstancyFaugeras(cv::InputArray input, cv::OutputArray output) {
-    msg_assert(input.depth() == CV_32F, "Input cv::Mat must be CV_32 depth");
+    Assertion(input.depth() == CV_32F, "Input cv::Mat must be CV_32 depth");
 
     cv::Mat  img = input.getMat();
     cv::Mat& out = output.getMatRef();

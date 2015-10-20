@@ -47,7 +47,7 @@ class Grid {
         : nrows(rows)
         , ncols(cols)
         , data(rows * cols, std::vector<T>()) {
-        msg_assert(rows > 0 && cols > 0, "Size must be positive");
+        Assertion(rows > 0 && cols > 0, "Size must be positive");
     }
 
     // * destructor
@@ -72,7 +72,7 @@ class Grid {
 
     // Resize grid
     void resize(int rows, int cols) {
-        msg_assert(rows > 0 && cols > 0, "Size must be positive");
+        Assertion(rows > 0 && cols > 0, "Size must be positive");
         this->nrows = rows;
         this->ncols = cols;
         data.resize(rows * cols);
@@ -100,7 +100,7 @@ class Grid {
 
     // * access vector of (i, j)
     const std::vector<T>& operator()(int i, int j) const {
-        msg_assert(i >= 0 && j >= 0 && i < nrows && j < ncols,
+        Assertion(i >= 0 && j >= 0 && i < nrows && j < ncols,
                    "Index out of bounds");
         return data[i * ncols + j];
     }

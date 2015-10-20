@@ -63,6 +63,6 @@ inline void detectSingular(const Array2d<Tensor>& sst, std::vector<SingularPoint
 
 }  // namespace lime
 
-#include "VectorField_detail.h"
+#include "vector_field_detail.h"
 
 #endif  // SRC_NPR_VECTORFIELD_H_

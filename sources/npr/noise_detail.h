@@ -49,7 +49,7 @@ namespace noise {
 
         int scaleW = width >> level;
         int scaleH = height >> level;
-        msg_assert(scaleW != 0 && scaleH != 0, "Specified level is too large.");
+        Assertion(scaleW != 0 && scaleH != 0, "Specified level is too large.");
 
         Random rand = Random::getRNG();
         int count = 0;

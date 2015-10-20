@@ -274,8 +274,8 @@ namespace { // NOLINT
 } /* unnamed namespace */
 
     void lic(cv::OutputArray out, cv::InputArray img, const cv::Mat& vfield, int L, LicAlgo algo_type) {
-        msg_assert(img.depth() == CV_32F, "Input image must be floating-point-valued.");
-        msg_assert(img.channels() == 1 || img.channels() == 3, "Input image must have 1 or 3 channels");
+        Assertion(img.depth() == CV_32F, "Input image must be floating-point-valued.");
+        Assertion(img.channels() == 1 || img.channels() == 3, "Input image must have 1 or 3 channels");
 
         cv::Mat  tmp;
         img.getMat().convertTo(tmp, CV_32F);
@@ -292,7 +292,7 @@ namespace { // NOLINT
     }
 
     void vector2angle(cv::InputArray vfield, cv::OutputArray angle) {
-        msg_assert(vfield.depth() == CV_32F && vfield.channels() == 2, "Format of input vector field is invalid.");
+        Assertion(vfield.depth() == CV_32F && vfield.channels() == 2, "Format of input vector field is invalid.");
 
         cv::Mat V = vfield.getMat();
         const int width = V.cols;
@@ -309,7 +309,7 @@ namespace { // NOLINT
     }
 
     void angle2vector(cv::InputArray angle, cv::OutputArray vfield, double scale) {
-        msg_assert(angle.depth() == CV_32F && angle.channels() == 1, "Format of input tangent angles are invalid.");
+        Assertion(angle.depth() == CV_32F && angle.channels() == 1, "Format of input tangent angles are invalid.");
 
         cv::Mat A = angle.getMat();
         const int width = A.cols;

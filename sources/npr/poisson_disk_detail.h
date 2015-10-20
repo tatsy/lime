@@ -84,8 +84,8 @@ double minDistFromIntensity(cv::Point2f p, const cv::Mat& gray, double min_radiu
 }
 
 void checkInputMat(const cv::Mat& grayImage) {
-    msg_assert(grayImage.depth() == CV_32F, "Image depth must be CV_32F");
-    msg_assert(grayImage.channels() == 1, "Image must be single channel");
+    Assertion(grayImage.depth() == CV_32F, "Image depth must be CV_32F");
+    Assertion(grayImage.channels() == 1, "Image must be single channel");
 }
 
 void pdsRandomQueue(std::vector<cv::Point2f>* points, const cv::Mat& grayImage, double min_radius, double max_radius) {
@@ -327,7 +327,7 @@ void poissonDisk(cv::InputArray grayImage, std::vector<cv::Point2f>* samplePoint
         break;
 
     default:
-        msg_assert(false, "Unknown method specified to Poisson disk sampling.");
+        Assertion(false, "Unknown method specified to Poisson disk sampling.");
     }
 }
 

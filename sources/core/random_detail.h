@@ -194,7 +194,7 @@ inline Random::Random(int seed) {
 }
 
 inline int Random::randInt(const int n) const {
-    msg_assert(n > 0, "Upper bound of random integers must be positive.");
+    Assertion(n > 0, "Upper bound of random integers must be positive.");
     return genrand_int31() % n;
 }
 

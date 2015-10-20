@@ -1,36 +1,20 @@
-/******************************************************************************
-Copyright 2015 Tatsuya Yatagawa (tatsy)
+#ifdef _MSC_VER
+#pragma once
+#endif
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "Software"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-the Software, and to permit persons to whom the Software is furnished to do so,
-subject to the following conditions:
+#ifndef _NPR_LIME_NPR_HPP_
+#define _NPR_LIME_NPR_HPP_
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+#include "npr_edges.h"
+#include "poisson_disk.h"
+#include "tensor.hpp"
+#include "singularity.hpp"
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-******************************************************************************/
+#include "noise.h"
+#include "npr_filters.h"
 
-#ifndef SRC_NPR_LIME_NPR_HPP_
-#define SRC_NPR_LIME_NPR_HPP_
+#include "vector_field.h"
 
-#include "NPREdges.h"
-#include "PoissonDisk.h"
-#include "Tensor.hpp"
-#include "Singularity.hpp"
-
-#include "Noise.h"
-#include "NPRFilters.h"
-
-#include "VectorField.h"
 #include "../npr/lic.h"
 
-#endif  // SRC_NPR_LIME_NPR_HPP_
+#endif  // _NPR_LIME_NPR_HPP_

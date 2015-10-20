@@ -24,7 +24,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include <vector>
 
-#include "PoissonDisk.h"
+#include "poisson_disk.h"
 
 namespace lime {
 
@@ -90,7 +90,7 @@ void calcETF(cv::InputArray input, cv::OutputArray output,
             }
         }
     } else {
-        msg_assert(false, "Unknown edge detector is specified");
+        Assertion(false, "Unknown edge detector is specified");
     }
 
     // compute tangent field
@@ -219,7 +219,7 @@ void calcSST(cv::InputArray input, cv::OutputArray output, int ksize = 5, EdgeDe
             }
         }
     } else {
-        msg_assert(false, "Unknown edge detector is specified.");
+        Assertion(false, "Unknown edge detector is specified.");
     }
 
     // tensor relaxation step
@@ -312,7 +312,7 @@ void calcVectorField(cv::InputArray input, cv::OutputArray angles,
             }
         }
     } else {
-        msg_assert(false, "Unknown vector field type is specified.");
+        Assertion(false, "Unknown vector field type is specified.");
     }
 }
 

@@ -1,100 +1,82 @@
-/******************************************************************************
-Copyright 2015 Tatsuya Yatagawa (tatsy)
+#ifdef _MSC_VER
+#pragma once
+#endif
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "Software"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-the Software, and to permit persons to whom the Software is furnished to do so,
-subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-******************************************************************************/
-
-#ifndef SRC_CORE_ARRAY2D_DETAIL_H_
-#define SRC_CORE_ARRAY2D_DETAIL_H_
+#ifndef _CORE_ARRAY2D_DETAIL_H_
+#define _CORE_ARRAY2D_DETAIL_H_
 
 #include <cstring>
+#include <algorithm>
 
 #include "common.hpp"
 
 namespace lime {
 
-template <class Ty>
-Array2d<Ty>::Array2d()
-    : nrows(0)
-    , ncols(0)
-    , data(0) {
-}
+    template <class T>
+    Array2d<T>::Array2d()
+        : _rows{0}
+        , _cols{0}
+        , _data{} {
+    }
 
-template <class Ty>
-Array2d<Ty>::Array2d(int rows, int cols)
-    : nrows(rows)
-    , ncols(cols)
-    , data(0) {
-    msg_assert(rows > 0 && cols > 0, "The array size must be positive.");
-    data = new Ty[rows * cols];
-    memset(data, 0, sizeof(Ty)* rows * cols);
-}
+    template <class T>
+    Array2d<T>::Array2d(int rows, int cols)
+        : _rows{rows}
+        , _cols{cols}
+        , _data{} {
+        Assertion(rows > 0 && cols > 0, "The array size must be positive.");
+        data = std::make_unique<T[]>(rows * cols);
+        memset(data, 0, sizeof(T)* rows * cols);
+    }
 
-template <class Ty>
-Array2d<Ty>::Array2d(int rows, int cols, const Ty& value)
-    : nrows(rows)
-    , ncols(cols)
-    , data(0) {
-    msg_assert(rows > 0 && cols > 0, "The array size must be positive.");
-    data = new Ty[rows * cols];
+    template <class T>
+    Array2d<T>::Array2d(int rows, int cols, const T& value)
+        : _rows{rows}
+        , _cols{cols}
+        , _data{} {
+        Assertion(rows > 0 && cols > 0, "The array size must be positive.");
+        data = std::make_unique<T[]>(rows * cols);
+        std::fill(data, data + (rows * cols), value);
+    }
 
-    Ty *s = &data[0];
-    Ty *e = &data[rows * cols - 1];
-    for (Ty* p = s; p != e; ++p) *p = value;
-}
+    template <class T>
+    Array2d<T>::Array2d(const Array2d<T>& ary)
+        : _rows{ary.nrows}
+        , _cols{ary.ncols}
+        , _data{} {
+        _data = std::make_unique<T[]>(_rows * _cols);
+        std::copy(ary._data, ary._data + (_rows * _cols), _data);
+    }
 
-template <class Ty>
-Array2d<Ty>::Array2d(const Array2d<Ty>& ary)
-    : nrows(ary.nrows)
-    , ncols(ary.ncols)
-    , data(0) {
-    data = new Ty[ary.nrows * ary.ncols];
-    memcpy(data, ary.data, sizeof(Ty)* ary.nrows * ary.ncols);
-}
+    template <class T>
+    Array2d<T>& Array2d<T>::operator=(const Array2d<T>& ary) {
+        this->_rows = ary._rows;
+        this->_cols = ary._cols;
 
-template <class Ty>
-Array2d<Ty>& Array2d<Ty>::operator=(const Array2d<Ty>& ary) {
-    this->nrows = ary.nrows;
-    this->ncols = ary.ncols;
+        _data.reset();
+        _data = std::make_unique<T[]>(ary.nrows * ary.ncols);
+        std::copy(ary._data, ary._data + (_rows * _cols), _data);
 
-    delete[] data;
-    data = new Ty[ary.nrows * ary.ncols];
-    memcpy(data, ary.data, sizeof(Ty)* ary.nrows * ary.ncols);
+        return *this;
+    }
 
-    return *this;
-}
+    template <class T>
+    T& Array2d<T>::operator()(int i, int j) const {
+        Assertion(i >= 0 && j >= 0 && i < nrows && j < ncols,
+                  "Array index out of bounds!!");
+        return data[i * ncols + j];
+    }
 
-template <class Ty>
-Ty& Array2d<Ty>::operator()(int i, int j) const {
-    msg_assert(i >= 0 && j >= 0 && i < nrows && j < ncols, "Array index out of bounds");
-    return data[i * ncols + j];
-}
+    template <class T>
+    int Array2d<T>::rows() const {
+        return _rows;
+    }
 
-template <class Ty>
-int Array2d<Ty>::rows() const {
-    return nrows;
-}
-
-template <class Ty>
-int Array2d<Ty>::cols() const {
-    return ncols;
-}
+    template <class T>
+    int Array2d<T>::cols() const {
+        return _cols;
+    }
 
 }  // namespace lime
 
-#endif  // SRC_CORE_ARRAY2D_DETAIL_H_
+#endif  // _CORE_ARRAY2D_DETAIL_H_

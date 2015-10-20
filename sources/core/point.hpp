@@ -99,7 +99,7 @@ class Point_ : public cv::Point_<T> {
 
     // * operator /
     Point_<T> operator/(T t) const {
-        msg_assert(t != 0, "Zero division");
+        Assertion(t != 0, "Zero division");
         Point_ q;
         q.x = this->x / t;
         q.y = this->y / t;
