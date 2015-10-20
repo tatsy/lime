@@ -31,7 +31,7 @@ namespace lime {
         Grid(int rows, int cols)
             : _rows{rows}
             , _cols{cols}
-            , _data{rows * cols, std::vector<T>{}} {
+            , _data(rows * cols, std::vector<T>{}) {
             Assertion(rows > 0 && cols > 0, "Size must be positive!!");
         }
 
@@ -45,7 +45,7 @@ namespace lime {
         Grid(const Grid& grid)
             : _rows{grid._rows}
             , _cols{grid._cols}
-            , _data{grid._rows * grid._cols, std::vector<T>{}} {
+            , _data(grid._rows * grid._cols, std::vector<T>{}) {
             dataCopy(grid);
         }
 

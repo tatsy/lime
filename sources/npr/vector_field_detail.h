@@ -297,7 +297,7 @@ void calcVectorField(cv::InputArray input, cv::OutputArray angles,
                 double D = sqrt((E - G) * (E - G) + 4.0 * F * F);
                 double lambda1 = (E + G + D) / 2.0;
                 double lambda2 = (E + G - D) / 2.0;
-                double lambda = abs(lambda1) > abs(lambda2) ? lambda1 : lambda2;
+                double lambda = std::abs(lambda1) > std::abs(lambda2) ? lambda1 : lambda2;
                 vfield.at<float>(y, x) = static_cast<float>(atan2(-F, lambda1 - E));
             }
         }

@@ -134,7 +134,7 @@ void solveSF(cv::InputArray input, cv::OutputArray output, double lambda, int ma
                         if (xx >= 0 && yy >= 0 && xx < width && yy < height) {
                             double diff = temp.at<float>(yy, xx*dim + c) - temp.at<float>(y, x*dim + c);
                             double l = laplace.at<float>(yy, xx);
-                            sum += -sign(l) * abs(diff);
+                            sum += -sign(l) * std::abs(diff);
                             w += lambda;
                         }
                     }
@@ -179,7 +179,7 @@ void solveMCF(cv::InputArray input, cv::OutputArray output, double lambda, int m
                         if (xx >= 0 && yy >= 0 && xx < width && yy < height) {
                             double kappa = meanCurve(temp, xx, yy, c);
                             double diff = temp.at<float>(yy, xx*dim + c) - temp.at<float>(y, x*dim + c);
-                            sum += abs(diff);
+                            sum += std::abs(diff);
                             w += lambda;
                         }
                     }

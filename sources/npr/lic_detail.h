@@ -38,10 +38,10 @@ namespace lime {
                 double direct[4];
                 Point2d horz(1.0, 0.0);
                 Point2d vert(0.0, 1.0);
-                direct[0] = (sign(v.det(horz)) == 0) ? INF : (ceil(pt.y) - pt.y) / (abs(v.y) + EPS);    // top
-                direct[1] = (sign(v.det(horz)) == 0) ? INF : (pt.y - floor(pt.y)) / (abs(v.y) + EPS);    // bottom
-                direct[2] = (sign(v.det(vert)) == 0) ? INF : (ceil(pt.x) - pt.x) / (abs(v.x) + EPS);    // left
-                direct[3] = (sign(v.det(vert)) == 0) ? INF : (pt.x - floor(pt.x)) / (abs(v.x) + EPS);    // right
+                direct[0] = (sign(v.det(horz)) == 0) ? INF : (ceil(pt.y) - pt.y) / (std::abs(v.y) + EPS);    // top
+                direct[1] = (sign(v.det(horz)) == 0) ? INF : (pt.y - floor(pt.y)) / (std::abs(v.y) + EPS);    // bottom
+                direct[2] = (sign(v.det(vert)) == 0) ? INF : (ceil(pt.x) - pt.x) / (std::abs(v.x) + EPS);    // left
+                direct[3] = (sign(v.det(vert)) == 0) ? INF : (pt.x - floor(pt.x)) / (std::abs(v.x) + EPS);    // right
                 double se = INF;
                 for (int i = 0; i < 4; i++) {
                     if (sign(direct[i]) > 0) se = std::min(se, direct[i]);

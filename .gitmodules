@@ -1,0 +1,4 @@
+[submodule "docs/html"]
+	path = docs/html
+	url = https://github.com/tatsy/lime.git
+	branch = gh-pages

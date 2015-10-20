@@ -220,8 +220,8 @@ void generalKF(cv::InputArray input, cv::OutputArray output, int n_div, int ksiz
                         if (dx == 0 && dy == 0) continue;
                         int xx = x + dx;
                         int yy = y + dy;
-                        int ax = abs(dx);
-                        int ay = abs(dy);
+                        int ax = std::abs(dx);
+                        int ay = std::abs(dy);
                         double g = gauss[ay][ax];
                         if (xx >= 0 && yy >= 0 && xx < width && yy < height) {
                             double ddx = static_cast<double>(dx);

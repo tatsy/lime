@@ -38,7 +38,7 @@ TEST(Random, RandInt) {
     }
 
     for (int i = 0; i < nBins; i++) {
-        EXPECT_LT(abs(countUp[i] - nLoop / nBins), nLoop / (nBins * nBins));
+        EXPECT_LT(std::abs(countUp[i] - nLoop / nBins), nLoop / (nBins * nBins));
     }
 
     delete[] countUp;

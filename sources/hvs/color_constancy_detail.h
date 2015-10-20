@@ -153,7 +153,7 @@ void threshold(cv::InputArray input_, cv::OutputArray output_, double threshold)
     for (int c = 0; c < channel; c++) {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                if (fabs(input.at<float>(y, x*channel + c)) < threshold) {
+                if (std::abs(input.at<float>(y, x*channel + c)) < threshold) {
                     output.at<float>(y, x*channel + c) = 0.0f;
                 } else {
                     output.at<float>(y, x*channel + c) = input.at<float>(y, x*channel + c);
