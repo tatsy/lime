@@ -19,13 +19,9 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ******************************************************************************/
 
-#ifndef _LIBRARY_FOR_IMAGE_EDITING_H_
-#define _LIBRARY_FOR_IMAGE_EDITING_H_
+#include "gtest/gtest.h"
 
-#undef NDEBUG
-
-#include "../sources/npr/lime_npr.hpp"
-#include "../sources/core/lime_core.hpp"
-#include "../sources/hvs/lime_hvs.hpp"
-
-#endif
+int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}

@@ -69,9 +69,3 @@ TEST_F(Array2dTest, OperatorEq) {
     temp(5, 5) = 0;
     EXPECT_NE(array2d(5, 5), 0);
 }
-
-
-int main(int argc, char **argv) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
-}

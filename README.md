@@ -51,4 +51,4 @@ You can compile all the samples using CMake.
 
 ## Copyright
 
-* (C) 1997 - 2002, Makoto Matsumoto and Takuji Nishimura (random number generator codes)
+MIT License 2015, Tatsuya Yatagawa (tatsy)
