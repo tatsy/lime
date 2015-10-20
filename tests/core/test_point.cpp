@@ -22,25 +22,34 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "gtest/gtest.h"
 
 #include "../../include/lime.hpp"
-using lime::Point2d;
+using namespace lime;
 
-const int nSimpleLoop = 100;
-lime::Random rng = lime::Random::getRNG();
+class Point2dTest : public ::testing::Test {
+protected:
+    static const int nSimpleLoop = 100;
+    static Random rng;
 
-TEST(Point2d, Sign) {
+protected:
+    Point2dTest() {}
+    virtual ~Point2dTest() {}
+};
+
+Random Point2dTest::rng = Random::getRNG();
+
+TEST_F(Point2dTest, Sign) {
     EXPECT_EQ(lime::sign(10.0), 1);
     EXPECT_EQ(lime::sign(-10.0), -1);
     EXPECT_EQ(lime::sign(1.0e-12), 0);
     EXPECT_EQ(lime::sign(-1.0e-12), 0);
 }
 
-TEST(Point2d, DefaultConstructor) {
+TEST_F(Point2dTest, DefaultConstructor) {
     const Point2d p;
     EXPECT_EQ(p.x, 0.0);
     EXPECT_EQ(p.y, 0.0);
 }
 
-TEST(Point2d, OperatorEq) {
+TEST_F(Point2dTest, OperatorEq) {
     Point2d p(1.0, 2.0);
     Point2d q(2.0, 2.0);
     q = p;
@@ -49,7 +58,7 @@ TEST(Point2d, OperatorEq) {
     EXPECT_NE(p, q);
 }
 
-TEST(Point2d, AddAndSubtract) {
+TEST_F(Point2dTest, AddAndSubtract) {
     for (int i = 0; i < nSimpleLoop; i++) {
         const Point2d p(rng.randReal(), rng.randReal());
         const Point2d q(rng.randReal(), rng.randReal());
@@ -60,7 +69,7 @@ TEST(Point2d, AddAndSubtract) {
     }
 }
 
-TEST(Point2d, MultiplyAndDiv) {
+TEST_F(Point2dTest, MultiplyAndDiv) {
     for (int i = 0; i < nSimpleLoop; i++) {
         const Point2d p(rng.randReal(), rng.randReal());
         const double d = rng.randReal() + 1.0e-8;
@@ -70,10 +79,10 @@ TEST(Point2d, MultiplyAndDiv) {
         EXPECT_EQ(p.y / d, (p / d).y) << "Divide: y does not match";
     }
     Point2d p(1.0, 2.0);
-    ASSERT_DEATH(p / 0.0, "Zero division") << "Divide: zero division";
+    ASSERT_DEATH(p / 0.0, "") << "Divide: zero division";
 }
 
-TEST(Point2d, Norm) {
+TEST_F(Point2dTest, Norm) {
     for (int i = 0; i < nSimpleLoop; i++) {
         double dx = rng.randReal();
         double dy = rng.randReal();
@@ -82,7 +91,7 @@ TEST(Point2d, Norm) {
     }
 }
 
-TEST(Point2d, Normalize) {
+TEST_F(Point2dTest, Normalize) {
     for (int i = 0; i < nSimpleLoop; i++) {
         double dx = rng.randReal();
         double dy = rng.randReal();
@@ -93,10 +102,10 @@ TEST(Point2d, Normalize) {
     }
 
     const Point2d p(0.0, 0.0);
-    ASSERT_DEATH(p.normalize(), "Zero division") << "Normalize: zero division";
+    ASSERT_DEATH(p.normalize(), "") << "Normalize: zero division";
 }
 
-TEST(Point2d, DotAndDet) {
+TEST_F(Point2dTest, DotAndDet) {
     for (int i = 0; i < nSimpleLoop; i++) {
         double dx1 = rng.randReal();
         double dy1 = rng.randReal();
@@ -107,9 +116,4 @@ TEST(Point2d, DotAndDet) {
         EXPECT_EQ(p1.dot(p2), dx1 * dx2 + dy1 * dy2) << "Dot: value does not match";
         EXPECT_EQ(p1.det(p2), dx1 * dy2 - dx2 * dy1) << "Det: value does not match";
     }
-}
-
-int main(int argc, char **argv) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
 }

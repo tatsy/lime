@@ -24,8 +24,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #undef NDEBUG
 
-#include "../src/npr/lime_npr.hpp"
-#include "../src/core/lime_core.hpp"
-#include "../src/hvs/lime_hvs.hpp"
+#include "../sources/npr/lime_npr.hpp"
+#include "../sources/core/lime_core.hpp"
+#include "../sources/hvs/lime_hvs.hpp"
 
 #endif

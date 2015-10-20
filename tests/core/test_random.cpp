@@ -38,7 +38,7 @@ TEST(Random, RandInt) {
     }
 
     for (int i = 0; i < nBins; i++) {
-        EXPECT_LT(abs(countUp[i] - nLoop / nBins), nLoop / (nBins * nBins));
+        EXPECT_LT(std::abs(countUp[i] - nLoop / nBins), nLoop / (nBins * nBins));
     }
 
     delete[] countUp;
@@ -72,9 +72,4 @@ TEST(Random, RandNorm) {
         ASSERT_NEAR(avg, 0.0, 0.05);
         ASSERT_NEAR(var, 1.0, 0.05);
     }
-}
-
-int main(int argc, char **argv) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
 }

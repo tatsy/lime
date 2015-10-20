@@ -49,15 +49,15 @@ void demo_circle() {
     lime::npr::noise::random(noise, cv::Size(width, height));
 
     printf("[LIC] Classic     -> ");
-    lime::npr::lic(classic, noise, vfield, 20, lime::npr::LIC_CLASSIC);
+    lime::npr::lic(classic, noise, vfield, 20, lime::npr::LICType::Classic);
     printf("OK\n");
 
     printf("[LIC] Eulerian    -> ");
-    lime::npr::lic(euler, noise, vfield, 20, lime::npr::LIC_EULARIAN);
+    lime::npr::lic(euler, noise, vfield, 20, lime::npr::LICType::Eulerian);
     printf("OK\n");
 
     printf("[LIC] Runge-Kutta -> ");
-    lime::npr::lic(runge, noise, vfield, 20, lime::npr::LIC_RUNGE_KUTTA);
+    lime::npr::lic(runge, noise, vfield, 20, lime::npr::LICType::RungeKutta);
     printf("OK\n");
 
     cv::imshow("Noise", noise);
@@ -86,8 +86,8 @@ void demo_img(const cv::Mat& img) {
 
     cv::Mat noise, flow, out;
     lime::npr::noise::random(noise, cv::Size(width, height));
-    lime::npr::lic(noise, flow, vfield, 20, lime::npr::LIC_CLASSIC);
-    lime::npr::lic(img, out, vfield, 20, lime::npr::LIC_RUNGE_KUTTA);
+    lime::npr::lic(noise, flow, vfield, 20, lime::npr::LICType::Classic);
+    lime::npr::lic(img, out, vfield, 20, lime::npr::LICType::RungeKutta);
 
     cv::imshow("Input", img);
     cv::imshow("Flow", flow);

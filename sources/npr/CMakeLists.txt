@@ -1,0 +1,24 @@
+set(HEADERS
+    ${HEADERS}
+    ${CMAKE_CURRENT_LIST_DIR}/lic.h
+    ${CMAKE_CURRENT_LIST_DIR}/lic_detail.h
+    ${CMAKE_CURRENT_LIST_DIR}/lime_npr.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/noise.h
+    ${CMAKE_CURRENT_LIST_DIR}/noise_detail.h
+    ${CMAKE_CURRENT_LIST_DIR}/npr_edges.h
+    ${CMAKE_CURRENT_LIST_DIR}/npr_edges_detail.h
+    ${CMAKE_CURRENT_LIST_DIR}/npr_filter_kuwahara_detail.h
+    ${CMAKE_CURRENT_LIST_DIR}/npr_filter_morphology_detail.h
+    ${CMAKE_CURRENT_LIST_DIR}/npr_filter_pdebased_detail.h
+    ${CMAKE_CURRENT_LIST_DIR}/npr_filters.h
+    ${CMAKE_CURRENT_LIST_DIR}/poisson_disk.h
+    ${CMAKE_CURRENT_LIST_DIR}/poisson_disk_detail.h
+    ${CMAKE_CURRENT_LIST_DIR}/singularity.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/tensor.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/vector_field.h
+    ${CMAKE_CURRENT_LIST_DIR}/vector_field_detail.h
+    PARENT_SCOPE)
+
+set(SOURCES
+    ${SOURCES}
+    PARENT_SCOPE)

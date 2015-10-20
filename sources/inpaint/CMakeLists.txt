@@ -1,0 +1,7 @@
+set(HEADERS
+    ${HEADERS}
+    PARENT_SCOPE)
+
+set(SOURCES
+    ${SOURCES}
+    PARENT_SCOPE)
