@@ -37,7 +37,7 @@ RUN \
 RUN \
   cd lime && \
   git submodule update --init --recursive && \
-  cmake . && \
+  cmake -DBUILD_LIME_TEST=ON . && \
   cmake --build .
 
 #

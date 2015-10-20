@@ -1,26 +1,9 @@
-/******************************************************************************
-Copyright 2015 Tatsuya Yatagawa (tatsy)
+#ifdef _MSC_VER
+#pragma once
+#endif
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "Software"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-the Software, and to permit persons to whom the Software is furnished to do so,
-subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-******************************************************************************/
-
-#ifndef SRC_NPR_NPREDGES_DETAIL_H_
-#define SRC_NPR_NPREDGES_DETAIL_H_
+#ifndef _NPR_NPREDGES_DETAIL_H_
+#define _NPR_NPREDGES_DETAIL_H_
 
 #include "vector_field.h"
 #include "../npr/lic.h"
@@ -28,8 +11,6 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 namespace lime {
 
 namespace npr {
-
-#pragma region DoGParam
 
 inline DoGParam::DoGParam(double _kappa, double _sigma, double _tau, double _phi, DoGType _dogType)
     : kappa(_kappa)
@@ -39,11 +20,9 @@ inline DoGParam::DoGParam(double _kappa, double _sigma, double _tau, double _phi
     , dogType(_dogType) {
 }
 
-#pragma endregion
-
 namespace {  // NOLINT
 
-void uniformNoise(cv::OutputArray noise, const cv::InputArray gray, int nNoise) {
+void uniformNoise(cv::OutputArray noise, cv::InputArray gray, int nNoise) {
     cv::Mat  img = gray.getMat();
     cv::Mat& out = noise.getMatRef();
 
@@ -259,4 +238,4 @@ void edgeDoG(cv::InputArray image, cv::OutputArray edge, const DoGParam& param) 
 
 }  // namespace lime
 
-#endif  // SRC_NPR_NPREDGES_DETAIL_H_
+#endif  // _NPR_NPREDGES_DETAIL_H_

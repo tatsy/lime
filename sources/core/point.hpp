@@ -151,10 +151,11 @@ namespace lime {
          */
         Point_<T> normalize() const {
             const double l = this->norm();
-            return (*this) / l;
+            Assertion(l != 0.0, "Zero division");
+            return { x / l, y / l };
         }
 
-        /** Convert to cv::Point_<T>
+        /** Convert to cv::Point_<T>.
          */
         operator cv::Point_<T>() const {
             return { x, y };
