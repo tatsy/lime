@@ -39,7 +39,7 @@ after_success:
 before_deploy:
   - git config --global user.name "Travis CI"
   - git config --global user.email "travis@travis-ci.org"
-  - "cd docs; /bin/bash; doxygen doxyfile; cd -"
+  - "cd docs; doxygen doxyfile; cd -"
   - mkdir packages
   - tar czvf packages/releases-$GIT_TAG.tar.gz $(ls)
   - zip -q packages/releases-$GIT_TAG.zip -r $(ls)
