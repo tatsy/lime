@@ -37,14 +37,14 @@ after_success:
   - docker exec lime-env coveralls-lcov --repo-token c6Fd5h2Ovd2c5PV7agagA89sUhsZCwIPR coverage.info
 
 before_deploy:
-  - git config --global user.name "Travis CI"
-  - git config --global user.email "travis@travis-ci.org"
-  - "cd docs; doxygen doxyfile; cd -"
-  - mkdir packages
-  - tar czvf packages/releases-$GIT_TAG.tar.gz $(ls -I packages)
-  - zip -q packages/releases-$GIT_TAG.zip -r $(ls -I packages)
-  - git tag $GIT_TAG -a -m "Commit from Travis CI for build $TRAVIS_BUILD_NUMBER"
-  - git push --quiet https://$GH_TOKEN@github.com/tatsy/lime.git --tags 2> /dev/null
+  - if [ $CXX = "clang++" ]; then git config --global user.name "Travis CI"; fi
+  - if [ $CXX = "clang++" ]; then git config --global user.email "travis@travis-ci.org"; fi
+  - if [ $CXX = "clang++" ]; then "cd docs; doxygen doxyfile; cd -"; fi
+  - if [ $CXX = "clang++" ]; then mkdir packages; fi
+  - if [ $CXX = "clang++" ]; then tar czvf packages/releases-$GIT_TAG.tar.gz $(ls -I packages); fi
+  - if [ $CXX = "clang++" ]; then zip -q packages/releases-$GIT_TAG.zip -r $(ls -I packages); fi
+  - if [ $CXX = "clang++" ]; then git tag $GIT_TAG -a -m "Commit from Travis CI for build $TRAVIS_BUILD_NUMBER"; fi
+  - if [ $CXX = "clang++" ]; then git push --quiet https://$GH_TOKEN@github.com/tatsy/lime.git --tags 2> /dev/null; fi
 
 deploy:
   skip_cleanup: true
