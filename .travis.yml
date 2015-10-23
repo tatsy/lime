@@ -50,7 +50,7 @@ deploy:
   skip_cleanup: true
   provider: releases
   api_key:
-    secure: kEV14WgxyZwIrd/tKScLKCk9vSSkqSZIvmfcSwvLrxKWYU6t5wmXkoIwfq1TMWWOGd9pSAAWtx7w2ofdA7OUXJyfW2I/azug1J+3zhzChbeVLNbt69orHZNbTbOddcTLKMUI43cEPk5Qn3cVxoRAwN1zF/s8VGiBE4zQaLSz6Ck=
+    secure: bTVMc7yMAfVh7ceO5cgT1qwFgjdKzKz0cAHZAl3FOJqpH1wTmF530kSXT05zMTwFq1G8YMsx/cmCCi9xp+liAgQAnOfAY4usZO9t+OKjRaxhrYWS+XV9nr5XmyHRvJgWE2R4NlVnp8poKI4EkXoba+/Vp1Cfs02cjPqwo04gUiw=
   file:
     - packages/releases-$GIT_TAG.tar.gz
     - packages/releases-$GIT_TAG.zip
