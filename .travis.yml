@@ -44,13 +44,13 @@ before_deploy:
   - tar czvf packages/releases-$GIT_TAG.tar.gz $(ls -I packages)
   - zip -q packages/releases-$GIT_TAG.zip -r $(ls -I packages)
   - git tag $GIT_TAG -a -m "Commit from Travis CI for build $TRAVIS_BUILD_NUMBER"
-  - git push --quiet https://$GH_TOKEN@github.com/lime.git --tags 2> /dev/null 
+  - git push --quiet https://$GH_TOKEN@github.com/lime.git --tags 2> /dev/null
 
 deploy:
   skip_cleanup: true
   provider: releases
   api_key:
-    secure: FvLmuzyUsyy8PN3u/RjsZUt4mUsuuAdG4O4FdSogAPFVeu1oathhntC8q4x1Qw7aQ+5Tper0yX7oJxKHjyuh3oCU+eNHMHGcpj1L21QzzEglUtzS/NW2/QhINt1WXB3onCxhcL9lq+NzWMOdCqPAfe/egbNX/ERCTrGZMtoFNgo=
+    secure: kEV14WgxyZwIrd/tKScLKCk9vSSkqSZIvmfcSwvLrxKWYU6t5wmXkoIwfq1TMWWOGd9pSAAWtx7w2ofdA7OUXJyfW2I/azug1J+3zhzChbeVLNbt69orHZNbTbOddcTLKMUI43cEPk5Qn3cVxoRAwN1zF/s8VGiBE4zQaLSz6Ck=
   file:
     - packages/releases-$GIT_TAG.tar.gz
     - packages/releases-$GIT_TAG.zip
@@ -67,7 +67,7 @@ branches:
 env:
   global:
     - GIT_TAG=v0.1.0
-    - secure: FvLmuzyUsyy8PN3u/RjsZUt4mUsuuAdG4O4FdSogAPFVeu1oathhntC8q4x1Qw7aQ+5Tper0yX7oJxKHjyuh3oCU+eNHMHGcpj1L21QzzEglUtzS/NW2/QhINt1WXB3onCxhcL9lq+NzWMOdCqPAfe/egbNX/ERCTrGZMtoFNgo=
+    - secure: kEV14WgxyZwIrd/tKScLKCk9vSSkqSZIvmfcSwvLrxKWYU6t5wmXkoIwfq1TMWWOGd9pSAAWtx7w2ofdA7OUXJyfW2I/azug1J+3zhzChbeVLNbt69orHZNbTbOddcTLKMUI43cEPk5Qn3cVxoRAwN1zF/s8VGiBE4zQaLSz6Ck=
 
 notifications:
     email:
