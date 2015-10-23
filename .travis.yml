@@ -67,7 +67,7 @@ branches:
 env:
   global:
     - GIT_TAG=v0.1.0
-    - secure=FvLmuzyUsyy8PN3u/RjsZUt4mUsuuAdG4O4FdSogAPFVeu1oathhntC8q4x1Qw7aQ+5Tper0yX7oJxKHjyuh3oCU+eNHMHGcpj1L21QzzEglUtzS/NW2/QhINt1WXB3onCxhcL9lq+NzWMOdCqPAfe/egbNX/ERCTrGZMtoFNgo=
+    - secure: FvLmuzyUsyy8PN3u/RjsZUt4mUsuuAdG4O4FdSogAPFVeu1oathhntC8q4x1Qw7aQ+5Tper0yX7oJxKHjyuh3oCU+eNHMHGcpj1L21QzzEglUtzS/NW2/QhINt1WXB3onCxhcL9lq+NzWMOdCqPAfe/egbNX/ERCTrGZMtoFNgo=
 
 notifications:
     email:
