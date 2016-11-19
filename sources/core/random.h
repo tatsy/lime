@@ -7,31 +7,31 @@
 
 namespace lime {
 
-    /**
-     * A singleton class for generating random numbers.
+/**
+ * A singleton class for generating random numbers.
+ */
+class Random {
+public:
+    static Random& getRNG(int seed = -1);
+
+private:
+    explicit Random(int seed = -1);
+    Random& operator=(const Random&) = delete;
+
+public:
+    /** Generate a random integer from [0, n-1]
      */
-    class Random {
-    public:
-        static Random& getRNG(int seed = -1);
+    int randInt(const int n) const;
 
-    private:
-        explicit Random(int seed = -1);
-        Random& operator=(const Random&) = delete;
+    /** Generate a floating point random number from [0, 1)
+     */
+    double randReal() const;
 
-    public:
-        /** Generate a random integer from [0, n-1]
-         */
-        int randInt(const int n) const;
+    /** Genrate a random number from a normal distribution with mean = 0 and STD = 1
+     */
+    double randNorm() const;
 
-        /** Generate a floating point random number from [0, 1)
-         */
-        double randReal() const;
-
-        /** Genrate a random number from a normal distribution with mean = 0 and STD = 1
-         */
-        double randNorm() const;
-
-    };  // class Random
+};  // class Random
 
 }  // namespace lime
 

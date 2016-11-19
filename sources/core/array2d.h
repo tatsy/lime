@@ -9,45 +9,54 @@
 
 namespace lime {
 
-    template <class T>
-    class LIME_EXPORTS Array2d {
-    private:
-        int _rows, _cols;
-        std::unique_ptr<T[]> _data;
+/**
+ * 2D array class.
+ * @ingroup core_module
+ **/
 
-    public:
-        /** The Array2d constructor.
-         */
-        Array2d();
+template <class T>
+class LIME_EXPORTS Array2D {
+public:
+    //! The Array2D constructor.
+    Array2D();
 
-        /** The Array2d constructor.
-         */
-        Array2d(int rows, int cols);
+    //! The Array2D constructor.
+    Array2D(int rows, int cols);
 
-        /** Allocate memory space and fill it with the specified value
-         *  @param[in] rows: Number of rows
-         *  @param[in] cols: Number of columns
-         *  @param[in] value: A value with which the array is filled
-         */
-        Array2d(int rows, int cols, const T& val);
+    /** Allocate memory space and fill it with the specified value
+     *  @param[in] rows: Number of rows
+     *  @param[in] cols: Number of columns
+     *  @param[in] value: A value with which the array is filled
+     **/
+    Array2D(int rows, int cols, const T &val);
 
-        /** The Array2d constructor (copy).
-         */
-        Array2d(const Array2d& ary);
+    //! The Array2D constructor (copy).
+    Array2D(const Array2D &ary);
+    
+    //! The Array2D constructor (move).
+    Array2D(Array2D &&ary);
 
-        /** Assignment operator.
-         */
-        Array2d& operator=(const Array2d& ary);
+    //! Assignment operator (copy).
+    Array2D<T> & operator=(const Array2D &ary);
+    
+    //! Assignment operator (move).
+    Array2D<T> & operator=(Array2D &&ary);
 
-        T& operator()(int i, int j) const;
+    T & operator()(int i, int j) const;
 
-        int cols() const;
-        int rows() const;
+    int cols() const;
+    int rows() const;
 
-    };  // class Array2d
+private:
+    int rows_, cols_;
+    std::unique_ptr<T[]> data_;
+
+};  // class Array2D
 
 }  // namespace lime
 
+#ifndef LIME_USE_STATIC_LIB
 #include "array2d_detail.h"
+#endif
 
 #endif  // _CORE_ARRAY2D_H_

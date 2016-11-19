@@ -1,34 +1,17 @@
-/******************************************************************************
-Copyright 2015 Tatsuya Yatagawa (tatsy)
+#ifdef _MSC_VER
+#pragma once
+#endif
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "Software"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-the Software, and to permit persons to whom the Software is furnished to do so,
-subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-******************************************************************************/
-
-#ifndef SRC_NPR_POISSONDISK_DETAIL_H_
-#define SRC_NPR_POISSONDISK_DETAIL_H_
+#ifndef _NPR_POISSONDISK_DETAIL_H_
+#define _NPR_POISSONDISK_DETAIL_H_
 
 #include <vector>
 #include <algorithm>
 
 #include <opencv2/opencv.hpp>
 
-#include "../core/common.hpp"
-#include "../core/grid.hpp"
+#include "../core/common.h"
+#include "../core/random.h"
 #include "../core/random_queue.h"
 
 namespace lime {
@@ -37,6 +20,9 @@ namespace npr {
 
 namespace {  // NOLINT
 
+template <class T>
+using Grid = Array2D<std::vector<T> >;
+
 cv::Point2f coord2Grid(const cv::Point2f& v, double cellSize) {
     cv::Point2f ret;
     ret.x = static_cast<float>(v.x / cellSize);
@@ -44,9 +30,9 @@ cv::Point2f coord2Grid(const cv::Point2f& v, double cellSize) {
     return ret;
 }
 
-cv::Point2f generateRandomPointAround(const cv::Point2f& v, double min_dist) {
-    double radius = (1.0 + genrand_real1()) * min_dist;
-    double angle = 2.0 * PI * genrand_real1();
+cv::Point2f generateRandomPointAround(const cv::Point2f &v, double min_dist, const cv::Vec2f &rands) {
+    double radius = (1.0 + rands[0]) * min_dist;
+    double angle = 2.0 * PI * rands[1];
     cv::Point2f ret;
     ret.x = v.x + static_cast<int>(radius * cos(angle));
     ret.y = v.y + static_cast<int>(radius * sin(angle));
@@ -55,13 +41,11 @@ cv::Point2f generateRandomPointAround(const cv::Point2f& v, double min_dist) {
 
 bool inNeighborhoodForList(const Grid<cv::Point2f>& grid, cv::Point2f point, double min_dist, double cellSize) {
     cv::Point2f gridCoord = coord2Grid(point, cellSize);
-    int gridW = grid.cols();
-    int gridH = grid.rows();
     for (int dy = -2; dy <= 2; dy++) {
         for (int dx = -2; dx <= 2; dx++) {
             int xx = static_cast<int>(gridCoord.x + dx);
             int yy = static_cast<int>(gridCoord.y + dy);
-            if (grid.hasCell(yy, xx)) {
+            if (xx >= 0 && yy >= 0 && xx < grid.cols() && yy < grid.rows()) {
                 const std::vector<cv::Point2f>& v = grid(yy, xx);
                 if (!v.empty()) {
                     for (int i = 0; i < v.size(); i++) {
@@ -115,7 +99,7 @@ void pdsRandomQueue(std::vector<cv::Point2f>* points, const cv::Mat& grayImage, 
 
         const int gx = static_cast<int>(gridCoord.x);
         const int gy = static_cast<int>(gridCoord.y);
-        grid.pushAt(gy, gx, firstPoint);
+        grid(gy, gx).push_back(firstPoint);
     } else {
         for (int i = 0; i < points->size(); i++) {
             cv::Point2f p = points->at(i);
@@ -127,7 +111,7 @@ void pdsRandomQueue(std::vector<cv::Point2f>* points, const cv::Mat& grayImage, 
 
                     const int gx = static_cast<int>(gridCoord.x);
                     const int gy = static_cast<int>(gridCoord.y);
-                    grid.pushAt(gy, gx, p);
+                    grid(gy, gx).push_back(p);
                 } else {
                     points->erase(points->begin() + i);
                     i--;
@@ -140,7 +124,8 @@ void pdsRandomQueue(std::vector<cv::Point2f>* points, const cv::Mat& grayImage, 
         cv::Point2f p = process.pop();
         for (int i = 0; i < new_point_count; i++) {
             double min_dist = minDistFromIntensity(p, grayImage, min_radius, max_radius);
-            cv::Point2f q = generateRandomPointAround(p, min_dist);
+            cv::Vec2f rands(rand.randReal(), rand.randReal());
+            cv::Point2f q = generateRandomPointAround(p, min_dist, rands);
             if (q.x >= 0 && q.y >= 0 && q.x < width && q.y < height) {
                 if (!inNeighborhoodForList(grid, q, min_dist, cellSize)) {
                     process.push(q);
@@ -149,7 +134,7 @@ void pdsRandomQueue(std::vector<cv::Point2f>* points, const cv::Mat& grayImage, 
 
                     const int gx = static_cast<int>(gridCoord.x);
                     const int gy = static_cast<int>(gridCoord.y);
-                    grid.pushAt(gy, gx, q);
+                    grid(gy, gx).push_back(q);
                 }
             }
         }
@@ -337,4 +322,4 @@ void poissonDisk(cv::InputArray grayImage, std::vector<cv::Point2f>* samplePoint
 
 }  // namespace lime
 
-#endif  // SRC_NPR_POISSONDISK_DETAIL_H_
+#endif  // _NPR_POISSONDISK_DETAIL_H_

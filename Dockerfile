@@ -13,6 +13,12 @@ ENV CC @C_COMPILER@
 ENV CXX @CXX_COMPILER@
 
 #
+## update/upgrade
+#
+RUN apt-get update -qq
+RUN apt-get upgrade -qq
+
+#
 ## Install Gcovr
 #
 RUN apt-get -qq install python-pip
@@ -22,6 +28,16 @@ RUN pip install gcovr
 ## Install cppcheck, cccc, and doxygen
 #
 RUN apt-get -qq install cppcheck cccc doxygen
+
+#
+## Install Google test
+#
+RUN git clone https://github.com/google/googletest.git
+RUN \
+  cd googletest && \
+  mkdir build && cd build && \
+  cmake -D gtest_disable_pthreads=ON .. && \
+  make && make install
 
 #
 ## Build lime
@@ -36,8 +52,10 @@ RUN \
 
 RUN \
   cd lime && \
-  git submodule update --init --recursive && \
-  cmake -DBUILD_LIME_TEST=ON . && \
+  git submodule update --init --recursive
+RUN \
+  cd lime && \
+  cmake -D LIME_BUILD_TEST=ON -D GTEST_ROOT=/usr/local . && \
   cmake --build .
 
 #

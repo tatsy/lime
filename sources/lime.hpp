@@ -19,9 +19,13 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ******************************************************************************/
 
-#ifndef SRC_HVS_LIME_HVS_HPP_
-#define SRC_HVS_LIME_HVS_HPP_
+#ifndef _LIBRARY_FOR_IMAGE_EDITING_H_
+#define _LIBRARY_FOR_IMAGE_EDITING_H_
 
-#include "../hvs/color_constancy.h"
+#undef NDEBUG
 
-#endif  // SRC_HVS_LIME_HVS_HPP_
+#include "core/core.hpp"
+#include "npr/npr.hpp"
+#include "misc/misc.hpp"
+
+#endif

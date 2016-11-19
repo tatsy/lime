@@ -26,7 +26,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <ctime>
 #include <iostream>
 
-#include "../../include/lime.hpp"
+#include "lime.hpp"
 
 void demo_circle() {
     const int width  = 512;

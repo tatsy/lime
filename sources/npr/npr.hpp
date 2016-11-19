@@ -11,10 +11,12 @@
 #include "singularity.hpp"
 
 #include "noise.h"
-#include "npr_filters.h"
+#include "kuwahara.h"
+#include "pdefilter.h"
+#include "morphology.h"
 
 #include "vector_field.h"
 
-#include "../npr/lic.h"
+#include "lic.h"
 
 #endif  // _NPR_LIME_NPR_HPP_

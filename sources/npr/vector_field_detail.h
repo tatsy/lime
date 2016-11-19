@@ -316,7 +316,7 @@ void calcVectorField(cv::InputArray input, cv::OutputArray angles,
     }
 }
 
-void detectSingular(const Array2d<Tensor>& sst, std::vector<SingularPoint>* points,
+void detectSingular(const Array2D<Tensor>& sst, std::vector<SingularPoint>* points,
                     std::vector<cv::Point2f>* delauneyNodes) {
     const int width = sst.cols();
     const int height = sst.rows();

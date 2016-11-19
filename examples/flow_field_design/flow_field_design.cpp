@@ -27,7 +27,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using std::vector;
 
-#include "../../include/lime.hpp"
+#include "lime.hpp"
 
 cv::Mat sst, vfield, out;
 vector<cv::Point> sings;

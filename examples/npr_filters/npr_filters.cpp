@@ -24,7 +24,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <iostream>
 #include <string>
 
-#include "../../include/lime.hpp"
+#include "lime.hpp"
 
 using std::cout;
 using std::endl;
@@ -99,11 +99,11 @@ void demoCartoon(const cv::Mat& img) {
 
 void demoKuwahara(const cv::Mat& img) {
     cv::Mat kf, gkf, akf;
-    lime::npr::filter::kuwaharaFilter(img, kf, 7);
+    lime::kuwaharaFilter(img, kf, 7);
     cout << "[Kuwahara] standard kuwahara    -> OK" << endl;
-    lime::npr::filter::generalKF(img, gkf, 8, 7);
+    lime::generalKF(img, gkf, 8, 7);
     cout << "[Kuwahara] general kuwahara     -> OK" << endl;
-    lime::npr::filter::anisoKF(img, akf, 8, 7);
+    lime::anisoKF(img, akf, 8, 7);
     cout << "[Kuwahara] anisotropic kuwahara -> OK" << endl;
 
     cv::imshow("Input", img);
@@ -123,13 +123,13 @@ void demoMorphology(const cv::Mat& img) {
     const int ksize = 5;
     cv::Mat dilate, erode, closing, opening, grad, tophat, blkhat;
 
-    lime::npr::filter::morphDilate(img, dilate, ksize);
-    lime::npr::filter::morphErode(img, erode, ksize);
-    lime::npr::filter::morphOpen(img, opening, ksize);
-    lime::npr::filter::morphClose(img, closing, ksize);
-    lime::npr::filter::morphGradient(img, grad, ksize);
-    lime::npr::filter::morphTophat(img, tophat, ksize);
-    lime::npr::filter::morphBlackhat(img, blkhat, ksize);
+    lime::morphDilate(img, dilate, ksize);
+    lime::morphErode(img, erode, ksize);
+    lime::morphOpen(img, opening, ksize);
+    lime::morphClose(img, closing, ksize);
+    lime::morphGradient(img, grad, ksize);
+    lime::morphTophat(img, tophat, ksize);
+    lime::morphBlackhat(img, blkhat, ksize);
 
     cv::imshow("Dilation", dilate);
     cv::imshow("Erosion", erode);
@@ -154,17 +154,17 @@ void demoMorphology(const cv::Mat& img) {
 void demoPDE(const cv::Mat& img) {
     cv::Mat ad, sf, mcf, out;
 
-    lime::npr::filter::solveAD(img, ad, 0.05, 10);
+    lime::solveAD(img, ad, 0.05, 10);
     cout << "[PDE] anisotropic  -> OK" << endl;
-    lime::npr::filter::solveSF(img, sf, 3.0, 10);
+    lime::solveSF(img, sf, 3.0, 10);
     cout << "[PDE] shock filter -> OK" << endl;
-    lime::npr::filter::solveMCF(img, mcf, 3.0, 10);
+    lime::solveMCF(img, mcf, 3.0, 10);
     cout << "[PDE] mean curve   -> OK" << endl;
 
     img.convertTo(out, CV_32FC3);
     for (int i = 0; i < 5; i++) {
-        lime::npr::filter::solveMCF(out, out, 3.0, 5);
-        lime::npr::filter::solveSF(out, out, 3.0, 1);
+        lime::solveMCF(out, out, 3.0, 5);
+        lime::solveSF(out, out, 3.0, 1);
     }
     std::cout << "[PDE] SF + MCF    -> OK" << std::endl;
 
@@ -222,12 +222,12 @@ void demoCEF(const cv::Mat& img) {
 
     cout << "[CEF] Shock Filter -> ";
     out.convertTo(tmp, CV_32F);
-    lime::npr::filter::solveSF(tmp, out, 3.0, 10);
+    lime::solveSF(tmp, out, 3.0, 10);
     cout << "OK" << endl;
 
     cout << "[CEF] Edge smoothing -> ";
     out.convertTo(tmp, CV_32F);
-    lime::npr::filter::solveAD(tmp, out, 0.1, 5);
+    lime::solveAD(tmp, out, 0.1, 5);
     cout << "OK" << endl;
 
     cv::imshow("Input", img);

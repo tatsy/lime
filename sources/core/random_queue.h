@@ -7,32 +7,38 @@
 
 namespace lime {
 
-    template <class T>
-    class random_queue {
-     private:
-        static const int init_len = 2048;
-        int ptr;
-        int len;
-        T* data;
+/**
+ * Random queue.
+ * @ingroup core_module
+ **/
+template <class T>
+class random_queue {
+public:
+    random_queue();
+    ~random_queue();
 
-     public:
-        random_queue();
-        ~random_queue();
+    void push(const T &value);
 
-        void push(const T& value);
+    /** Return a random value form the queue and remove it.
+     */
+    T pop();
 
-        /** Return a random value form the queue and remove it.
-         */
-        T pop();
+    bool empty() const;
 
-        bool empty() const;
+    int size() const;
 
-        int size() const;
+private:
+    static const int init_len = 2048;
+    int ptr;
+    int len;
+    T* data;
 
-    };  // class random_queue
+};  // class random_queue
 
 }  // namespace lime
 
-#include "../core/random_queue_detail.h"
+#ifndef LIME_USE_STATIC_LIB
+#include "random_queue_detail.h"
+#endif
 
 #endif  // _CORE_RANDOM_QUEUE_H_

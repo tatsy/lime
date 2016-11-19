@@ -28,7 +28,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <cmath>
 #include <vector>
 
-#include "../../include/lime.hpp"
+#include "lime.hpp"
 
 /* Line integral convolution */
 void LIConv(cv::OutputArray lic, cv::InputArray img, cv::InputArray etf, cv::InputArray noise, double ratio);

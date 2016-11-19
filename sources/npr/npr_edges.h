@@ -33,6 +33,8 @@ inline void edgeDoG(cv::InputArray image, cv::OutputArray edge, const DoGParam& 
 
 }  // namespace lime
 
+#ifndef LIME_USE_STATIC_LIB
 #include "npr_edges_detail.h"
+#endif
 
 #endif  // _NPR_NPREDGES_H_

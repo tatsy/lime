@@ -1,10 +1,9 @@
 enable_testing()
 
-option(SPICA_BUILD_TEST "SPICA_BUILD_TEST" ON)
 set(GTEST_ROOT $ENV{GTEST_ROOT} CACHE STRING "GTEST_ROOT")
 
-option(BUILD_LIME_TEST ${BUILD_LIME_TEST} OFF)
-if ("${BUILD_LIME_TEST}" STREQUAL "ON")
+set(LIME_BUILD_TEST OFF CACHE BOOL OFF)
+if ("${LIME_BUILD_TEST}" STREQUAL "ON")
 
   if(NOT "${GTEST_ROOT}" STREQUAL "")
     set(GTEST_LIB)
@@ -24,6 +23,7 @@ if ("${BUILD_LIME_TEST}" STREQUAL "ON")
     set(GTEST_INCLUDE_DIRS $ENV{GTEST_INCLUDE_DIRS})
   endif()
 
+  include_directories("${LIME_ROOT}/sources")
   add_subdirectory(core)
 
 endif()

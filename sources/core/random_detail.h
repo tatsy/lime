@@ -42,21 +42,15 @@ http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html
 email: m-mat @ math.sci.hiroshima-u.ac.jp (remove space)
 
 **************************************************************************
-
-This header file is a C++ class wrapper of mt19937.c. Hense, please refer to
-the above comments to check the copyright of the source code.
-
-Thanks! 
-
 */
 
-#ifndef SRC_CORE_RANDOM_DETAIL_H_
-#define SRC_CORE_RANDOM_DETAIL_H_
+#ifndef _CORE_RANDOM_DETAIL_H_
+#define _CORE_RANDOM_DETAIL_H_
 
 #include <cmath>
 #include <ctime>
 
-#include "common.hpp"
+#include "common.h"
 
 namespace lime {
 

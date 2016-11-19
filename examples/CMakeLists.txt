@@ -1,26 +1,27 @@
 # Example generate function
-function(generate_example example_name example_sources)
-  add_executable(${example_name} "${example_sources}")
+function(generate_example EXAMPLE_NAME)
+  file(GLOB SOURCE_FILES "${EXAMPLE_NAME}/*.cpp" "${EXAMPLE_NAME}*.h")
 
-  # include_directories(${CMAKE_CURRENT_LIST_DIR})
-  include_directories(${OpenCV_DIR}/include)
-  target_link_libraries(${example_name} ${OpenCV_LIBS})
+  set(TARGET_NAME "demo_${EXAMPLE_NAME}")
+  add_executable(${TARGET_NAME} ${SOURCE_FILES})
 
+  include_directories("${LIME_ROOT}/sources")
+  include_directories(${OpenCV_INCLUDE_DIRS})
+  target_link_libraries(${TARGET_NAME} ${OpenCV_LIBS})
+
+  set_property(TARGET ${TARGET_NAME} PROPERTY FOLDER "Examples")
   if (MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zi")
-    set_property(TARGET ${example_name} APPEND PROPERTY LINK_FLAGS "/DEBUG /PROFILE")
-    set_property(TARGET ${example_name} PROPERTY FOLDER "Examples")
+    set_property(TARGET ${TARGET_NAME} APPEND PROPERTY LINK_FLAGS "/DEBUG /PROFILE")
   endif()
 endfunction()
 
 option(LIME_BUILD_EXAMPLE "LIME_BUILD_EXAMPLE" ON)
 if ("${LIME_BUILD_EXAMPLE}" STREQUAL "ON")
-
+  generate_example(color_constancy)
+  generate_example(flow_field_design)
+  generate_example(npr_filters)
+  generate_example(pencil_drawing)
+  generate_example(perlin_noise)
+  generate_example(vector_field_imaging)
 endif()
-
-add_subdirectory(cc_example)
-add_subdirectory(flow_field_design)
-add_subdirectory(npr_filter_demo)
-add_subdirectory(pencil_drawing)
-add_subdirectory(perlin_noise)
-add_subdirectory(vector_field_imaging)

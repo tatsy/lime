@@ -15,8 +15,7 @@ set(TEST_SOURCES ${TEST_SOURCES}
     test_point.cpp
     test_random.cpp
     test_random_queue.cpp
-    test_array2d.cpp
-    test_grid.cpp)
+    test_array2d.cpp)
 
 add_gtest_with_opencv(test_core "${TEST_SOURCES}")
 

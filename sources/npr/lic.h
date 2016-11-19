@@ -7,7 +7,7 @@
 
 #include <cmath>
 
-#include "../core/point.hpp"
+#include "../core/point.h"
 
 namespace lime {
 
@@ -41,6 +41,8 @@ namespace lime {
 
 }  // namespace lime
 
+#ifndef LIME_USE_STATIC_LIB
 #include "../npr/lic_detail.h"
+#endif
 
 #endif  // _NPR_LIC_H_

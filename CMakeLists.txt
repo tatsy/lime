@@ -7,16 +7,43 @@ find_package( OpenCV 3.0 REQUIRED )
 # Build settings
 if (NOT WIN32)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -O2")
+endif()
+
+if (LINUX)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -fPIC")
 endif()
 
+# ------------------------------------------------------------------------------
+# Set library prefices and suffices
+# ------------------------------------------------------------------------------
 if (WIN32)
   set(LIB_PREFIX "")
   set(LIB_SUFFIX ".lib")
+elseif(APPLE)
+  if (SPICA_USE_STATIC_LIBS)
+    set(LIB_PREFIX "lib")
+    set(LIB_SUFFIX ".a")
+  else()
+    set(LIB_PREFIX "lib")
+    set(LIB_SUFFIX ".dylib")
+  endif()
 else()
-  set(LIB_PREFIX "lib")
-  set(LIB_SUFFIX ".so")
+  if (SPICA_USE_STATIC_LIBS)
+    set(LIB_PREFIX "lib")
+    set(LIB_SUFFIX ".a")
+  else()
+    set(LIB_PREFIX "lib")
+    set(LIB_SUFFIX ".so")
+  endif()
 endif()
+
+# ------------------------------------------------------------------------------
+# Set output path
+# ------------------------------------------------------------------------------
+set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/build)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 

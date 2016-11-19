@@ -1,1 +1,0 @@
-generate_example(vector_field_imaging vector_field_imaging.cpp)

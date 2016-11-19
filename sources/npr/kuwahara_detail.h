@@ -26,100 +26,15 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <utility>
 #include <algorithm>
 
-#include "../core/common.hpp"
+#include "../core/common.h"
 #include "npr_edges.h"
 #include "vector_field.h"
 
 namespace lime {
 
-namespace npr {
-
-namespace filter {
-
 namespace {  // NOLINT
 
 const double EPS = 1.0e-5;
-
-void calcTangent(cv::OutputArray output, cv::InputArray input, int ksize, int maxiter) {
-    cv::Mat  gray    = input.getMat();
-    cv::Mat& tangent = output.getMatRef();
-
-    // check input arguments
-    Assertion(gray.depth() == CV_32F && gray.channels() == 1,
-               "Input image must be single channel and floating-point-valued.");
-
-    const int width = gray.cols;
-    const int height = gray.rows;
-
-    // detect standard edge
-    cv::Mat gx, gy;
-    cv::Sobel(gray, gx, CV_32FC1, 1, 0);
-    cv::Sobel(gray, gy, CV_32FC1, 0, 1);
-
-    // compute tangent field
-    tangent = cv::Mat::zeros(height, width, CV_32FC2);
-    cv::Mat ghat = cv::Mat::zeros(height, width, CV_32FC1);
-    double maxval = 0.0;
-    for (int y = 0; y < height; y++) {
-        for (int x = 0; x < width; x++) {
-            double vx = gx.at<float>(y, x);
-            double vy = gy.at<float>(y, x);
-            tangent.at<float>(y, x * 2 + 0) = -static_cast<float>(vy);
-            tangent.at<float>(y, x * 2 + 1) =  static_cast<float>(vx);
-            ghat.at<float>(y, x) = static_cast<float>(sqrt(vx*vx + vy*vy));
-            maxval = std::max(maxval, static_cast<double>(ghat.at<float>(y, x)));
-        }
-    }
-    ghat.convertTo(ghat, CV_32FC1, 1.0 / maxval);
-
-    // compute ETF
-    cv::Mat temp = cv::Mat(height, width, CV_32FC2);
-    while (maxiter--) {
-        ompfor(int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                cv::Point2d sum = cv::Point2d(0.0, 0.0);
-                double weight = 0.0;
-                for (int dy = -ksize; dy <= ksize; dy++) {
-                    for (int dx = -ksize; dx <= ksize; dx++) {
-                        int xx = x + dx;
-                        int yy = y + dy;
-                        if (xx < 0 || yy < 0 || xx >= width || yy >= height) continue;
-                        if (dx * dx + dy * dy > ksize * ksize) continue;
-
-                        double vx = tangent.at<float>(y, x * 2 + 0);
-                        double vy = tangent.at<float>(y, x * 2 + 1);
-                        cv::Point2d tx = cv::Point2d(vx, vy);
-
-                        double ux = tangent.at<float>(yy, xx * 2 + 0);
-                        double uy = tangent.at<float>(yy, xx * 2 + 1);
-                        cv::Point2d ty = cv::Point2d(ux, uy);
-                        double wd = tx.dot(ty);
-
-                        double gx = ghat.at<float>(y, x);
-                        double gy = ghat.at<float>(yy, xx);
-                        double wm = (gy - gx + 1.0) / 2.0;
-
-                        sum = sum + ty * (wm * wd);
-                        weight += wm * wd;
-                    }
-                }
-
-                cv::Point2d v = weight != 0.0 ? cv::Point2d(sum.x / weight, sum.y / weight) : cv::Point2d(0.0, 0.0);
-                temp.at<float>(y, x * 2 + 0) = static_cast<float>(v.x);
-                temp.at<float>(y, x * 2 + 1) = static_cast<float>(v.y);
-            }
-        }
-
-        temp.convertTo(tangent, CV_32FC2);
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                double vx = tangent.at<float>(y, x * 2 + 0);
-                double vy = tangent.at<float>(y, x * 2 + 1);
-                ghat.at<float>(y, x) = static_cast<float>(sqrt(vx*vx + vy*vy));
-            }
-        }
-    }
-}
 
 }  // unnamed namespace
 
@@ -346,10 +261,6 @@ void anisoKF(cv::InputArray input, cv::OutputArray output, int n_div, int ksize)
         }
     }
 }
-
-}  // namespace filter
-
-}  // namespace npr
 
 }  // namespace lime
 
