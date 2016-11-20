@@ -13,7 +13,7 @@ protected:
     virtual ~Point2dTest() {}
 };
 
-Random Point2dTest::rng = Random::getRNG();
+Random Point2dTest::rng = Random((unsigned int)time(0));
 
 TEST_F(Point2dTest, Sign) {
     EXPECT_EQ(lime::sign(10.0), 1);
@@ -39,8 +39,8 @@ TEST_F(Point2dTest, OperatorEq) {
 
 TEST_F(Point2dTest, AddAndSubtract) {
     for (int i = 0; i < nSimpleLoop; i++) {
-        const Point2d p(rng.randReal(), rng.randReal());
-        const Point2d q(rng.randReal(), rng.randReal());
+        const Point2d p(rng.nextReal(), rng.nextReal());
+        const Point2d q(rng.nextReal(), rng.nextReal());
         EXPECT_EQ(p.x + q.x, (p + q).x) << "Add: x does not match";
         EXPECT_EQ(p.y + q.y, (p + q).y) << "Add: y does not match";
         EXPECT_EQ(p.x - q.x, (p - q).x) << "Subtract: x does not match";
@@ -50,8 +50,8 @@ TEST_F(Point2dTest, AddAndSubtract) {
 
 TEST_F(Point2dTest, MultiplyAndDiv) {
     for (int i = 0; i < nSimpleLoop; i++) {
-        const Point2d p(rng.randReal(), rng.randReal());
-        const double d = rng.randReal() + 1.0e-8;
+        const Point2d p(rng.nextReal(), rng.nextReal());
+        const double d = rng.nextReal() + 1.0e-8;
         EXPECT_EQ(p.x * d, (p * d).x) << "Multiply: x does not match";
         EXPECT_EQ(p.y * d, (p * d).y) << "Multiply: y does not match";
         EXPECT_EQ(p.x / d, (p / d).x) << "Divide: x does not match";
@@ -63,8 +63,8 @@ TEST_F(Point2dTest, MultiplyAndDiv) {
 
 TEST_F(Point2dTest, Norm) {
     for (int i = 0; i < nSimpleLoop; i++) {
-        double dx = rng.randReal();
-        double dy = rng.randReal();
+        double dx = rng.nextReal();
+        double dy = rng.nextReal();
         const Point2d p(dx, dy);
         EXPECT_EQ(p.norm(), hypot(dx, dy)) << "Norm: value does not match";
     }
@@ -72,8 +72,8 @@ TEST_F(Point2dTest, Norm) {
 
 TEST_F(Point2dTest, Normalize) {
     for (int i = 0; i < nSimpleLoop; i++) {
-        double dx = rng.randReal();
-        double dy = rng.randReal();
+        double dx = rng.nextReal();
+        double dy = rng.nextReal();
         const Point2d p(dx, dy);
         double norm = p.norm();
         EXPECT_EQ(p.normalize().x, dx / norm) << "Normalize: x does not match";
@@ -86,10 +86,10 @@ TEST_F(Point2dTest, Normalize) {
 
 TEST_F(Point2dTest, DotAndDet) {
     for (int i = 0; i < nSimpleLoop; i++) {
-        double dx1 = rng.randReal();
-        double dy1 = rng.randReal();
-        double dx2 = rng.randReal();
-        double dy2 = rng.randReal();
+        double dx1 = rng.nextReal();
+        double dy1 = rng.nextReal();
+        double dx2 = rng.nextReal();
+        double dy2 = rng.nextReal();
         const Point2d p1(dx1, dy1);
         const Point2d p2(dx2, dy2);
         EXPECT_EQ(p1.dot(p2), dx1 * dx2 + dy1 * dy2) << "Dot: value does not match";

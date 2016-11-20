@@ -1,5 +1,5 @@
 /**
- * @defgroup core_module Core module.
+ * @defgroup core
  * @brief Basic utilities.
  **/
 

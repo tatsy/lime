@@ -6,14 +6,14 @@ using lime::Random;
 
 static const int nTest = 100;
 static const int nLoop = 50000;
-Random rng = Random::getRNG();
+Random rng = Random((unsigned int)time(0));
 
 TEST(Random, RandInt) {
     int nBins = 10;
     int *countUp = new int[10];
     memset(countUp, 0, sizeof(int) * nBins);
     for (int i = 0; i < nLoop; i++) {
-        countUp[rng.randInt(nBins)]++;
+        countUp[rng.nextInt(nBins)]++;
     }
 
     for (int i = 0; i < nBins; i++) {
@@ -27,8 +27,8 @@ TEST(Random, RandReal) {
     for (int t = 0; t < nTest; t++) {
         double accum = 0.0;
         for (int i = 0; i < nLoop; i++) {
-            double rx = rng.randReal();
-            double ry = rng.randReal();
+            double rx = rng.nextReal();
+            double ry = rng.nextReal();
             if (hypot(rx, ry) <= 1.0) {
                 accum += 1.0;
             }
@@ -42,7 +42,7 @@ TEST(Random, RandNorm) {
         double avg = 0.0;
         double var = 0.0;
         for (int i = 0; i < nLoop; i++) {
-            double r = rng.randNorm();
+            double r = rng.normal();
             avg += r;
             var += r * r;
         }

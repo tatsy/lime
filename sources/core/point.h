@@ -11,7 +11,10 @@
 
 namespace lime {
 
-//! Take sign of the value.
+/**
+ * Take sign of the value.
+ * @ingroup core
+ **/
 inline int sign(double d) {
     if (d < -EPS) return -1;
     if (d >  EPS) return  1;
@@ -19,7 +22,7 @@ inline int sign(double d) {
 }
 
 /**
- * 2D point class.
+ * The 2D point class.
  * @ingroup core_module
  **/
 template <class T>
@@ -69,7 +72,7 @@ public:
         this->y *= t;
         return *this;
     }
-    
+
     Point_<T> & operator/=(T t) {
         Assertion(t != T{0}, "Zero division");
         this->x /= t;
@@ -125,7 +128,7 @@ public:
 public:
     T x{0};
     T y{0};
-    
+
     static_assert(std::is_arithmetic<T>::value,
                 "Template type must be arithmetic!!");
 

@@ -5,19 +5,19 @@
 #ifndef _NPR_NPREDGES_DETAIL_H_
 #define _NPR_NPREDGES_DETAIL_H_
 
+#include <ctime>
+
 #include "vector_field.h"
 #include "../npr/lic.h"
 
 namespace lime {
 
-namespace npr {
-
-inline DoGParam::DoGParam(double _kappa, double _sigma, double _tau, double _phi, DoGType _dogType)
+inline DoGParams::DoGParams(double _kappa, double _sigma, double _tau, double _phi, NPREdgeTypes _edgeType)
     : kappa(_kappa)
     , sigma(_sigma)
     , tau(_tau)
     , phi(_phi)
-    , dogType(_dogType) {
+    , edgeType(_edgeType) {
 }
 
 namespace {  // NOLINT
@@ -32,20 +32,20 @@ void uniformNoise(cv::OutputArray noise, cv::InputArray gray, int nNoise) {
     const int width  = img.cols;
     const int height = img.rows;
 
-    Random rand = Random::getRNG();
+    Random rand((unsigned int)time(0));
 
     out = cv::Mat::zeros(height, width, CV_32FC1);
     int count = 0;
     while (count < nNoise) {
-        int x = rand.randInt(width);
-        int y = rand.randInt(height);
-        if (rand.randReal() < img.at<float>(y, x)) continue;
+        int x = rand.nextInt(width);
+        int y = rand.nextInt(height);
+        if (rand.nextReal() < img.at<float>(y, x)) continue;
         out.at<float>(y, x) = 1.0f;
         count++;
     }
 }
 
-void edgeXDoG(cv::InputArray input, cv::OutputArray output, const DoGParam& param) {
+void edgeXDoG(cv::InputArray input, cv::OutputArray output, const DoGParams& param) {
     cv::Mat  gray = input.getMat();
     cv::Mat& edge = output.getMatRef();
 
@@ -167,7 +167,7 @@ void gaussWithFlow(cv::InputArray input, cv::OutputArray output, const cv::Mat& 
     }
 }
 
-void edgeFDoG(cv::InputArray input, cv::OutputArray output, const cv::Mat& vfield, const DoGParam& param) {
+void edgeFDoG(cv::InputArray input, cv::OutputArray output, const cv::Mat& vfield, const DoGParams& param) {
     cv::Mat  gray = input.getMat();
     cv::Mat& edge = output.getMatRef();
 
@@ -177,8 +177,8 @@ void edgeFDoG(cv::InputArray input, cv::OutputArray output, const cv::Mat& vfiel
 
     if (vfield.empty()) {
         cv::Mat angles;
-        npr::calcVectorField(gray, angles, 11);
-        npr::angle2vector(angles, vfield, 2.0);
+        calcVectorField(gray, angles, 11);
+        angle2vector(angles, vfield, 2.0);
     }
 
     const int ksize = 10;
@@ -213,19 +213,19 @@ void edgeFDoG(cv::InputArray input, cv::OutputArray output, const cv::Mat& vfiel
 
 }  // unnamed namespace
 
-void edgeDoG(cv::InputArray image, cv::OutputArray edge, const DoGParam& param) {
+void edgeDoG(cv::InputArray image, cv::OutputArray edge, const DoGParams& param) {
     cv::Mat input = image.getMat();
     Assertion(input.depth() == CV_32F && input.channels() == 1,
         "Input image must be single channel and floating-point-valued.");
 
     cv::Mat& outRef = edge.getMatRef();
 
-    switch (param.dogType) {
-    case EDGE_XDOG:
+    switch (param.edgeType) {
+    case NPR_EDGE_XDOG:
         edgeXDoG(input, outRef, param);
         break;
 
-    case EDGE_FDOG:
+    case NPR_EDGE_FDOG:
         edgeFDoG(input, outRef, cv::Mat(), param);
         break;
 
@@ -233,8 +233,6 @@ void edgeDoG(cv::InputArray image, cv::OutputArray edge, const DoGParam& param) 
         Assertion(false, "Unknown DoG type is specified.");
     }
 }
-
-}  // namespace npr
 
 }  // namespace lime
 

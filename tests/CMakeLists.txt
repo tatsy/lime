@@ -1,6 +1,7 @@
 enable_testing()
 
 if (${LIME_BUILD_TESTS})
+  set(GTEST_ROOT "GTEST-NOT_FOUND" CACHE PATH "")
   message(STATUS "[ LIME ] Build tests.")
 
   if(NOT "${GTEST_ROOT}" STREQUAL "")

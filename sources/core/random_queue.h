@@ -9,29 +9,34 @@ namespace lime {
 
 /**
  * Random queue.
- * @ingroup core_module
+ * @ingroup core
  **/
 template <class T>
 class random_queue {
 public:
+    //! Constructor.
     random_queue();
-    ~random_queue();
 
+    //! Destructor.
+    virtual ~random_queue();
+
+    //! Push value to the queue.
     void push(const T &value);
 
-    /** Return a random value form the queue and remove it.
-     */
+    //! Return a random value form the queue and remove it.
     T pop();
 
+    //! Check if the queue is empty or not.
     bool empty() const;
 
+    //! Returns # of elements in the queue.
     int size() const;
 
 private:
     static const int init_len = 2048;
     int ptr;
     int len;
-    T* data;
+    T *data;
 
 };  // class random_queue
 

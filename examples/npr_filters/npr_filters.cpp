@@ -67,7 +67,7 @@ void demoCartoon(const cv::Mat& img) {
     cv::Mat edge;
     cv::Mat gray;
     cv::cvtColor(img, gray, cv::COLOR_BGR2GRAY);
-    lime::npr::edgeDoG(gray, edge);
+    lime::edgeDoG(gray, edge);
     cout << "  [Cartoon] edge detection (alg = DoG) -> OK" << endl;
 
     const int width  = img.cols;
@@ -99,11 +99,11 @@ void demoCartoon(const cv::Mat& img) {
 
 void demoKuwahara(const cv::Mat& img) {
     cv::Mat kf, gkf, akf;
-    lime::kuwaharaFilter(img, kf, 7);
+    lime::kuwaharaClassical(img, kf, 7);
     cout << "[Kuwahara] standard kuwahara    -> OK" << endl;
-    lime::generalKF(img, gkf, 8, 7);
+    lime::kuwaharaGeneralized(img, gkf, 7, 8);
     cout << "[Kuwahara] general kuwahara     -> OK" << endl;
-    lime::anisoKF(img, akf, 8, 7);
+    lime::kuwaharaAnisotropic(img, akf, 7, 8);
     cout << "[Kuwahara] anisotropic kuwahara -> OK" << endl;
 
     cv::imshow("Input", img);
@@ -154,17 +154,17 @@ void demoMorphology(const cv::Mat& img) {
 void demoPDE(const cv::Mat& img) {
     cv::Mat ad, sf, mcf, out;
 
-    lime::solveAD(img, ad, 0.05, 10);
+    lime::anisoDiffusion(img, ad, 0.05, 10);
     cout << "[PDE] anisotropic  -> OK" << endl;
-    lime::solveSF(img, sf, 3.0, 10);
+    lime::shockFilter(img, sf, 3.0, 10);
     cout << "[PDE] shock filter -> OK" << endl;
-    lime::solveMCF(img, mcf, 3.0, 10);
+    lime::meanCurveFlow(img, mcf, 3.0, 10);
     cout << "[PDE] mean curve   -> OK" << endl;
 
     img.convertTo(out, CV_32FC3);
     for (int i = 0; i < 5; i++) {
-        lime::solveMCF(out, out, 3.0, 5);
-        lime::solveSF(out, out, 3.0, 1);
+        lime::meanCurveFlow(out, out, 3.0, 5);
+        lime::shockFilter(out, out, 3.0, 1);
     }
     std::cout << "[PDE] SF + MCF    -> OK" << std::endl;
 
@@ -188,13 +188,13 @@ void demoDOG(const cv::Mat& img) {
     cv::cvtColor(img, gray, cv::COLOR_BGR2GRAY);
 
     cout << "[DoG] XDoG -> ";
-    lime::npr::edgeDoG(gray, xdog,
-        lime::npr::DoGParam(4.5, 0.5, 0.95, 10.0, lime::npr::EDGE_XDOG));
+    lime::edgeDoG(gray, xdog,
+        lime::DoGParams(4.5, 0.5, 0.95, 10.0, lime::NPR_EDGE_XDOG));
     cout << "OK" << endl;
 
     cout << "[DoG] FDoG -> ";
-    lime::npr::edgeDoG(gray, fdog,
-        lime::npr::DoGParam(2.5, 0.5, 0.95, 10.0, lime::npr::EDGE_FDOG));
+    lime::edgeDoG(gray, fdog,
+        lime::DoGParams(2.5, 0.5, 0.95, 10.0, lime::NPR_EDGE_FDOG));
     cout << "OK" << endl;
 
     cv::imshow("Input", img);
@@ -210,24 +210,23 @@ void demoDOG(const cv::Mat& img) {
 
 void demoCEF(const cv::Mat& img) {
     cv::Mat vfield, tangent;
-    lime::npr::calcVectorField(img, vfield, 5,
-                               lime::npr::VECTOR_SST, lime::npr::EDGE_SOBEL);
-    lime::npr::angle2vector(vfield, tangent, 2.0);
+    lime::calcVectorField(img, vfield, 5, lime::VEC_FIELD_SST, lime::EDGE_DETECT_SOBEL);
+    lime::angle2vector(vfield, tangent, 2.0);
 
     cv::Mat tmp, out;
     cout << "[CEF] LIC Runge-Kutta -> ";
     img.convertTo(tmp, CV_32F);
-    lime::npr::lic(out, tmp, tangent, 20, lime::npr::LICType::RungeKutta);
+    lime::LIC(tmp, out, tangent, 20, lime::LIC_RUNGE_KUTTA);
     cout << "OK" << endl;
 
     cout << "[CEF] Shock Filter -> ";
     out.convertTo(tmp, CV_32F);
-    lime::solveSF(tmp, out, 3.0, 10);
+    lime::shockFilter(tmp, out, 3.0, 10);
     cout << "OK" << endl;
 
     cout << "[CEF] Edge smoothing -> ";
     out.convertTo(tmp, CV_32F);
-    lime::solveAD(tmp, out, 0.1, 5);
+    lime::anisoDiffusion(tmp, out, 0.1, 5);
     cout << "OK" << endl;
 
     cv::imshow("Input", img);

@@ -5,6 +5,7 @@
 #ifndef _CORE_RANDOM_QUEUE_DETAIL_H_
 #define _CORE_RANDOM_QUEUE_DETAIL_H_
 
+#include <ctime>
 #include <cstring>
 #include <algorithm>
 
@@ -38,8 +39,8 @@ void random_queue<T>::push(const T& value) {
 
 template <class T>
 T random_queue<T>::pop() {
-    Random rand = Random::getRNG();
-    int i = rand.randInt(static_cast<int>(ptr));
+    Random rand((unsigned int)time(0));
+    int i = rand.nextInt(static_cast<int>(ptr));
     ptr--;
     std::swap(data[i], data[ptr]);
     return data[ptr];

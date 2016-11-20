@@ -14,14 +14,16 @@
 namespace lime {
 
 /**
- * Generate random noise
+ * Generate random noise.
+ * @ingroup npr
  * @param[out] noise: generated noise image (CV_32FC1 format)
  * @param[in] size: size of the noise image to be returned
  **/
 inline void randomNoise(cv::OutputArray noise, const cv::Size& size);
 
 /**
- * Generate Perlin noise
+ * Generate Perlin noise.
+ * @ingroup npr
  * @param[out] noise: generated noise image (CV_32FC1 format)
  * @param[in] size: size of the noise image to be returned
  * @param[in] level: maximum depth level to generate the Perlin noise

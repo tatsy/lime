@@ -5,6 +5,7 @@
 #ifndef _NPR_POISSONDISK_DETAIL_H_
 #define _NPR_POISSONDISK_DETAIL_H_
 
+#include <ctime>
 #include <vector>
 #include <algorithm>
 
@@ -82,8 +83,8 @@ void pdsRandomQueue(std::vector<cv::Point2f>* points, const cv::Mat& grayImage, 
     const int dim    = grayImage.channels();
     double cellSize  = std::max(width, height) / 15.0;
 
-    Random rand = Random::getRNG();
-
+    Random rand((unsigned int)time(0));
+    
     cv::Point2f gridCoord;
     int new_point_count = 8;
     int gridW = static_cast<int>(ceil(width / cellSize));
@@ -92,7 +93,7 @@ void pdsRandomQueue(std::vector<cv::Point2f>* points, const cv::Mat& grayImage, 
     lime::random_queue<cv::Point2f> process;
 
     if (points->empty()) {
-        cv::Point2f firstPoint = cv::Point2f(rand.randInt(width), rand.randInt(height));
+        cv::Point2f firstPoint = cv::Point2f(rand.nextInt(width), rand.nextInt(height));
         process.push(firstPoint);
         points->push_back(firstPoint);
         gridCoord = coord2Grid(firstPoint, cellSize);
@@ -124,7 +125,7 @@ void pdsRandomQueue(std::vector<cv::Point2f>* points, const cv::Mat& grayImage, 
         cv::Point2f p = process.pop();
         for (int i = 0; i < new_point_count; i++) {
             double min_dist = minDistFromIntensity(p, grayImage, min_radius, max_radius);
-            cv::Vec2f rands(rand.randReal(), rand.randReal());
+            cv::Vec2f rands(rand.nextReal(), rand.nextReal());
             cv::Point2f q = generateRandomPointAround(p, min_dist, rands);
             if (q.x >= 0 && q.y >= 0 && q.x < width && q.y < height) {
                 if (!inNeighborhoodForList(grid, q, min_dist, cellSize)) {
@@ -172,13 +173,14 @@ bool isConflict(const cv::Mat& gray, const cv::Mat& noise, cv::Point2f p, double
 }
 
 bool throwSample(const cv::Mat& gray, const cv::Mat& noise, cv::Point2f* newPoint,
-                 int nTrial, const cv::Rect& region, double min_radius, double max_radius) {
+                 int nTrial, const cv::Rect& region, double min_radius, double max_radius,
+                 Random &rand) {
     const int width  = gray.cols;
     const int height = gray.rows;
 
     for (int t = 0; t < nTrial; t++) {
-        int rx = region.x + genrand_int31() % region.width;
-        int ry = region.y + genrand_int31() % region.height;
+        int rx = region.x + rand.nextInt(region.width);
+        int ry = region.y + rand.nextInt(region.height);
         if (rx >= 0 && ry >= 0 && rx < width && ry < height) {
             cv::Point2f p = cv::Point2f(rx, ry);
             if (!isConflict(gray, noise, p, min_radius, max_radius)) {
@@ -212,6 +214,8 @@ void pdsParallel(std::vector<cv::Point2f>* points, const cv::Mat& grayImage, dou
     const int width  = grayImage.cols;
     const int height = grayImage.rows;
     const int dim    = grayImage.channels();
+    
+    Random rand((unsigned int)time(0));
 
     // initialze noises
     cv::Mat noise = cv::Mat::zeros(height, width, CV_32FC1);
@@ -249,8 +253,8 @@ void pdsParallel(std::vector<cv::Point2f>* points, const cv::Mat& grayImage, dou
 
     // determine traverse order for phase groups
     for (int i = 0; i < 100; i++) {
-        int p = genrand_int31() % nPhaseGroup2;
-        int q = genrand_int31() % nPhaseGroup2;
+        int p = rand.nextInt(nPhaseGroup2);
+        int q = rand.nextInt(nPhaseGroup2);
         int t = order[p];
         order[p] = order[q];
         order[q] = t;
@@ -276,7 +280,7 @@ void pdsParallel(std::vector<cv::Point2f>* points, const cv::Mat& grayImage, dou
                     cv::Rect omega = cv::Rect(sx, sy, cellW, cellH);
                     if (!containPoint(noise, omega)) {
                         cv::Point2f p;
-                        if (throwSample(grayImage, noise, &p, 10, omega, min_radius, max_radius)) {
+                        if (throwSample(grayImage, noise, &p, 10, omega, min_radius, max_radius, rand)) {
                             int ipx = static_cast<int>(p.x);
                             int ipy = static_cast<int>(p.y);
                             noise.at<float>(ipy, ipx) = 1.0f;

@@ -7,25 +7,55 @@
 
 namespace lime {
 
-// compute erosion of mathematical morphology
+/**
+ * Morphological filter types.
+ * @ingroup npr
+ **/
+enum MorphTypes : int {
+    MORPH_ERODE,        //!< Erosion
+    MORPH_DILATE,       //!< Dilation
+    MORPH_OPEN,         //!< Opening
+    MORPH_CLOSE,        //!< Closing
+    MORPH_GRADIENT,     //!< Gradient
+    MORPH_TOPHAT,       //!< Top-hat
+    MORPH_BLACKHAT      //!< Black-hat
+};
+
+/**
+ * Image filtering with mathematical morphology.
+ * @ingroup npr
+ * @param[in] src: Input image.
+ * @param[out] dst: Output image.
+ * @param[in] type: MorphTypes enum.
+ * @param[in] ksize: Kernel size of the filter.
+ *
+ * @details
+ * @code
+ * # Python
+ * dst = lime.morphFilter(src, ksize)
+ * @endcode
+ **/
+inline void morphFilter(cv::InputArray src, cv::OutputArray dst, int type, int ksize);
+
+//! Compute erosion of mathematical morphology
 inline void morphErode(cv::InputArray img, cv::OutputArray out, int ksize);
 
-// compute dilation of mathematical morphology
+//! Compute dilation of mathematical morphology
 inline void morphDilate(cv::InputArray img, cv::OutputArray out, int ksize);
 
-// compute opening of mathematical morphology
+//! Compute opening of mathematical morphology
 inline void morphOpen(cv::InputArray img, cv::OutputArray out, int ksize);
 
-// compute closing of mathematical morphology
+//! Compute closing of mathematical morphology
 inline void morphClose(cv::InputArray img, cv::OutputArray out, int ksize);
 
-// compute gradient of mathematical morphology
+//! Compute gradient of mathematical morphology
 inline void morphGradient(cv::InputArray img, cv::OutputArray out, int ksize);
 
-// compute gradient of mathematical morphology
+//! Compute gradient of mathematical morphology
 inline void morphTophat(cv::InputArray img, cv::OutputArray out, int ksize);
 
-// compute gradient of mathematical morphology
+//! Compute gradient of mathematical morphology
 inline void morphBlackhat(cv::InputArray img, cv::OutputArray out, int ksize);
 
 }  // namespace lime

@@ -1,24 +1,4 @@
-/******************************************************************************
-Copyright 2015 Tatsuya Yatagawa (tatsy)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "Software"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-the Software, and to permit persons to whom the Software is furnished to do so,
-subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-******************************************************************************/
-
+#include <ctime>
 #include <vector>
 #include <algorithm>
 #include <cassert>
@@ -104,8 +84,8 @@ void LIConv(cv::OutputArray lic_, cv::InputArray img_, cv::InputArray etf_, cv::
     int totalStep = dim * height * width;
     int progress = 0;
 
-    lime::Random rand = lime::Random::getRNG();
-
+    lime::Random rand((unsigned int)time(0));
+    
     for (int y = 0; y < height; y++) {
         ompfor (int x = 0; x < width; x++) {  // NOLINT
             std::vector<double> s_sum(dim, 0.0);
@@ -113,7 +93,7 @@ void LIConv(cv::OutputArray lic_, cv::InputArray img_, cv::InputArray etf_, cv::
             std::vector<double> sum(dim, 0.0);
             std::vector<double> weight(dim, 0.0);
 
-            double t_i = tau / n * (rand.randInt(2*n+1) - n);
+            double t_i = tau / n * (rand.nextInt(2*n+1) - n);
             for (int t = -t_disc; t <= t_disc; t++) {
                 double theta = tau / t_disc * t +  etf.at<float>(y, x);
                 fill(s_sum.begin(), s_sum.end(), 0.0);
@@ -166,11 +146,11 @@ void pencilDrawing(cv::InputArray input, cv::OutputArray output, const std::vect
     // * Detect edge DoF
     cv::Mat gray, edge;
     cv::cvtColor(img, gray, cv::COLOR_BGR2GRAY);
-    lime::npr::edgeDoG(gray, edge);
+    lime::edgeDoG(gray, edge);
 
     // Compute ETF
     cv::Mat vfield;
-    lime::npr::calcVectorField(gray, vfield, ksize);
+    lime::calcVectorField(gray, vfield, ksize);
 
     // Quantize direction using distance field
     quantizeOrientation(vfield, edge);
@@ -181,7 +161,7 @@ void pencilDrawing(cv::InputArray input, cv::OutputArray output, const std::vect
     if (points.empty()) {
         int nNoise = static_cast<int>(0.2 * width * height);
         noise = cv::Mat(height, width, CV_32FC1);
-        lime::npr::uniformNoise(noise, gray, nNoise);
+        lime::uniformNoise(noise, gray, nNoise);
         ratio = 1.5 * nNoise / (width * height);
     } else {
         int nNoise = static_cast<int>(points.size());

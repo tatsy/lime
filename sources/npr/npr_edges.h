@@ -9,27 +9,45 @@
 
 namespace lime {
 
-namespace npr {
-
-enum DoGType {
-    EDGE_XDOG,
-    EDGE_FDOG
+/**
+ * NPR edge types.
+ * @ingroup npr
+ **/
+enum NPREdgeTypes {
+    NPR_EDGE_XDOG,      //!< Extended DoG (XDoG) filter.
+    NPR_EDGE_FDOG       //!< Flow DoG (FDoG) filter.
 };
 
-struct DoGParam {
+/**
+ * DoG parameters.
+ * @ingroup npr
+ **/
+struct DoGParams {
     double kappa;
     double sigma;
     double tau;
     double phi;
-    DoGType dogType;
+    NPREdgeTypes edgeType;
 
-    explicit DoGParam(double kappa = 4.5, double sigma = 0.5, double tau = 0.95,
-                      double phi = 10.0, DoGType dogType = EDGE_XDOG);
-};  // class DoGParam
+    explicit DoGParams(double kappa = 4.5, double sigma = 0.5, double tau = 0.95,
+                      double phi = 10.0, NPREdgeTypes edgeType = NPR_EDGE_XDOG);
+};  // struct DoGParams
 
-inline void edgeDoG(cv::InputArray image, cv::OutputArray edge, const DoGParam& param = DoGParam());
-
-}  // namespace npr
+/**
+ * Detecting NPR edges with DoG filter.
+ * @ingroup npr
+ * @param[in] image: Input image.
+ * @param[out] edge: Output edge image.
+ * @param[in] params: DoG parameters.
+ *
+ * @details
+ * @code
+ * # Python
+ * edge = lime.edgeDoG(image, params)
+ * @endcode
+ * <b>params</b>: Python builtin "dict" including DoG parameters.
+ **/
+inline void edgeDoG(cv::InputArray image, cv::OutputArray edge, const DoGParams& params = DoGParams());
 
 }  // namespace lime
 

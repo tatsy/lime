@@ -1,26 +1,9 @@
-/******************************************************************************
-Copyright 2015 Tatsuya Yatagawa (tatsy)
+#ifdef _MSC_VER
+#pragma once
+#endif
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "Software"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-the Software, and to permit persons to whom the Software is furnished to do so,
-subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-******************************************************************************/
-
-#ifndef SRC_NPR_VECTORFIELD_DETAIL_H_
-#define SRC_NPR_VECTORFIELD_DETAIL_H_
+#ifndef _NPR_VECTORFIELD_DETAIL_H_
+#define _NPR_VECTORFIELD_DETAIL_H_
 
 #include <vector>
 
@@ -28,12 +11,10 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace lime {
 
-namespace npr {
-
 namespace {  // NOLINT
 
 void calcETF(cv::InputArray input, cv::OutputArray output,
-             int ksize = 5, int maxiter = 3, EdgeDetector edgeDetector = EDGE_SOBEL) {
+             int ksize = 5, int maxiter = 3, int edgeDetector = EDGE_DETECT_SOBEL) {
     cv::Mat  image = input.getMat();
     cv::Mat& etf   = output.getMatRef();
 
@@ -56,10 +37,10 @@ void calcETF(cv::InputArray input, cv::OutputArray output,
 
     // detect standard edge
     cv::Mat gx, gy;
-    if (edgeDetector == EDGE_SOBEL) {
+    if (edgeDetector == EDGE_DETECT_SOBEL) {
         cv::Sobel(gray, gx, CV_32FC1, 1, 0);
         cv::Sobel(gray, gy, CV_32FC1, 0, 1);
-    } else if (edgeDetector == EDGE_ROTATIONAL) {
+    } else if (edgeDetector == EDGE_DETECT_ROTATIONAL) {
         double p1 = 0.183;
         double Dx[3][3] = { { 0.5 * p1, 0.0, -0.5 * p1 },
         { 0.5 - p1, 0.0, p1 - 0.5 },
@@ -162,7 +143,7 @@ void calcETF(cv::InputArray input, cv::OutputArray output,
     temp.convertTo(etf, CV_32F);
 }
 
-void calcSST(cv::InputArray input, cv::OutputArray output, int ksize = 5, EdgeDetector edgeDetector = EDGE_SOBEL) {
+void calcSST(cv::InputArray input, cv::OutputArray output, int ksize = 5, int edgeDetector = EDGE_DETECT_SOBEL) {
     cv::Mat  image = input.getMat();
     cv::Mat& sst   = output.getMatRef();
 
@@ -185,10 +166,10 @@ void calcSST(cv::InputArray input, cv::OutputArray output, int ksize = 5, EdgeDe
 
     // detect standard edge
     cv::Mat gx, gy;
-    if (edgeDetector == EDGE_SOBEL) {
+    if (edgeDetector == EDGE_DETECT_SOBEL) {
         cv::Sobel(gray, gx, CV_32FC1, 1, 0);
         cv::Sobel(gray, gy, CV_32FC1, 0, 1);
-    } else if (edgeDetector == EDGE_ROTATIONAL) {
+    } else if (edgeDetector == EDGE_DETECT_ROTATIONAL) {
         double p1 = 0.183;
         double Dx[3][3] = { { 0.5 * p1, 0.0, -0.5 * p1 },
         { 0.5 - p1, 0.0, p1 - 0.5 },
@@ -219,7 +200,7 @@ void calcSST(cv::InputArray input, cv::OutputArray output, int ksize = 5, EdgeDe
             }
         }
     } else {
-        Assertion(false, "Unknown edge detector is specified.");
+        ErrorMsg("Unknown edge detector is specified.");
     }
 
     // tensor relaxation step
@@ -277,7 +258,7 @@ void calcSST(cv::InputArray input, cv::OutputArray output, int ksize = 5, EdgeDe
 }  // unnamed namespace
 
 void calcVectorField(cv::InputArray input, cv::OutputArray angles,
-                     int ksize, VFieldType vfieldType, EdgeDetector edgeDetector) {
+                     int ksize, int vfieldType, int edgeDetector) {
     cv::Mat image = input.getMat();
 
     const int width = image.cols;
@@ -285,9 +266,9 @@ void calcVectorField(cv::InputArray input, cv::OutputArray angles,
 
     cv::Mat& vfield = angles.getMatRef();
     vfield = cv::Mat(height, width, CV_32FC1);
-    if (vfieldType == VECTOR_SST) {
+    if (vfieldType == VEC_FIELD_SST) {
         cv::Mat sst;
-        npr::calcSST(image, sst, ksize, edgeDetector);
+        calcSST(image, sst, ksize, edgeDetector);
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
@@ -301,9 +282,9 @@ void calcVectorField(cv::InputArray input, cv::OutputArray angles,
                 vfield.at<float>(y, x) = static_cast<float>(atan2(-F, lambda1 - E));
             }
         }
-    } else if (vfieldType == VECTOR_ETF) {
+    } else if (vfieldType == VEC_FIELD_ETF) {
         cv::Mat etf;
-        npr::calcETF(image, etf, ksize, edgeDetector);
+        calcETF(image, etf, ksize, edgeDetector);
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 double tx = etf.at<double>(y, x * 2 + 0);
@@ -389,8 +370,6 @@ void detectSingular(const Array2D<Tensor>& sst, std::vector<SingularPoint>* poin
     }
 }
 
-}  // namespace npr
-
 }  // namespace lime
 
-#endif  // SRC_NPR_VECTORFIELD_DETAIL_H_
+#endif  // _NPR_VECTORFIELD_DETAIL_H_

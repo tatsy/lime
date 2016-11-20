@@ -46,18 +46,18 @@ void demo_circle() {
     }
 
     cv::Mat noise, classic, euler, runge;
-    lime::npr::noise::random(noise, cv::Size(width, height));
+    lime::randomNoise(noise, cv::Size(width, height));
 
     printf("[LIC] Classic     -> ");
-    lime::npr::lic(classic, noise, vfield, 20, lime::npr::LICType::Classic);
+    lime::LIC(noise, classic, vfield, 20, lime::LIC_CLASSICAL);
     printf("OK\n");
 
     printf("[LIC] Eulerian    -> ");
-    lime::npr::lic(euler, noise, vfield, 20, lime::npr::LICType::Eulerian);
+    lime::LIC(noise, euler, vfield, 20, lime::LIC_EULERIAN);
     printf("OK\n");
 
     printf("[LIC] Runge-Kutta -> ");
-    lime::npr::lic(runge, noise, vfield, 20, lime::npr::LICType::RungeKutta);
+    lime::LIC(noise, runge, vfield, 20, lime::LIC_RUNGE_KUTTA);
     printf("OK\n");
 
     cv::imshow("Noise", noise);
@@ -74,7 +74,7 @@ void demo_img(const cv::Mat& img) {
     img.convertTo(img, CV_32FC1, 1.0 / 255.0);
 
     cv::Mat sst, vfield;
-    lime::npr::calcVectorField(img, sst, 11, lime::npr::VECTOR_SST, lime::npr::EDGE_SOBEL);
+    lime::calcVectorField(img, sst, 11, lime::VEC_FIELD_SST, lime::EDGE_DETECT_SOBEL);
     vfield = cv::Mat(height, width, CV_32FC2);
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
@@ -85,9 +85,9 @@ void demo_img(const cv::Mat& img) {
     }
 
     cv::Mat noise, flow, out;
-    lime::npr::noise::random(noise, cv::Size(width, height));
-    lime::npr::lic(noise, flow, vfield, 20, lime::npr::LICType::Classic);
-    lime::npr::lic(img, out, vfield, 20, lime::npr::LICType::RungeKutta);
+    lime::randomNoise(noise, cv::Size(width, height));
+    lime::LIC(noise, flow, vfield, 20, lime::LIC_CLASSICAL);
+    lime::LIC(img, out, vfield, 20, lime::LIC_RUNGE_KUTTA);
 
     cv::imshow("Input", img);
     cv::imshow("Flow", flow);

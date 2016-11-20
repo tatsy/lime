@@ -1,26 +1,9 @@
-/******************************************************************************
-Copyright 2015 Tatsuya Yatagawa (tatsy)
+#ifdef _MSC_VER
+#pragma once
+#endif
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "Software"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-the Software, and to permit persons to whom the Software is furnished to do so,
-subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-******************************************************************************/
-
-#ifndef SRC_NPR_NPRFILTER_KUWAHARA_DETAIL_H_
-#define SRC_NPR_NPRFILTER_KUWAHARA_DETAIL_H_
+#ifndef _NPR_KUWAHARA_DETAIL_H_
+#define _NPR_KUWAHARA_DETAIL_H_
 
 #include <vector>
 #include <utility>
@@ -32,14 +15,27 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace lime {
 
-namespace {  // NOLINT
+void kuwaharaFilter(cv::InputArray input, cv::OutputArray output, int type,
+                    int ksize, int nDivide) {
+    switch (type) {
+    case KUWAHARA_CLASSICAL:
+        kuwaharaClassical(input, output, ksize);
+        break;
 
-const double EPS = 1.0e-5;
+    case KUWAHARA_GENERALIZED:
+        kuwaharaGeneralized(input, output, ksize, nDivide);
+        break;
 
-}  // unnamed namespace
+    case KUWAHARA_ANISOTROPIC:
+        kuwaharaAnisotropic(input, output, ksize, nDivide);
+        break;
 
+    default:
+        ErrorMsg("Unknown Kuwahara filter type!!");
+    }
+}
 
-void kuwaharaFilter(cv::InputArray input, cv::OutputArray output, int ksize) {
+void kuwaharaClassical(cv::InputArray input, cv::OutputArray output, int ksize) {
     cv::Mat  img = input.getMat();
     cv::Mat& out = output.getMatRef();
 
@@ -105,7 +101,9 @@ void kuwaharaFilter(cv::InputArray input, cv::OutputArray output, int ksize) {
     out.convertTo(temp, CV_32FC3);
 }
 
-void generalKF(cv::InputArray input, cv::OutputArray output, int n_div, int ksize) {
+void kuwaharaGeneralized(cv::InputArray input, cv::OutputArray output, int ksize, int n_div) {
+    Assertion(n_div > 4, "Kernel size must be more than 4");
+
     cv::Mat  img = input.getMat();
     cv::Mat& out = output.getMatRef();
 
@@ -174,7 +172,9 @@ void generalKF(cv::InputArray input, cv::OutputArray output, int n_div, int ksiz
     }
 }
 
-void anisoKF(cv::InputArray input, cv::OutputArray output, int n_div, int ksize) {
+void kuwaharaAnisotropic(cv::InputArray input, cv::OutputArray output, int ksize, int n_div) {
+    Assertion(n_div > 4, "Kernel size must be more than 4");
+
     cv::Mat  img = input.getMat();
     cv::Mat& out = output.getMatRef();
 
@@ -186,7 +186,7 @@ void anisoKF(cv::InputArray input, cv::OutputArray output, int n_div, int ksize)
     double alpha = 1.0;
 
     cv::Mat sst;
-    npr::calcSST(img, sst);
+    calcSST(img, sst);
 
     cv::Mat A = cv::Mat(height, width, CV_64FC1);
     cv::Mat R = cv::Mat(height, width, CV_64FC1);
@@ -264,4 +264,4 @@ void anisoKF(cv::InputArray input, cv::OutputArray output, int n_div, int ksize)
 
 }  // namespace lime
 
-#endif  // SRC_NPR_NPRFILTER_KUWAHARA_DETAIL_H_
+#endif  // _NPR_KUWAHARA_DETAIL_H_

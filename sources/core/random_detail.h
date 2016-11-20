@@ -44,6 +44,10 @@ email: m-mat @ math.sci.hiroshima-u.ac.jp (remove space)
 **************************************************************************
 */
 
+#ifdef _MSC_VER
+#pragma once
+#endif
+
 #ifndef _CORE_RANDOM_DETAIL_H_
 #define _CORE_RANDOM_DETAIL_H_
 
@@ -54,20 +58,42 @@ email: m-mat @ math.sci.hiroshima-u.ac.jp (remove space)
 
 namespace lime {
 
-namespace {  // NOLINT
+namespace {
 
 /* Period parameters */
-const int N = 624;
-const int M = 397;
-const unsigned int MATRIX_A   = 0x9908b0dfU;  /* constant vector a */
-const unsigned int UPPER_MASK = 0x80000000U;  /* most significant w-r bits */
-const unsigned int LOWER_MASK = 0x7fffffffU;  /* least significant r bits */
+static const unsigned int MATRIX_A   = 0x9908b0dfU;  /* constant vector a */
+static const unsigned int UPPER_MASK = 0x80000000U;  /* most significant w-r bits */
+static const unsigned int LOWER_MASK = 0x7fffffffU;  /* least significant r bits */
 
-static unsigned int mt[N]; /* the array for the state vector  */
-static int mti = N + 1; /* mti==N+1 means mt[N] is not initialized */
+}  // unnamed namespace
+
+inline Random::Random(unsigned int seed)
+    : mti(N + 1)
+{
+    init_genrand(seed);
+}
+
+inline int Random::nextInt() {
+    return genrand_int31();
+}
+
+inline int Random::nextInt(const int n) {
+    Assertion(n > 0, "Upper bound of random integers must be positive.");
+    return genrand_int31() % n;
+}
+
+inline double Random::nextReal() {
+    return genrand_real2();
+}
+
+inline double Random::normal() {
+    const double r1 = nextReal();
+    const double r2 = nextReal();
+    return sqrt(-2.0 * log(r1)) * sin(2.0 * PI * r2);
+}
 
 /* initializes mt[N] with a seed */
-void init_genrand(unsigned int s) {
+inline void Random::init_genrand(unsigned int s) {
     mt[0] = s & 0xffffffffU;
     for (mti = 1; mti < N; mti++) {
         mt[mti] =
@@ -81,36 +107,8 @@ void init_genrand(unsigned int s) {
     }
 }
 
-/* initialize by an array with array-length */
-/* init_key is the array for initializing keys */
-/* key_length is its length */
-/* slight change for C++, 2004/2/26 */
-void init_by_array(unsigned int init_key[], int key_length) {
-    int i, j, k;
-    init_genrand(19650218U);
-    i = 1; j = 0;
-    k = (N > key_length ? N : key_length);
-    for (; k; k--) {
-        mt[i] = (mt[i] ^ ((mt[i - 1] ^ (mt[i - 1] >> 30)) * 1664525UL))
-            + init_key[j] + j; /* non linear */
-        mt[i] &= 0xffffffffULL; /* for WORDSIZE > 32 machines */
-        i++; j++;
-        if (i >= N) { mt[0] = mt[N - 1]; i = 1; }
-        if (j >= key_length) j = 0;
-    }
-    for (k = N - 1; k; k--) {
-        mt[i] = (mt[i] ^ ((mt[i - 1] ^ (mt[i - 1] >> 30)) * 1566083941UL))
-            - i; /* non linear */
-        mt[i] &= 0xffffffffUL; /* for WORDSIZE > 32 machines */
-        i++;
-        if (i >= N) { mt[0] = mt[N - 1]; i = 1; }
-    }
-
-    mt[0] = 0x80000000ULL; /* MSB is 1; assuring non-zero initial array */
-}
-
 /* generates a random number on [0,0xffffffff]-interval */
-unsigned int genrand_int32(void) {
+inline unsigned int Random::genrand_int32(void) {
     unsigned int y;
     static unsigned int mag01[2] = { 0x0U, MATRIX_A };
     /* mag01[x] = x * MATRIX_A  for x=0,1 */
@@ -118,7 +116,7 @@ unsigned int genrand_int32(void) {
     if (mti >= N) { /* generate N words at one time */
         int kk;
 
-        if (mti == N + 1)   /* if init_genrand() has not been called, */
+        if (mti == N + 1) /* if init_genrand() has not been called, */
             init_genrand(5489UL); /* a default initial seed is used */
 
         for (kk = 0; kk < N - M; kk++) {
@@ -139,7 +137,7 @@ unsigned int genrand_int32(void) {
 
     /* Tempering */
     y ^= (y >> 11);
-    y ^= (y << 7) & 0x9d2c5680ULL;
+    y ^= (y <<  7) & 0x9d2c5680ULL;
     y ^= (y << 15) & 0xefc60000ULL;
     y ^= (y >> 18);
 
@@ -147,61 +145,16 @@ unsigned int genrand_int32(void) {
 }
 
 /* generates a random number on [0,0x7fffffff]-interval */
-int genrand_int31(void) {
+inline int Random::genrand_int31(void) {
     return static_cast<int>(genrand_int32() >> 1);
 }
 
-/* generates a random number on [0,1]-real-interval */
-double genrand_real1(void) {
-    return genrand_int32()*(1.0 / 4294967295.0);
-    /* divided by 2^32-1 */
-}
-
 /* generates a random number on [0,1)-real-interval */
-double genrand_real2(void) {
+inline double Random::genrand_real2(void) {
     return genrand_int32()*(1.0 / 4294967296.0);
     /* divided by 2^32 */
 }
 
-/* generates a random number on (0,1)-real-interval */
-double genrand_real3(void) {
-    return ((static_cast<double>(genrand_int32())) + 0.5)*(1.0 / 4294967296.0);
-    /* divided by 2^32 */
-}
-
-/* generates a random number on [0,1) with 53-bit resolution*/
-double genrand_res53(void) {
-    unsigned int a = genrand_int32() >> 5, b = genrand_int32() >> 6;
-    return(a*67108864.0 + b)*(1.0 / 9007199254740992.0);
-}
-
-}  // unnamed namespace
-
-inline Random& Random::getRNG(int seed) {
-    static Random instance(seed);
-    return instance;
-}
-
-inline Random::Random(int seed) {
-    unsigned int ulseed = seed >= 0 ? seed : (unsigned int)time(0);
-    init_genrand(ulseed);
-}
-
-inline int Random::randInt(const int n) const {
-    Assertion(n > 0, "Upper bound of random integers must be positive.");
-    return genrand_int31() % n;
-}
-
-inline double Random::randReal() const {
-    return genrand_real2();
-}
-
-inline double Random::randNorm() const {
-    double r1 = genrand_real3();
-    double r2 = genrand_real1();
-    return sqrt(-2.0 * log(r1)) * sin(2.0 * PI * r2);
-}
-
 }  // namespace lime
 
-#endif  // SRC_CORE_RANDOM_DETAIL_H_
+#endif  // _CORE_RANDOM_DETAIL_H_

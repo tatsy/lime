@@ -1,3 +1,8 @@
+/**
+ * @defgroup misc
+ * @brief Miscellaneous classes and methods.
+ **/
+
 #ifdef _MSC_VER
 #pragma once
 #endif

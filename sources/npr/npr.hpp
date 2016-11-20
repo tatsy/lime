@@ -1,3 +1,8 @@
+/**
+ * @defgroup npr
+ * Mainly including various filters for artistic image stylization.
+ **/
+
 #ifdef _MSC_VER
 #pragma once
 #endif

@@ -164,3 +164,8 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
+
+# Sphix related files/folders
+docs/source/_*
+docs/build
+docs/xml

@@ -7,14 +7,41 @@
 
 namespace lime {
 
-//! normal kuwahara filter
-inline void kuwaharaFilter(cv::InputArray img, cv::OutputArray out, int ksize);
+/**
+ * Kuwahara filter types.
+ * @ingroup npr
+ **/
+enum KuwaharaTypes : int {
+    KUWAHARA_CLASSICAL,     //!< Classical Kuwahara filter.
+    KUWAHARA_GENERALIZED,   //!< Generalized Kuwahara filter.
+    KUWAHARA_ANISOTROPIC    //!< Anisotropic Kuwahara filter.
+};
 
-//! generalized kuwahara filter
-inline void generalKF(cv::InputArray img, cv::OutputArray out, int n_div, int ksize);
+/**
+ * Kuwahara filter
+ * @ingroup npr
+ * @param[in] src: Input image.
+ * @param[out] dst: Output image.
+ * @param[in] type: KuwaharaTypes enum.
+ * @param[in] ksize: Kernel size of the filter.
+ * @param[in] nDivide: # of orientation divisions (not used for CLASSICAL).
+ *
+ * @detail
+ * @code
+ * # Python
+ * dst = lime.kuwaharaFilter(src, type, ksize, nDivide = 0)
+ * @endcode
+ **/
+inline void kuwaharaFilter(cv::InputArray src, cv::OutputArray dst, int type, int ksize, int nDivide = 0);
 
-//! anisotropic kuwahara filter
-inline void anisoKF(cv::InputArray img, cv::OutputArray out, int n_div, int ksize);
+//! Clasical kuwahara filter
+inline void kuwaharaClassical(cv::InputArray src, cv::OutputArray dst, int ksize);
+
+//! Generalized kuwahara filter
+inline void kuwaharaGeneralized(cv::InputArray src, cv::OutputArray dst, int ksize, int nDivide);
+
+//! Anisotropic kuwahara filter
+inline void kuwaharaAnisotropic(cv::InputArray src, cv::OutputArray dst, int ksize, int nDivide);
 
 }  // namespace lime
 

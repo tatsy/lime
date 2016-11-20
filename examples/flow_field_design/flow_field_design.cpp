@@ -1,24 +1,3 @@
-/******************************************************************************
-Copyright 2015 Tatsuya Yatagawa (tatsy)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "Software"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-the Software, and to permit persons to whom the Software is furnished to do so,
-subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-******************************************************************************/
-
 #include <opencv2/opencv.hpp>
 
 #include <cmath>
@@ -171,8 +150,8 @@ void demo_img(const std::string& filename) {
 
     cv::Mat angles;
 
-    lime::npr::calcSST(img, sst, ksize);
-    lime::npr::calcVectorField(img, angles, ksize);
+    lime::calcSST(img, sst, ksize);
+    lime::calcVectorField(img, angles, ksize);
     vfield = cv::Mat(height, width, CV_32FC2);
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
@@ -183,8 +162,8 @@ void demo_img(const std::string& filename) {
     }
 
     cv::Mat noise;
-    lime::npr::noise::random(noise, img.size());
-    lime::npr::lic(out, noise, vfield, 20, lime::npr::LICType::RungeKutta);
+    lime::randomNoise(noise, img.size());
+    lime::LIC(noise, out, vfield, 20, lime::LIC_RUNGE_KUTTA);
     cv::cvtColor(out, out, cv::COLOR_GRAY2BGR);
 
     cv::namedWindow("Output");
@@ -227,8 +206,8 @@ void demo_tensor() {
     }
 
     cv::Mat noise, out;
-    lime::npr::noise::random(noise, cv::Size(512, 512));
-    lime::npr::lic(noise, out, vfield, 30, lime::npr::LICType::Classic);
+    lime::randomNoise(noise, cv::Size(512, 512));
+    lime::LIC(noise, out, vfield, 30, lime::LIC_CLASSICAL);
 
     cv::imshow("Output", out);
     cv::waitKey(0);

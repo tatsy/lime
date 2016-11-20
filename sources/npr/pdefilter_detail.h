@@ -37,7 +37,26 @@ double meanCurve(const cv::Mat& img, int x, int y, int c) {
 
 }  // unnamed namespace
 
-void solveAD(cv::InputArray input, cv::OutputArray output, double lambda, int maxiter) {
+void pdeFilter(cv::InputArray input, cv::OutputArray output, int type, double lambda, int maxiter) {
+    switch (type) {
+    case PDE_ANISO_DIFFSION:
+        anisoDiffusion(input, output, lambda, maxiter);
+        break;
+
+    case PDE_SHOCK_FILTER:
+        shockFilter(input, output, lambda, maxiter);
+        break;
+
+    case PDE_MEAN_CURVATURE:
+        meanCurveFlow(input, output, lambda, maxiter);
+        break;
+
+    default:
+        ErrorMsg("Unknown PDE filter type!!");
+    }
+}
+
+void anisoDiffusion(cv::InputArray input, cv::OutputArray output, double lambda, int maxiter) {
     cv::Mat  img = input.getMat();
     cv::Mat& out = output.getMatRef();
 
@@ -75,7 +94,7 @@ void solveAD(cv::InputArray input, cv::OutputArray output, double lambda, int ma
     }
 }
 
-void solveSF(cv::InputArray input, cv::OutputArray output, double lambda, int maxiter) {
+void shockFilter(cv::InputArray input, cv::OutputArray output, double lambda, int maxiter) {
     cv::Mat  img = input.getMat();
     cv::Mat& out = output.getMatRef();
 
@@ -129,7 +148,7 @@ void solveSF(cv::InputArray input, cv::OutputArray output, double lambda, int ma
     }
 }
 
-void solveMCF(cv::InputArray input, cv::OutputArray output, double lambda, int maxiter) {
+void meanCurveFlow(cv::InputArray input, cv::OutputArray output, double lambda, int maxiter) {
     cv::Mat  img = input.getMat();
     cv::Mat& out = output.getMatRef();
 
