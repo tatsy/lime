@@ -1,5 +1,6 @@
-set(LIME_BUILD_STATIC_LIB OFF CACHE BOOL OFF)
-if (${LIME_BUILD_STATIC_LIB} STREQUAL "ON")
+if (${LIME_BUILD_STATIC_LIB})
+  message(STATUS "[ LIME ] Build static library.")
+
   set(SOURCE_FILES "")
   function(add_folder FOLDER_NAME)
     set(filters "")
@@ -20,4 +21,8 @@ if (${LIME_BUILD_STATIC_LIB} STREQUAL "ON")
 
   include_directories(${OpenCV_INCLUDE_DIRS})
   target_link_libraries(lime ${OpenCV_LIBS})
+endif()
+
+if (${LIME_BUILD_PYTHON_MODULE})
+  add_subdirectory(python)
 endif()

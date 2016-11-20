@@ -1,8 +1,22 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(lime)
 
+# ------------------------------------------------------------------------------
+# Build options
+# ------------------------------------------------------------------------------
+option(LIME_BUILD_TESTS "Build unit tests." OFF)
+option(LIME_BUILD_EXAMPLES "Build example programes." ON)
+option(LIME_BUILD_STATIC_LIB "Build static library." OFF)
+option(LIME_BUILD_PYTHON_MODULE "Build python modules." OFF)
+
+# ------------------------------------------------------------------------------
 # Required packages
+# ------------------------------------------------------------------------------
 find_package( OpenCV 3.0 REQUIRED )
+if (${LIME_BUILD_PYTHON_MODULE})
+  find_package( PythonLibs 3 REQUIRED )
+  find_package( Boost REQUIRED python numpy )
+endif()
 
 # Build settings
 if (NOT WIN32)

@@ -237,6 +237,25 @@ void highEnhanceFilter(cv::InputArray input_, cv::OutputArray output_) {
 
 }  // unnamed namespace
 
+void colorConstancy(cv::InputArray input, cv::OutputArray output, int type) {
+    switch (type) {
+    case CONSTANCY_HORN:
+        colorConstancyHorn(input, output);
+        break;
+
+    case CONSTANCY_RAHMAN:
+        colorConstancyRahman(input, output);
+        break;
+
+    case CONSTANCY_FAUGERAS:
+        colorConstancyFaugeras(input, output);
+        break;
+
+    default:
+        ErrorMsg("Unknown color constancy algorithm!!");
+    }
+}
+
 void colorConstancyHorn(cv::InputArray input, cv::OutputArray output, double thre) {
     cv::Mat  img = input.getMat();
     cv::Mat& out = output.getMatRef();

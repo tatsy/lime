@@ -1,9 +1,7 @@
 enable_testing()
 
-set(GTEST_ROOT $ENV{GTEST_ROOT} CACHE STRING "GTEST_ROOT")
-
-set(LIME_BUILD_TEST OFF CACHE BOOL OFF)
-if ("${LIME_BUILD_TEST}" STREQUAL "ON")
+if (${LIME_BUILD_TESTS})
+  message(STATUS "[ LIME ] Build tests.")
 
   if(NOT "${GTEST_ROOT}" STREQUAL "")
     set(GTEST_LIB)

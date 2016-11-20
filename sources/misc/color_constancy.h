@@ -9,6 +9,14 @@
 
 namespace lime {
 
+enum : int {
+    CONSTANCY_HORN,
+    CONSTANCY_RAHMAN,
+    CONSTANCY_FAUGERAS
+};
+
+inline void colorConstancy(cv::InputArray input, cv::OutputArray output, int type = CONSTANCY_RAHMAN);
+
 inline void colorConstancyHorn(cv::InputArray input, cv::OutputArray output, double thre = 0.05);
 
 inline void colorConstancyRahman(cv::InputArray input, cv::OutputArray output,

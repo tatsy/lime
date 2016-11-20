@@ -7,6 +7,7 @@
 
 #include <cmath>
 #include <iostream>
+#include <sstream>
 
 // -----------------------------------------------------------------------------
 // API export macro
@@ -35,7 +36,7 @@
 static const double PI     = 4.0 * atan(1.0);
 static const double INV_PI = 1.0 / PI;
 static const double INFTY  = 1.0e32;
-static const double EPS    = 1.0e-6; 
+static const double EPS    = 1.0e-6;
 
 // ----------------------------------------------------------------------------
 // Parallel for
@@ -64,28 +65,83 @@ static const double EPS    = 1.0e-6;
 // -----------------------------------------------------------------------------
 
 #ifndef __FUNCTION_NAME__
-    #if defined(WIN32) || defined(_WIN32)
-        #define __FUNCTION_NAME__ __FUNCTION__
-    #else
-        #define __FUNCTION_NAME__ __func__
-    #endif
+#if defined(_WIN32) || defined(__WIN32__)
+#define __FUNCTION_NAME__ __FUNCTION__
+#else
+#define __FUNCTION_NAME__ __func__
+#endif
 #endif
 
 #undef NDEBUG
-#ifndef NDEBUG
-#define Assertion(PREDICATE, MSG) \
+#ifdef PY_VERSION_HEX
+#define Assertion(PREDICATE, ...) \
 do { \
-    if (!(PREDICATE)) { \
-        std::cerr << "Asssertion \"" \
-        << #PREDICATE << "\" failed in " << __FILE__ \
-        << " line " << __LINE__ \
-        << " in function \"" << (__FUNCTION_NAME__) << "\"" \
-        << " : " << (MSG) << std::endl; \
-        std::abort(); \
-    } \
+if (!(PREDICATE)) { \
+std::stringstream ss; \
+ss << "Asssertion \"" \
+<< #PREDICATE << "\" failed in " << __FILE__ \
+<< " line " << __LINE__ \
+<< " in function \"" << (__FUNCTION_NAME__) << "\"" \
+<< " : "; \
+throw PyLimeException(ss.str()); \
+} \
+} while (false)
+#elif !defined(NDEBUG)
+#define Assertion(PREDICATE, ...) \
+do { \
+if (!(PREDICATE)) { \
+std::cerr << "Asssertion \"" \
+<< #PREDICATE << "\" failed in " << __FILE__ \
+<< " line " << __LINE__ \
+<< " in function \"" << (__FUNCTION_NAME__) << "\"" \
+<< " : "; \
+fprintf(stderr, __VA_ARGS__); \
+std::cerr << std::endl; \
+std::abort(); \
+} \
 } while (false)
 #else  // NDEBUG
-#define Assertion(PREDICATE, MSG) do {} while (false)
-#endif  // NDEBUG
+#define Assertion(PREDICATE, ...) do {} while (false)
+#endif // NDEBUG
+
+
+// -----------------------------------------------------------------------------
+// Message handlers
+// -----------------------------------------------------------------------------
+
+#ifndef NDEBUG
+#define InfoMsg(...) \
+do { \
+    std::cout << "[ INFO  ] "; \
+    fprintf(stdout, __VA_ARGS__); \
+    std::cerr << std::endl; \
+} while (false);
+#define WarnMsg(...) \
+do { \
+    std::cerr << "[WARNING] "; \
+    fprintf(stdout, __VA_ARGS__); \
+    std::cerr << std::endl; \
+} while (false);
+#else
+#define InfoMsg(...)
+#define WarnMsg(...)
+#endif
+
+#ifdef PY_VERSION_HEX
+#define ErrorMsg(...) \
+do { \
+    char msg[512]; \
+    sprintf(msg, __VA_ARGS__); \
+    throw PyLimeException(msg); \
+} while (false);
+#else
+#define ErrorMsg(...) \
+do { \
+    std::cerr << "[ ERROR ] "; \
+    fprintf(stderr, __VA_ARGS__); \
+    std::cerr << std::endl; \
+    std::abort(); \
+} while (false);
+#endif
 
 #endif  // _CORE_COMMON_HPP_
