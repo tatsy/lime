@@ -9,40 +9,7 @@
 
 namespace lime {
 
-void morphFilter(cv::InputArray input, cv::OutputArray output, int type, int ksize) {
-    switch (type) {
-    case MORPH_ERODE:
-        morphErode(input, output, ksize);
-        break;
-
-    case MORPH_DILATE:
-        morphDilate(input, output, ksize);
-        break;
-
-    case MORPH_OPEN:
-        morphOpen(input, output, ksize);
-        break;
-
-    case MORPH_CLOSE:
-        morphClose(input, output, ksize);
-        break;
-
-    case MORPH_GRADIENT:
-        morphGradient(input, output, ksize);
-        break;
-
-    case MORPH_TOPHAT:
-        morphTophat(input, output, ksize);
-        break;
-
-    case MORPH_BLACKHAT:
-        morphBlackhat(input, output, ksize);
-        break;
-
-    default:
-        ErrorMsg("Unknown morphological filter type!!");
-    }
-}
+namespace {
 
 void morphErode(cv::InputArray input, cv::OutputArray output, int ksize) {
     cv::Mat  img = input.getMat();
@@ -153,6 +120,43 @@ void morphBlackhat(cv::InputArray input, cv::OutputArray output, int ksize) {
     cv::Mat closing;
     morphClose(img, closing, ksize);
     cv::subtract(closing, img, out);
+}
+
+}  // unnamed namespace
+
+void morphFilter(cv::InputArray input, cv::OutputArray output, int type, int ksize) {
+    switch (type) {
+    case MORPH_ERODE:
+        morphErode(input, output, ksize);
+        break;
+
+    case MORPH_DILATE:
+        morphDilate(input, output, ksize);
+        break;
+
+    case MORPH_OPEN:
+        morphOpen(input, output, ksize);
+        break;
+
+    case MORPH_CLOSE:
+        morphClose(input, output, ksize);
+        break;
+
+    case MORPH_GRADIENT:
+        morphGradient(input, output, ksize);
+        break;
+
+    case MORPH_TOPHAT:
+        morphTophat(input, output, ksize);
+        break;
+
+    case MORPH_BLACKHAT:
+        morphBlackhat(input, output, ksize);
+        break;
+
+    default:
+        ErrorMsg("Unknown morphological filter type!!");
+    }
 }
 
 }  // namespace lime

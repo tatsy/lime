@@ -1,6 +1,37 @@
 NPR module
 ===========
 
+-----------------
+Kuwahara filter
+-----------------
+
+.. doxygenfunction:: lime::kuwaharaFilter
+
+.. doxygenenum:: lime::KuwaharaType
+
+
+--------------------------
+Line integral convolution
+--------------------------
+
+.. doxygenfunction:: lime::LIC
+
+.. doxygenenum:: lime::LICType
+
+.. doxygenfunction:: lime::angle2vector
+
+.. doxygenfunction:: lime::vector2angle
+
+
+---------------------
+Morphological filter
+---------------------
+
+.. doxygenfunction:: lime::morphFilter
+
+.. doxygenenum:: lime::MorphType
+
+
 ---------------
 Noise pattern
 ---------------
@@ -10,22 +41,17 @@ Noise pattern
 .. doxygenfunction:: lime::perlinNoise
 
 
----------------------
-Morphological filter
----------------------
+------------
+NPR edges
+------------
 
-.. doxygenfunction:: lime::morphFilter
+.. doxygenfunction:: lime::edgeDoG
 
-.. doxygenenum:: lime::MorphTypes
+.. doxygenstruct:: lime::DoGParams
+  :members:
 
+.. doxygenenum:: lime::NPREdgeType
 
------------------
-Kuwahara filter
------------------
-
-.. doxygenfunction:: lime::kuwaharaFilter
-
-.. doxygenenum:: lime::KuwaharaTypes
 
 
 -----------------
@@ -34,7 +60,8 @@ PDE-based filter
 
 .. doxygenfunction:: lime::pdeFilter
 
-.. doxygenenum:: lime::PDETypes
+.. doxygenenum:: lime::PDEType
+
 
 -----------------------
 Vector field detection
@@ -42,24 +69,6 @@ Vector field detection
 
 .. doxygenfunction:: lime::calcVectorField
 
-.. doxygenenum:: lime::VecFieldTypes
+.. doxygenenum:: lime::VecFieldType
 
 .. doxygenenum:: lime::EdgeDetector
-
-
-------------
-NPR edges
-------------
-
-.. doxygenfunction:: lime::edgeDoG
-
-.. doxygenenum:: lime::NPREdgeTypes
-
-
---------------------------
-Line integral convolution
---------------------------
-
-.. doxygenfunction:: lime::LIC
-
-.. doxygenenum:: lime::LICTypes

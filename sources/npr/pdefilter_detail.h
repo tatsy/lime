@@ -39,7 +39,7 @@ double meanCurve(const cv::Mat& img, int x, int y, int c) {
 
 void pdeFilter(cv::InputArray input, cv::OutputArray output, int type, double lambda, int maxiter) {
     switch (type) {
-    case PDE_ANISO_DIFFSION:
+    case PDE_ANISO_DIFFUSION:
         anisoDiffusion(input, output, lambda, maxiter);
         break;
 

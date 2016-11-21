@@ -151,7 +151,7 @@ npy::ndarray py_edgeDoG(const npy::ndarray &img, const py::dict &pdict) {
     std::set<std::string> keys;
     int entries = py::len(pdict);
     for (int i = 0; i < entries; i++) {
-        keys.insert(py::extract<std::string>(pdict[i]));
+        keys.insert(py::extract<std::string>(pdict.keys()[i]));
     }
 
     lime::DoGParams params;
@@ -161,7 +161,7 @@ npy::ndarray py_edgeDoG(const npy::ndarray &img, const py::dict &pdict) {
     if (keys.find("phi")  != keys.end()) params.phi = py::extract<double>(pdict["phi"]);
     if (keys.find("edgeType") != keys.end()) {
         int value = py::extract<int>(pdict["edgeType"]);
-        params.edgeType = (lime::NPREdgeTypes)value;
+        params.edgeType = (lime::NPREdgeType)value;
     }
 
     cv::Mat ret;
@@ -217,7 +217,7 @@ BOOST_PYTHON_MODULE(lime) {
     py::scope().attr("KUWAHARA_ANISOTROPIC") = (int)lime::KUWAHARA_ANISOTROPIC;
 
     py::def("kuwaharaFilter", py_kuwaharaFilter, ol_py_kuwaharaFilter(
-        py::args("src", "type", "ksize", "nDivide")));
+        py::args("src", "ftype", "ksize", "ndivide")));
 
     py::scope().attr("MORPH_ERODE") = (int)lime::MORPH_ERODE;
     py::scope().attr("MORPH_DILATE") = (int)lime::MORPH_DILATE;
@@ -229,7 +229,7 @@ BOOST_PYTHON_MODULE(lime) {
 
     py::def("morphFilter", py_morphFilter);
 
-    py::scope().attr("PDE_ANISO_DIFFSION") = (int)lime::PDE_ANISO_DIFFSION;
+    py::scope().attr("PDE_ANISO_DIFFUSION") = (int)lime::PDE_ANISO_DIFFUSION;
     py::scope().attr("PDE_SHOCK_FILTER") = (int)lime::PDE_SHOCK_FILTER;
     py::scope().attr("PDE_MEAN_CURVATURE") = (int)lime::PDE_MEAN_CURVATURE;
 
@@ -241,7 +241,7 @@ BOOST_PYTHON_MODULE(lime) {
     py::scope().attr("EDGE_DETECT_ROTATIONAL") = (int)lime::EDGE_DETECT_ROTATIONAL;
 
     py::def("calcVectorField", py_calcVectorField, ol_py_calcVectorField(
-        py::args("img", "ksize", "vfieldType", "edgeDetector")));
+        py::args("img", "ksize", "vftype", "edtype")));
 
     py::scope().attr("NPR_EDGE_XDOG") = (int)lime::NPR_EDGE_XDOG;
     py::scope().attr("NPR_EDGE_FDOG") = (int)lime::NPR_EDGE_FDOG;
@@ -253,12 +253,12 @@ BOOST_PYTHON_MODULE(lime) {
     py::scope().attr("LIC_RUNGE_KUTTA") = (int)lime::LIC_RUNGE_KUTTA;
 
     py::def("LIC", py_LIC, ol_py_LIC(
-        py::args("img", "tangent", "L", "type")));
+        py::args("img", "tangent", "L", "ftype")));
 
     // Misc methods.
     py::scope().attr("CONSTANCY_HORN") = (int)lime::CONSTANCY_HORN;
     py::scope().attr("CONSTANCY_RAHMAN") = (int)lime::CONSTANCY_RAHMAN;
-    py::scope().attr("CONSTANCY_FAUREGAS") = (int)lime::CONSTANCY_FAUGERAS;
+    py::scope().attr("CONSTANCY_FAUGERAS") = (int)lime::CONSTANCY_FAUGERAS;
 
     py::def("colorConstancy", py_colorConstancy);
 

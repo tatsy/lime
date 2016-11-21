@@ -15,25 +15,7 @@
 
 namespace lime {
 
-void kuwaharaFilter(cv::InputArray input, cv::OutputArray output, int type,
-                    int ksize, int nDivide) {
-    switch (type) {
-    case KUWAHARA_CLASSICAL:
-        kuwaharaClassical(input, output, ksize);
-        break;
-
-    case KUWAHARA_GENERALIZED:
-        kuwaharaGeneralized(input, output, ksize, nDivide);
-        break;
-
-    case KUWAHARA_ANISOTROPIC:
-        kuwaharaAnisotropic(input, output, ksize, nDivide);
-        break;
-
-    default:
-        ErrorMsg("Unknown Kuwahara filter type!!");
-    }
-}
+namespace {
 
 void kuwaharaClassical(cv::InputArray input, cv::OutputArray output, int ksize) {
     cv::Mat  img = input.getMat();
@@ -259,6 +241,28 @@ void kuwaharaAnisotropic(cv::InputArray input, cv::OutputArray output, int ksize
                 out.at<float>(y, x*dim + c) = static_cast<float>(val);
             }
         }
+    }
+}
+
+}  // unnamed namespace
+
+void kuwaharaFilter(cv::InputArray input, cv::OutputArray output, int type,
+                    int ksize, int nDivide) {
+    switch (type) {
+    case KUWAHARA_CLASSICAL:
+        kuwaharaClassical(input, output, ksize);
+        break;
+
+    case KUWAHARA_GENERALIZED:
+        kuwaharaGeneralized(input, output, ksize, nDivide);
+        break;
+
+    case KUWAHARA_ANISOTROPIC:
+        kuwaharaAnisotropic(input, output, ksize, nDivide);
+        break;
+
+    default:
+        ErrorMsg("Unknown Kuwahara filter type!!");
     }
 }
 

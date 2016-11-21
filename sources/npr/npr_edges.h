@@ -12,8 +12,8 @@ namespace lime {
 /**
  * NPR edge types.
  * @ingroup npr
- **/
-enum NPREdgeTypes {
+ */
+enum NPREdgeType {
     NPR_EDGE_XDOG,      //!< Extended DoG (XDoG) filter.
     NPR_EDGE_FDOG       //!< Flow DoG (FDoG) filter.
 };
@@ -27,25 +27,34 @@ struct DoGParams {
     double sigma;
     double tau;
     double phi;
-    NPREdgeTypes edgeType;
+    NPREdgeType edgeType;
 
+    //! Constructor.
     explicit DoGParams(double kappa = 4.5, double sigma = 0.5, double tau = 0.95,
-                      double phi = 10.0, NPREdgeTypes edgeType = NPR_EDGE_XDOG);
+                       double phi = 10.0, NPREdgeType edgeType = NPR_EDGE_XDOG);
 };  // struct DoGParams
 
 /**
  * Detecting NPR edges with DoG filter.
  * @ingroup npr
- * @param[in] image: Input image.
- * @param[out] edge: Output edge image.
- * @param[in] params: DoG parameters.
  *
  * @details
- * @code
- * # Python
- * edge = lime.edgeDoG(image, params)
+ * @b Parameters
+ * @arg @b image: The input floating-point, 1-channel image.
+ * @arg @b edge: The floating-point, 1-channel edge image.
+ * @arg @b params: DoG parameters.
+ *
+ * @details
+ * @code{.py}
+ * edge = lime.edgeDoG(image, params = {})
  * @endcode
- * <b>params</b>: Python builtin "dict" including DoG parameters.
+ *
+ * @b Parameters
+ * @arg @b image - @c numpy.ndarray : The input floating-point, 1-channel image.
+ * @arg @b params - @c dict : Stores the pair of parameter names and corresponding values.
+ *
+ * @b Returns
+ * @arg @b edge - @c numpy.ndarray : The floating-point, 1-channel edge image.
  **/
 inline void edgeDoG(cv::InputArray image, cv::OutputArray edge, const DoGParams& params = DoGParams());
 

@@ -12,7 +12,8 @@
 
 namespace lime {
 
-inline DoGParams::DoGParams(double _kappa, double _sigma, double _tau, double _phi, NPREdgeTypes _edgeType)
+inline DoGParams::DoGParams(double _kappa, double _sigma, double _tau, double _phi,
+                            NPREdgeType _edgeType)
     : kappa(_kappa)
     , sigma(_sigma)
     , tau(_tau)

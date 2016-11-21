@@ -19,40 +19,49 @@ namespace lime {
 /**
  * Vector field types.
  * @ingroup npr
- **/
-enum VecFieldTypes : int {
+ */
+enum VecFieldType : int {
     VEC_FIELD_SST,      //!< Smoothed structural tensor.
     VEC_FIELD_ETF       //!< Edge tangent filter.
 };
 
 /**
  * Edge detector types.
- * @ingroup npe
- **/
+ * @ingroup npr
+ */
 enum EdgeDetector : int {
     EDGE_DETECT_SOBEL,         //!< Sobel filter.
     EDGE_DETECT_ROTATIONAL     //!< Rotationally invariant edge detector.
 };
 
 /**
- * Compute vector field
+ * Compute smooth edge flow field from the input image.
  * @ingroup npr
- * @param[in] img: input image from which a vector field is computed
- * @param[out] angles: output array of CV_32FC1 depth which stores tangent direction of vectors
- * @param[in] ksize: kernel size for smoothing the vector field
- * @param[in] vfieldType: algorithm to detect vector field (SST or ETF)
- * @param[in] edgeDetector: edge detection algorithm
  *
  * @details
- * @code
- * # Python
- * angles = lime.calcVectorField(input, ksize = 5, vfieldType = lime.VEC_FIELD_SST, edgeDetector = lime.EDGE_SOBEL)
+ * @b Parameters
+ * @arg @b img: The input 8-bit integer or floating-point, 1 or 3-channel image.
+ * @arg @b angles: The destination vector field; will have floating-point, 1-channel orientation angles.
+ * @arg @b ksize: Kernel size for smoothing the vector field
+ * @arg @b vfieldType: Algorithm to detect vector field (see <a>@c lime::VecFieldType</a>).
+ * @arg @b edgeDetector: Edge detection algorithm (see <a>@c lime::EdgeDetector</a>).
+ *
+ * @b Python
+ *
+ * @code{.py}
+ * angles = lime.calcVectorField(img, ksize = 5, vftype = lime.VEC_FIELD_SST, edtype = lime.EDGE_DETECT_SOBEL)
  * @endcode
- **/
+ *
+ * @b Parameters
+ * @arg @b img - @c numpy.ndarray
+ * @arg @b ksize - @c int
+ * @arg @b vftype - @c int : Chosen from <a>@c lime::VecFieldType</a>.
+ * @arg @b edtype - @c int : Chosen from <a>@c lime::EdgeDetector</a>.
+ */
 inline void calcVectorField(cv::InputArray input, cv::OutputArray angles, int ksize = 5,
                             int vfieldType = VEC_FIELD_SST, int edgeDetector = EDGE_DETECT_SOBEL);
 
-// * detect singularity of vector field
+//! Detect singularity of vector field
 inline void detectSingular(const Array2D<Tensor>& sst, std::vector<SingularPoint>* points,
                            std::vector<cv::Point2f>* delauneyNodes);
 

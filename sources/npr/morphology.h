@@ -11,52 +11,42 @@ namespace lime {
  * Morphological filter types.
  * @ingroup npr
  **/
-enum MorphTypes : int {
-    MORPH_ERODE,        //!< Erosion
-    MORPH_DILATE,       //!< Dilation
-    MORPH_OPEN,         //!< Opening
-    MORPH_CLOSE,        //!< Closing
-    MORPH_GRADIENT,     //!< Gradient
-    MORPH_TOPHAT,       //!< Top-hat
-    MORPH_BLACKHAT      //!< Black-hat
+enum MorphType : int {
+    MORPH_ERODE,        //!< Erosion.
+    MORPH_DILATE,       //!< Dilation.
+    MORPH_OPEN,         //!< Opening = \f$ Erosion \rightarrow Dilation \f$.
+    MORPH_CLOSE,        //!< Closing = \f$ Dilation \rightarrow Erosion \f$.
+    MORPH_GRADIENT,     //!< Gradient = \f$ Dilation - Erosion \f$.
+    MORPH_TOPHAT,       //!< Top-hat = \f$ Input - Opening \f$.
+    MORPH_BLACKHAT      //!< Black-hat = \f$ Input - Closing \f$.
 };
 
 /**
  * Image filtering with mathematical morphology.
  * @ingroup npr
- * @param[in] src: Input image.
- * @param[out] dst: Output image.
- * @param[in] type: MorphTypes enum.
- * @param[in] ksize: Kernel size of the filter.
  *
  * @details
+ * @b Parameters
+ * @arg @b src: The floating-point, 1 or 3-channel image.
+ * @arg @b dst: The destination image; will have the same type as <b>src</b>.
+ * @param[in] type: The type of morphology operation (see <a>@c lime::MorphType</a>).
+ * @param[in] ksize: Kernel size of the filter.
+ *
+ * @b Python
+ *
  * @code
- * # Python
- * dst = lime.morphFilter(src, ksize)
+ * dst = lime.morphFilter(src, ftype, ksize)
  * @endcode
+ *
+ * @b Parameters
+ * @arg @b src - @c numpy.ndarray : The floating-point, 1 or 3-channel image.
+ * @arg @b ftype - @c int : Chosen from <a>@c lime::MorphType</a>.
+ * @arg @b ksize - @c int : Kernel size.
+ *
+ * @b Returns
+ * @arg @b dst - @c numpy.ndarray : The destination image with the same type as <b>src</b>.
  **/
 inline void morphFilter(cv::InputArray src, cv::OutputArray dst, int type, int ksize);
-
-//! Compute erosion of mathematical morphology
-inline void morphErode(cv::InputArray img, cv::OutputArray out, int ksize);
-
-//! Compute dilation of mathematical morphology
-inline void morphDilate(cv::InputArray img, cv::OutputArray out, int ksize);
-
-//! Compute opening of mathematical morphology
-inline void morphOpen(cv::InputArray img, cv::OutputArray out, int ksize);
-
-//! Compute closing of mathematical morphology
-inline void morphClose(cv::InputArray img, cv::OutputArray out, int ksize);
-
-//! Compute gradient of mathematical morphology
-inline void morphGradient(cv::InputArray img, cv::OutputArray out, int ksize);
-
-//! Compute gradient of mathematical morphology
-inline void morphTophat(cv::InputArray img, cv::OutputArray out, int ksize);
-
-//! Compute gradient of mathematical morphology
-inline void morphBlackhat(cv::InputArray img, cv::OutputArray out, int ksize);
 
 }  // namespace lime
 

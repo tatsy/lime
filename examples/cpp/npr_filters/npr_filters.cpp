@@ -2,11 +2,9 @@
 
 #include <iostream>
 #include <string>
+using namespace std;
 
 #include "lime.hpp"
-
-using std::cout;
-using std::endl;
 
 void saveResult(const std::string& filename, const cv::Mat& img) {
     cv::Mat res;
@@ -32,7 +30,7 @@ void printDescription() {
 
 void demoCartoon(const cv::Mat& img) {
     int maxiter;
-    cout << "How many bilateral iteration?: ";
+    cout << "How many bilateral filtering?: ";
     std::cin >> maxiter;
 
     cv::Mat tmp, bf;
@@ -81,7 +79,7 @@ void demoKuwahara(const cv::Mat& img) {
     lime::kuwaharaClassical(img, kf, 7);
     cout << "[Kuwahara] standard kuwahara    -> OK" << endl;
     lime::kuwaharaGeneralized(img, gkf, 7, 8);
-    cout << "[Kuwahara] general kuwahara     -> OK" << endl;
+    cout << "[Kuwahara] generalized kuwahara -> OK" << endl;
     lime::kuwaharaAnisotropic(img, akf, 7, 8);
     cout << "[Kuwahara] anisotropic kuwahara -> OK" << endl;
 
@@ -134,7 +132,7 @@ void demoPDE(const cv::Mat& img) {
     cv::Mat ad, sf, mcf, out;
 
     lime::anisoDiffusion(img, ad, 0.05, 10);
-    cout << "[PDE] anisotropic  -> OK" << endl;
+    cout << "[PDE] anisotropic diffusion -> OK" << endl;
     lime::shockFilter(img, sf, 3.0, 10);
     cout << "[PDE] shock filter -> OK" << endl;
     lime::meanCurveFlow(img, mcf, 3.0, 10);
@@ -162,7 +160,7 @@ void demoPDE(const cv::Mat& img) {
     saveResult("sf_and_mcf.png", out);
 }
 
-void demoDOG(const cv::Mat& img) {
+void demoDoG(const cv::Mat& img) {
     cv::Mat gray, xdog, fdog;
     cv::cvtColor(img, gray, cv::COLOR_BGR2GRAY);
 
@@ -218,11 +216,15 @@ void demoCEF(const cv::Mat& img) {
 
 int main(int argc, char** argv) {
     if (argc <= 1) {
-        cout << "usage: NPRFilterDemo.exe [input image]" << endl;
-        return -1;
+        cerr << "usage: demo_npr_filters.exe [input image]" << endl;
+        return 1;
     }
 
     cv::Mat img = cv::imread(argv[1], cv::IMREAD_COLOR);
+    if (img.empty()) {
+        cerr << "Failed to load image: " << argv[1] << std::endl;
+        return 1;
+    }
     img.convertTo(img, CV_32F, 1.0 / 255.0);
 
     // bilateral filter
@@ -253,7 +255,7 @@ int main(int argc, char** argv) {
             break;
 
         case 5:
-            demoDOG(img);
+            demoDoG(img);
             break;
 
         case 6:

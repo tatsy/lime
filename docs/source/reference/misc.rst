@@ -7,4 +7,4 @@ Color constancy
 
 .. doxygenfunction:: lime::colorConstancy
 
-.. doxygenenum:: lime::ConstancyTypes
+.. doxygenenum:: lime::ConstancyType
