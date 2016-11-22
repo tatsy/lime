@@ -1,6 +1,8 @@
 #!/bin/sh
 set -x
-doxygen doxyfile
+doxygen doxyfile && make html
+rm -rf html/*
+cp --recursive build/html/* html
 cd html
 git checkout -b gh-pages
 git add --all .
