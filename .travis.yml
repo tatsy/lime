@@ -39,18 +39,19 @@ after_success:
 before_deploy:
   - git config --global user.name "Travis CI"
   - git config --global user.email "travis@travis-ci.org"
+  - pip install sphinx breathe sphinx_rtd_theme
   - "cd docs; sh deploy_docs.sh; cd -"
   - mkdir packages
   - tar czvf packages/releases-$GIT_TAG.tar.gz $(ls -I packages)
   - zip -q packages/releases-$GIT_TAG.zip -r $(ls -I packages)
   - git tag $GIT_TAG -a -m "Commit from Travis CI for build $TRAVIS_BUILD_NUMBER"
-  - git push --quiet https://$GH_TOKEN@github.com/tatsy/lime.git --tags 2> /dev/null
+  - git push --tags --quiet https://$GH_TOKEN@github.com/tatsy/lime.git 2> /dev/null
 
 deploy:
   skip_cleanup: true
   provider: releases
-  api_key:
-    secure: bTVMc7yMAfVh7ceO5cgT1qwFgjdKzKz0cAHZAl3FOJqpH1wTmF530kSXT05zMTwFq1G8YMsx/cmCCi9xp+liAgQAnOfAY4usZO9t+OKjRaxhrYWS+XV9nr5XmyHRvJgWE2R4NlVnp8poKI4EkXoba+/Vp1Cfs02cjPqwo04gUiw=
+  api-key:
+    secure: GHB2T473DgGkISSdypsPp8xR0mvZEBXT4XJNdZF8Bx75/lKb2uvW1VZ1ii+7EFDsdVMhS+VxJFt+9kSmi29WVGDVkVL+ZNclhgGb8668T2mbOkzckiLRmDSECRq5z0Cc1qri9CZRLiucE8cm87XeVfV+GbRHCA1xIqupS/i0fqk=
   file:
     - packages/releases-$GIT_TAG.tar.gz
     - packages/releases-$GIT_TAG.zip
@@ -66,8 +67,7 @@ branches:
 
 env:
   global:
-    - GIT_TAG=v0.1.0
-    - secure: kEV14WgxyZwIrd/tKScLKCk9vSSkqSZIvmfcSwvLrxKWYU6t5wmXkoIwfq1TMWWOGd9pSAAWtx7w2ofdA7OUXJyfW2I/azug1J+3zhzChbeVLNbt69orHZNbTbOddcTLKMUI43cEPk5Qn3cVxoRAwN1zF/s8VGiBE4zQaLSz6Ck=
+    - GIT_TAG=v0.2.0
 
 notifications:
     email:
