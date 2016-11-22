@@ -304,7 +304,7 @@ void detectSingular(const Array2D<Tensor>& sst, std::vector<SingularPoint>* poin
 
     if (delauneyNodes->empty()) {
         cv::Mat white = cv::Mat::ones(height, width, CV_32FC1);
-        lime::npr::poissonDisk(white, delauneyNodes, lime::npr::PDS_FAST_PARALLEL, 3.0, 5.0);
+        lime::poissonDisk(white, delauneyNodes, lime::PDS_FAST_PARALLEL, 3.0, 5.0);
     }
 
     cv::Rect(0, 0, width, height);

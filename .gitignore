@@ -169,3 +169,4 @@ $RECYCLE.BIN/
 docs/source/_*
 docs/build
 docs/xml
+*.egg-info

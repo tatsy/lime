@@ -42,7 +42,7 @@ void run_still_image(const std::string& filename) {
     std::vector<cv::Point2f> points;
 
     cv::cvtColor(img, gray, cv::COLOR_BGR2GRAY);
-    lime::npr::poissonDisk(gray, &points, lime::npr::PDS_RAND_QUEUE, 1.0, 4.0);
+    lime::poissonDisk(gray, &points, lime::PDS_RAND_QUEUE, 1.0, 4.0);
     pencilDrawing(img, out, points);
 
     cv::namedWindow("Input");
@@ -66,7 +66,7 @@ void run_still_image(const std::string& filename) {
 int main(int argc, char** argv) {
     // * Check input arguments
     if (argc <= 1) {
-        std::cout << "usage: PencilDrawing.exe [input image]" << std::endl;
+        std::cout << "usage: demo_pencil_drawing.exe [input image]" << std::endl;
         return -1;
     }
 

@@ -19,8 +19,8 @@ void detectSingularity() {
 
     vector<cv::Point2f> points;
     cv::Mat white = cv::Mat::ones(height, width, CV_32FC1);
-    lime::npr::poissonDisk(white, &points,
-                           lime::npr::PDS_FAST_PARALLEL, 2.0, 4.0);
+    lime::poissonDisk(white, &points,
+                           lime::PDS_FAST_PARALLEL, 2.0, 4.0);
 
     cv::Rect(0, 0, width, height);
     cv::Subdiv2D subdiv(cv::Rect(0, 0, width, height));

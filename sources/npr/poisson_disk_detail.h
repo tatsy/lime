@@ -17,8 +17,6 @@
 
 namespace lime {
 
-namespace npr {
-
 namespace {  // NOLINT
 
 template <class T>
@@ -302,12 +300,13 @@ void pdsParallel(std::vector<cv::Point2f>* points, const cv::Mat& grayImage, dou
             }
         }
     }
+
 }  // function pdsParallel
 
-}  // anonymous namespace
+}  // unnamed namespace
 
 void poissonDisk(cv::InputArray grayImage, std::vector<cv::Point2f>* samplePoints,
-                 PdsMethod pdsMethod, double minRadius, double maxRadius) {
+                 PDSMethod pdsMethod, double minRadius, double maxRadius) {
     switch (pdsMethod) {
     case PDS_RAND_QUEUE:
         pdsRandomQueue(samplePoints, grayImage.getMat(), minRadius, maxRadius);
@@ -321,8 +320,6 @@ void poissonDisk(cv::InputArray grayImage, std::vector<cv::Point2f>* samplePoint
         Assertion(false, "Unknown method specified to Poisson disk sampling.");
     }
 }
-
-}  // namespace npr
 
 }  // namespace lime
 
