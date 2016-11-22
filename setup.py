@@ -56,7 +56,7 @@ print(lime_shared_lib)
 setup(
     cmdclass={ 'install' : install },
     name='lime',
-    version='0.1.0',
+    version='0.2.0',
     author='tatsy',
     author_email='tatsy.mail@gmail.com',
     url='https://github.com/tatsy/lime.git',
