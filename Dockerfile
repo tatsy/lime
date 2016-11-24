@@ -55,7 +55,7 @@ RUN \
   git submodule update --init --recursive
 RUN \
   cd lime && \
-  cmake -D LIME_BUILD_TESTS=ON -D GTEST_ROOT=/usr/local . && \
+  cmake -D CMAKE_BUILD_TYPE=Release -D LIME_BUILD_TESTS=ON -D GTEST_ROOT=/usr/local . && \
   cmake --build .
 
 #

@@ -21,10 +21,10 @@ endif()
 # Build settings
 if (NOT WIN32)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -O2")
-endif()
-
-if (LINUX)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -fPIC")
+  if (${LIME_BUILD_TESTS})
+    message(STATUS "[lime] Generating coverage data.")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fprofile-arcs -ftest-coverage")
+  endif()
 endif()
 
 # ------------------------------------------------------------------------------

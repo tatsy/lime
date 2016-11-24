@@ -31,7 +31,7 @@ script:
 after_success:
   # Collect coverage
   - if [ $CXX = "g++"     ]; then docker exec lime-env lcov --directory . --capture --output-file coverage.info; fi
-  - if [ $CXX = "clang++" ]; then docker exec lime-env lcov --directory . --capture --output-file coverage.info --gcov-tool llvm-cov-3.5; fi
+  - if [ $CXX = "clang++" ]; then docker exec lime-env lcov --directory . --capture --output-file coverage.info --gcov-tool llvm-cov; fi
   - docker exec lime-env lcov --remove coverage.info 'tests/*' 'examples/*' '/usr/*' 'CMakeFiles/*' --output-file coverage.info
   - docker exec lime-env lcov --list coverage.info
   - docker exec lime-env coveralls-lcov --repo-token c6Fd5h2Ovd2c5PV7agagA89sUhsZCwIPR coverage.info
