@@ -1,7 +1,10 @@
+from __future__ import print_function
+
 import os
 import sys
 import site
 import shutil
+from six import add_metaclass
 from distutils.sysconfig import get_python_lib
 from setuptools import setup, find_packages, Extension
 from setuptools.command.install import install as install_default
@@ -46,7 +49,7 @@ def prebuild():
 # Install
 class install(install_default):
     def run(self):
-        super(install, self).run()
+        install_default.run(self)
 
 # Check build.
 prebuild()
