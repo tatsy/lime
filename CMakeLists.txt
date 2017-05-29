@@ -14,7 +14,7 @@ option(LIME_BUILD_PYTHON_MODULE "Build python modules." OFF)
 # ------------------------------------------------------------------------------
 find_package( OpenCV 3.0 REQUIRED )
 if (${LIME_BUILD_PYTHON_MODULE})
-  find_package( PythonLibs 3 REQUIRED )
+  find_package( PythonLibs REQUIRED )
   find_package( Boost REQUIRED python numpy )
 endif()
 

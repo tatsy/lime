@@ -8,10 +8,10 @@
 #include <string>
 #include <exception>
 #include <boost/python.hpp>
-#include <boost/numpy.hpp>
+#include <boost/python/numpy.hpp>
 
 namespace py = boost::python;
-namespace npy = boost::numpy;
+namespace npy = boost::python::numpy;
 
 class PyLimeException : public std::exception {
 public:
