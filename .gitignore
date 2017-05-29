@@ -7,6 +7,9 @@
 *.jpeg
 *.gif
 
+# System swap file (MacOS)
+*.swp
+
 # Others
 node_modules/*
 public/*
