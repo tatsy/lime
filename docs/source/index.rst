@@ -4,7 +4,7 @@
 Welcome to Lime's documentation!
 ================================
 
-Lime (Library for IMage Editing) is an image editing library extending OpenCV
+Lime (Library for IMage Editing) is an image editing library extending OpenCV 3.x
 which is developed for C/C++ and Python.
 
 .. toctree::

@@ -27,9 +27,14 @@ your program source codes.
 Python
 --------
 
-For Python users, you can build the library with CMake. After building it,
-you can install it normally with ``setup.py``. Following is the simple
-installation steps.
+For Python users, you can build the library with CMake. While `lime` depends
+on `OpenCV` and `boost python/numpy`, you need to install these libraries beforehands.
+Please make sure, the versions of these libraries meet the following requirements.
+
+* OpenCV 3.0 or higher
+* Boost 1.63 or higher and build boost-python and boost-numpy
+
+After install these libraries, you can build and install the python library with following shell script.
 
 .. code-block:: shell
 
@@ -44,3 +49,6 @@ installation steps.
 
 While building the source codes with CMake, you may ought to specify your
 python include and library directories.
+
+If the installation is failed, you should check whether `lime` binary file appears in 'build/lib' directory
+(the name of the binary would be `lime.pyd` (Windows), 'liblime.dylib' (MacOS) or 'lime.so' (Linux)).

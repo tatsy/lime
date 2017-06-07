@@ -74,7 +74,7 @@ branches:
 
 env:
   global:
-    - GIT_TAG=v0.2.0
+    - GIT_TAG=v0.3.0
   matrix:
     - PYTHON_VERSION=2.7
     - PYTHON_VERSION=3.5

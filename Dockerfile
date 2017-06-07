@@ -62,7 +62,7 @@ RUN \
 #
 ## Build lime
 #
-RUN git clone --depth 10 -b $BRANCH_NAME https://github.com/tatsy/lime.git
+RUN git clone --depth 20 -b $BRANCH_NAME https://github.com/tatsy/lime.git
 RUN \
   if [ $PULL_REQUEST != "false" ]; then \
     cd lime && \
@@ -73,6 +73,7 @@ RUN \
 RUN \
   cd lime && \
   git submodule update --init --recursive
+
 RUN \
   cd lime && \
   cmake \
