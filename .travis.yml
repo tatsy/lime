@@ -16,7 +16,11 @@ install:
   - docker pull tatsy/ubuntu-cxx:opencv
 
   # Dynamically generate Dockerfile
-  - sed -i -e "s/@C_COMPILER@/$CC/;s/@CXX_COMPILER@/$CXX/;s/@BRANCH_NAME@/$TRAVIS_BRANCH/;s/@PULL_REQUEST@/$TRAVIS_PULL_REQUEST/" Dockerfile
+  - sed -i -e "s/@C_COMPILER@/$CC/" Dockerfile
+  - sed -i -e "s/@CXX_COMPILER@/$CXX/" Dockerfile
+  - sed -i -e "s/@BRANCH_NAME@/$TRAVIS_BRANCH/" Dockerfile
+  - sed -i -e "s/@PULL_REQUEST@/$TRAVIS_PULL_REQUEST/" Dockerfile
+  - sed -i -e "s/@PYTHON_VERSION@/$TRAVIS_PULL_REQUEST/" Dockerfile
 
   # Build Dockerfile
   - docker build --tag=lime-env .
@@ -27,6 +31,9 @@ install:
 script:
   # Run test on Docker container
   - docker exec lime-env make check
+
+  # Python execution
+  - python -c "import lime; lime.print_version()"
 
 after_success:
   # Collect coverage
@@ -68,6 +75,9 @@ branches:
 env:
   global:
     - GIT_TAG=v0.2.0
+  matrix:
+    - PYTHON_VERSION=2.7
+    - PYTHON_VERSION=3.5
 
 notifications:
     email:

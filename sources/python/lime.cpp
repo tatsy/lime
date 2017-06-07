@@ -75,6 +75,10 @@ inline npy::ndarray mat2np(const cv::Mat &mat) {
     return arr;
 }
 
+inline void py_print_verson() {
+    lime::print_version();
+}
+
 // -----------------------------------------------------------------------------
 // NPR module
 // -----------------------------------------------------------------------------
@@ -190,7 +194,7 @@ py::list py_poissonDisk(const npy::ndarray &gray, const py::list &points,
                         double minRadius = 2.0, double maxRadius = 5.0) {
     cv::Mat input;
     np2mat(gray, input);
-    
+
     std::vector<cv::Point2f> samples;
     int nPoints = py::len(points);
     for (int i = 0; i < nPoints; i++) {
@@ -198,9 +202,9 @@ py::list py_poissonDisk(const npy::ndarray &gray, const py::list &points,
         double b = py::extract<double>(points[i][1]);
         samples.push_back(cv::Point2f((float)a, (float)b));
     }
-    
+
     lime::poissonDisk(input, &samples, (lime::PDSMethod)pdsMethod, minRadius, maxRadius);
-    
+
     py::list output;
     for (int i = 0; i < samples.size(); i++) {
         py::tuple t = py::make_tuple((double)samples[i].x, (double)samples[i].y);
@@ -282,10 +286,10 @@ BOOST_PYTHON_MODULE(lime) {
 
     py::def("LIC", py_LIC, ol_py_LIC(
         py::args("img", "tangent", "L", "ftype")));
-    
+
     py::scope().attr("PDS_RAND_QUEUE") = (int)lime::PDS_RAND_QUEUE;
     py::scope().attr("PDS_FAST_PARALLEL") = (int)lime::PDS_FAST_PARALLEL;
-    
+
     py::def("poissonDisk", py_poissonDisk, ol_py_poissonDisk(
         py::args("gray", "samples", "method", "min_radius", "max_radius")));
 
@@ -295,6 +299,4 @@ BOOST_PYTHON_MODULE(lime) {
     py::scope().attr("CONSTANCY_FAUGERAS") = (int)lime::CONSTANCY_FAUGERAS;
 
     py::def("colorConstancy", py_colorConstancy);
-
-
 }

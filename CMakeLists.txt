@@ -14,8 +14,11 @@ option(LIME_BUILD_PYTHON_MODULE "Build python modules." OFF)
 # ------------------------------------------------------------------------------
 find_package( OpenCV 3.0 REQUIRED )
 if (${LIME_BUILD_PYTHON_MODULE})
-  find_package( PythonLibs 3 REQUIRED )
   find_package( Boost REQUIRED python numpy )
+  find_package( PythonLibs )
+  if (NOT PYTHON_INCLUDE_DIR && NOT PYTHON_LIBRARY)
+    message(FATAL_ERROR "Python libraries not found. Please set PYTHON_INCLUDE_DIR and PYTHON_LIBRARY manually to CMake.")
+  endif()
 endif()
 
 # Build settings
