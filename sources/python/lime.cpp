@@ -240,6 +240,9 @@ BOOST_PYTHON_MODULE(lime) {
     // Exception translator.
     py::register_exception_translator<PyLimeException>(&translate);
 
+    // Version
+    py::def("print_version", py_print_verson);
+
     // NPR methods.
     py::def("randomNoise", py_randomNoise);
     py::def("perlinNoise", py_perlinNoise);

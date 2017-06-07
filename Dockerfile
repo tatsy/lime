@@ -11,7 +11,7 @@ ENV BRANCH_NAME development
 ENV PULL_REQUEST false
 ENV CC gcc
 ENV CXX g++
-ENV PYTHON_VERSION 3.5
+ENV PYTHON_VERSION 2.7
 
 #
 ## update/upgrade
@@ -43,11 +43,11 @@ RUN \
 #
 ## Install Python through Anaconda
 #
-RUN wget -q https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-x86_64.sh
-RUN bash Anaconda3-4.4.0-Linux-x86_64.sh -b -p $HOME/anaconda
+RUN wget -q https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+RUN bash miniconda.sh -b -p $HOME/anaconda
 ENV PATH "$HOME/anaconda/bin:$PATH"
 RUN conda update --yes conda
-RUN conda install --yes python=$PYTHON_VERSION setuptools numpy scipy pillow six
+RUN conda install --yes python=$PYTHON_VERSION setuptools numpy scipy pillow six libgcc
 
 #
 ## Install Google test
@@ -62,7 +62,7 @@ RUN \
 #
 ## Build lime
 #
-RUN git clone --depth 20 -b $BRANCH_NAME https://github.com/tatsy/lime.git
+RUN git clone --depth 23 -b $BRANCH_NAME https://github.com/tatsy/lime.git
 RUN \
   if [ $PULL_REQUEST != "false" ]; then \
     cd lime && \
@@ -74,14 +74,16 @@ RUN \
   cd lime && \
   git submodule update --init --recursive
 
+RUN find $HOME/anaconda/lib -name libpython${PYTHON_VERSION}
+
 RUN \
   cd lime && \
   cmake \
     -D CMAKE_BUILD_TYPE=Release \
     -D LIME_BUILD_TESTS=ON \
     -D GTEST_ROOT=/usr/local \
-    -D PYTHON_INCLUDE_DIR="$HOME/anaconda/include/python$PYTHON_VERSIONm" \
-    -D PYTHON_LIBRARY="$HOME/anaconda/lib/libpython$PYTHON_VERSIONm.so" \
+    -D PYTHON_INCLUDE_DIR=`python -c "from __future__ import print_function; from distutils import sysconfig; print(sysconfig.get_python_inc())"` \
+    -D PYTHON_LIBRARY=`find $HOME/anaconda/lib -name python${PYTHON_VERSION}` \
     -D LIME_BUILD_PYTHON_MODULE=ON . && \
   cmake --build .
 

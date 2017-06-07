@@ -1,3 +1,6 @@
+configure_file("${CMAKE_CURRENT_LIST_DIR}/core/version.h.in"
+               "${CMAKE_CURRENT_LIST_DIR}/core/version.h" @ONLY)
+
 if (${LIME_BUILD_STATIC_LIB})
   message(STATUS "[ LIME ] Build static library.")
 
@@ -13,9 +16,6 @@ if (${LIME_BUILD_STATIC_LIB})
 
     source_group(${FOLDER_NAME} FILES ${LOCAL_FILES})
   endfunction()
-
-  configure_file("${CMAKE_CURRENT_LIST_DIR}/core/version.h.in"
-                 "${CMAKE_CURRENT_LIST_DIR}/core/version.h" @ONLY)
 
   add_folder(core "*.cpp" "*.h" "*.hpp")
   add_folder(misc "*.cpp" "*.h" "*.hpp")

@@ -33,7 +33,7 @@ script:
   - docker exec lime-env make check
 
   # Python execution
-  - python -c "import lime; lime.print_version()"
+  - docker exec lime-env python -c "import lime; lime.print_version()"
 
 after_success:
   # Collect coverage

@@ -1,0 +1,19 @@
+#ifdef _MSC_VER
+#pragma once
+#endif
+
+#ifndef _LIME_VERSION_H_
+#define _LIME_VERSION_H_
+
+namespace lime {
+
+static const int VERSION_MAJOR = 0;
+static const int VERSION_MINOR = 2;
+
+static inline void print_version() {
+    printf("lime v%d.%d\n", VERSION_MAJOR, VERSION_MINOR);
+}
+
+}  // namespace lime
+
+#endif  // _LIME_VERSION_H_
