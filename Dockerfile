@@ -103,8 +103,3 @@ ENV OMP_NUM_THREADS 4
 ## Define working direcotry
 #
 WORKDIR /root/lime
-
-#
-## Run unit tests
-#
-RUN lcov --directory . --zerocounters

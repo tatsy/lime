@@ -32,6 +32,9 @@ install:
   - docker exec lime-env python -c "import lime; lime.print_version()"
 
 script:
+  # Clear coverage infomation
+  - docker exec lime-env lcov --directory . --zerocounters
+
   # Run test on Docker container
   - docker exec lime-env make check
 
