@@ -20,7 +20,7 @@ install:
   - sed -i -e "s/@CXX_COMPILER@/$CXX/" Dockerfile
   - sed -i -e "s/@BRANCH_NAME@/$TRAVIS_BRANCH/" Dockerfile
   - sed -i -e "s/@PULL_REQUEST@/$TRAVIS_PULL_REQUEST/" Dockerfile
-  - sed -i -e "s/@PYTHON_VERSION@/$TRAVIS_PULL_REQUEST/" Dockerfile
+  - sed -i -e "s/@PYTHON_VERSION@/$PYTHON_VERSION/" Dockerfile
 
   # Build Dockerfile
   - docker build --tag=lime-env .
