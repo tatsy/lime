@@ -49,9 +49,9 @@ before_deploy:
   - pip install sphinx breathe sphinx_rtd_theme
   - "cd docs; sh deploy_docs.sh; cd -"
   - mkdir packages
-  - tar czvf packages/releases-$GIT_TAG.tar.gz $(ls -I packages)
-  - zip -q packages/releases-$GIT_TAG.zip -r $(ls -I packages)
-  - git tag $GIT_TAG -a -m "Commit from Travis CI for build $TRAVIS_BUILD_NUMBER"
+  - tar czvf packages/releases-v${LIME_VERSION}.tar.gz $(ls -I packages)
+  - zip -q packages/releases-v${LIME_VERSION}.zip -r $(ls -I packages)
+  - git tag v{$LIME_VERSION} -a -m "Commit from Travis CI for build $TRAVIS_BUILD_NUMBER"
   - git push --tags --quiet https://$GH_TOKEN@github.com/tatsy/lime.git 2> /dev/null
 
 deploy:
@@ -73,8 +73,6 @@ branches:
     - development
 
 env:
-  global:
-    - GIT_TAG=v0.3.0
   matrix:
     - PYTHON_VERSION=2.7
     - PYTHON_VERSION=3.5

@@ -7,11 +7,8 @@
 
 namespace lime {
 
-static const int VERSION_MAJOR = 0;
-static const int VERSION_MINOR = 2;
-
 static inline void print_version() {
-    printf("lime v%d.%d\n", VERSION_MAJOR, VERSION_MINOR);
+    printf("LIME v.%s\n", "@ENV{LIME_VERSION}@");
 }
 
 }  // namespace lime
