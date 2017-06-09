@@ -32,9 +32,6 @@ script:
   # Run test on Docker container
   - docker exec lime-env make check
 
-  # Python execution
-  - docker exec lime-env python -c "import lime; lime.print_version()"
-
 after_success:
   # Collect coverage
   - if [ $CXX = "g++"     ]; then docker exec lime-env lcov --directory . --capture --output-file coverage.info; fi
