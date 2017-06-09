@@ -1,0 +1,16 @@
+#ifdef _MSC_VER
+#pragma once
+#endif
+
+#ifndef _LIME_VERSION_H_
+#define _LIME_VERSION_H_
+
+namespace lime {
+
+static inline void print_version() {
+    printf("LIME v@LIME_VERSION_STRING@\n");
+}
+
+}  // namespace lime
+
+#endif  // _LIME_VERSION_H_

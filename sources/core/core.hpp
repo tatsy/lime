@@ -10,6 +10,7 @@
 #ifndef _LIME_CORE_HPP_
 #define _LIME_CORE_HPP_
 
+#include "common.h"
 #include "point.h"
 #include "array2d.h"
 #include "random.h"

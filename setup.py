@@ -1,6 +1,7 @@
 from __future__ import print_function
 
 import os
+import re
 import sys
 import site
 import shutil
@@ -10,6 +11,12 @@ from setuptools import setup, find_packages, Extension
 from setuptools.command.install import install as install_default
 
 lime_shared_lib = ''
+
+def get_version():
+    v = ''
+    with open('VERSION', 'r') as lines:
+        v = list(lines)[0]
+    return v
 
 def prebuild():
     global lime_shared_lib
@@ -59,16 +66,17 @@ print(lime_shared_lib)
 setup(
     cmdclass={ 'install' : install },
     name='lime',
-    version='0.2.0',
+    version=get_version(),
     author='tatsy',
     author_email='tatsy.mail@gmail.com',
     url='https://github.com/tatsy/lime.git',
     description='Library for IMage Editing.',
     license='MIT',
     classifiers={
-        'Development Status :: 3 - Alpha',
-        'Programming Language :: Python 3',
-        'Programming Language :: C++'
+        'Development Status :: 4 - Beta',
+        'Programming Language :: C++',
+        'Programming Language :: Python 2',
+        'Programming Language :: Python 3'
     },
     data_files=[ (get_python_lib(), [ lime_shared_lib ]) ]
 )

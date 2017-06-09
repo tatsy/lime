@@ -1,3 +1,6 @@
+configure_file("${CMAKE_CURRENT_LIST_DIR}/core/version.h.in"
+               "${CMAKE_CURRENT_LIST_DIR}/core/version.h" @ONLY)
+
 if (${LIME_BUILD_STATIC_LIB})
   message(STATUS "[ LIME ] Build static library.")
 

@@ -16,7 +16,11 @@ install:
   - docker pull tatsy/ubuntu-cxx:opencv
 
   # Dynamically generate Dockerfile
-  - sed -i -e "s/@C_COMPILER@/$CC/;s/@CXX_COMPILER@/$CXX/;s/@BRANCH_NAME@/$TRAVIS_BRANCH/;s/@PULL_REQUEST@/$TRAVIS_PULL_REQUEST/" Dockerfile
+  - sed -i -e "s/@C_COMPILER@/$CC/" Dockerfile
+  - sed -i -e "s/@CXX_COMPILER@/$CXX/" Dockerfile
+  - sed -i -e "s/@BRANCH_NAME@/$TRAVIS_BRANCH/" Dockerfile
+  - sed -i -e "s/@PULL_REQUEST@/$TRAVIS_PULL_REQUEST/" Dockerfile
+  - sed -i -e "s/@PYTHON_VERSION@/$PYTHON_VERSION/" Dockerfile
 
   # Build Dockerfile
   - docker build --tag=lime-env .
@@ -24,7 +28,13 @@ install:
   # Run container
   - docker run --name lime-env --env="CI=true" --env="TRAVIS_JOB_ID=$TRAVIS_JOB_ID" --env="CTEST_OUTPUT_ON_FAILURE=TRUE" -itd lime-env
 
+  # Check Python module installation
+  - docker exec lime-env python -c "import lime; lime.print_version()"
+
 script:
+  # Clear coverage infomation
+  - docker exec lime-env lcov --directory . --zerocounters
+
   # Run test on Docker container
   - docker exec lime-env make check
 
@@ -42,9 +52,9 @@ before_deploy:
   - pip install sphinx breathe sphinx_rtd_theme
   - "cd docs; sh deploy_docs.sh; cd -"
   - mkdir packages
-  - tar czvf packages/releases-$GIT_TAG.tar.gz $(ls -I packages)
-  - zip -q packages/releases-$GIT_TAG.zip -r $(ls -I packages)
-  - git tag $GIT_TAG -a -m "Commit from Travis CI for build $TRAVIS_BUILD_NUMBER"
+  - tar czvf packages/releases-v${LIME_VERSION}.tar.gz $(ls -I packages)
+  - zip -q packages/releases-v${LIME_VERSION}.zip -r $(ls -I packages)
+  - git tag v{$LIME_VERSION} -a -m "Commit from Travis CI for build $TRAVIS_BUILD_NUMBER"
   - git push --tags --quiet https://$GH_TOKEN@github.com/tatsy/lime.git 2> /dev/null
 
 deploy:
@@ -66,8 +76,9 @@ branches:
     - development
 
 env:
-  global:
-    - GIT_TAG=v0.2.0
+  matrix:
+    - PYTHON_VERSION=2.7
+    - PYTHON_VERSION=3.5
 
 notifications:
     email:

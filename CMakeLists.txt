@@ -1,6 +1,19 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(lime)
 
+if (UNIX AND NOT APPLE)
+  set(LINUX TRUE)
+else()
+  set(LINUX FALSE)
+endif()
+
+# ------------------------------------------------------------------------------
+# Set version string
+# ------------------------------------------------------------------------------
+set(LIME_VERSION_STRING "0.3.0")
+message(STATUS "LIME v${LIME_VERSION_STRING}")
+file(WRITE "VERSION" "${LIME_VERSION_STRING}")
+
 # ------------------------------------------------------------------------------
 # Build options
 # ------------------------------------------------------------------------------
@@ -14,15 +27,27 @@ option(LIME_BUILD_PYTHON_MODULE "Build python modules." OFF)
 # ------------------------------------------------------------------------------
 find_package( OpenCV 3.0 REQUIRED )
 if (${LIME_BUILD_PYTHON_MODULE})
-  find_package( PythonLibs 3 REQUIRED )
-  find_package( Boost REQUIRED python numpy )
+  find_package( PythonLibs REQUIRED )
+  if (NOT DEFINED PYTHON_INCLUDE_DIR OR NOT DEFINED PYTHON_LIBRARY)
+    message(FATAL_ERROR "Python libraries not found. Please set PYTHON_INCLUDE_DIR and PYTHON_LIBRARY manually to CMake.")
+  endif()
+
+  message(STATUS "Python ${PYTHONLIBS_VERSION_STRING}")
+  message(STATUS "  Include: ${PYTHON_INCLUDE_DIR}")
+  message(STATUS "  Library: ${PYTHON_LIBRARY}")
+
+  if (LINUX AND ${PYTHONLIBS_VERSION_STRING} VERSION_GREATER "3.0")
+    find_package( Boost REQUIRED python3 numpy3 )
+  else()
+    find_package( Boost REQUIRED python numpy )
+  endif()
 endif()
 
 # Build settings
 if (NOT WIN32)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -O2")
   if (${LIME_BUILD_TESTS})
-    message(STATUS "[lime] Generating coverage data.")
+    message(STATUS "[ LIME ] Generating coverage data.")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fprofile-arcs -ftest-coverage")
   endif()
 endif()
