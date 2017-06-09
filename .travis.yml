@@ -28,6 +28,9 @@ install:
   # Run container
   - docker run --name lime-env --env="CI=true" --env="TRAVIS_JOB_ID=$TRAVIS_JOB_ID" --env="CTEST_OUTPUT_ON_FAILURE=TRUE" -itd lime-env
 
+  # Check Python module installation
+  - docker exec lime-env python -c "import lime; lime.print_version()"
+
 script:
   # Run test on Docker container
   - docker exec lime-env make check

@@ -94,8 +94,6 @@ RUN \
   cd lime && \
   python setup.py install
 
-RUN python -c "import lime; lime.print_version()" #redo
-
 #
 ## # of threads used by OpenMP
 #
