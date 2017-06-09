@@ -8,7 +8,7 @@
 namespace lime {
 
 static inline void print_version() {
-    printf("LIME v.%s\n", "@ENV{LIME_VERSION}@");
+    printf("LIME v@LIME_VERSION_STRING@\n");
 }
 
 }  // namespace lime

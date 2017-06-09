@@ -10,8 +10,9 @@ endif()
 # ------------------------------------------------------------------------------
 # Set version string
 # ------------------------------------------------------------------------------
-set(ENV{LIME_VERSION} "0.3.0")
-message(STATUS "LIME v.$ENV{LIME_VERSION}")
+set(LIME_VERSION_STRING "0.3.0")
+message(STATUS "LIME v${LIME_VERSION_STRING}")
+file(WRITE "VERSION" "${LIME_VERSION_STRING}")
 
 # ------------------------------------------------------------------------------
 # Build options

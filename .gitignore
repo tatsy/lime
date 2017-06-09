@@ -3,6 +3,7 @@
 
 # User defined files
 version.h
+VERSION
 
 # image files
 *.png
