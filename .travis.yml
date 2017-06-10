@@ -47,7 +47,7 @@ after_success:
   - docker exec lime-env coveralls-lcov --repo-token c6Fd5h2Ovd2c5PV7agagA89sUhsZCwIPR coverage.info
 
 before_deploy:
-  - export LIME_VERSION=`cat VERSION`
+  - export LIME_VERSION=`docker exec lime-env cat VERSION`
   - git config --global user.name "Travis CI"
   - git config --global user.email "travis@travis-ci.org"
   - pip install sphinx breathe sphinx_rtd_theme
