@@ -64,8 +64,8 @@ deploy:
   api-key:
     secure: "PDNTAv4hlKC9ABcjsUj3HdYb3GvBRqENug1WcYuPwQNYlU4jhjHwmgvaVDEaelwDok/BGIfHP0RSEufg5NGDiFtDZGcO82uu5827Sf4E8Iajki34Mv+RgxH+9vPaf1UzY1+j98RxtVIPsrQcv9wQtBvw/9Jpn0t/XX1AvBmGe4Y="
   file:
-    - packages/releases-${LIME_VERSION}.tar.gz
-    - packages/releases-${LIME_VERSION}.zip
+    - packages/releases-v${LIME_VERSION}.tar.gz
+    - packages/releases-v${LIME_VERSION}.zip
   on:
     tags: false
     branch: master
