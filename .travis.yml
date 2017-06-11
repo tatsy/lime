@@ -47,6 +47,7 @@ after_success:
   - docker exec lime-env coveralls-lcov --repo-token c6Fd5h2Ovd2c5PV7agagA89sUhsZCwIPR coverage.info
 
 before_deploy:
+  - docker cp lime-env:/root/lime/VERSION .
   - export LIME_VERSION=`cat VERSION`
   - git config --global user.name "Travis CI"
   - git config --global user.email "travis@travis-ci.org"
