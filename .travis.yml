@@ -56,21 +56,21 @@ before_deploy:
   - mkdir packages
   - tar czvf packages/releases-v${LIME_VERSION}.tar.gz $(ls -I packages)
   - zip -q packages/releases-v${LIME_VERSION}.zip -r $(ls -I packages)
-  - git tag v{$LIME_VERSION} -a -m "Commit from Travis CI for build $TRAVIS_BUILD_NUMBER"
+  - git tag v${LIME_VERSION} -a -m "Commit from Travis CI for build $TRAVIS_BUILD_NUMBER"
   - git push --tags --quiet https://$GH_TOKEN@github.com/tatsy/lime.git 2> /dev/null
 
 deploy:
   skip_cleanup: true
   provider: releases
   api-key:
-    secure: GHB2T473DgGkISSdypsPp8xR0mvZEBXT4XJNdZF8Bx75/lKb2uvW1VZ1ii+7EFDsdVMhS+VxJFt+9kSmi29WVGDVkVL+ZNclhgGb8668T2mbOkzckiLRmDSECRq5z0Cc1qri9CZRLiucE8cm87XeVfV+GbRHCA1xIqupS/i0fqk=
+    secure: "PDNTAv4hlKC9ABcjsUj3HdYb3GvBRqENug1WcYuPwQNYlU4jhjHwmgvaVDEaelwDok/BGIfHP0RSEufg5NGDiFtDZGcO82uu5827Sf4E8Iajki34Mv+RgxH+9vPaf1UzY1+j98RxtVIPsrQcv9wQtBvw/9Jpn0t/XX1AvBmGe4Y="
   file:
-    - packages/releases-$GIT_TAG.tar.gz
-    - packages/releases-$GIT_TAG.zip
+    - packages/releases-v${LIME_VERSION}.tar.gz
+    - packages/releases-v${LIME_VERSION}.zip
   on:
     tags: false
     branch: master
-    condition: "$CXX = clang++"
+    condition: "$CXX = clang++ && $PYTHON_VERSION = 3.5"
 
 branches:
   only:
