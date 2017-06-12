@@ -9,7 +9,6 @@ services:
 
 before_install:
   - sudo apt-get -qq update
-  - sudo apt-get -qq upgrade
 
 install:
   # Pull Docker image
