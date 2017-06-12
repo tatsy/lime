@@ -34,6 +34,18 @@ Please make sure, the versions of these libraries meet the following requirement
 * OpenCV 3.0 or higher
 * Boost 1.63 or higher and build boost-python and boost-numpy
 
+When you intall Boost libraries, please carefully check that Boost build uses correct Python headers and libraries.
+Generally, the Boost installation from source codes would be like following.
+
+.. code-block:: shell
+  wget -q https://dl.bintray.com/boostorg/release/1.64.0/source/boost_1_64_0.tar.gz
+  tar -zxf boost_1_64_0.tar.gz
+  cd boost_1_64_0
+  ./bootstrap.sh
+  ./b2 address-model=64 \
+    include=$YOUR_PYTHON_INCLUDE_DIR \
+    -d0 --with-python -j2 install .
+
 After install these libraries, you can build and install the python library with following shell script.
 
 .. code-block:: shell
@@ -47,8 +59,20 @@ After install these libraries, you can build and install the python library with
   cd ..
   sudo python setup.py
 
-While building the source codes with CMake, you may ought to specify your
-python include and library directories.
+If you use the Anaconda, you may have to specify Python include directory and library paths like following.
+
+.. code-block:: shell
+
+  git clone https://github.com/tatsy/lime.git
+  mkdir build && cd build
+  cmake -D LIME_BUILD_EXAMPLES=OFF \
+        -D LIME_BUILD_TESTS=OFF \
+        -D LIME_BUILD_PYTHON_MODULE=ON \
+        -D PYTHON_INCLUDE_DIR=$YOUR_PYTHON_INCLUDE_DIR \
+        -D PYTHON_LIBRARY=$YOUR_PYTHON_LIBRARY ..
+  make
+  cd ..
+  sudo python setup.py
 
 If the installation is failed, you should check whether `lime` binary file appears in 'build/lib' directory
 (the name of the binary would be `lime.pyd` (Windows), 'liblime.dylib' (MacOS) or 'lime.so' (Linux)).
