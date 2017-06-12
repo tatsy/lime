@@ -9,7 +9,7 @@ services:
 
 before_install:
   - sudo apt-get -qq update
-  - if [ $TRAVIS_BRANCH = "master" ]; then sudo apt-get -qq install doxygen; fi
+  - sudo apt-get -qq upgracde
 
 install:
   # Pull Docker image
@@ -51,8 +51,9 @@ before_deploy:
   - export LIME_VERSION=`cat VERSION`
   - git config --global user.name "Travis CI"
   - git config --global user.email "travis@travis-ci.org"
+  - sudo apt-get -qq install doxygen python-pip
   - pip install sphinx breathe sphinx_rtd_theme
-  - "cd docs; sh deploy_docs.sh; cd -"
+  - cd docs && sh ./deploy_docs.sh && cd -
   - mkdir packages
   - tar czvf packages/releases-v${LIME_VERSION}.tar.gz $(ls -I packages)
   - zip -q packages/releases-v${LIME_VERSION}.zip -r $(ls -I packages)
