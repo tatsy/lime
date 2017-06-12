@@ -38,6 +38,7 @@ When you intall Boost libraries, please carefully check that Boost build uses co
 Generally, the Boost installation from source codes would be like following.
 
 .. code-block:: shell
+
   wget -q https://dl.bintray.com/boostorg/release/1.64.0/source/boost_1_64_0.tar.gz
   tar -zxf boost_1_64_0.tar.gz
   cd boost_1_64_0
