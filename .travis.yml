@@ -9,6 +9,7 @@ services:
 
 before_install:
   - sudo apt-get -qq update
+  - sudo apt-get -qq install llvm
 
 install:
   # Pull Docker image
@@ -52,7 +53,7 @@ before_deploy:
   - git config --global user.email "travis@travis-ci.org"
   - pip install --upgrade pip
   - sudo apt-get -qq install doxygen python-pip python-sphinx
-  - pip install sphinx breathe sphinx_rtd_theme
+  - pip install sphinx docutils breathe sphinx_rtd_theme
   - cd docs && sh ./deploy_docs.sh && cd -
   - mkdir packages
   - tar czvf packages/releases-v${LIME_VERSION}.tar.gz $(ls -I packages)
