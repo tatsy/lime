@@ -59,6 +59,7 @@ before_deploy:
   - conda install --yes sphinx
   - pip install breathe sphinx_rtd_theme
   - sphinx-build --version
+  - doxygen --version
   - cd docs && sh ./deploy_docs.sh && cd -
   - mkdir packages
   - tar czvf packages/releases-v${LIME_VERSION}.tar.gz $(ls -I packages)
