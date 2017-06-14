@@ -1,13 +1,12 @@
---- sphinxrenderer2.py	2017-06-14 10:20:06.373839000 +0900
-+++ sphinxrenderer.py	2017-06-14 10:08:46.705839000 +0900
-@@ -1091,7 +1091,9 @@ class SphinxRenderer(object):
+--- sphinxrenderer.py	2017-06-14 11:50:53.381113833 +0900
++++ sphinxrenderer.revised.py	2017-06-14 11:59:11.005801835 +0900
+@@ -1091,7 +1091,8 @@
          #
          # If there is no description then render then term by itself
          if nodelist:
 -            nodelist[0].children = [term, separator] + nodelist[0].children
-+            #nodelist[0].children = [term, separator] + nodelist[0].children
 +            nodelist[0].insert(0, term)
 +            nodelist[0].insert(1, separator)
- 	else:
+         else:
              nodelist = [term]
  
