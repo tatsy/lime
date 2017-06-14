@@ -29,8 +29,8 @@ enum MorphType : int {
  * @b Parameters
  * @arg @b src: The floating-point, 1 or 3-channel image.
  * @arg @b dst: The destination image; will have the same type as <b>src</b>.
- * @param[in] type: The type of morphology operation (see <a>@c lime::MorphType</a>).
- * @param[in] ksize: Kernel size of the filter.
+ * @arg @b type: The type of morphology operation (see <a>@c lime::MorphType</a>).
+ * @arg @b ksize: Kernel size of the filter.
  *
  * @b Python
  *

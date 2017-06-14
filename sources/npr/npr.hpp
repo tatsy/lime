@@ -1,5 +1,5 @@
 /**
- * @defgroup npr
+ * @defgroup npr Non-photorealistic rendering package
  * Mainly including various filters for artistic image stylization.
  **/
 

@@ -1,5 +1,5 @@
 /**
- * @defgroup misc
+ * @defgroup misc Miscellaneous classes and methods
  * @brief Miscellaneous classes and methods.
  **/
 

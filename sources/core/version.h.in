@@ -7,6 +7,10 @@
 
 namespace lime {
 
+/**
+ * Print version string of "lime".
+ * @ingroup core
+ **/
 static inline void print_version() {
     printf("LIME v@LIME_VERSION_STRING@\n");
 }

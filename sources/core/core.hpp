@@ -1,6 +1,6 @@
 /**
- * @defgroup core
- * @brief Basic utilities.
+ * @defgroup core Core package
+ * @brief Core package commonly used in other packages.
  **/
 
 #ifdef _MSC_VER

@@ -52,6 +52,7 @@ before_deploy:
   - git config --global user.email "travis@travis-ci.org"
   - sudo apt-get -qq install doxygen python-pip
   - pip install sphinx breathe sphinx_rtd_theme
+  - patch -u ~/.local/lib/python2.7/site-packages/breathe/renderer/sphinxrenderer.py docs/sphinxrenderer.py.patch
   - cd docs && sh ./deploy_docs.sh && cd -
   - mkdir packages
   - tar czvf packages/releases-v${LIME_VERSION}.tar.gz $(ls -I packages)

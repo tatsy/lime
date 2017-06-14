@@ -12,7 +12,7 @@ namespace lime {
 /**
  * The 2-dimensional array class.
  * @ingroup core
- * @detail
+ * @details
  * This class is <b>not supported</b> by Python because this can be altered by
  * Python's buildin list.
  **/
@@ -31,7 +31,7 @@ public:
      * @param[in] cols: Number of columns
      * @param[in] value: A value with which the array is filled
      **/
-    Array2D(int rows, int cols, const T &val);
+    Array2D(int rows, int cols, const T &value);
 
     //! The Array2D constructor (copy).
     Array2D(const Array2D &ary);
