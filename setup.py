@@ -33,7 +33,7 @@ def prebuild():
         return
 
     out_dir = 'build/lib'
-    out_format = re.compile('pylime\.([a-zA-Z0-9]+)?(-[a-zA-Z0-9\_]+)?' + suffix)
+    out_format = re.compile('pylime\.([a-zA-Z0-9]+)?(-[a-zA-Z0-9\_]+)?(-[a-zA-Z0-9\_]+)?' + suffix)
 
     out_file = None
     for f in os.listdir(out_dir):
