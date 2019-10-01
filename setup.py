@@ -21,37 +21,34 @@ def get_version():
 def prebuild():
     global lime_shared_lib
 
-    prefix = ''
     suffix = ''
-    py_suffix = ''
     if sys.platform == 'linux' or sys.platform == 'linux2':
-        prefix = 'lib'
         suffix = '.so'
-        py_suffix = '.so'
     elif sys.platform == 'darwin':
-        prefix = 'lib'
-        suffix = '.dylib'
-        py_suffix = '.so'
+        suffix = '.so'
     elif sys.platform == 'win32':
-        prefix = ''
-        suffix = '.dll'
-        py_suffix = '.pyd'
+        suffix = '.pyd'
     else:
         print('Sorry, unsupported OS: {}'.format(sys.platform))
         return
 
     out_dir = 'build/lib'
-    outfile = '%spylime%s' % (prefix, suffix)
-    if not os.path.exists(os.path.join(out_dir, outfile)):
+    out_format = re.compile('pylime\.([a-zA-Z0-9]+)?(-[a-zA-Z0-9\_]+)?' + suffix)
+
+    out_file = None
+    for f in os.listdir(out_dir):
+        m = out_format.search(f)
+        if m is not None:
+            out_file = m.group(0)
+            print('Install module "%s"' % out_file)
+            break
+
+    if out_file is None:
         print('Please build the library with CMake first.')
         print('If you did it, please make sure the path of the shared library.')
-        print('The path should be: {}'.format(
-            os.path.join(out_dir, outfile)))
         raise Exception('Installation failed!!')
 
-    lime_shared_lib = os.path.join(out_dir, 'lime%s' % py_suffix)
-    shutil.copyfile(os.path.join(out_dir, outfile),
-              os.path.join(lime_shared_lib))
+    shutil.copyfile(os.path.join(out_dir, out_file), os.path.join(site.getsitepackages()[-1], out_file))
 
 # Install
 class install(install_default):

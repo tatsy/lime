@@ -8,6 +8,7 @@
 #include <cmath>
 #include <iostream>
 #include <sstream>
+#include <stdexcept>
 
 #include "version.h"
 
@@ -78,29 +79,29 @@ static const double EPS    = 1.0e-6;
 #ifdef PY_VERSION_HEX
 #define Assertion(PREDICATE, ...) \
 do { \
-if (!(PREDICATE)) { \
-std::stringstream ss; \
-ss << "Asssertion \"" \
-<< #PREDICATE << "\" failed in " << __FILE__ \
-<< " line " << __LINE__ \
-<< " in function \"" << (__FUNCTION_NAME__) << "\"" \
-<< " : "; \
-throw PyLimeException(ss.str()); \
-} \
+    if (!(PREDICATE)) { \
+        std::stringstream ss; \
+        ss << "Asssertion \"" \
+        << #PREDICATE << "\" failed in " << __FILE__ \
+        << " line " << __LINE__ \
+        << " in function \"" << (__FUNCTION_NAME__) << "\"" \
+        << " : "; \
+        throw std::runtime_error(ss.str()); \
+    } \
 } while (false)
 #elif !defined(NDEBUG)
 #define Assertion(PREDICATE, ...) \
 do { \
-if (!(PREDICATE)) { \
-std::cerr << "Asssertion \"" \
-<< #PREDICATE << "\" failed in " << __FILE__ \
-<< " line " << __LINE__ \
-<< " in function \"" << (__FUNCTION_NAME__) << "\"" \
-<< " : "; \
-fprintf(stderr, __VA_ARGS__); \
-std::cerr << std::endl; \
-std::abort(); \
-} \
+    if (!(PREDICATE)) { \
+        std::cerr << "Asssertion \"" \
+        << #PREDICATE << "\" failed in " << __FILE__ \
+        << " line " << __LINE__ \
+        << " in function \"" << (__FUNCTION_NAME__) << "\"" \
+        << " : "; \
+        fprintf(stderr, __VA_ARGS__); \
+        std::cerr << std::endl; \
+        std::abort(); \
+    } \
 } while (false)
 #else  // NDEBUG
 #define Assertion(PREDICATE, ...) do {} while (false)
@@ -134,7 +135,7 @@ do { \
 do { \
     char msg[512]; \
     sprintf(msg, __VA_ARGS__); \
-    throw PyLimeException(msg); \
+    throw std::runtime_error(msg); \
 } while (false);
 #else
 #define ErrorMsg(...) \

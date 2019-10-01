@@ -1,78 +1,46 @@
-#define BOOST_PYTHON_STATIC_LIB
+#include <iostream>
+#include <stdexcept>
+#include <vector>
 #include <set>
+#include <tuple>
 
 #include <opencv2/opencv.hpp>
 
-#include "pyutils.h"
+#include <pybind11/numpy.h>
+#include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
+
 #include "lime.hpp"
 
-void translate(const PyLimeException &ex) {
-    PyErr_SetString(PyExc_RuntimeError, ex.what());
+namespace py = pybind11;
+
+cv::Mat np2mat(const py::array_t<float> &arr) {
+    py::buffer_info buf_info = arr.request();
+    const int rows = buf_info.shape[0];
+    const int cols = buf_info.shape[1];
+    const int channels = buf_info.ndim == 2 ? 1 : buf_info.shape[2];
+
+    cv::Mat mat(cv::Size(cols, rows), CV_MAKE_TYPE(CV_32F, channels), buf_info.ptr);
+    
+    return std::move(mat);
 }
 
-inline void np2mat(const npy::ndarray &arr, cv::Mat &mat) {
-    const int dims = arr.get_nd();
-    Assertion(dims == 2 || dims == 3,
-              "Input numpy::ndarray is invalid!!");
-
-    const int rows = (int)arr.shape(0);
-    const int cols = (int)arr.shape(1);
-    const int chls = dims == 2 ? 1 : (int)arr.shape(2);
-
-    mat = cv::Mat(rows, cols, CV_MAKETYPE(CV_32F, chls));
-    if (arr.get_dtype() == npy::dtype::get_builtin<uint8_t>()) {
-        uint8_t *data = (uint8_t *)arr.get_data();
-        for (int y = 0; y < rows; y++) {
-            for (int x = 0; x < cols; x++) {
-                for (int c = 0; c < chls; c++) {
-                    mat.at<float>(y, x * chls + c) =
-                    (float)data[(y * cols + x) * chls + c] / 255.0;
-                }
-            }
-        }
-    } else if (arr.get_dtype() == npy::dtype::get_builtin<double>()) {
-        double *data = (double *)arr.get_data();
-        for (int y = 0; y < rows; y++) {
-            for (int x = 0; x < cols; x++) {
-                for (int c = 0; c < chls; c++) {
-                    mat.at<float>(y, x * chls + c) = (float)data[(y * cols + x) * chls + c];
-                }
-            }
-        }
-    } else if (arr.get_dtype() == npy::dtype::get_builtin<float>()) {
-        float *data = (float *)arr.get_data();
-        for (int y = 0; y < rows; y++) {
-            for (int x = 0; x < cols; x++) {
-                for (int c = 0; c < chls; c++) {
-                    mat.at<float>(y, x * chls + c) = data[(y * cols + x) * chls + c];
-                }
-            }
-        }
-    } else {
-        ErrorMsg("Input ndarray must be either of uint8, float32 or float64 type.");
-    }
-}
-
-inline npy::ndarray mat2np(const cv::Mat &mat) {
-    const int chls = mat.channels();
-    const int dims = chls == 1 ? 2 : 3;
+inline py::array_t<float> mat2np(const cv::Mat &mat) {
+    const int channels = mat.channels();
+    const int dims = channels == 1 ? 2 : 3;
     const int rows = mat.rows;
     const int cols = mat.cols;
-    Assertion(mat.depth() == CV_32F, "Internal error: cv::Mat must be CV_32F type.");
-
-    py::tuple shape = dims == 2 ? py::make_tuple(rows, cols)
-    : py::make_tuple(rows, cols, chls);
-    npy::ndarray arr = npy::zeros(shape, npy::dtype::get_builtin<float>());
-    float *data = (float *)arr.get_data();
-    for (int y = 0; y < rows; y++) {
-        for (int x = 0; x < cols; x++) {
-            for (int c = 0; c < chls; c++) {
-                data[(y * cols + x) * chls + c] = mat.at<float>(y, x * chls + c);
-            }
-        }
+    if (mat.depth() != CV_32F) {
+        throw std::runtime_error("Internal error: cv::Mat must be CV_32F type.");
     }
 
-    return arr;
+    const auto shape = (dims == 2) ? py::detail::any_container<py::ssize_t>{rows, cols}
+                                   : py::detail::any_container<py::ssize_t>{rows, cols, channels};
+    const auto stride = (dims == 2) ? py::detail::any_container<py::ssize_t>{cols * sizeof(float), sizeof(float)}
+                                    : py::detail::any_container<py::ssize_t>{cols * channels * sizeof(float), channels * sizeof(float), sizeof(float)};
+    py::buffer_info buf_info(mat.data, sizeof(float), py::format_descriptor<float>::format(), dims, shape, stride);
+
+    return py::array_t<float>(buf_info);
 }
 
 inline void py_print_verson() {
@@ -83,127 +51,80 @@ inline void py_print_verson() {
 // NPR module
 // -----------------------------------------------------------------------------
 
-npy::ndarray py_randomNoise(const py::tuple &size) {
-    const int w = py::extract<int>(size[0]);
-    const int h = py::extract<int>(size[1]);
+py::array_t<float> py_randomNoise(const std::tuple<int, int> &size) {
+    const int w = std::get<0>(size);
+    const int h = std::get<1>(size);
     cv::Mat ret;
     lime::randomNoise(ret, cv::Size(w, h));
 
     return mat2np(ret);
 }
 
-npy::ndarray py_perlinNoise(const py::tuple &size, int level) {
-    const int w = py::extract<int>(size[0]);
-    const int h = py::extract<int>(size[1]);
+py::array_t<float> py_perlinNoise(const std::tuple<int, int> &size, int level) {
+    const int w = std::get<0>(size);
+    const int h = std::get<1>(size);
     cv::Mat ret;
     lime::perlinNoise(ret, cv::Size(w, h), level);
-
     return mat2np(ret);
 }
 
-npy::ndarray py_kuwaharaFilter(const npy::ndarray &img, int type, int ksize, int nDivide = 0) {
-    cv::Mat input;
-    np2mat(img, input);
-
+py::array_t<float> py_kuwaharaFilter(const py::array_t<float> &img, int type, int ksize, int nDivide) {
     cv::Mat ret;
-    lime::kuwaharaFilter(input, ret, type, ksize, nDivide);
-
+    lime::kuwaharaFilter(np2mat(img), ret, type, ksize, nDivide);
     return mat2np(ret);
 }
 
-BOOST_PYTHON_FUNCTION_OVERLOADS(ol_py_kuwaharaFilter, py_kuwaharaFilter, 3, 4);
-
-npy::ndarray py_morphFilter(const npy::ndarray &img, int type, int ksize) {
-    cv::Mat input;
-    np2mat(img, input);
-
+py::array_t<float> py_morphFilter(const py::array_t<float> &img, int type, int ksize) {
     cv::Mat ret;
-    lime::morphFilter(input, ret, type, ksize);
-
+    lime::morphFilter(np2mat(img), ret, type, ksize);
     return mat2np(ret);
 }
 
-npy::ndarray py_pdeFilter(const npy::ndarray &img, int type, double lambda, int maxiter) {
-    cv::Mat input;
-    np2mat(img, input);
-
+py::array_t<float> py_pdeFilter(const py::array_t<float> &img, int type, double lambda, int maxiter) {
     cv::Mat ret;
-    lime::pdeFilter(input, ret, type, lambda, maxiter);
-
+    lime::pdeFilter(np2mat(img), ret, type, lambda, maxiter);
     return mat2np(ret);
 }
 
-npy::ndarray py_calcVectorField(const npy::ndarray &img, int ksize,
-                                int vfieldType = lime::VEC_FIELD_SST,
-                                int edgeDetector = lime::EDGE_DETECT_SOBEL) {
-    cv::Mat input;
-    np2mat(img, input);
-
+py::array_t<float> py_calcVectorField(const py::array_t<float> &img, int ksize, int vfieldType, int edgeDetector) {
     cv::Mat ret;
-    lime::calcVectorField(input, ret, ksize, vfieldType, edgeDetector);
-
+    lime::calcVectorField(np2mat(img), ret, ksize, vfieldType, edgeDetector);
     return mat2np(ret);
 }
 
-BOOST_PYTHON_FUNCTION_OVERLOADS(ol_py_calcVectorField, py_calcVectorField, 2, 4);
-
-
-npy::ndarray py_edgeDoG(const npy::ndarray &img, const py::dict &pdict) {
-    cv::Mat input;
-    np2mat(img, input);
-
-    std::set<std::string> keys;
-    int entries = py::len(pdict);
-    for (int i = 0; i < entries; i++) {
-        keys.insert(py::extract<std::string>(pdict.keys()[i]));
-    }
-
+py::array_t<float> py_edgeDoG(const py::array_t<float> &img, const py::dict &pdict) {
     lime::DoGParams params;
-    if (keys.find("kappa") != keys.end()) params.kappa = py::extract<double>(pdict["kappa"]);
-    if (keys.find("sigma") != keys.end()) params.sigma = py::extract<double>(pdict["sigma"]);
-    if (keys.find("tau")  != keys.end()) params.tau = py::extract<double>(pdict["tau"]);
-    if (keys.find("phi")  != keys.end()) params.phi = py::extract<double>(pdict["phi"]);
-    if (keys.find("edgeType") != keys.end()) {
-        int value = py::extract<int>(pdict["edgeType"]);
-        params.edgeType = (lime::NPREdgeType)value;
+    if (pdict.contains("kappa")) params.kappa = pdict["kappa"].cast<float>();
+    if (pdict.contains("sigma")) params.sigma = pdict["sigma"].cast<float>();
+    if (pdict.contains("tau")) params.tau = pdict["tau"].cast<float>();
+    if (pdict.contains("phi")) params.phi = pdict["phi"].cast<float>();
+    if (pdict.contains("edgeType")) {
+        params.edgeType = (lime::NPREdgeType)pdict["edgeType"].cast<int>();
     }
 
     cv::Mat ret;
-    lime::edgeDoG(input, ret, params);
+    lime::edgeDoG(np2mat(img), ret, params);
 
     return mat2np(ret);
 }
 
-npy::ndarray py_LIC(const npy::ndarray &img, const npy::ndarray &tangent,
-                    int L, int type = lime::LIC_EULERIAN) {
-    cv::Mat input, tangmat;
-    np2mat(img, input);
-    np2mat(tangent, tangmat);
-
+py::array_t<float> py_LIC(const py::array_t<float> &img, const py::array_t<float> &tangent, int L, int type) {
     cv::Mat ret;
-    lime::LIC(input, ret, tangmat, L, type);
-
+    lime::LIC(np2mat(img), ret, np2mat(tangent), L, type);
     return mat2np(ret);
 }
 
-BOOST_PYTHON_FUNCTION_OVERLOADS(ol_py_LIC, py_LIC, 3, 4);
-
-
-py::list py_poissonDisk(const npy::ndarray &gray, const py::list &points,
-                        int pdsMethod = (int)lime::PDS_FAST_PARALLEL,
-                        double minRadius = 2.0, double maxRadius = 5.0) {
-    cv::Mat input;
-    np2mat(gray, input);
-
+py::list py_poissonDisk(const py::array_t<float> &gray, const std::vector<std::tuple<double, double>> &points,
+                        int pdsMethod, double minRadius, double maxRadius) {
     std::vector<cv::Point2f> samples;
-    int nPoints = py::len(points);
+    const int nPoints = points.size();
     for (int i = 0; i < nPoints; i++) {
-        double a = py::extract<double>(points[i][0]);
-        double b = py::extract<double>(points[i][1]);
+        const double a = std::get<0>(points[i]);
+        const double b = std::get<1>(points[i]);
         samples.push_back(cv::Point2f((float)a, (float)b));
     }
 
-    lime::poissonDisk(input, &samples, (lime::PDSMethod)pdsMethod, minRadius, maxRadius);
+    lime::poissonDisk(np2mat(gray), &samples, (lime::PDSMethod)pdsMethod, minRadius, maxRadius);
 
     py::list output;
     for (int i = 0; i < samples.size(); i++) {
@@ -214,18 +135,13 @@ py::list py_poissonDisk(const npy::ndarray &gray, const py::list &points,
     return output;
 }
 
-BOOST_PYTHON_FUNCTION_OVERLOADS(ol_py_poissonDisk, py_poissonDisk, 2, 5);
-
 // -----------------------------------------------------------------------------
 // Misc module
 // -----------------------------------------------------------------------------
 
-npy::ndarray py_colorConstancy(const npy::ndarray &img, int type) {
-    cv::Mat input;
-    np2mat(img, input);
-
+py::array_t<float> py_colorConstancy(const py::array_t<float> &img, int type) {
     cv::Mat ret;
-    lime::colorConstancy(input, ret, type);
+    lime::colorConstancy(np2mat(img), ret, type);
 
     return mat2np(ret);
 }
@@ -234,72 +150,72 @@ npy::ndarray py_colorConstancy(const npy::ndarray &img, int type) {
 // Module registration.
 // -----------------------------------------------------------------------------
 
-BOOST_PYTHON_MODULE(lime) {
-    npy::initialize();
-
+PYBIND11_MODULE(pylime, m) {
     // Exception translator.
-    py::register_exception_translator<PyLimeException>(&translate);
+    //py::register_exception_translator<PyLimeException>(&translate);
 
     // Version
-    py::def("print_version", py_print_verson);
+    m.def("print_version", &py_print_verson, "Print version of \"lime\".");
 
     // NPR methods.
-    py::def("randomNoise", py_randomNoise);
-    py::def("perlinNoise", py_perlinNoise);
+    m.def("randomNoise", &py_randomNoise, "Generate random noise", py::arg("size"));
+    m.def("perlinNoise", &py_perlinNoise, "Generate perlin noise", py::arg("size"), py::arg("level"));
 
-    py::scope().attr("KUWAHARA_CLASSICAL") = (int)lime::KUWAHARA_CLASSICAL;
-    py::scope().attr("KUWAHARA_GENERALIZED") = (int)lime::KUWAHARA_GENERALIZED;
-    py::scope().attr("KUWAHARA_ANISOTROPIC") = (int)lime::KUWAHARA_ANISOTROPIC;
+    m.attr("KUWAHARA_CLASSICAL") = (int)lime::KUWAHARA_CLASSICAL;
+    m.attr("KUWAHARA_GENERALIZED") = (int)lime::KUWAHARA_GENERALIZED;
+    m.attr("KUWAHARA_ANISOTROPIC") = (int)lime::KUWAHARA_ANISOTROPIC;
 
-    py::def("kuwaharaFilter", py_kuwaharaFilter, ol_py_kuwaharaFilter(
-        py::args("src", "ftype", "ksize", "ndivide")));
+    m.def("kuwaharaFilter", &py_kuwaharaFilter, "Kuwahara filter",
+          py::arg("src"), py::arg("type"), py::arg("ksize"), py::arg("ndivide") = 0);
 
-    py::scope().attr("MORPH_ERODE") = (int)lime::MORPH_ERODE;
-    py::scope().attr("MORPH_DILATE") = (int)lime::MORPH_DILATE;
-    py::scope().attr("MORPH_OPEN") = (int)lime::MORPH_OPEN;
-    py::scope().attr("MORPH_CLOSE") = (int)lime::MORPH_CLOSE;
-    py::scope().attr("MORPH_GRADIENT") = (int)lime::MORPH_GRADIENT;
-    py::scope().attr("MORPH_TOPHAT") = (int)lime::MORPH_TOPHAT;
-    py::scope().attr("MORPH_BLACKHAT") = (int)lime::MORPH_BLACKHAT;
+    m.attr("MORPH_ERODE") = (int)lime::MORPH_ERODE;
+    m.attr("MORPH_DILATE") = (int)lime::MORPH_DILATE;
+    m.attr("MORPH_OPEN") = (int)lime::MORPH_OPEN;
+    m.attr("MORPH_CLOSE") = (int)lime::MORPH_CLOSE;
+    m.attr("MORPH_GRADIENT") = (int)lime::MORPH_GRADIENT;
+    m.attr("MORPH_TOPHAT") = (int)lime::MORPH_TOPHAT;
+    m.attr("MORPH_BLACKHAT") = (int)lime::MORPH_BLACKHAT;
 
-    py::def("morphFilter", py_morphFilter);
+    m.def("morphFilter", &py_morphFilter, "Filtering with mathematical morphology");
 
-    py::scope().attr("PDE_ANISO_DIFFUSION") = (int)lime::PDE_ANISO_DIFFUSION;
-    py::scope().attr("PDE_SHOCK_FILTER") = (int)lime::PDE_SHOCK_FILTER;
-    py::scope().attr("PDE_MEAN_CURVATURE") = (int)lime::PDE_MEAN_CURVATURE;
+    m.attr("PDE_ANISO_DIFFUSION") = (int)lime::PDE_ANISO_DIFFUSION;
+    m.attr("PDE_SHOCK_FILTER") = (int)lime::PDE_SHOCK_FILTER;
+    m.attr("PDE_MEAN_CURVATURE") = (int)lime::PDE_MEAN_CURVATURE;
 
-    py::def("pdeFilter", py_pdeFilter);
+    m.def("pdeFilter", &py_pdeFilter, "Filtering based on partial differential equations");
 
-    py::scope().attr("VEC_FIELD_SST") = (int)lime::VEC_FIELD_SST;
-    py::scope().attr("VEC_FIELD_ETF") = (int)lime::VEC_FIELD_ETF;
-    py::scope().attr("EDGE_DETECT_SOBEL") = (int)lime::EDGE_DETECT_SOBEL;
-    py::scope().attr("EDGE_DETECT_ROTATIONAL") = (int)lime::EDGE_DETECT_ROTATIONAL;
+    m.attr("VEC_FIELD_SST") = (int)lime::VEC_FIELD_SST;
+    m.attr("VEC_FIELD_ETF") = (int)lime::VEC_FIELD_ETF;
+    m.attr("EDGE_DETECT_SOBEL") = (int)lime::EDGE_DETECT_SOBEL;
+    m.attr("EDGE_DETECT_ROTATIONAL") = (int)lime::EDGE_DETECT_ROTATIONAL;
 
-    py::def("calcVectorField", py_calcVectorField, ol_py_calcVectorField(
-        py::args("img", "ksize", "vftype", "edtype")));
+    m.def("calcVectorField", &py_calcVectorField, "Compute vector fields based on image edges",
+          py::arg("img"), py::arg("ksize"), py::arg("method") = (int)lime::VEC_FIELD_SST, py::arg("edge_type") = (int)lime::EDGE_DETECT_SOBEL);
 
-    py::scope().attr("NPR_EDGE_XDOG") = (int)lime::NPR_EDGE_XDOG;
-    py::scope().attr("NPR_EDGE_FDOG") = (int)lime::NPR_EDGE_FDOG;
+    m.attr("NPR_EDGE_XDOG") = (int)lime::NPR_EDGE_XDOG;
+    m.attr("NPR_EDGE_FDOG") = (int)lime::NPR_EDGE_FDOG;
 
-    py::def("edgeDoG", py_edgeDoG);
+    m.def("edgeDoG", &py_edgeDoG, "Detect edges using difference of Gaussians",
+          py::arg("img"), py::arg("params"));
 
-    py::scope().attr("LIC_CLASSICAL") = (int)lime::LIC_CLASSICAL;
-    py::scope().attr("LIC_EULERIAN") = (int)lime::LIC_EULERIAN;
-    py::scope().attr("LIC_RUNGE_KUTTA") = (int)lime::LIC_RUNGE_KUTTA;
+    m.attr("LIC_CLASSICAL") = (int)lime::LIC_CLASSICAL;
+    m.attr("LIC_EULERIAN") = (int)lime::LIC_EULERIAN;
+    m.attr("LIC_RUNGE_KUTTA") = (int)lime::LIC_RUNGE_KUTTA;
 
-    py::def("LIC", py_LIC, ol_py_LIC(
-        py::args("img", "tangent", "L", "ftype")));
+    m.def("LIC", &py_LIC, "Line integral convolution",
+          py::arg("img"), py::arg("tangent"), py::arg("L"), py::arg("type") = (int)lime::LIC_EULERIAN);
 
-    py::scope().attr("PDS_RAND_QUEUE") = (int)lime::PDS_RAND_QUEUE;
-    py::scope().attr("PDS_FAST_PARALLEL") = (int)lime::PDS_FAST_PARALLEL;
+    m.attr("PDS_RAND_QUEUE") = (int)lime::PDS_RAND_QUEUE;
+    m.attr("PDS_FAST_PARALLEL") = (int)lime::PDS_FAST_PARALLEL;
 
-    py::def("poissonDisk", py_poissonDisk, ol_py_poissonDisk(
-        py::args("gray", "samples", "method", "min_radius", "max_radius")));
+    m.def("poissonDisk", &py_poissonDisk, "Poisson disk sampling",
+          py::arg("gray"), py::arg("samples"), py::arg("method") = (int)lime::PDS_FAST_PARALLEL,
+          py::arg("min_radius") = 2.0, py::arg("max_radius") = 5.0);
 
     // Misc methods.
-    py::scope().attr("CONSTANCY_HORN") = (int)lime::CONSTANCY_HORN;
-    py::scope().attr("CONSTANCY_RAHMAN") = (int)lime::CONSTANCY_RAHMAN;
-    py::scope().attr("CONSTANCY_FAUGERAS") = (int)lime::CONSTANCY_FAUGERAS;
+    m.attr("CONSTANCY_HORN") = (int)lime::CONSTANCY_HORN;
+    m.attr("CONSTANCY_RAHMAN") = (int)lime::CONSTANCY_RAHMAN;
+    m.attr("CONSTANCY_FAUGERAS") = (int)lime::CONSTANCY_FAUGERAS;
 
-    py::def("colorConstancy", py_colorConstancy);
+    m.def("colorConstancy", py_colorConstancy, "Color constancy");
 }

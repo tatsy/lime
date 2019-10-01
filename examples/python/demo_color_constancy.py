@@ -1,6 +1,6 @@
 import sys
 import cv2
-import lime
+import pylime as lime
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -21,24 +21,29 @@ def main():
     out_rahman = lime.colorConstancy(img, lime.CONSTANCY_RAHMAN)
     out_faugeras = lime.colorConstancy(img, lime.CONSTANCY_FAUGERAS)
 
-    fig, axarr = plt.subplots(1, 4, figsize=(12, 3))
+    fig = plt.figure()
 
-    axarr[0].imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-    axarr[0].axis('off')
-    axarr[0].set_title('Input')
+    ax = fig.add_subplot(2, 2, 1)
+    ax.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+    ax.axis('off')
+    ax.set_title('Input')
 
-    axarr[1].imshow(cv2.cvtColor(out_horn, cv2.COLOR_BGR2RGB))
-    axarr[1].axis('off')
-    axarr[1].set_title('Horn')
+    ax = fig.add_subplot(2, 2, 2)
+    ax.imshow(cv2.cvtColor(out_horn, cv2.COLOR_BGR2RGB))
+    ax.axis('off')
+    ax.set_title('Horn')
 
-    axarr[2].imshow(cv2.cvtColor(out_rahman, cv2.COLOR_BGR2RGB))
-    axarr[2].axis('off')
-    axarr[2].set_title('Rahman')
+    ax = fig.add_subplot(2, 2, 3)
+    ax.imshow(cv2.cvtColor(out_rahman, cv2.COLOR_BGR2RGB))
+    ax.axis('off')
+    ax.set_title('Rahman')
 
-    axarr[3].imshow(cv2.cvtColor(out_faugeras, cv2.COLOR_BGR2RGB))
-    axarr[3].axis('off')
-    axarr[3].set_title('Faugeras')
+    ax = fig.add_subplot(2, 2, 4)
+    ax.imshow(cv2.cvtColor(out_faugeras, cv2.COLOR_BGR2RGB))
+    ax.axis('off')
+    ax.set_title('Faugeras')
 
+    plt.tight_layout()
     plt.show()
 
 if __name__ == '__main__':

@@ -1,7 +1,7 @@
 import sys
 from itertools import product
 import cv2
-import lime
+import pylime as lime
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import cm
@@ -26,6 +26,7 @@ def demoCartoon(img):
     print('  [Cartoon] bilateral filter -> OK')
 
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    print(gray.shape)
     edge = lime.edgeDoG(gray, {})
 
     width = img.shape[1]
@@ -34,24 +35,29 @@ def demoCartoon(img):
 
     out = bf * np.tile(edge.reshape((height, width, 1)), (1, 1, 3))
 
-    fig, axarr = plt.subplots(2, 2)
+    fig = plt.figure()
+    
+    ax = fig.add_subplot(2, 2, 1)
+    ax.axis('off')
+    ax.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+    ax.set_title('Input')
 
-    axarr[0, 0].axis('off')
-    axarr[0, 0].imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-    axarr[0, 0].set_title('Input')
+    ax = fig.add_subplot(2, 2, 2)
+    ax.axis('off')
+    ax.imshow(cv2.cvtColor(bf, cv2.COLOR_BGR2RGB))
+    ax.set_title('Bilateral')
 
-    axarr[0, 1].axis('off')
-    axarr[0, 1].imshow(cv2.cvtColor(bf, cv2.COLOR_BGR2RGB))
-    axarr[0, 1].set_title('Bilateral')
+    ax = fig.add_subplot(2, 2, 3)
+    ax.axis('off')
+    ax.imshow(edge, cmap=cm.gray)
+    ax.set_title('Edge')
 
-    axarr[1, 0].axis('off')
-    axarr[1, 0].imshow(edge, cmap=cm.gray)
-    axarr[1, 0].set_title('Edge')
+    ax = fig.add_subplot(2, 2, 4)
+    ax.axis('off')
+    ax.imshow(cv2.cvtColor(out, cv2.COLOR_BGR2RGB))
+    ax.set_title('Cartoon')
 
-    axarr[1, 1].axis('off')
-    axarr[1, 1].imshow(cv2.cvtColor(out, cv2.COLOR_BGR2RGB))
-    axarr[1, 1].set_title('Cartoon')
-
+    plt.tight_layout()
     plt.show()
 
 def demoKuwahara(img):
@@ -62,24 +68,29 @@ def demoKuwahara(img):
     akf = lime.kuwaharaFilter(img, lime.KUWAHARA_ANISOTROPIC, 7, 8)
     print('[Kuwahara] anisotropic kuwahara -> OK')
 
-    fig, axarr = plt.subplots(2, 2)
+    fig = plt.figure()
+    
+    ax = fig.add_subplot(2, 2, 1)
+    ax.axis('off')
+    ax.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+    ax.set_title('Input')
 
-    axarr[0, 0].axis('off')
-    axarr[0, 0].imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-    axarr[0, 0].set_title('Input')
+    ax = fig.add_subplot(2, 2, 2)
+    ax.axis('off')
+    ax.imshow(cv2.cvtColor(kf, cv2.COLOR_BGR2RGB))
+    ax.set_title('Classical')
 
-    axarr[0, 1].axis('off')
-    axarr[0, 1].imshow(cv2.cvtColor(kf, cv2.COLOR_BGR2RGB))
-    axarr[0, 1].set_title('Classical')
+    ax = fig.add_subplot(2, 2, 3)
+    ax.axis('off')
+    ax.imshow(cv2.cvtColor(gkf, cv2.COLOR_BGR2RGB))
+    ax.set_title('Generalized')
 
-    axarr[1, 0].axis('off')
-    axarr[1, 0].imshow(cv2.cvtColor(gkf, cv2.COLOR_BGR2RGB))
-    axarr[1, 0].set_title('Generalized')
+    ax = fig.add_subplot(2, 2, 4)
+    ax.axis('off')
+    ax.imshow(cv2.cvtColor(akf, cv2.COLOR_BGR2RGB))
+    ax.set_title('Anisotropic')
 
-    axarr[1, 1].axis('off')
-    axarr[1, 1].imshow(cv2.cvtColor(akf, cv2.COLOR_BGR2RGB))
-    axarr[1, 1].set_title('Anisotropic')
-
+    plt.tight_layout()
     plt.show()
 
 def demoMorphology(img):
@@ -102,6 +113,8 @@ def demoMorphology(img):
         axarr[i, j].axis('off')
         axarr[i, j].imshow(cv2.cvtColor(images[i][j], cv2.COLOR_BGR2RGB))
         axarr[i, j].set_title(titles[i][j])
+
+    plt.tight_layout()
     plt.show()
 
 def demoPDE(img):
@@ -128,6 +141,8 @@ def demoPDE(img):
         if images[i][j] is not None and titles[i][j] is not None:
             axarr[i, j].imshow(cv2.cvtColor(images[i][j], cv2.COLOR_BGR2RGB))
             axarr[i, j].set_title(titles[i][j])
+
+    plt.tight_layout()
     plt.show()
 
 def demoDoG(img):
@@ -161,6 +176,7 @@ def demoDoG(img):
     ax3.imshow(fdog, cmap=cm.gray)
     ax3.set_title('FDoG')
 
+    plt.tight_layout()
     plt.show()
 
 def demoCEF(img):
@@ -187,6 +203,7 @@ def demoCEF(img):
     ax2.imshow(cv2.cvtColor(out, cv2.COLOR_BGR2RGB))
     ax2.set_title('Output')
 
+    plt.tight_layout()
     plt.show()
 
 def main():
