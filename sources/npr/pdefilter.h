@@ -5,6 +5,8 @@
 #ifndef _NPR_PDEFILTER_H_
 #define _NPR_PDEFILTER_H_
 
+#include "core/common.h"
+
 namespace lime {
 
 /**
@@ -45,20 +47,20 @@ enum PDEType : int {
  * @b Returns
  * @arg @b dst - @c numpy.ndarray : The destination image with the same type as <b>src</b>.
  */
-inline void pdeFilter(cv::InputArray src, cv::OutputArray dst, int type, double lambda, int maxiter);
+LIME_METHOD_API void pdeFilter(cv::InputArray src, cv::OutputArray dst, int type, double lambda, int maxiter);
 
 // Solve anistropic diffusion
-inline void anisoDiffusion(cv::InputArray img, cv::OutputArray out, double lambda, int maxiter);
+LIME_METHOD_API void anisoDiffusion(cv::InputArray img, cv::OutputArray out, double lambda, int maxiter);
 
 // Solve PDE for shock filter
-inline void shockFilter(cv::InputArray img, cv::OutputArray out, double lambda, int maxiter);
+LIME_METHOD_API void shockFilter(cv::InputArray img, cv::OutputArray out, double lambda, int maxiter);
 
 // Solve PDE for mean curvature flow
-inline void meanCurveFlow(cv::InputArray img, cv::OutputArray out, double lambda, int maxiter);
+LIME_METHOD_API void meanCurveFlow(cv::InputArray img, cv::OutputArray out, double lambda, int maxiter);
 
 }  // namespace lime
 
-#ifndef LIME_USE_STATIC_LIB
+#ifndef LIME_USE_LIBRARY
 #include "pdefilter_detail.h"
 #endif
 

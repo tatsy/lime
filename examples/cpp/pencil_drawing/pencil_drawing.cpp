@@ -3,8 +3,8 @@
 #include <algorithm>
 #include <cassert>
 
-#include "../pencil_drawing/pencil_drawing.h"
-#include "../pencil_drawing/math_utils.h"
+#include "pencil_drawing.h"
+#include "math_utils.h"
 
 const double tau = PI / 6.0;
 const int t_disc = 24;
@@ -161,7 +161,7 @@ void pencilDrawing(cv::InputArray input, cv::OutputArray output, const std::vect
     if (points.empty()) {
         int nNoise = static_cast<int>(0.2 * width * height);
         noise = cv::Mat(height, width, CV_32FC1);
-        lime::uniformNoise(noise, gray, nNoise);
+        lime::densityNoise(noise, gray, nNoise);
         ratio = 1.5 * nNoise / (width * height);
     } else {
         int nNoise = static_cast<int>(points.size());

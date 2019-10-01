@@ -1,29 +1,32 @@
 configure_file("${CMAKE_CURRENT_LIST_DIR}/core/version.h.in"
                "${CMAKE_CURRENT_LIST_DIR}/core/version.h" @ONLY)
 
+include_directories(${LIME_INCLUDE_DIR})
+
 if (${LIME_BUILD_STATIC_LIB})
   message(STATUS "[ LIME ] Build static library.")
 
-  set(SOURCE_FILES "")
-  function(add_folder FOLDER_NAME)
-    set(filters "")
-    foreach(f ${ARGN})
-      set(filters ${filters} "${FOLDER_NAME}/${f}")
-    endforeach()
-
-    file(GLOB LOCAL_FILES ${filters})
-    set(SOURCE_FILES ${SOURCE_FILES} ${LOCAL_FILES} PARENT_SCOPE)
-
-    source_group(${FOLDER_NAME} FILES ${LOCAL_FILES})
-  endfunction()
-
-  add_folder(core "*.cpp" "*.h" "*.hpp")
-  add_folder(misc "*.cpp" "*.h" "*.hpp")
-  add_folder(npr "*.cpp" "*.h" "*.hpp")
-  add_library(lime ${SOURCE_FILES})
-
+  set(SOURCE_FILES lime.hpp lime.cpp)
+  add_folder(SOURCE_FILES core INSTALL)
+  add_folder(SOURCE_FILES npr INSTALL)
+  add_folder(SOURCE_FILES misc INSTALL)
+  
   include_directories(${OpenCV_INCLUDE_DIRS})
-  target_link_libraries(lime ${OpenCV_LIBS})
+  add_library(${LIME_LIBRARY} STATIC ${SOURCE_FILES})
+  target_compile_definitions(${LIME_LIBRARY} PRIVATE "-DLIME_BUILD_LIBRARY")
+  target_link_libraries(${LIME_LIBRARY} ${OpenCV_LIBS})
+
+  source_group("Source Files" FILES ${SOURCE_FILES})
+
+  install(TARGETS ${LIME_LIBRARY}
+          EXPORT LimeTargets
+          RUNTIME DESTINATION bin
+          LIBRARY DESTINATION bin
+          ARCHIVE DESTINATION lib)
+
+  install(FILES lime.hpp
+          EXPORT LimeTargets
+          DESTINATION include)
 endif()
 
 if (${LIME_BUILD_PYTHON_MODULE})

@@ -5,6 +5,8 @@
 #ifndef _NPR_KUWAHARA_H_
 #define _NPR_KUWAHARA_H_
 
+#include "core/common.h"
+
 namespace lime {
 
 /**
@@ -43,11 +45,11 @@ enum KuwaharaType : int {
  * @b Returns
  * @arg @b dst - @c numpy.ndarray : The destination image; will have the same types as <b>src</b>.
  **/
-inline void kuwaharaFilter(cv::InputArray src, cv::OutputArray dst, int type, int ksize, int nDivide = 0);
+LIME_METHOD_API void kuwaharaFilter(cv::InputArray src, cv::OutputArray dst, int type, int ksize, int nDivide = 0);
 
 }  // namespace lime
 
-#ifndef LIME_USE_STATIC_LIB
+#ifndef LIME_USE_LIBRARY
 #include "kuwahara_detail.h"
 #endif
 

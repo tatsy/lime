@@ -7,6 +7,8 @@
 
 #include <opencv2/opencv.hpp>
 
+#include "core/common.h"
+
 namespace lime {
 
 /**
@@ -22,7 +24,7 @@ enum NPREdgeType {
  * DoG parameters.
  * @ingroup npr
  **/
-struct DoGParams {
+struct LIME_API DoGParams {
     double kappa;
     double sigma;
     double tau;
@@ -56,11 +58,11 @@ struct DoGParams {
  * @b Returns
  * @arg @b edge - @c numpy.ndarray : The floating-point, 1-channel edge image.
  **/
-inline void edgeDoG(cv::InputArray image, cv::OutputArray edge, const DoGParams& params = DoGParams());
+LIME_METHOD_API void edgeDoG(cv::InputArray image, cv::OutputArray edge, const DoGParams& params = DoGParams());
 
 }  // namespace lime
 
-#ifndef LIME_USE_STATIC_LIB
+#ifndef LIME_USE_LIBRARY
 #include "npr_edges_detail.h"
 #endif
 

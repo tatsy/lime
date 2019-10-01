@@ -8,12 +8,12 @@
 #include <ctime>
 
 #include "vector_field.h"
-#include "../npr/lic.h"
+#include "noise.h"
+#include "lic.h"
 
 namespace lime {
 
-inline DoGParams::DoGParams(double _kappa, double _sigma, double _tau, double _phi,
-                            NPREdgeType _edgeType)
+LIME_METHOD_API DoGParams::DoGParams(double _kappa, double _sigma, double _tau, double _phi, NPREdgeType _edgeType)
     : kappa(_kappa)
     , sigma(_sigma)
     , tau(_tau)
@@ -22,29 +22,6 @@ inline DoGParams::DoGParams(double _kappa, double _sigma, double _tau, double _p
 }
 
 namespace {  // NOLINT
-
-void uniformNoise(cv::OutputArray noise, cv::InputArray gray, int nNoise) {
-    cv::Mat  img = gray.getMat();
-    cv::Mat& out = noise.getMatRef();
-
-    Assertion(img.channels() == 1 && img.depth() == CV_32F,
-        "input image must be single channel and floating-point-valued");
-
-    const int width  = img.cols;
-    const int height = img.rows;
-
-    Random rand((unsigned int)time(0));
-
-    out = cv::Mat::zeros(height, width, CV_32FC1);
-    int count = 0;
-    while (count < nNoise) {
-        int x = rand.nextInt(width);
-        int y = rand.nextInt(height);
-        if (rand.nextReal() < img.at<float>(y, x)) continue;
-        out.at<float>(y, x) = 1.0f;
-        count++;
-    }
-}
 
 void edgeXDoG(cv::InputArray input, cv::OutputArray output, const DoGParams& param) {
     cv::Mat  gray = input.getMat();

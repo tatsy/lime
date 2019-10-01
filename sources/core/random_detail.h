@@ -67,33 +67,33 @@ static const unsigned int LOWER_MASK = 0x7fffffffU;  /* least significant r bits
 
 }  // unnamed namespace
 
-inline Random::Random(unsigned int seed)
+LIME_METHOD_API Random::Random(unsigned int seed)
     : mti(N + 1)
 {
     init_genrand(seed);
 }
 
-inline int Random::nextInt() {
+LIME_METHOD_API int Random::nextInt() {
     return genrand_int31();
 }
 
-inline int Random::nextInt(const int n) {
+LIME_METHOD_API int Random::nextInt(const int n) {
     Assertion(n > 0, "Upper bound of random integers must be positive.");
     return genrand_int31() % n;
 }
 
-inline double Random::nextReal() {
+LIME_METHOD_API double Random::nextReal() {
     return genrand_real2();
 }
 
-inline double Random::normal() {
+LIME_METHOD_API double Random::normal() {
     const double r1 = nextReal();
     const double r2 = nextReal();
     return sqrt(-2.0 * log(r1)) * sin(2.0 * PI * r2);
 }
 
 /* initializes mt[N] with a seed */
-inline void Random::init_genrand(unsigned int s) {
+LIME_METHOD_API void Random::init_genrand(unsigned int s) {
     mt[0] = s & 0xffffffffU;
     for (mti = 1; mti < N; mti++) {
         mt[mti] =
@@ -108,7 +108,7 @@ inline void Random::init_genrand(unsigned int s) {
 }
 
 /* generates a random number on [0,0xffffffff]-interval */
-inline unsigned int Random::genrand_int32(void) {
+LIME_METHOD_API unsigned int Random::genrand_int32(void) {
     unsigned int y;
     static unsigned int mag01[2] = { 0x0U, MATRIX_A };
     /* mag01[x] = x * MATRIX_A  for x=0,1 */
@@ -145,12 +145,12 @@ inline unsigned int Random::genrand_int32(void) {
 }
 
 /* generates a random number on [0,0x7fffffff]-interval */
-inline int Random::genrand_int31(void) {
+LIME_METHOD_API int Random::genrand_int31(void) {
     return static_cast<int>(genrand_int32() >> 1);
 }
 
 /* generates a random number on [0,1)-real-interval */
-inline double Random::genrand_real2(void) {
+LIME_METHOD_API double Random::genrand_real2(void) {
     return genrand_int32()*(1.0 / 4294967296.0);
     /* divided by 2^32 */
 }

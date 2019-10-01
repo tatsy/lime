@@ -12,18 +12,14 @@ ENV PULL_REQUEST @PULL_REQUEST@
 ENV CC @C_COMPILER@
 ENV CXX @CXX_COMPILER@
 ENV PYTHON_VERSION @PYTHON_VERSION@
+ENV BUILD_STATIC_LIB @BUILD_STATIC_LIB@
+ENV PATH /opt/conda/bin:$PATH
 
 #
 ## update/upgrade
 #
-RUN apt-get update -qq
-RUN apt-get upgrade -qq
-
-#
-## Install Gcovr
-#
-RUN apt-get -qq install python-pip
-RUN pip install gcovr
+RUN apt-get update -q
+#RUN apt-get upgrade -q
 
 #
 ## Install cppcheck, cccc, and doxygen
@@ -31,25 +27,11 @@ RUN pip install gcovr
 RUN apt-get -qq install cppcheck cccc doxygen
 
 #
-## Install Python through Anaconda
+## Install Python through Miniconda
 #
-RUN wget -q https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-RUN bash miniconda.sh -b -p $HOME/anaconda
-ENV PATH "$HOME/anaconda/bin:$PATH"
-RUN conda update --yes conda
-RUN conda install --yes python=$PYTHON_VERSION setuptools numpy scipy pillow six libgcc
-
-#
-## Install Boost
-#
-RUN wget -q https://dl.bintray.com/boostorg/release/1.64.0/source/boost_1_64_0.tar.gz
-RUN tar -zxf boost_1_64_0.tar.gz
-RUN \
-  cd boost_1_64_0 && \
-  ./bootstrap.sh && \
-  ./b2 address-model=64 \
-       include=`python -c "from __future__ import print_function; from distutils import sysconfig; print(sysconfig.get_python_inc())"` \
-       -d0 --with-python -j2 install .
+RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -q -O miniconda3.sh
+RUN sh ./miniconda3.sh -b -p /opt/conda
+RUN rm ./miniconda3.sh
 
 #
 ## Install Google test
@@ -62,7 +44,7 @@ RUN \
   make && make install
 
 #
-## Build lime
+## Download lime source codes
 #
 RUN git clone --depth 12 -b $BRANCH_NAME https://github.com/tatsy/lime.git #redo
 RUN \
@@ -76,16 +58,30 @@ RUN \
   cd lime && \
   git submodule update --init --recursive
 
+#
+## Create conda env and change default env
+#
+RUN \
+  cd lime && \
+  sed -i -e "s/python/python=$PYTHON_VERSION/" environment.yml && \
+  conda env create -f environment.yml
+ENV PATH /opt/conda/envs/lime/bin:$PATH
+ENV CONDA_DEFAULT_ENV lime
+
+#
+## Build lime
+#
 RUN \
   cd lime && \
   cmake \
     -D CMAKE_BUILD_TYPE=Release \
     -D LIME_BUILD_TESTS=ON \
-    -D GTEST_ROOT=/usr/local \
-    -D PYTHON_INCLUDE_DIR=`python -c "from __future__ import print_function; from distutils import sysconfig; print(sysconfig.get_python_inc())"` \
-    -D PYTHON_LIBRARY=`find $HOME/anaconda/lib -name python${PYTHON_VERSION}` \
+    -D LIME_BUILD_EXAMPLES=ON \
+    -D LIME_BUILD_STATIC_LIB=$BUILD_STATIC_LIB \
+    -D PYTHON_EXECUTABLE=/opt/conda/envs/lime/bin/python \
+    -D PYBIND11_PYTHON_VERSION=$PYTHON_VERSION \
     -D LIME_BUILD_PYTHON_MODULE=ON . && \
-  cmake --build .
+  cmake --build . -- -j4
 
 #
 ## Install pylime
