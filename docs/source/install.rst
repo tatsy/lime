@@ -40,25 +40,12 @@ You can build and install the python library with following shell script.
 .. code-block:: shell
 
   git clone https://github.com/tatsy/lime.git
+  cd lime
+  git submodule update --init
   mkdir build && cd build
   cmake -D LIME_BUILD_EXAMPLES=OFF \
         -D LIME_BUILD_TESTS=OFF \
         -D LIME_BUILD_PYTHON_MODULE=ON ..
-  make
-  cd ..
-  sudo python setup.py
-
-If you use the Anaconda, you may have to specify Python include directory and library paths like following.
-
-.. code-block:: shell
-
-  git clone https://github.com/tatsy/lime.git
-  mkdir build && cd build
-  cmake -D LIME_BUILD_EXAMPLES=OFF \
-        -D LIME_BUILD_TESTS=OFF \
-        -D LIME_BUILD_PYTHON_MODULE=ON \
-        -D PYTHON_INCLUDE_DIR=$YOUR_PYTHON_INCLUDE_DIR \
-        -D PYTHON_LIBRARY=$YOUR_PYTHON_LIBRARY ..
   make
   cd ..
   pip install -e .
