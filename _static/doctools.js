@@ -4,7 +4,11 @@
  *
  * Sphinx JavaScript utilities for all documentation.
  *
+<<<<<<< HEAD
  * :copyright: Copyright 2007-2018 by the Sphinx team, see AUTHORS.
+=======
+ * :copyright: Copyright 2007-2019 by the Sphinx team, see AUTHORS.
+>>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
  * :license: BSD, see LICENSE for details.
  *
  */
@@ -87,14 +91,23 @@ jQuery.fn.highlightText = function(text, className) {
           node.nextSibling));
         node.nodeValue = val.substr(0, pos);
         if (isInSVG) {
+<<<<<<< HEAD
           var bbox = span.getBBox();
           var rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
        	  rect.x.baseVal.value = bbox.x;
+=======
+          var rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+          var bbox = node.parentElement.getBBox();
+          rect.x.baseVal.value = bbox.x;
+>>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
           rect.y.baseVal.value = bbox.y;
           rect.width.baseVal.value = bbox.width;
           rect.height.baseVal.value = bbox.height;
           rect.setAttribute('class', className);
+<<<<<<< HEAD
           var parentOfText = node.parentNode.parentNode;
+=======
+>>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
           addItems.push({
               "parent": node.parentNode,
               "target": rect});
@@ -150,7 +163,9 @@ var Documentation = {
     this.fixFirefoxAnchorBug();
     this.highlightSearchWords();
     this.initIndexTable();
-    
+    if (DOCUMENTATION_OPTIONS.NAVIGATION_WITH_KEYS) {
+      this.initOnKeyListeners();
+    }
   },
 
   /**
