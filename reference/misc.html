@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Misc module &mdash; Lime 0.1.0 documentation</title>
+  <title>Misc module &mdash; LIME 0.3.0 documentation</title>
   
 
+  
+  
   
   
 
@@ -22,28 +24,20 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="Lime 0.1.0 documentation" href="../index.html"/>
-        <link rel="up" title="Reference Manual" href="index.html"/>
-        <link rel="prev" title="NPR module" href="npr.html"/> 
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="NPR module" href="npr.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -53,7 +47,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> Lime
+            <a href="../index.html" class="icon icon-home"> LIME
           
 
           
@@ -63,7 +57,7 @@
             
             
               <div class="version">
-                0.1.0
+                0.3.0
               </div>
             
           
@@ -84,7 +78,10 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference Manual</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="core.html">Core module</a></li>
@@ -106,36 +103,58 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">Lime</a>
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">LIME</a>
+        
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="index.html">Reference Manual</a> &raquo;</li>
-      
-    <li>Misc module</li>
+        
+      <li>Misc module</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="../_sources/reference/misc.txt" rel="nofollow"> View page source</a>
+            
+            
+              <a href="https://github.com///blob/reference/misc.rst" class="fa fa-github"> Edit on GitHub</a>
+            
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -146,50 +165,50 @@
 <div class="section" id="color-constancy">
 <h2>Color constancy<a class="headerlink" href="#color-constancy" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
-<dt id="_CPPv2N4lime14colorConstancyEN2cv10InputArrayEN2cv11OutputArrayEi">
-<span id="lime::colorConstancy__cv::InputArray.cv::OutputArray.i"></span><span class="target" id="limegroup__misc_1gaba0cd61445280e52491878cbd2ff43b4"></span>void <code class="descclassname">lime::</code><code class="descname">colorConstancy</code><span class="sig-paren">(</span>cv::InputArray <em>src</em>, cv::OutputArray <em>dst</em>, int <em>type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N4lime14colorConstancyEN2cv10InputArrayEN2cv11OutputArrayEi" title="Permalink to this definition">¶</a></dt>
+<dt id="_CPPv3N4lime14colorConstancyEN2cv10InputArrayEN2cv11OutputArrayEi">
+<span id="_CPPv2N4lime14colorConstancyEN2cv10InputArrayEN2cv11OutputArrayEi"></span><span id="lime::colorConstancy__cv::InputArray.cv::OutputArray.i"></span><span class="target" id="namespacelime_1aba0cd61445280e52491878cbd2ff43b4"></span>void <code class="descclassname">lime<code class="descclassname">::</code></code><code class="descname">colorConstancy</code><span class="sig-paren">(</span>cv::InputArray <em>src</em>, cv::OutputArray <em>dst</em>, int <em>type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4lime14colorConstancyEN2cv10InputArrayEN2cv11OutputArrayEi" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Apply color constancy algorithm for the input image. </p>
 <p><ul class="simple">
 <li><strong>src:</strong> The input floating-point, 3-channel image. </li>
 <li><strong>dst:</strong> The destination image; will have also floating-point, 3-channel pixel values. </li>
-<li><strong>type:</strong> Algorithm type (see <code class="docutils literal"><a class="reference internal" href="#limegroup__misc_1ga5eecdba620ee53d856eee01d06593309"><span class="std std-ref"><span class="pre">lime::ConstancyType</span></span></a></code> ).</li>
+<li><strong>type:</strong> Algorithm type (see <code class="docutils literal notranslate"><a class="reference internal" href="#namespacelime_1a5eecdba620ee53d856eee01d06593309"><span class="std std-ref"><span class="pre">lime::ConstancyType</span></span></a></code> ).</li>
 </ul>
 <strong>Python</strong> </p>
-<p><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">dst</span> <span class="o">=</span> <span class="n">lime</span><span class="o">.</span><span class="n">colorConstancy</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">ftype</span><span class="p">)</span>
+<p><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dst</span> <span class="o">=</span> <span class="n">lime</span><span class="o">.</span><span class="n">colorConstancy</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">ftype</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
 <p><strong>Parameters</strong> <ul class="simple">
-<li><strong>src</strong> - <code class="docutils literal"><span class="pre">numpy.ndarray</span></code> : The input floating-point, 3-channel image. </li>
-<li><strong>ftype</strong> - <code class="docutils literal"><span class="pre">int</span></code> : Chosen from <code class="docutils literal"><a class="reference internal" href="#limegroup__misc_1ga5eecdba620ee53d856eee01d06593309"><span class="std std-ref"><span class="pre">lime::ConstancyType</span></span></a></code> .</li>
+<li><strong>src</strong> - <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> : The input floating-point, 3-channel image. </li>
+<li><strong>ftype</strong> - <code class="docutils literal notranslate"><span class="pre">int</span></code> : Chosen from <code class="docutils literal notranslate"><a class="reference internal" href="#namespacelime_1a5eecdba620ee53d856eee01d06593309"><span class="std std-ref"><span class="pre">lime::ConstancyType</span></span></a></code> .</li>
 </ul>
 <strong>Returns</strong> <ul class="simple">
-<li><strong>dst</strong> - <code class="docutils literal"><span class="pre">numpy.ndarray</span></code> : The destination image; will have also floating-point, 3-channel pixel values. </li>
+<li><strong>dst</strong> - <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> : The destination image; will have also floating-point, 3-channel pixel values. </li>
 </ul>
 </p>
 </dd></dl>
 
 <dl class="type">
-<dt id="_CPPv2N4lime13ConstancyTypeE">
-<span id="lime::ConstancyType"></span><span class="target" id="limegroup__misc_1ga5eecdba620ee53d856eee01d06593309"></span><em class="property">enum </em><code class="descclassname">lime::</code><code class="descname">ConstancyType</code><a class="headerlink" href="#_CPPv2N4lime13ConstancyTypeE" title="Permalink to this definition">¶</a></dt>
+<dt id="_CPPv3N4lime13ConstancyTypeE">
+<span id="_CPPv2N4lime13ConstancyTypeE"></span><span id="lime::ConstancyType"></span><span class="target" id="namespacelime_1a5eecdba620ee53d856eee01d06593309"></span><em class="property">enum </em><code class="descclassname">lime<code class="descclassname">::</code></code><code class="descname">ConstancyType</code><a class="headerlink" href="#_CPPv3N4lime13ConstancyTypeE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Color constancy algorithms. </p>
 <p><em>Values:</em></p>
-<dl class="member">
-<dt id="_CPPv2N4lime14CONSTANCY_HORNE">
-<span id="lime::CONSTANCY_HORN"></span><span class="target" id="limegroup__misc_1gga5eecdba620ee53d856eee01d06593309a29ac7101e12f1ebfd3614f2cc88b9d59"></span><code class="descname">CONSTANCY_HORN</code><a class="headerlink" href="#_CPPv2N4lime14CONSTANCY_HORNE" title="Permalink to this definition">¶</a></dt>
-<dd><p>Horm&#8217;s algorithm. </p>
+<dl class="enumerator">
+<dt id="_CPPv3N4lime14CONSTANCY_HORNE">
+<span id="_CPPv2N4lime14CONSTANCY_HORNE"></span><span class="target" id="namespacelime_1a5eecdba620ee53d856eee01d06593309a29ac7101e12f1ebfd3614f2cc88b9d59"></span><code class="descname">CONSTANCY_HORN</code><a class="headerlink" href="#_CPPv3N4lime14CONSTANCY_HORNE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Horm’s algorithm. </p>
 </dd></dl>
 
-<dl class="member">
-<dt id="_CPPv2N4lime16CONSTANCY_RAHMANE">
-<span id="lime::CONSTANCY_RAHMAN"></span><span class="target" id="limegroup__misc_1gga5eecdba620ee53d856eee01d06593309a5313da8ab5ca3c491ad4a9f51c782758"></span><code class="descname">CONSTANCY_RAHMAN</code><a class="headerlink" href="#_CPPv2N4lime16CONSTANCY_RAHMANE" title="Permalink to this definition">¶</a></dt>
-<dd><p>Rahman&#8217;s algorithm. </p>
+<dl class="enumerator">
+<dt id="_CPPv3N4lime16CONSTANCY_RAHMANE">
+<span id="_CPPv2N4lime16CONSTANCY_RAHMANE"></span><span class="target" id="namespacelime_1a5eecdba620ee53d856eee01d06593309a5313da8ab5ca3c491ad4a9f51c782758"></span><code class="descname">CONSTANCY_RAHMAN</code><a class="headerlink" href="#_CPPv3N4lime16CONSTANCY_RAHMANE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Rahman’s algorithm. </p>
 </dd></dl>
 
-<dl class="member">
-<dt id="_CPPv2N4lime18CONSTANCY_FAUGERASE">
-<span id="lime::CONSTANCY_FAUGERAS"></span><span class="target" id="limegroup__misc_1gga5eecdba620ee53d856eee01d06593309a0465b506a26a0dc2569905f8fbc3c0ef"></span><code class="descname">CONSTANCY_FAUGERAS</code><a class="headerlink" href="#_CPPv2N4lime18CONSTANCY_FAUGERASE" title="Permalink to this definition">¶</a></dt>
-<dd><p>Faugeras&#8217;s algorithm. </p>
+<dl class="enumerator">
+<dt id="_CPPv3N4lime18CONSTANCY_FAUGERASE">
+<span id="_CPPv2N4lime18CONSTANCY_FAUGERASE"></span><span class="target" id="namespacelime_1a5eecdba620ee53d856eee01d06593309a0465b506a26a0dc2569905f8fbc3c0ef"></span><code class="descname">CONSTANCY_FAUGERAS</code><a class="headerlink" href="#_CPPv3N4lime18CONSTANCY_FAUGERASE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Faugeras’s algorithm. </p>
 </dd></dl>
 
 </dd></dl>
@@ -199,13 +218,14 @@
 
 
            </div>
+           
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="npr.html" class="btn btn-neutral" title="NPR module" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="npr.html" class="btn btn-neutral" title="NPR module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -214,11 +234,11 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright MIT License 2016, Tatsuya Yatagawa (tatsy).
+        &copy; Copyright MIT License 2016-2017, Tatsuya Yatagawa (tatsy).
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -236,32 +256,28 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.1.0',
+            VERSION:'0.3.0',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

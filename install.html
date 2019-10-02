@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installation Guide &mdash; Lime 0.1.0 documentation</title>
+  <title>Installation Guide &mdash; LIME 0.3.0 documentation</title>
   
 
+  
+  
   
   
 
@@ -22,28 +24,21 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Lime 0.1.0 documentation" href="index.html"/>
-        <link rel="next" title="Reference Manual" href="reference/index.html"/>
-        <link rel="prev" title="Welcome to Lime’s documentation!" href="index.html"/> 
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Reference Manual" href="reference/index.html" />
+    <link rel="prev" title="Welcome to Lime’s documentation!" href="index.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -53,7 +48,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> Lime
+            <a href="index.html" class="icon icon-home"> LIME
           
 
           
@@ -63,7 +58,7 @@
             
             
               <div class="version">
-                0.1.0
+                0.3.0
               </div>
             
           
@@ -84,7 +79,10 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#download">Download</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#c-c">C/C++</a></li>
@@ -103,34 +101,56 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="index.html">Lime</a>
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">LIME</a>
+        
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="index.html">Docs</a> &raquo;</li>
-      
-    <li>Installation Guide</li>
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Installation Guide</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="_sources/install.txt" rel="nofollow"> View page source</a>
+            
+            
+              <a href="https://github.com///blob/install.rst" class="fa fa-github"> Edit on GitHub</a>
+            
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -141,47 +161,56 @@
 <div class="section" id="download">
 <h2>Download<a class="headerlink" href="#download" title="Permalink to this headline">¶</a></h2>
 <p>Please download the source files from <a href="https://github.com/tatsy/lime.git" target="_blank">GitHub</a>.</p>
-<div class="highlight-shell"><div class="highlight"><pre><span></span>git clone https://github.com/tatsy/lime.git
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/tatsy/lime.git
 </pre></div>
 </div>
 </div>
 <div class="section" id="c-c">
 <h2>C/C++<a class="headerlink" href="#c-c" title="Permalink to this headline">¶</a></h2>
-<p>Since this library includes only headers, you do not have to any compilation for
-using the library in C/C++. Please include <cite>$LIME_ROOT/sources/lime.hpp</cite> in
-your program source codes.</p>
-</div>
-<div class="section" id="python">
-<h2>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
-<p>For Python users, you can build the library with CMake. After building it,
-you can install it normally with <code class="docutils literal"><span class="pre">setup.py</span></code>. Following is the simple
-installation steps.</p>
-<div class="highlight-shell"><div class="highlight"><pre><span></span>git clone https://github.com/tatsy/lime.git
+<p>Since this library includes only headers, you do not have to any compilation for using the library in C/C++. Please include <cite>$LIME_ROOT/sources/lime.hpp</cite> in your program source codes.</p>
+<p>Also, you can build the static library for accelerating the compilation of your program with <cite>LIME</cite>. To do so, what you need to do is only to specify <cite>LIME_BUILD_STATIC_LIB</cite> to the cmake option, and the library can be built with the following commands.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/tatsy/lime.git
 mkdir build <span class="o">&amp;&amp;</span> <span class="nb">cd</span> build
 cmake -D <span class="nv">LIME_BUILD_EXAMPLES</span><span class="o">=</span>OFF <span class="se">\</span>
       -D <span class="nv">LIME_BUILD_TESTS</span><span class="o">=</span>OFF <span class="se">\</span>
-      -D <span class="nv">LIME_BUILD_PYTHON_MODULE</span><span class="o">=</span>ON ..
-make
-<span class="nb">cd</span> ..
-sudo python setup.py
+      -D <span class="nv">LIME_BUILD_STATIC_LIB</span><span class="o">=</span>ON ..
+make -j4
+sudo make install
 </pre></div>
 </div>
-<p>While building the source codes with CMake, you may ought to specify your
-python include and library directories.</p>
+</div>
+<div class="section" id="python">
+<h2>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
+<p style="color: red;">We are now free from Boost! You can install Python module just our source code!</p><p>For Python users, you can build the library with CMake. While <cite>lime</cite> depends on <cite>OpenCV</cite> (3.0 or higher), you need to install these libraries in advance. Please make sure, the versions of these libraries meet the following requirements.</p>
+<p>You can build and install the python library with following shell script. If you build the module with Anaconda/Miniconda, make sure the path to the python executable is specified to <cite>PYTHON_EXECUTABLE</cite>.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/tatsy/lime.git
+git submodule update --init --recursive  <span class="c1"># Download &quot;pybind11&quot; needed to build python module</span>
+mkdir build <span class="o">&amp;&amp;</span> <span class="nb">cd</span> build
+cmake -D <span class="nv">LIME_BUILD_EXAMPLES</span><span class="o">=</span>OFF <span class="se">\</span>
+      -D <span class="nv">LIME_BUILD_TESTS</span><span class="o">=</span>OFF <span class="se">\</span>
+      -D <span class="nv">PYTHON_EXECUTABLE</span><span class="o">=</span>/home/user/miniconda3/envs/lime/bin/python <span class="se">\</span>
+      -D <span class="nv">LIME_BUILD_PYTHON_MODULE</span><span class="o">=</span>ON ..
+cmake --build . -- -j4
+<span class="nb">cd</span> ..
+python setup.py install  <span class="c1"># You may need to use &quot;sudo&quot; for system-wide python.</span>
+</pre></div>
+</div>
+<p>If the installation is failed, you should check whether <cite>pylime</cite> binary file appears in ‘build/lib’ directory (the name of the binary would be like <cite>pylime.cp36-win_amd64.pyd</cite> (Windows), ‘pylime.cython-36m-darwin.so’ (MacOS) or ‘pylime.cython-36m-linux.so’ (Linux)).</p>
 </div>
 </div>
 
 
            </div>
+           
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="reference/index.html" class="btn btn-neutral float-right" title="Reference Manual" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="reference/index.html" class="btn btn-neutral float-right" title="Reference Manual" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="Welcome to Lime’s documentation!" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral" title="Welcome to Lime’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -190,11 +219,11 @@ python include and library directories.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright MIT License 2016, Tatsuya Yatagawa (tatsy).
+        &copy; Copyright MIT License 2016-2017, Tatsuya Yatagawa (tatsy).
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -212,32 +241,28 @@ python include and library directories.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.1.0',
+            VERSION:'0.3.0',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>
