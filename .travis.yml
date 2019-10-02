@@ -78,7 +78,7 @@ deploy:
   on:
     tags: false
     branch: master
-    condition: "$CXX = clang++ && BUILD_STATIC_LIB=OFF && $PYTHON_VERSION = 3.5"
+    condition: "$CXX = clang++ && $BUILD_STATIC_LIB = OFF && $PYTHON_VERSION = 3.5"
 
 branches:
   only:
