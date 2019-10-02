@@ -16,20 +16,25 @@
 // API export macro
 // -----------------------------------------------------------------------------
 
-#if (defined(WIN32) || defined(_WIN32) || defined(WINCE) || defined(__CYGWIN__))
-#   if defined(LIME_API_EXPORT)
-#       define LIME_EXPORTS __declspec(dllexport)
-#       define LIME_IMPORTS
+#if defined(LIME_BUILD_LIBRARY)
+#   if (defined(WIN32) || defined(_WIN32) || defined(WINCE) || defined(__CYGWIN__))
+#       if defined(LIME_API_EXPORT)
+#           define LIME_API __declspec(dllexport)
+#       else
+#           define LIME_API
+#       endif
+#   elif defined(__GNUC__) && __GNUC__ >= 4
+#       define LIME_API __attribute__((visibility ("default")))
 #   else
-#       define LIME_EXPORTS
-#       define LIME_IMPORTS __declspec(dllimport)
+#       define LIME_API
 #   endif
-#elif defined(__GNUC__) && __GNUC__ >= 4
-#   define LIME_EXPORTS __attribute__((visibility ("default")))
-#   define LIME_IMPORTS
+#   define LIME_METHOD_API LIME_API
+#elif defined(LIME_USE_LIBRARY)
+#   define LIME_API
+#   define LIME_METHOD_API
 #else
-#   define LIME_EXPORTS
-#   define LIME_IMPORTS
+#   define LIME_API
+#   define LIME_METHOD_API inline
 #endif
 
 // ----------------------------------------------------------------------------

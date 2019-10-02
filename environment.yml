@@ -2,7 +2,8 @@ name: lime
 channels:
   - conda-forge
 dependencies:
-  - python>=3.0.0
+  - python
+  - pip
   - numpy
   - opencv>=3.0.0
   - matplotlib

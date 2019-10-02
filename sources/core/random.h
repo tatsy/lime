@@ -13,7 +13,7 @@ namespace lime {
  * Random number generator using Mersenne-twister.
  * @ingroup core
  **/
-class LIME_EXPORTS Random {
+class LIME_API Random {
 public:
     explicit Random(unsigned int seed = 0);
 
@@ -46,7 +46,7 @@ private:
 
 }  // namespace lime
 
-#ifndef LIME_USE_STATIC_LIB
+#ifndef LIME_USE_LIBRARY
 #include "random_detail.h"
 #endif
 

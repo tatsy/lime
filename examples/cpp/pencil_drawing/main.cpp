@@ -6,7 +6,7 @@
 #include <vector>
 #include <string>
 
-#include "../pencil_drawing/pencil_drawing.h"
+#include "pencil_drawing.h"
 
 bool save_result = true;
 const int depth = 1;

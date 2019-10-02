@@ -4,7 +4,7 @@
 #include <string>
 using namespace std;
 
-#include "lime.hpp"
+#include <lime.hpp>
 
 void saveResult(const std::string& filename, const cv::Mat& img) {
     cv::Mat res;
@@ -76,11 +76,11 @@ void demoCartoon(const cv::Mat& img) {
 
 void demoKuwahara(const cv::Mat& img) {
     cv::Mat kf, gkf, akf;
-    lime::kuwaharaClassical(img, kf, 7);
+    lime::kuwaharaFilter(img, kf, lime::KUWAHARA_CLASSICAL, 7);
     cout << "[Kuwahara] standard kuwahara    -> OK" << endl;
-    lime::kuwaharaGeneralized(img, gkf, 7, 8);
+    lime::kuwaharaFilter(img, gkf, lime::KUWAHARA_GENERALIZED, 7, 8);
     cout << "[Kuwahara] generalized kuwahara -> OK" << endl;
-    lime::kuwaharaAnisotropic(img, akf, 7, 8);
+    lime::kuwaharaFilter(img, akf, lime::KUWAHARA_ANISOTROPIC, 7, 8);
     cout << "[Kuwahara] anisotropic kuwahara -> OK" << endl;
 
     cv::imshow("Input", img);
@@ -100,13 +100,13 @@ void demoMorphology(const cv::Mat& img) {
     const int ksize = 5;
     cv::Mat dilate, erode, closing, opening, grad, tophat, blkhat;
 
-    lime::morphDilate(img, dilate, ksize);
-    lime::morphErode(img, erode, ksize);
-    lime::morphOpen(img, opening, ksize);
-    lime::morphClose(img, closing, ksize);
-    lime::morphGradient(img, grad, ksize);
-    lime::morphTophat(img, tophat, ksize);
-    lime::morphBlackhat(img, blkhat, ksize);
+    lime::morphFilter(img, dilate, lime::MORPH_DILATE, ksize);
+    lime::morphFilter(img, erode, lime::MORPH_ERODE, ksize);
+    lime::morphFilter(img, opening, lime::MORPH_OPEN, ksize);
+    lime::morphFilter(img, closing, lime::MORPH_CLOSE, ksize);
+    lime::morphFilter(img, grad, lime::MORPH_GRADIENT, ksize);
+    lime::morphFilter(img, tophat, lime::MORPH_TOPHAT, ksize);
+    lime::morphFilter(img, blkhat, lime::MORPH_BLACKHAT, ksize);
 
     cv::imshow("Dilation", dilate);
     cv::imshow("Erosion", erode);

@@ -3,7 +3,7 @@
 #include <iostream>
 #include <ctime>
 
-#include "lime.hpp"
+#include <lime.hpp>
 
 int main(int argc, char** argv) {
     const int width  = 256;

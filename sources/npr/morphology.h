@@ -5,6 +5,8 @@
 #ifndef _NPR_MORPHOLOGY_H_
 #define _NPR_MORPHOLOGY_H_
 
+#include "core/common.h"
+
 namespace lime {
 
 /**
@@ -46,11 +48,11 @@ enum MorphType : int {
  * @b Returns
  * @arg @b dst - @c numpy.ndarray : The destination image with the same type as <b>src</b>.
  **/
-inline void morphFilter(cv::InputArray src, cv::OutputArray dst, int type, int ksize);
+LIME_METHOD_API void morphFilter(cv::InputArray src, cv::OutputArray dst, int type, int ksize);
 
 }  // namespace lime
 
-#ifndef LIME_USE_STATIC_LIB
+#ifndef LIME_USE_LIBRARY
 #include "morphology_detail.h"
 #endif
 

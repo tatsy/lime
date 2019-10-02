@@ -22,6 +22,29 @@ void randomNoise(cv::OutputArray noise, const cv::Size& size) {
     }
 }
 
+void densityNoise(cv::OutputArray noise, cv::InputArray gray, int nNoise) {
+    cv::Mat  img = gray.getMat();
+    cv::Mat& out = noise.getMatRef();
+
+    Assertion(img.channels() == 1 && img.depth() == CV_32F,
+        "input image must be single channel and floating-point-valued");
+
+    const int width  = img.cols;
+    const int height = img.rows;
+
+    Random rand((unsigned int)time(0));
+
+    out = cv::Mat::zeros(height, width, CV_32FC1);
+    int count = 0;
+    while (count < nNoise) {
+        int x = rand.nextInt(width);
+        int y = rand.nextInt(height);
+        if (rand.nextReal() < img.at<float>(y, x)) continue;
+        out.at<float>(y, x) = 1.0f;
+        count++;
+    }
+}
+
 void perlinNoise(cv::OutputArray noise, const cv::Size& size, int level) {
     const int width = size.width;
     const int height = size.height;

@@ -10,6 +10,8 @@
 #include <utility>
 #include <cmath>
 
+#include "core/common.h"
+
 namespace lime {
 
 /**

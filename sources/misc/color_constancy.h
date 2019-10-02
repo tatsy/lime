@@ -7,6 +7,8 @@
 
 #include <opencv2/opencv.hpp>
 
+#include "core/common.h"
+
 namespace lime {
 
 /**
@@ -42,21 +44,21 @@ enum ConstancyType : int {
  * @b Returns
  * @arg @b dst - @c numpy.ndarray : The destination image; will have also floating-point, 3-channel pixel values.
  **/
-inline void colorConstancy(cv::InputArray src, cv::OutputArray dst, int type);
+LIME_METHOD_API void colorConstancy(cv::InputArray src, cv::OutputArray dst, int type);
 
 //! Horn's color constancy algorihtm.
-inline void colorConstancyHorn(cv::InputArray input, cv::OutputArray output, double thre = 0.05);
+LIME_METHOD_API void colorConstancyHorn(cv::InputArray input, cv::OutputArray output, double thre = 0.05);
 
 //! Rahman's color constancy algorithm.
-inline void colorConstancyRahman(cv::InputArray input, cv::OutputArray output,
+LIME_METHOD_API void colorConstancyRahman(cv::InputArray input, cv::OutputArray output,
                                  double sigma = 1.0, double scale = 0.16, int nLevel = 3);
 
 //! Faugeras's color constancy algorithm.
-inline void colorConstancyFaugeras(cv::InputArray input, cv::OutputArray output);
+LIME_METHOD_API void colorConstancyFaugeras(cv::InputArray input, cv::OutputArray output);
 
 }  // namespace lime
 
-#ifndef LIME_USE_STATIC_LIB
+#ifndef LIME_USE_LIBRARY
 #include "color_constancy_detail.h"
 #endif
 

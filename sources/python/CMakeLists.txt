@@ -8,8 +8,8 @@ add_subdirectory(pybind11)
 
 file(GLOB SOURCE_FILES "*.cpp" "*.h")
 
-include_directories(${OpenCV_INCLUDE_DIRS}
-                    ${LIME_ROOT}/sources)
+include_directories(${LIME_INCLUDE_DIR}
+                    ${OpenCV_INCLUDE_DIRS})
 
 pybind11_add_module(${BUILD_TARGET} ${SOURCE_FILES})
 

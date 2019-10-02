@@ -14,6 +14,8 @@ This library is comprised of only header files. Therefore, you do not
 need to do anything other than installing OpenCV in your computer.
 The library depends on **OpenCV 3.0** or later.
 
+For the installation detail, please refer to [the reference manual](http://tatsy.github.io/lime/).
+
 ## Functions
 
 This library supports following methods.
@@ -47,8 +49,8 @@ This library supports following methods.
 
 ## Samples
 
-You can compile all the samples using CMake.
+You can compile all the samples using CMake!
 
 ## Copyright
 
-MIT License 2015, Tatsuya Yatagawa (tatsy)
+MIT License 2015-2019, Tatsuya Yatagawa (tatsy)

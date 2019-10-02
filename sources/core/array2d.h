@@ -7,6 +7,8 @@
 
 #include <memory>
 
+#include "common.h"
+
 namespace lime {
 
 /**
@@ -17,7 +19,7 @@ namespace lime {
  * Python's buildin list.
  **/
 template <class T>
-class LIME_EXPORTS Array2D {
+class LIME_API Array2D {
 public:
     //! The Array2D constructor.
     Array2D();
@@ -62,7 +64,7 @@ private:
 
 }  // namespace lime
 
-#ifndef LIME_USE_STATIC_LIB
+#ifndef LIME_USE_LIBRARY
 #include "array2d_detail.h"
 #endif
 

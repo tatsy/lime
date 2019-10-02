@@ -5,6 +5,8 @@
 #ifndef _NPR_SINGULARITY_HPP_
 #define _NPR_SINGULARITY_HPP_
 
+#include "core/common.h"
+
 // type of singularity
 enum {
     SINGULAR_WEDGE = 0x01,

@@ -6,7 +6,7 @@
 
 using std::vector;
 
-#include "lime.hpp"
+#include <lime.hpp>
 
 cv::Mat sst, vfield, out;
 vector<cv::Point> sings;
@@ -150,7 +150,6 @@ void demo_img(const std::string& filename) {
 
     cv::Mat angles;
 
-    lime::calcSST(img, sst, ksize);
     lime::calcVectorField(img, angles, ksize);
     vfield = cv::Mat(height, width, CV_32FC2);
     for (int y = 0; y < height; y++) {

@@ -9,8 +9,9 @@
 
 #include <vector>
 
-#include "../core/point.h"
-#include "../core/array2d.h"
+#include "core/common.h"
+#include "core/point.h"
+#include "core/array2d.h"
 #include "tensor.hpp"
 #include "singularity.hpp"
 
@@ -58,15 +59,17 @@ enum EdgeDetector : int {
  * @arg @b vftype - @c int : Chosen from <a>@c lime::VecFieldType</a>.
  * @arg @b edtype - @c int : Chosen from <a>@c lime::EdgeDetector</a>.
  */
-inline void calcVectorField(cv::InputArray input, cv::OutputArray angles, int ksize = 5,
-                            int vfieldType = VEC_FIELD_SST, int edgeDetector = EDGE_DETECT_SOBEL);
+LIME_METHOD_API void calcVectorField(cv::InputArray input, cv::OutputArray angles, int ksize = 5,
+                                     int vfieldType = VEC_FIELD_SST, int edgeDetector = EDGE_DETECT_SOBEL);
 
 //! Detect singularity of vector field
-inline void detectSingular(const Array2D<Tensor>& sst, std::vector<SingularPoint>* points,
-                           std::vector<cv::Point2f>* delauneyNodes);
+LIME_METHOD_API void detectSingular(const Array2D<Tensor>& sst, std::vector<SingularPoint>* points,
+                                    std::vector<cv::Point2f>* delauneyNodes);
 
 }  // namespace lime
 
+#ifndef LIME_USE_LIBRARY
 #include "vector_field_detail.h"
+#endif
 
 #endif  // _NPR_VECTORFIELD_H_

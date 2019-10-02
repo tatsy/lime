@@ -12,7 +12,7 @@ namespace lime {
  * @ingroup core
  **/
 static inline void print_version() {
-    printf("LIME v@LIME_VERSION_STRING@\n");
+    printf("LIME v@LIME_VERSION@\n");
 }
 
 }  // namespace lime

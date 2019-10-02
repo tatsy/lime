@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "lime.hpp"
+#include <lime.hpp>
 
 int main(int argc, char **argv) {
     if (argc <= 1) {

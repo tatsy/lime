@@ -7,7 +7,8 @@
 
 #include <cmath>
 
-#include "../core/point.h"
+#include "core/common.h"
+#include "core/point.h"
 
 namespace lime {
 
@@ -47,8 +48,8 @@ enum LICType : int {
  * @b Returns
  * @arg @b dst - <tt>numpy.ndarray</tt> : The same type with <b>src</b>.
  */
-inline void LIC(cv::InputArray src, cv::OutputArray dst,
-                const cv::Mat& tangent, int L, int licType = LIC_EULERIAN);
+LIME_METHOD_API void LIC(cv::InputArray src, cv::OutputArray dst,
+                         const cv::Mat& tangent, int L, int licType = LIC_EULERIAN);
 
 /**
  * Converts flow orientation angle to vector field.
@@ -68,7 +69,7 @@ inline void LIC(cv::InputArray src, cv::OutputArray dst,
  * vfield[:,:,1] = np.sin(angle) * scale
  * @endcode
  */
-inline void angle2vector(cv::InputArray angle, cv::OutputArray vfield, double scale = 1.0);
+LIME_METHOD_API void angle2vector(cv::InputArray angle, cv::OutputArray vfield, double scale = 1.0);
 
 /**
  * Converts vector field to orientation angles.
@@ -86,11 +87,11 @@ inline void angle2vector(cv::InputArray angle, cv::OutputArray vfield, double sc
  * angle = np.arctan(vfield[:,:,1], vfield[:,:,0])
  * @endcode
  */
-inline void vector2angle(cv::InputArray vfield, cv::OutputArray angle);
+LIME_METHOD_API void vector2angle(cv::InputArray vfield, cv::OutputArray angle);
 
 }  // namespace lime
 
-#ifndef LIME_USE_STATIC_LIB
+#ifndef LIME_USE_LIBRARY
 #include "../npr/lic_detail.h"
 #endif
 

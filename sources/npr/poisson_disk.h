@@ -9,7 +9,8 @@
 
 #include <vector>
 
-#include "../core/point.h"
+#include "core/common.h"
+#include "core/point.h"
 
 namespace lime {
 
@@ -27,13 +28,13 @@ enum PDSMethod {
  * @arg @b minRadius: minimum radius of Poisson disk
  * @arg @b maxRadius: maximum radius of Poisson disk
  */
-inline void poissonDisk(cv::InputArray grayImage, std::vector<cv::Point2f>* samplePoints,
-                        PDSMethod pdsMethod = PDS_FAST_PARALLEL,
-                        double minRadius = 2.0, double maxRadius = 5.0);
+LIME_METHOD_API void poissonDisk(cv::InputArray grayImage, std::vector<cv::Point2f>* samplePoints,
+                                 PDSMethod pdsMethod = PDS_FAST_PARALLEL,
+                                 double minRadius = 2.0, double maxRadius = 5.0);
 
 }  // namespace lime
 
-#ifndef LIME_USE_STATIC_LIB
+#ifndef LIME_USE_LIBRARY
 #include "poisson_disk_detail.h"
 #endif
 

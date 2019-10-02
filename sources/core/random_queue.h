@@ -5,6 +5,8 @@
 #ifndef _CORE_RANDOM_QUEUE_H_
 #define _CORE_RANDOM_QUEUE_H_
 
+#include "common.h"
+
 namespace lime {
 
 /**
@@ -12,7 +14,7 @@ namespace lime {
  * @ingroup core
  **/
 template <class T>
-class random_queue {
+class LIME_API random_queue {
 public:
     //! Constructor.
     random_queue();
@@ -42,7 +44,7 @@ private:
 
 }  // namespace lime
 
-#ifndef LIME_USE_STATIC_LIB
+#ifndef LIME_USE_LIBRARY
 #include "random_queue_detail.h"
 #endif
 

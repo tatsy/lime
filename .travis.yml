@@ -21,15 +21,13 @@ install:
   - sed -i -e "s/@BRANCH_NAME@/$TRAVIS_BRANCH/" Dockerfile
   - sed -i -e "s/@PULL_REQUEST@/$TRAVIS_PULL_REQUEST/" Dockerfile
   - sed -i -e "s/@PYTHON_VERSION@/$PYTHON_VERSION/" Dockerfile
+  - sed -i -e "s/@BUILD_STATIC_LIB@/$BUILD_STATIC_LIB/" Dockerfile
 
   # Build Dockerfile
   - docker build --tag=lime-env .
 
   # Run container
   - docker run --name lime-env --env="CI=true" --env="TRAVIS_JOB_ID=$TRAVIS_JOB_ID" --env="CTEST_OUTPUT_ON_FAILURE=TRUE" -itd lime-env
-
-  # Check Python module installation
-  - docker exec lime-env python -c "import lime; lime.print_version()"
 
 script:
   # Clear coverage infomation
@@ -38,11 +36,14 @@ script:
   # Run test on Docker container
   - docker exec lime-env make check
 
+  # Check Python module installation
+  - docker exec lime-env python -c "import pylime as lime; lime.print_version()"
+
 after_success:
   # Collect coverage
   - if [ $CXX = "g++"     ]; then docker exec lime-env lcov --directory . --capture --output-file coverage.info; fi
   - if [ $CXX = "clang++" ]; then docker exec lime-env lcov --directory . --capture --output-file coverage.info --gcov-tool llvm-cov; fi
-  - docker exec lime-env lcov --remove coverage.info 'tests/*' 'examples/*' '/usr/*' 'CMakeFiles/*' --output-file coverage.info
+  - docker exec lime-env lcov --remove coverage.info 'tests/*' 'examples/*' '/usr/*' '/opt/*' 'CMakeFiles/*' --output-file coverage.info
   - docker exec lime-env lcov --list coverage.info
   - docker exec lime-env coveralls-lcov --repo-token c6Fd5h2Ovd2c5PV7agagA89sUhsZCwIPR coverage.info
 
@@ -53,12 +54,12 @@ before_deploy:
   - git config --global user.email "travis@travis-ci.org"
   - sudo apt-get -qq install doxygen
   - wget -q https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-  - bash miniconda.sh -b -p $HOME/anaconda
-  - export PATH="$HOME/anaconda/bin:$PATH"
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - export PATH="$HOME/miniconda/bin:$PATH"
   - conda update --yes conda
   - conda install --yes sphinx
   - pip install breathe sphinx_rtd_theme
-  - patch -u $HOME/anaconda/lib/python3.6/site-packages/breathe/renderer/sphinxrenderer.py < docs/sphinxrenderer.py.patch
+#  - patch -u $HOME/miniconda/lib/python3.6/site-packages/breathe/renderer/sphinxrenderer.py < docs/sphinxrenderer.py.patch
   - cd docs && sh ./deploy_docs.sh && cd -
   - mkdir packages
   - tar czvf packages/releases-v${LIME_VERSION}.tar.gz $(ls -I packages)
@@ -77,17 +78,19 @@ deploy:
   on:
     tags: false
     branch: master
-    condition: "$CXX = clang++ && $PYTHON_VERSION = 3.5"
+    condition: "$CXX = clang++ && $BUILD_STATIC_LIB = OFF && $PYTHON_VERSION = 3.5"
 
 branches:
   only:
     - master
-    - development
+    - dev
 
 env:
   matrix:
-    - PYTHON_VERSION=2.7
-    - PYTHON_VERSION=3.5
+    - BUILD_STATIC_LIB=OFF PYTHON_VERSION=2.7
+    - BUILD_STATIC_LIB=OFF PYTHON_VERSION=3.5
+    - BUILD_STATIC_LIB=ON PYTHON_VERSION=2.7
+    - BUILD_STATIC_LIB=ON PYTHON_VERSION=3.5
 
 notifications:
     email:
