@@ -14,7 +14,7 @@ endif()
 # Set version string
 # ------------------------------------------------------------------------------
 set(LIME_MAJOR_VERSION 0)
-set(LIME_MINOR_VERSION 3)
+set(LIME_MINOR_VERSION 4)
 set(LIME_PATCH_VERSION 0)
 set(LIME_VERSION "${LIME_MAJOR_VERSION}.${LIME_MINOR_VERSION}.${LIME_PATCH_VERSION}")
 message(STATUS "LIME v${LIME_VERSION}")
