@@ -38,6 +38,11 @@ endif()
 # ------------------------------------------------------------------------------
 # Build settings
 # ------------------------------------------------------------------------------
+set(CMAKE_CXX_STANDARD 17)
+if (NOT MSVC)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
+endif()
+
 if (${LIME_BUILD_TESTS})
   find_package(GTest REQUIRED)
   if (NOT WIN32)
