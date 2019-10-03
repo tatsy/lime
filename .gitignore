@@ -11,6 +11,12 @@ VERSION
 *.jpeg
 *.gif
 
+# VisualStudio code
+.vs/*
+
+# IntelliJ
+.idea/*
+
 # System swap file (MacOS)
 *.swp
 

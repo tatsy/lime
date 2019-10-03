@@ -10,6 +10,7 @@ if (${LIME_BUILD_STATIC_LIB})
   add_folder(SOURCE_FILES core INSTALL)
   add_folder(SOURCE_FILES npr INSTALL)
   add_folder(SOURCE_FILES misc INSTALL)
+  add_folder(SOURCE_FILES metrics INSTALL)
   
   include_directories(${OpenCV_INCLUDE_DIRS})
   add_library(${LIME_LIBRARY} STATIC ${SOURCE_FILES})

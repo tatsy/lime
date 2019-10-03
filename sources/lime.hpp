@@ -12,6 +12,8 @@
 #include "core/random.h"
 #include "core/random_queue.h"
 
+#include "metrics/basics.h"
+
 #include "misc/color_constancy.h"
 
 #include "npr/kuwahara.h"

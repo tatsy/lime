@@ -14,7 +14,7 @@ endif()
 # Set version string
 # ------------------------------------------------------------------------------
 set(LIME_MAJOR_VERSION 0)
-set(LIME_MINOR_VERSION 4)
+set(LIME_MINOR_VERSION 5)
 set(LIME_PATCH_VERSION 0)
 set(LIME_VERSION "${LIME_MAJOR_VERSION}.${LIME_MINOR_VERSION}.${LIME_PATCH_VERSION}")
 message(STATUS "LIME v${LIME_VERSION}")
@@ -52,6 +52,11 @@ endif()
 # ------------------------------------------------------------------------------
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+if (MSVC)
+  add_definitions("-D_CRT_SECURE_NO_WARNINGS")
+endif()
+
 if (NOT MSVC)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 endif()
