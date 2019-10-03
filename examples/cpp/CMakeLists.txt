@@ -4,6 +4,7 @@ endif()
 
 message(STATUS "[ LIME ] Build examples.")
 add_example(color_constancy)
+add_example(colormap)
 add_example(flow_field_design)
 add_example(npr_filters)
 add_example(pencil_drawing)

@@ -47,6 +47,15 @@ This library supports following methods.
     * Uniform noise
     * Perlin noise
 
+### Image Assessment
+
+* Mean squared error (MSE)
+* Root mean squared error (RMSE)
+* Peak signal-to-noise ratio (PSNR)
+* Structural similarity (SSIM)
+* Multi-scale structural similarity (MS-SSIM)
+* Color multi-scale structural similarity (CM-SSIM)
+
 ## Samples
 
 You can compile all the samples using CMake!

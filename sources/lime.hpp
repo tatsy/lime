@@ -7,6 +7,7 @@
 #define _LIBRARY_FOR_IMAGE_EDITING_H_
 
 #include "core/array2d.h"
+#include "core/colormap.h"
 #include "core/common.h"
 #include "core/point.h"
 #include "core/random.h"
