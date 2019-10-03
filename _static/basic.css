@@ -4,11 +4,7 @@
  *
  * Sphinx stylesheet -- basic theme.
  *
-<<<<<<< HEAD
- * :copyright: Copyright 2007-2018 by the Sphinx team, see AUTHORS.
-=======
  * :copyright: Copyright 2007-2019 by the Sphinx team, see AUTHORS.
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
  * :license: BSD, see LICENSE for details.
  *
  */
@@ -94,7 +90,6 @@ div.sphinxsidebar #searchbox input[type="text"] {
     width: 80%;
     padding: 0.25em;
     box-sizing: border-box;
-<<<<<<< HEAD
 }
 
 div.sphinxsidebar #searchbox input[type="submit"] {
@@ -105,18 +100,6 @@ div.sphinxsidebar #searchbox input[type="submit"] {
     box-sizing: border-box;
 }
 
-=======
-}
-
-div.sphinxsidebar #searchbox input[type="submit"] {
-    float: left;
-    width: 20%;
-    border-left: none;
-    padding: 0.25em;
-    box-sizing: border-box;
-}
-
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 
 img {
     border: 0;
@@ -395,14 +378,11 @@ table.align-center {
     margin-right: auto;
 }
 
-<<<<<<< HEAD
-=======
 table.align-default {
     margin-left: auto;
     margin-right: auto;
 }
 
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 table caption span.caption-number {
     font-style: italic;
 }
@@ -485,8 +465,6 @@ table.field-list td, table.field-list th {
     -webkit-hyphens: manual;
     hyphens: manual;
 }
-<<<<<<< HEAD
-=======
 
 /* -- hlist styles ---------------------------------------------------------- */
 
@@ -494,7 +472,6 @@ table.hlist td {
     vertical-align: top;
 }
 
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 
 /* -- other body styles ----------------------------------------------------- */
 

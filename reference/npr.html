@@ -8,11 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-<<<<<<< HEAD
-  <title>NPR module &mdash; LIME 0.3.0 documentation</title>
-=======
-  <title>NPR module &mdash; LIME 0.4.0 documentation</title>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
+  <title>NPR module &mdash; LIME 0.5.0 documentation</title>
   
 
   
@@ -21,15 +17,7 @@
   
 
   
-<<<<<<< HEAD
-
-  
-  
-    
-
-=======
   <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -41,16 +29,7 @@
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-<<<<<<< HEAD
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Misc module" href="misc.html" />
-    <link rel="prev" title="Core module" href="core.html" /> 
-=======
     
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
@@ -82,11 +61,7 @@
             
             
               <div class="version">
-<<<<<<< HEAD
-                0.3.0
-=======
-                0.4.0
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
+                0.5.0
               </div>
             
           
@@ -200,17 +175,6 @@
 <div class="section" id="kuwahara-filter">
 <h2>Kuwahara filter<a class="headerlink" href="#kuwahara-filter" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
-<<<<<<< HEAD
-<dt id="_CPPv3N4lime14kuwaharaFilterEN2cv10InputArrayEN2cv11OutputArrayEiii">
-<span id="_CPPv2N4lime14kuwaharaFilterEN2cv10InputArrayEN2cv11OutputArrayEiii"></span><span id="lime::kuwaharaFilter__cv::InputArray.cv::OutputArray.i.i.i"></span><span class="target" id="namespacelime_1a31f4550c6b079ba183e20e3dcba698e6"></span>void <code class="descclassname">lime<code class="descclassname">::</code></code><code class="descname">kuwaharaFilter</code><span class="sig-paren">(</span>cv::InputArray <em>src</em>, cv::OutputArray <em>dst</em>, int <em>type</em>, int <em>ksize</em>, int <em>nDivide</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4lime14kuwaharaFilterEN2cv10InputArrayEN2cv11OutputArrayEiii" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Apply Kuwahara filter to the image. </p>
-<p><strong>Parameters</strong> <ul class="simple">
-<li><strong>src:</strong> Input image. </li>
-<li><strong>dst:</strong> Output image. </li>
-<li><strong>type:</strong> Kuwahara filter type (see <code class="docutils literal notranslate"><a class="reference internal" href="#namespacelime_1aad67d1ed82514a53bfe9f9e0789436b0"><span class="std std-ref"><span class="pre">lime::KuwaharaType</span></span></a></code> ). </li>
-<li><strong>ksize:</strong> Kernel size of the filter. </li>
-<li><strong>nDivide:</strong> # of orientation divisions (not used for <code class="docutils literal notranslate"><span class="pre">KUWAHARA_CLASSICAL</span></code>).</li>
-=======
 <dt id="_CPPv4N4lime14kuwaharaFilterEN2cv10InputArrayEN2cv11OutputArrayEiii">
 <span id="_CPPv3N4lime14kuwaharaFilterEN2cv10InputArrayEN2cv11OutputArrayEiii"></span><span id="_CPPv2N4lime14kuwaharaFilterEN2cv10InputArrayEN2cv11OutputArrayEiii"></span><span id="lime::kuwaharaFilter__cv::InputArray.cv::OutputArray.i.i.i"></span><span class="target" id="namespacelime_1a31f4550c6b079ba183e20e3dcba698e6"></span>void <code class="sig-prename descclassname">lime<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">kuwaharaFilter</code><span class="sig-paren">(</span>cv::InputArray <em>src</em>, cv::OutputArray <em>dst</em>, int <em>type</em>, int <em>ksize</em>, int <em>nDivide</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4lime14kuwaharaFilterEN2cv10InputArrayEN2cv11OutputArrayEiii" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Apply Kuwahara filter to the image. </p>
@@ -220,7 +184,6 @@
 <li><p><strong>type:</strong> Kuwahara filter type (see <code class="docutils literal notranslate"><a class="reference internal" href="#namespacelime_1aad67d1ed82514a53bfe9f9e0789436b0"><span class="std std-ref"><span class="pre">lime::KuwaharaType</span></span></a></code> ). </p></li>
 <li><p><strong>ksize:</strong> Kernel size of the filter. </p></li>
 <li><p><strong>nDivide:</strong> # of orientation divisions (not used for <code class="docutils literal notranslate"><span class="pre">KUWAHARA_CLASSICAL</span></code>).</p></li>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 </ul>
 <strong>Python</strong> </p>
 <p><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dst</span> <span class="o">=</span> <span class="n">lime</span><span class="o">.</span><span class="n">kuwaharaFilter</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">ftype</span><span class="p">,</span> <span class="n">ksize</span><span class="p">,</span> <span class="n">ndivide</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
@@ -228,33 +191,15 @@
 </div>
 </p>
 <p><strong>Parameters</strong> <ul class="simple">
-<<<<<<< HEAD
-<li><strong>src</strong> - <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> : The floating-point, 1 or 3-channel image. </li>
-<li><strong>ftype</strong> - <code class="docutils literal notranslate"><span class="pre">int</span></code> : Chosen from <code class="docutils literal notranslate"><a class="reference internal" href="#namespacelime_1aad67d1ed82514a53bfe9f9e0789436b0"><span class="std std-ref"><span class="pre">lime::KuwaharaType</span></span></a></code> . </li>
-<li><strong>ksize</strong> - <code class="docutils literal notranslate"><span class="pre">int</span></code> </li>
-<li><strong>ndivide</strong> - <code class="docutils literal notranslate"><span class="pre">int</span></code> <strong>Returns</strong> </li>
-<li><strong>dst</strong> - <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> : The destination image; will have the same types as <strong>src</strong>. </li>
-=======
 <li><p><strong>src</strong> - <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> : The floating-point, 1 or 3-channel image. </p></li>
 <li><p><strong>ftype</strong> - <code class="docutils literal notranslate"><span class="pre">int</span></code> : Chosen from <code class="docutils literal notranslate"><a class="reference internal" href="#namespacelime_1aad67d1ed82514a53bfe9f9e0789436b0"><span class="std std-ref"><span class="pre">lime::KuwaharaType</span></span></a></code> . </p></li>
 <li><p><strong>ksize</strong> - <code class="docutils literal notranslate"><span class="pre">int</span></code> </p></li>
 <li><p><strong>ndivide</strong> - <code class="docutils literal notranslate"><span class="pre">int</span></code> <strong>Returns</strong> </p></li>
 <li><p><strong>dst</strong> - <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> : The destination image; will have the same types as <strong>src</strong>. </p></li>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 </ul>
 </p>
 </dd></dl>
 
-<<<<<<< HEAD
-<dl class="type">
-<dt id="_CPPv3N4lime12KuwaharaTypeE">
-<span id="_CPPv2N4lime12KuwaharaTypeE"></span><span id="lime::KuwaharaType"></span><span class="target" id="namespacelime_1aad67d1ed82514a53bfe9f9e0789436b0"></span><em class="property">enum </em><code class="descclassname">lime<code class="descclassname">::</code></code><code class="descname">KuwaharaType</code><a class="headerlink" href="#_CPPv3N4lime12KuwaharaTypeE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Kuwahara filter types. </p>
-<p><em>Values:</em></p>
-<dl class="enumerator">
-<dt id="_CPPv3N4lime18KUWAHARA_CLASSICALE">
-<span id="_CPPv2N4lime18KUWAHARA_CLASSICALE"></span><span class="target" id="namespacelime_1aad67d1ed82514a53bfe9f9e0789436b0a143f9e77515ebcee4e44acbb2c733792"></span><code class="descname">KUWAHARA_CLASSICAL</code><a class="headerlink" href="#_CPPv3N4lime18KUWAHARA_CLASSICALE" title="Permalink to this definition">¶</a><br /></dt>
-=======
 <dl class="enum">
 <dt id="_CPPv4N4lime12KuwaharaTypeE">
 <span id="_CPPv3N4lime12KuwaharaTypeE"></span><span id="_CPPv2N4lime12KuwaharaTypeE"></span><span class="target" id="namespacelime_1aad67d1ed82514a53bfe9f9e0789436b0"></span><em class="property">enum </em><code class="sig-prename descclassname">lime<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">KuwaharaType</code><a class="headerlink" href="#_CPPv4N4lime12KuwaharaTypeE" title="Permalink to this definition">¶</a><br /></dt>
@@ -263,29 +208,18 @@
 <dl class="enumerator">
 <dt id="_CPPv4N4lime18KUWAHARA_CLASSICALE">
 <span id="_CPPv3N4lime18KUWAHARA_CLASSICALE"></span><span id="_CPPv2N4lime18KUWAHARA_CLASSICALE"></span><span class="target" id="namespacelime_1aad67d1ed82514a53bfe9f9e0789436b0a143f9e77515ebcee4e44acbb2c733792"></span><code class="sig-name descname">KUWAHARA_CLASSICAL</code><a class="headerlink" href="#_CPPv4N4lime18KUWAHARA_CLASSICALE" title="Permalink to this definition">¶</a><br /></dt>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 <dd><p>Classical Kuwahara filter. </p>
 </dd></dl>
 
 <dl class="enumerator">
-<<<<<<< HEAD
-<dt id="_CPPv3N4lime20KUWAHARA_GENERALIZEDE">
-<span id="_CPPv2N4lime20KUWAHARA_GENERALIZEDE"></span><span class="target" id="namespacelime_1aad67d1ed82514a53bfe9f9e0789436b0ad52d99b7a8834629278f57480c28416b"></span><code class="descname">KUWAHARA_GENERALIZED</code><a class="headerlink" href="#_CPPv3N4lime20KUWAHARA_GENERALIZEDE" title="Permalink to this definition">¶</a><br /></dt>
-=======
 <dt id="_CPPv4N4lime20KUWAHARA_GENERALIZEDE">
 <span id="_CPPv3N4lime20KUWAHARA_GENERALIZEDE"></span><span id="_CPPv2N4lime20KUWAHARA_GENERALIZEDE"></span><span class="target" id="namespacelime_1aad67d1ed82514a53bfe9f9e0789436b0ad52d99b7a8834629278f57480c28416b"></span><code class="sig-name descname">KUWAHARA_GENERALIZED</code><a class="headerlink" href="#_CPPv4N4lime20KUWAHARA_GENERALIZEDE" title="Permalink to this definition">¶</a><br /></dt>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 <dd><p>Generalized Kuwahara filter. </p>
 </dd></dl>
 
 <dl class="enumerator">
-<<<<<<< HEAD
-<dt id="_CPPv3N4lime20KUWAHARA_ANISOTROPICE">
-<span id="_CPPv2N4lime20KUWAHARA_ANISOTROPICE"></span><span class="target" id="namespacelime_1aad67d1ed82514a53bfe9f9e0789436b0a1f9ddc428fe426a6c5e2da0b7b5e7388"></span><code class="descname">KUWAHARA_ANISOTROPIC</code><a class="headerlink" href="#_CPPv3N4lime20KUWAHARA_ANISOTROPICE" title="Permalink to this definition">¶</a><br /></dt>
-=======
 <dt id="_CPPv4N4lime20KUWAHARA_ANISOTROPICE">
 <span id="_CPPv3N4lime20KUWAHARA_ANISOTROPICE"></span><span id="_CPPv2N4lime20KUWAHARA_ANISOTROPICE"></span><span class="target" id="namespacelime_1aad67d1ed82514a53bfe9f9e0789436b0a1f9ddc428fe426a6c5e2da0b7b5e7388"></span><code class="sig-name descname">KUWAHARA_ANISOTROPIC</code><a class="headerlink" href="#_CPPv4N4lime20KUWAHARA_ANISOTROPICE" title="Permalink to this definition">¶</a><br /></dt>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 <dd><p>Anisotropic Kuwahara filter. </p>
 </dd></dl>
 
@@ -295,17 +229,6 @@
 <div class="section" id="line-integral-convolution">
 <h2>Line integral convolution<a class="headerlink" href="#line-integral-convolution" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
-<<<<<<< HEAD
-<dt id="_CPPv3N4lime3LICEN2cv10InputArrayEN2cv11OutputArrayERKN2cv3MatEii">
-<span id="_CPPv2N4lime3LICEN2cv10InputArrayEN2cv11OutputArrayERKN2cv3MatEii"></span><span id="lime::LIC__cv::InputArray.cv::OutputArray.cv::MatCR.i.i"></span><span class="target" id="namespacelime_1a7ae4f818b177b8380ece5703c8d80e41"></span>void <code class="descclassname">lime<code class="descclassname">::</code></code><code class="descname">LIC</code><span class="sig-paren">(</span>cv::InputArray <em>src</em>, cv::OutputArray <em>dst</em>, <em class="property">const</em> cv::Mat &amp;<em>tangent</em>, int <em>L</em>, int <em>licType</em> = <a class="reference internal" href="#_CPPv3N4lime12LIC_EULERIANE" title="lime::LIC_EULERIAN">LIC_EULERIAN</a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4lime3LICEN2cv10InputArrayEN2cv11OutputArrayERKN2cv3MatEii" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Integrate the pixel values along flow field. </p>
-<p><strong>Parameters</strong> <ul class="simple">
-<li><strong>src:</strong> The source 8-bit or floating-point, 1-channel or 3-channel image. </li>
-<li><strong>dst:</strong> The destination image; will have the same size and the same type as <strong>src</strong>. </li>
-<li><strong>tangent:</strong> The floating-point, 2-channel image storing tangent directions of pixels. </li>
-<li><strong>L:</strong> Convolution length. </li>
-<li><strong>licType:</strong> The algorithm used for the convolution (see <code class="docutils literal notranslate"><a class="reference internal" href="#namespacelime_1ac55877b56e2cc8e2a057940fa5091b46"><span class="std std-ref"><span class="pre">lime::LICType</span></span></a></code> ).</li>
-=======
 <dt id="_CPPv4N4lime3LICEN2cv10InputArrayEN2cv11OutputArrayERKN2cv3MatEii">
 <span id="_CPPv3N4lime3LICEN2cv10InputArrayEN2cv11OutputArrayERKN2cv3MatEii"></span><span id="_CPPv2N4lime3LICEN2cv10InputArrayEN2cv11OutputArrayERKN2cv3MatEii"></span><span id="lime::LIC__cv::InputArray.cv::OutputArray.cv::MatCR.i.i"></span><span class="target" id="namespacelime_1a7ae4f818b177b8380ece5703c8d80e41"></span>void <code class="sig-prename descclassname">lime<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">LIC</code><span class="sig-paren">(</span>cv::InputArray <em>src</em>, cv::OutputArray <em>dst</em>, <em class="property">const</em> cv::Mat &amp;<em>tangent</em>, int <em>L</em>, int <em>licType</em> = <a class="reference internal" href="#_CPPv4N4lime12LIC_EULERIANE" title="lime::LIC_EULERIAN">LIC_EULERIAN</a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4lime3LICEN2cv10InputArrayEN2cv11OutputArrayERKN2cv3MatEii" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Integrate the pixel values along flow field. </p>
@@ -315,7 +238,6 @@
 <li><p><strong>tangent:</strong> The floating-point, 2-channel image storing tangent directions of pixels. </p></li>
 <li><p><strong>L:</strong> Convolution length. </p></li>
 <li><p><strong>licType:</strong> The algorithm used for the convolution (see <code class="docutils literal notranslate"><a class="reference internal" href="#namespacelime_1ac55877b56e2cc8e2a057940fa5091b46"><span class="std std-ref"><span class="pre">lime::LICType</span></span></a></code> ).</p></li>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 </ul>
 <strong>Python</strong> </p>
 <p><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dst</span> <span class="o">=</span> <span class="n">lime</span><span class="o">.</span><span class="n">LIC</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">lictype</span> <span class="o">=</span> <span class="n">lime</span><span class="o">.</span><span class="n">LIC_EULERIAN</span><span class="p">)</span>
@@ -323,35 +245,16 @@
 </div>
 </p>
 <p><strong>Parameters</strong> <ul class="simple">
-<<<<<<< HEAD
-<li><strong>src</strong> - <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> : 1 or 3-channel, floating-point image. </li>
-<li><strong>L</strong> - <code class="docutils literal notranslate"><span class="pre">int</span></code> </li>
-<li><strong>lictype</strong> - <code class="docutils literal notranslate"><span class="pre">int</span></code> : Chosen from <code class="docutils literal notranslate"><a class="reference internal" href="#namespacelime_1ac55877b56e2cc8e2a057940fa5091b46"><span class="std std-ref"><span class="pre">lime::LICType</span></span></a></code> </li>
-</ul>
-<strong>Returns</strong> <ul class="simple">
-<li><strong>dst</strong> - <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> : The same type with <strong>src</strong>. </li>
-=======
 <li><p><strong>src</strong> - <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> : 1 or 3-channel, floating-point image. </p></li>
 <li><p><strong>L</strong> - <code class="docutils literal notranslate"><span class="pre">int</span></code> </p></li>
 <li><p><strong>lictype</strong> - <code class="docutils literal notranslate"><span class="pre">int</span></code> : Chosen from <code class="docutils literal notranslate"><a class="reference internal" href="#namespacelime_1ac55877b56e2cc8e2a057940fa5091b46"><span class="std std-ref"><span class="pre">lime::LICType</span></span></a></code> </p></li>
 </ul>
 <strong>Returns</strong> <ul class="simple">
 <li><p><strong>dst</strong> - <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> : The same type with <strong>src</strong>. </p></li>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 </ul>
 </p>
 </dd></dl>
 
-<<<<<<< HEAD
-<dl class="type">
-<dt id="_CPPv3N4lime7LICTypeE">
-<span id="_CPPv2N4lime7LICTypeE"></span><span id="lime::LICType"></span><span class="target" id="namespacelime_1ac55877b56e2cc8e2a057940fa5091b46"></span><em class="property">enum </em><code class="descclassname">lime<code class="descclassname">::</code></code><code class="descname">LICType</code><a class="headerlink" href="#_CPPv3N4lime7LICTypeE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>LIC algorithm types, which represent methods to generate integration paths. </p>
-<p><em>Values:</em></p>
-<dl class="enumerator">
-<dt id="_CPPv3N4lime13LIC_CLASSICALE">
-<span id="_CPPv2N4lime13LIC_CLASSICALE"></span><span class="target" id="namespacelime_1ac55877b56e2cc8e2a057940fa5091b46a41c149dbadcae4aaa3b3498b90b363d1"></span><code class="descname">LIC_CLASSICAL</code><a class="headerlink" href="#_CPPv3N4lime13LIC_CLASSICALE" title="Permalink to this definition">¶</a><br /></dt>
-=======
 <dl class="enum">
 <dt id="_CPPv4N4lime7LICTypeE">
 <span id="_CPPv3N4lime7LICTypeE"></span><span id="_CPPv2N4lime7LICTypeE"></span><span class="target" id="namespacelime_1ac55877b56e2cc8e2a057940fa5091b46"></span><em class="property">enum </em><code class="sig-prename descclassname">lime<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">LICType</code><a class="headerlink" href="#_CPPv4N4lime7LICTypeE" title="Permalink to this definition">¶</a><br /></dt>
@@ -360,50 +263,30 @@
 <dl class="enumerator">
 <dt id="_CPPv4N4lime13LIC_CLASSICALE">
 <span id="_CPPv3N4lime13LIC_CLASSICALE"></span><span id="_CPPv2N4lime13LIC_CLASSICALE"></span><span class="target" id="namespacelime_1ac55877b56e2cc8e2a057940fa5091b46a41c149dbadcae4aaa3b3498b90b363d1"></span><code class="sig-name descname">LIC_CLASSICAL</code><a class="headerlink" href="#_CPPv4N4lime13LIC_CLASSICALE" title="Permalink to this definition">¶</a><br /></dt>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 <dd><p>Slow but outputs beautiful vector fields. </p>
 </dd></dl>
 
 <dl class="enumerator">
-<<<<<<< HEAD
-<dt id="_CPPv3N4lime12LIC_EULERIANE">
-<span id="_CPPv2N4lime12LIC_EULERIANE"></span><span class="target" id="namespacelime_1ac55877b56e2cc8e2a057940fa5091b46a770c6197f5786e2e0f56c5721c51ec1d"></span><code class="descname">LIC_EULERIAN</code><a class="headerlink" href="#_CPPv3N4lime12LIC_EULERIANE" title="Permalink to this definition">¶</a><br /></dt>
-=======
 <dt id="_CPPv4N4lime12LIC_EULERIANE">
 <span id="_CPPv3N4lime12LIC_EULERIANE"></span><span id="_CPPv2N4lime12LIC_EULERIANE"></span><span class="target" id="namespacelime_1ac55877b56e2cc8e2a057940fa5091b46a770c6197f5786e2e0f56c5721c51ec1d"></span><code class="sig-name descname">LIC_EULERIAN</code><a class="headerlink" href="#_CPPv4N4lime12LIC_EULERIANE" title="Permalink to this definition">¶</a><br /></dt>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 <dd><p>Fast and stable algorithm. </p>
 </dd></dl>
 
 <dl class="enumerator">
-<<<<<<< HEAD
-<dt id="_CPPv3N4lime15LIC_RUNGE_KUTTAE">
-<span id="_CPPv2N4lime15LIC_RUNGE_KUTTAE"></span><span class="target" id="namespacelime_1ac55877b56e2cc8e2a057940fa5091b46a363c2d66dd28035a9cd950e647ae1627"></span><code class="descname">LIC_RUNGE_KUTTA</code><a class="headerlink" href="#_CPPv3N4lime15LIC_RUNGE_KUTTAE" title="Permalink to this definition">¶</a><br /></dt>
-=======
 <dt id="_CPPv4N4lime15LIC_RUNGE_KUTTAE">
 <span id="_CPPv3N4lime15LIC_RUNGE_KUTTAE"></span><span id="_CPPv2N4lime15LIC_RUNGE_KUTTAE"></span><span class="target" id="namespacelime_1ac55877b56e2cc8e2a057940fa5091b46a363c2d66dd28035a9cd950e647ae1627"></span><code class="sig-name descname">LIC_RUNGE_KUTTA</code><a class="headerlink" href="#_CPPv4N4lime15LIC_RUNGE_KUTTAE" title="Permalink to this definition">¶</a><br /></dt>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 <dd><p>Second-order line integration. </p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="function">
-<<<<<<< HEAD
-<dt id="_CPPv3N4lime12angle2vectorEN2cv10InputArrayEN2cv11OutputArrayEd">
-<span id="_CPPv2N4lime12angle2vectorEN2cv10InputArrayEN2cv11OutputArrayEd"></span><span id="lime::angle2vector__cv::InputArray.cv::OutputArray.double"></span><span class="target" id="namespacelime_1a55eaf129bbdda01c6a89eb7d9fc0c747"></span>void <code class="descclassname">lime<code class="descclassname">::</code></code><code class="descname">angle2vector</code><span class="sig-paren">(</span>cv::InputArray <em>angle</em>, cv::OutputArray <em>vfield</em>, double <em>scale</em> = 1.0<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4lime12angle2vectorEN2cv10InputArrayEN2cv11OutputArrayEd" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Converts flow orientation angle to vector field. </p>
-<p><strong>Parameters</strong> <ul class="simple">
-<li><strong>angle:</strong> The floating-point, 1-channel image storing orientation angle in <span class="math notranslate nohighlight">\([0, 2\pi\)</span>]. </li>
-<li><strong>vfield:</strong> The destination image; will have floating-point, 2-channel normalized vector values.</li>
-=======
 <dt id="_CPPv4N4lime12angle2vectorEN2cv10InputArrayEN2cv11OutputArrayEd">
 <span id="_CPPv3N4lime12angle2vectorEN2cv10InputArrayEN2cv11OutputArrayEd"></span><span id="_CPPv2N4lime12angle2vectorEN2cv10InputArrayEN2cv11OutputArrayEd"></span><span id="lime::angle2vector__cv::InputArray.cv::OutputArray.double"></span><span class="target" id="namespacelime_1a55eaf129bbdda01c6a89eb7d9fc0c747"></span>void <code class="sig-prename descclassname">lime<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">angle2vector</code><span class="sig-paren">(</span>cv::InputArray <em>angle</em>, cv::OutputArray <em>vfield</em>, double <em>scale</em> = 1.0<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4lime12angle2vectorEN2cv10InputArrayEN2cv11OutputArrayEd" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Converts flow orientation angle to vector field. </p>
 <p><strong>Parameters</strong> <ul class="simple">
 <li><p><strong>angle:</strong> The floating-point, 1-channel image storing orientation angle in <span class="math notranslate nohighlight">\([0, 2\pi\)</span>]. </p></li>
 <li><p><strong>vfield:</strong> The destination image; will have floating-point, 2-channel normalized vector values.</p></li>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 </ul>
 <strong>Python</strong> This method is equivalent to following.</p>
 <p><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vfield</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">((</span><span class="n">angle</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">angle</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
@@ -415,13 +298,8 @@
 </dd></dl>
 
 <dl class="function">
-<<<<<<< HEAD
-<dt id="_CPPv3N4lime12vector2angleEN2cv10InputArrayEN2cv11OutputArrayE">
-<span id="_CPPv2N4lime12vector2angleEN2cv10InputArrayEN2cv11OutputArrayE"></span><span id="lime::vector2angle__cv::InputArray.cv::OutputArray"></span><span class="target" id="namespacelime_1a0a42d7e727ff63c3d2277e027721d798"></span>void <code class="descclassname">lime<code class="descclassname">::</code></code><code class="descname">vector2angle</code><span class="sig-paren">(</span>cv::InputArray <em>vfield</em>, cv::OutputArray <em>angle</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4lime12vector2angleEN2cv10InputArrayEN2cv11OutputArrayE" title="Permalink to this definition">¶</a><br /></dt>
-=======
 <dt id="_CPPv4N4lime12vector2angleEN2cv10InputArrayEN2cv11OutputArrayE">
 <span id="_CPPv3N4lime12vector2angleEN2cv10InputArrayEN2cv11OutputArrayE"></span><span id="_CPPv2N4lime12vector2angleEN2cv10InputArrayEN2cv11OutputArrayE"></span><span id="lime::vector2angle__cv::InputArray.cv::OutputArray"></span><span class="target" id="namespacelime_1a0a42d7e727ff63c3d2277e027721d798"></span>void <code class="sig-prename descclassname">lime<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">vector2angle</code><span class="sig-paren">(</span>cv::InputArray <em>vfield</em>, cv::OutputArray <em>angle</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4lime12vector2angleEN2cv10InputArrayEN2cv11OutputArrayE" title="Permalink to this definition">¶</a><br /></dt>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 <dd><p>Converts vector field to orientation angles. </p>
 <p><strong>Parameters</strong> <ul class="simple">
 <li><p><strong>vfield:</strong> The floating-point, 2-channel image storing normalized vector values. </p></li>
@@ -438,16 +316,6 @@
 <div class="section" id="morphological-filter">
 <h2>Morphological filter<a class="headerlink" href="#morphological-filter" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
-<<<<<<< HEAD
-<dt id="_CPPv3N4lime11morphFilterEN2cv10InputArrayEN2cv11OutputArrayEii">
-<span id="_CPPv2N4lime11morphFilterEN2cv10InputArrayEN2cv11OutputArrayEii"></span><span id="lime::morphFilter__cv::InputArray.cv::OutputArray.i.i"></span><span class="target" id="namespacelime_1a991e4609b746d718466bc7c5425deec5"></span>void <code class="descclassname">lime<code class="descclassname">::</code></code><code class="descname">morphFilter</code><span class="sig-paren">(</span>cv::InputArray <em>src</em>, cv::OutputArray <em>dst</em>, int <em>type</em>, int <em>ksize</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4lime11morphFilterEN2cv10InputArrayEN2cv11OutputArrayEii" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Image filtering with mathematical morphology. </p>
-<p><strong>Parameters</strong> <ul class="simple">
-<li><strong>src:</strong> The floating-point, 1 or 3-channel image. </li>
-<li><strong>dst:</strong> The destination image; will have the same type as <strong>src</strong>. </li>
-<li><strong>type:</strong> The type of morphology operation (see <code class="docutils literal notranslate"><a class="reference internal" href="#namespacelime_1abab917423134b11b147af68d2ce6f828"><span class="std std-ref"><span class="pre">lime::MorphType</span></span></a></code> ). </li>
-<li><strong>ksize:</strong> Kernel size of the filter.</li>
-=======
 <dt id="_CPPv4N4lime11morphFilterEN2cv10InputArrayEN2cv11OutputArrayEii">
 <span id="_CPPv3N4lime11morphFilterEN2cv10InputArrayEN2cv11OutputArrayEii"></span><span id="_CPPv2N4lime11morphFilterEN2cv10InputArrayEN2cv11OutputArrayEii"></span><span id="lime::morphFilter__cv::InputArray.cv::OutputArray.i.i"></span><span class="target" id="namespacelime_1a991e4609b746d718466bc7c5425deec5"></span>void <code class="sig-prename descclassname">lime<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">morphFilter</code><span class="sig-paren">(</span>cv::InputArray <em>src</em>, cv::OutputArray <em>dst</em>, int <em>type</em>, int <em>ksize</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4lime11morphFilterEN2cv10InputArrayEN2cv11OutputArrayEii" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Image filtering with mathematical morphology. </p>
@@ -456,7 +324,6 @@
 <li><p><strong>dst:</strong> The destination image; will have the same type as <strong>src</strong>. </p></li>
 <li><p><strong>type:</strong> The type of morphology operation (see <code class="docutils literal notranslate"><a class="reference internal" href="#namespacelime_1abab917423134b11b147af68d2ce6f828"><span class="std std-ref"><span class="pre">lime::MorphType</span></span></a></code> ). </p></li>
 <li><p><strong>ksize:</strong> Kernel size of the filter.</p></li>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 </ul>
 <strong>Python</strong> </p>
 <p><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dst</span> <span class="o">=</span> <span class="n">lime</span><span class="o">.</span><span class="n">morphFilter</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">ftype</span><span class="p">,</span> <span class="n">ksize</span><span class="p">)</span>
@@ -464,35 +331,16 @@
 </div>
 </p>
 <p><strong>Parameters</strong> <ul class="simple">
-<<<<<<< HEAD
-<li><strong>src</strong> - <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> : The floating-point, 1 or 3-channel image. </li>
-<li><strong>ftype</strong> - <code class="docutils literal notranslate"><span class="pre">int</span></code> : Chosen from <code class="docutils literal notranslate"><a class="reference internal" href="#namespacelime_1abab917423134b11b147af68d2ce6f828"><span class="std std-ref"><span class="pre">lime::MorphType</span></span></a></code> . </li>
-<li><strong>ksize</strong> - <code class="docutils literal notranslate"><span class="pre">int</span></code> : Kernel size.</li>
-</ul>
-<strong>Returns</strong> <ul class="simple">
-<li><strong>dst</strong> - <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> : The destination image with the same type as <strong>src</strong>. </li>
-=======
 <li><p><strong>src</strong> - <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> : The floating-point, 1 or 3-channel image. </p></li>
 <li><p><strong>ftype</strong> - <code class="docutils literal notranslate"><span class="pre">int</span></code> : Chosen from <code class="docutils literal notranslate"><a class="reference internal" href="#namespacelime_1abab917423134b11b147af68d2ce6f828"><span class="std std-ref"><span class="pre">lime::MorphType</span></span></a></code> . </p></li>
 <li><p><strong>ksize</strong> - <code class="docutils literal notranslate"><span class="pre">int</span></code> : Kernel size.</p></li>
 </ul>
 <strong>Returns</strong> <ul class="simple">
 <li><p><strong>dst</strong> - <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> : The destination image with the same type as <strong>src</strong>. </p></li>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 </ul>
 </p>
 </dd></dl>
 
-<<<<<<< HEAD
-<dl class="type">
-<dt id="_CPPv3N4lime9MorphTypeE">
-<span id="_CPPv2N4lime9MorphTypeE"></span><span id="lime::MorphType"></span><span class="target" id="namespacelime_1abab917423134b11b147af68d2ce6f828"></span><em class="property">enum </em><code class="descclassname">lime<code class="descclassname">::</code></code><code class="descname">MorphType</code><a class="headerlink" href="#_CPPv3N4lime9MorphTypeE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Morphological filter types. </p>
-<p><em>Values:</em></p>
-<dl class="enumerator">
-<dt id="_CPPv3N4lime11MORPH_ERODEE">
-<span id="_CPPv2N4lime11MORPH_ERODEE"></span><span class="target" id="namespacelime_1abab917423134b11b147af68d2ce6f828a94d7af4a86caa43520e68dba1f5ac3b0"></span><code class="descname">MORPH_ERODE</code><a class="headerlink" href="#_CPPv3N4lime11MORPH_ERODEE" title="Permalink to this definition">¶</a><br /></dt>
-=======
 <dl class="enum">
 <dt id="_CPPv4N4lime9MorphTypeE">
 <span id="_CPPv3N4lime9MorphTypeE"></span><span id="_CPPv2N4lime9MorphTypeE"></span><span class="target" id="namespacelime_1abab917423134b11b147af68d2ce6f828"></span><em class="property">enum </em><code class="sig-prename descclassname">lime<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">MorphType</code><a class="headerlink" href="#_CPPv4N4lime9MorphTypeE" title="Permalink to this definition">¶</a><br /></dt>
@@ -501,73 +349,42 @@
 <dl class="enumerator">
 <dt id="_CPPv4N4lime11MORPH_ERODEE">
 <span id="_CPPv3N4lime11MORPH_ERODEE"></span><span id="_CPPv2N4lime11MORPH_ERODEE"></span><span class="target" id="namespacelime_1abab917423134b11b147af68d2ce6f828a94d7af4a86caa43520e68dba1f5ac3b0"></span><code class="sig-name descname">MORPH_ERODE</code><a class="headerlink" href="#_CPPv4N4lime11MORPH_ERODEE" title="Permalink to this definition">¶</a><br /></dt>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 <dd><p>Erosion. </p>
 </dd></dl>
 
 <dl class="enumerator">
-<<<<<<< HEAD
-<dt id="_CPPv3N4lime12MORPH_DILATEE">
-<span id="_CPPv2N4lime12MORPH_DILATEE"></span><span class="target" id="namespacelime_1abab917423134b11b147af68d2ce6f828a69140bbe6c5459bdb08ff262a07d078e"></span><code class="descname">MORPH_DILATE</code><a class="headerlink" href="#_CPPv3N4lime12MORPH_DILATEE" title="Permalink to this definition">¶</a><br /></dt>
-=======
 <dt id="_CPPv4N4lime12MORPH_DILATEE">
 <span id="_CPPv3N4lime12MORPH_DILATEE"></span><span id="_CPPv2N4lime12MORPH_DILATEE"></span><span class="target" id="namespacelime_1abab917423134b11b147af68d2ce6f828a69140bbe6c5459bdb08ff262a07d078e"></span><code class="sig-name descname">MORPH_DILATE</code><a class="headerlink" href="#_CPPv4N4lime12MORPH_DILATEE" title="Permalink to this definition">¶</a><br /></dt>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 <dd><p>Dilation. </p>
 </dd></dl>
 
 <dl class="enumerator">
-<<<<<<< HEAD
-<dt id="_CPPv3N4lime10MORPH_OPENE">
-<span id="_CPPv2N4lime10MORPH_OPENE"></span><span class="target" id="namespacelime_1abab917423134b11b147af68d2ce6f828a31c04ef09aed6a4ea3ec84c49c5c47a8"></span><code class="descname">MORPH_OPEN</code><a class="headerlink" href="#_CPPv3N4lime10MORPH_OPENE" title="Permalink to this definition">¶</a><br /></dt>
-=======
 <dt id="_CPPv4N4lime10MORPH_OPENE">
 <span id="_CPPv3N4lime10MORPH_OPENE"></span><span id="_CPPv2N4lime10MORPH_OPENE"></span><span class="target" id="namespacelime_1abab917423134b11b147af68d2ce6f828a31c04ef09aed6a4ea3ec84c49c5c47a8"></span><code class="sig-name descname">MORPH_OPEN</code><a class="headerlink" href="#_CPPv4N4lime10MORPH_OPENE" title="Permalink to this definition">¶</a><br /></dt>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 <dd><p>Opening = <span class="math notranslate nohighlight">\( Erosion \rightarrow Dilation \)</span>. </p>
 </dd></dl>
 
 <dl class="enumerator">
-<<<<<<< HEAD
-<dt id="_CPPv3N4lime11MORPH_CLOSEE">
-<span id="_CPPv2N4lime11MORPH_CLOSEE"></span><span class="target" id="namespacelime_1abab917423134b11b147af68d2ce6f828a6eca3cd9a0063b691e652b7f8055ae6c"></span><code class="descname">MORPH_CLOSE</code><a class="headerlink" href="#_CPPv3N4lime11MORPH_CLOSEE" title="Permalink to this definition">¶</a><br /></dt>
-=======
 <dt id="_CPPv4N4lime11MORPH_CLOSEE">
 <span id="_CPPv3N4lime11MORPH_CLOSEE"></span><span id="_CPPv2N4lime11MORPH_CLOSEE"></span><span class="target" id="namespacelime_1abab917423134b11b147af68d2ce6f828a6eca3cd9a0063b691e652b7f8055ae6c"></span><code class="sig-name descname">MORPH_CLOSE</code><a class="headerlink" href="#_CPPv4N4lime11MORPH_CLOSEE" title="Permalink to this definition">¶</a><br /></dt>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 <dd><p>Closing = <span class="math notranslate nohighlight">\( Dilation \rightarrow Erosion \)</span>. </p>
 </dd></dl>
 
 <dl class="enumerator">
-<<<<<<< HEAD
-<dt id="_CPPv3N4lime14MORPH_GRADIENTE">
-<span id="_CPPv2N4lime14MORPH_GRADIENTE"></span><span class="target" id="namespacelime_1abab917423134b11b147af68d2ce6f828a1845321b7ed9e9ffa995d329b7fb6607"></span><code class="descname">MORPH_GRADIENT</code><a class="headerlink" href="#_CPPv3N4lime14MORPH_GRADIENTE" title="Permalink to this definition">¶</a><br /></dt>
-=======
 <dt id="_CPPv4N4lime14MORPH_GRADIENTE">
 <span id="_CPPv3N4lime14MORPH_GRADIENTE"></span><span id="_CPPv2N4lime14MORPH_GRADIENTE"></span><span class="target" id="namespacelime_1abab917423134b11b147af68d2ce6f828a1845321b7ed9e9ffa995d329b7fb6607"></span><code class="sig-name descname">MORPH_GRADIENT</code><a class="headerlink" href="#_CPPv4N4lime14MORPH_GRADIENTE" title="Permalink to this definition">¶</a><br /></dt>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 <dd><p>Gradient = <span class="math notranslate nohighlight">\( Dilation - Erosion \)</span>. </p>
 </dd></dl>
 
 <dl class="enumerator">
-<<<<<<< HEAD
-<dt id="_CPPv3N4lime12MORPH_TOPHATE">
-<span id="_CPPv2N4lime12MORPH_TOPHATE"></span><span class="target" id="namespacelime_1abab917423134b11b147af68d2ce6f828a707a844a9932c110a8e223831d0ebd3d"></span><code class="descname">MORPH_TOPHAT</code><a class="headerlink" href="#_CPPv3N4lime12MORPH_TOPHATE" title="Permalink to this definition">¶</a><br /></dt>
-=======
 <dt id="_CPPv4N4lime12MORPH_TOPHATE">
 <span id="_CPPv3N4lime12MORPH_TOPHATE"></span><span id="_CPPv2N4lime12MORPH_TOPHATE"></span><span class="target" id="namespacelime_1abab917423134b11b147af68d2ce6f828a707a844a9932c110a8e223831d0ebd3d"></span><code class="sig-name descname">MORPH_TOPHAT</code><a class="headerlink" href="#_CPPv4N4lime12MORPH_TOPHATE" title="Permalink to this definition">¶</a><br /></dt>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 <dd><p>Top-hat = <span class="math notranslate nohighlight">\( Input - Opening \)</span>. </p>
 </dd></dl>
 
 <dl class="enumerator">
-<<<<<<< HEAD
-<dt id="_CPPv3N4lime14MORPH_BLACKHATE">
-<span id="_CPPv2N4lime14MORPH_BLACKHATE"></span><span class="target" id="namespacelime_1abab917423134b11b147af68d2ce6f828a6e2c21f97433cc6f9a218b935172d13b"></span><code class="descname">MORPH_BLACKHAT</code><a class="headerlink" href="#_CPPv3N4lime14MORPH_BLACKHATE" title="Permalink to this definition">¶</a><br /></dt>
-=======
 <dt id="_CPPv4N4lime14MORPH_BLACKHATE">
 <span id="_CPPv3N4lime14MORPH_BLACKHATE"></span><span id="_CPPv2N4lime14MORPH_BLACKHATE"></span><span class="target" id="namespacelime_1abab917423134b11b147af68d2ce6f828a6e2c21f97433cc6f9a218b935172d13b"></span><code class="sig-name descname">MORPH_BLACKHAT</code><a class="headerlink" href="#_CPPv4N4lime14MORPH_BLACKHATE" title="Permalink to this definition">¶</a><br /></dt>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 <dd><p>Black-hat = <span class="math notranslate nohighlight">\( Input - Closing \)</span>. </p>
 </dd></dl>
 
@@ -577,13 +394,8 @@
 <div class="section" id="noise-pattern">
 <h2>Noise pattern<a class="headerlink" href="#noise-pattern" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
-<<<<<<< HEAD
-<dt id="_CPPv3N4lime11randomNoiseEN2cv11OutputArrayERKN2cv4SizeE">
-<span id="_CPPv2N4lime11randomNoiseEN2cv11OutputArrayERKN2cv4SizeE"></span><span id="lime::randomNoise__cv::OutputArray.cv::SizeCR"></span><span class="target" id="namespacelime_1a1aed72b0b10c06e0db1af1fb13500681"></span>void <code class="descclassname">lime<code class="descclassname">::</code></code><code class="descname">randomNoise</code><span class="sig-paren">(</span>cv::OutputArray <em>noise</em>, <em class="property">const</em> cv::Size &amp;<em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4lime11randomNoiseEN2cv11OutputArrayERKN2cv4SizeE" title="Permalink to this definition">¶</a><br /></dt>
-=======
 <dt id="_CPPv4N4lime11randomNoiseEN2cv11OutputArrayERKN2cv4SizeE">
 <span id="_CPPv3N4lime11randomNoiseEN2cv11OutputArrayERKN2cv4SizeE"></span><span id="_CPPv2N4lime11randomNoiseEN2cv11OutputArrayERKN2cv4SizeE"></span><span id="lime::randomNoise__cv::OutputArray.cv::SizeCR"></span><span class="target" id="namespacelime_1a1aed72b0b10c06e0db1af1fb13500681"></span>void <code class="sig-prename descclassname">lime<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">randomNoise</code><span class="sig-paren">(</span>cv::OutputArray <em>noise</em>, <em class="property">const</em> cv::Size &amp;<em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4lime11randomNoiseEN2cv11OutputArrayERKN2cv4SizeE" title="Permalink to this definition">¶</a><br /></dt>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 <dd><p>Generate random noise. </p>
 <p>Each pixel value takes random number between <span class="math notranslate nohighlight">\([0, 1]\)</span>.</p>
 <p><strong>Parameters</strong> <ul class="simple">
@@ -596,29 +408,17 @@
 </div>
 </p>
 <p><strong>Parameters</strong> <ul class="simple">
-<<<<<<< HEAD
-<li><strong>size</strong> - <code class="docutils literal notranslate"><span class="pre">tuple</span></code> of <code class="docutils literal notranslate"><span class="pre">int</span></code> : Noise image size.</li>
-</ul>
-<strong>Returns</strong> <ul class="simple">
-<li><strong>noise</strong> - <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> : The floating-point, 1-channel noise image. </li>
-=======
 <li><p><strong>size</strong> - <code class="docutils literal notranslate"><span class="pre">tuple</span></code> of <code class="docutils literal notranslate"><span class="pre">int</span></code> : Noise image size.</p></li>
 </ul>
 <strong>Returns</strong> <ul class="simple">
 <li><p><strong>noise</strong> - <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> : The floating-point, 1-channel noise image. </p></li>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 </ul>
 </p>
 </dd></dl>
 
 <dl class="function">
-<<<<<<< HEAD
-<dt id="_CPPv3N4lime11perlinNoiseEN2cv11OutputArrayERKN2cv4SizeEi">
-<span id="_CPPv2N4lime11perlinNoiseEN2cv11OutputArrayERKN2cv4SizeEi"></span><span id="lime::perlinNoise__cv::OutputArray.cv::SizeCR.i"></span><span class="target" id="namespacelime_1a334792a2b6587ca5a165c2ec1db09b38"></span>void <code class="descclassname">lime<code class="descclassname">::</code></code><code class="descname">perlinNoise</code><span class="sig-paren">(</span>cv::OutputArray <em>noise</em>, <em class="property">const</em> cv::Size &amp;<em>size</em>, int <em>level</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4lime11perlinNoiseEN2cv11OutputArrayERKN2cv4SizeEi" title="Permalink to this definition">¶</a><br /></dt>
-=======
 <dt id="_CPPv4N4lime11perlinNoiseEN2cv11OutputArrayERKN2cv4SizeEi">
 <span id="_CPPv3N4lime11perlinNoiseEN2cv11OutputArrayERKN2cv4SizeEi"></span><span id="_CPPv2N4lime11perlinNoiseEN2cv11OutputArrayERKN2cv4SizeEi"></span><span id="lime::perlinNoise__cv::OutputArray.cv::SizeCR.i"></span><span class="target" id="namespacelime_1a334792a2b6587ca5a165c2ec1db09b38"></span>void <code class="sig-prename descclassname">lime<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">perlinNoise</code><span class="sig-paren">(</span>cv::OutputArray <em>noise</em>, <em class="property">const</em> cv::Size &amp;<em>size</em>, int <em>level</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4lime11perlinNoiseEN2cv11OutputArrayERKN2cv4SizeEi" title="Permalink to this definition">¶</a><br /></dt>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 <dd><p>Generate Perlin noise. </p>
 <p><strong>Parameters</strong> <ul class="simple">
 <li><p><strong>noise:</strong> Generated noise image; will have floating-point, 1-channel pixel values. </p></li>
@@ -631,19 +431,11 @@
 </div>
 </p>
 <p><strong>Parameters</strong> <ul class="simple">
-<<<<<<< HEAD
-<li><strong>size</strong> - <code class="docutils literal notranslate"><span class="pre">tuple</span></code> of <code class="docutils literal notranslate"><span class="pre">int</span></code> : Noise image size. </li>
-<li><strong>level</strong> - <code class="docutils literal notranslate"><span class="pre">int</span></code> </li>
-</ul>
-<strong>Returns</strong> <ul class="simple">
-<li><strong>noise</strong> - <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> : The floating-point, 1-channel noise image. </li>
-=======
 <li><p><strong>size</strong> - <code class="docutils literal notranslate"><span class="pre">tuple</span></code> of <code class="docutils literal notranslate"><span class="pre">int</span></code> : Noise image size. </p></li>
 <li><p><strong>level</strong> - <code class="docutils literal notranslate"><span class="pre">int</span></code> </p></li>
 </ul>
 <strong>Returns</strong> <ul class="simple">
 <li><p><strong>noise</strong> - <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> : The floating-point, 1-channel noise image. </p></li>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 </ul>
 </p>
 </dd></dl>
@@ -652,13 +444,8 @@
 <div class="section" id="npr-edges">
 <h2>NPR edges<a class="headerlink" href="#npr-edges" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
-<<<<<<< HEAD
-<dt id="_CPPv3N4lime7edgeDoGEN2cv10InputArrayEN2cv11OutputArrayERK9DoGParams">
-<span id="_CPPv2N4lime7edgeDoGEN2cv10InputArrayEN2cv11OutputArrayERK9DoGParams"></span><span id="lime::edgeDoG__cv::InputArray.cv::OutputArray.DoGParamsCR"></span><span class="target" id="namespacelime_1a89e7379b062effc94cbfbfc31842c786"></span>void <code class="descclassname">lime<code class="descclassname">::</code></code><code class="descname">edgeDoG</code><span class="sig-paren">(</span>cv::InputArray <em>image</em>, cv::OutputArray <em>edge</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv3N4lime9DoGParamsE" title="lime::DoGParams">DoGParams</a> &amp;<em>params</em> = <a class="reference internal" href="#_CPPv3N4lime9DoGParamsE" title="lime::DoGParams">DoGParams</a>()<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4lime7edgeDoGEN2cv10InputArrayEN2cv11OutputArrayERK9DoGParams" title="Permalink to this definition">¶</a><br /></dt>
-=======
 <dt id="_CPPv4N4lime7edgeDoGEN2cv10InputArrayEN2cv11OutputArrayERK9DoGParams">
 <span id="_CPPv3N4lime7edgeDoGEN2cv10InputArrayEN2cv11OutputArrayERK9DoGParams"></span><span id="_CPPv2N4lime7edgeDoGEN2cv10InputArrayEN2cv11OutputArrayERK9DoGParams"></span><span id="lime::edgeDoG__cv::InputArray.cv::OutputArray.DoGParamsCR"></span><span class="target" id="namespacelime_1a89e7379b062effc94cbfbfc31842c786"></span>void <code class="sig-prename descclassname">lime<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">edgeDoG</code><span class="sig-paren">(</span>cv::InputArray <em>image</em>, cv::OutputArray <em>edge</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N4lime9DoGParamsE" title="lime::DoGParams">DoGParams</a> &amp;<em>params</em> = <a class="reference internal" href="#_CPPv4N4lime9DoGParamsE" title="lime::DoGParams">DoGParams</a>()<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4lime7edgeDoGEN2cv10InputArrayEN2cv11OutputArrayERK9DoGParams" title="Permalink to this definition">¶</a><br /></dt>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 <dd><p>Detecting NPR edges with DoG filter. </p>
 <p><strong>Parameters</strong> <ul class="simple">
 <li><p><strong>image:</strong> The input floating-point, 1-channel image. </p></li>
@@ -670,58 +457,30 @@
 </div>
 </p>
 <p><strong>Parameters</strong> <ul class="simple">
-<<<<<<< HEAD
-<li><strong>image</strong> - <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> : The input floating-point, 1-channel image. </li>
-<li><strong>params</strong> - <code class="docutils literal notranslate"><span class="pre">dict</span></code> : Stores the pair of parameter names and corresponding values.</li>
-</ul>
-<strong>Returns</strong> <ul class="simple">
-<li><strong>edge</strong> - <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> : The floating-point, 1-channel edge image. </li>
-=======
 <li><p><strong>image</strong> - <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> : The input floating-point, 1-channel image. </p></li>
 <li><p><strong>params</strong> - <code class="docutils literal notranslate"><span class="pre">dict</span></code> : Stores the pair of parameter names and corresponding values.</p></li>
 </ul>
 <strong>Returns</strong> <ul class="simple">
 <li><p><strong>edge</strong> - <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> : The floating-point, 1-channel edge image. </p></li>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 </ul>
 </p>
 </dd></dl>
 
 <dl class="class">
-<<<<<<< HEAD
-<dt id="_CPPv3N4lime9DoGParamsE">
-<span id="_CPPv2N4lime9DoGParamsE"></span><span id="lime::DoGParams"></span><span class="target" id="structlime_1_1_do_g_params"></span><em class="property">struct </em><code class="descname">DoGParams</code><a class="headerlink" href="#_CPPv3N4lime9DoGParamsE" title="Permalink to this definition">¶</a><br /></dt>
-=======
 <dt id="_CPPv4N4lime9DoGParamsE">
 <span id="_CPPv3N4lime9DoGParamsE"></span><span id="_CPPv2N4lime9DoGParamsE"></span><span id="lime::DoGParams"></span><span class="target" id="structlime_1_1_do_g_params"></span><em class="property">struct </em><code class="sig-name descname">DoGParams</code><a class="headerlink" href="#_CPPv4N4lime9DoGParamsE" title="Permalink to this definition">¶</a><br /></dt>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 <dd><p>DoG parameters. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="function">
-<<<<<<< HEAD
-<dt id="_CPPv3N4lime9DoGParams9DoGParamsEdddd11NPREdgeType">
-<span id="_CPPv2N4lime9DoGParams9DoGParamsEdddd11NPREdgeType"></span><span id="lime::DoGParams::DoGParams__double.double.double.double.NPREdgeType"></span><span class="target" id="structlime_1_1_do_g_params_1a27d9a68fcb83c78be7cb5fa0874f3b78"></span>LIME_METHOD_API <code class="descname">DoGParams</code><span class="sig-paren">(</span>double <em>kappa</em> = 4.5, double <em>sigma</em> = 0.5, double <em>tau</em> = 0.95, double <em>phi</em> = 10.0, <a class="reference internal" href="#_CPPv3N4lime11NPREdgeTypeE" title="lime::NPREdgeType">NPREdgeType</a> <em>edgeType</em> = <a class="reference internal" href="#_CPPv3N4lime13NPR_EDGE_XDOGE" title="lime::NPR_EDGE_XDOG">NPR_EDGE_XDOG</a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4lime9DoGParams9DoGParamsEdddd11NPREdgeType" title="Permalink to this definition">¶</a><br /></dt>
-=======
 <dt id="_CPPv4N4lime9DoGParams9DoGParamsEdddd11NPREdgeType">
 <span id="_CPPv3N4lime9DoGParams9DoGParamsEdddd11NPREdgeType"></span><span id="_CPPv2N4lime9DoGParams9DoGParamsEdddd11NPREdgeType"></span><span id="lime::DoGParams::DoGParams__double.double.double.double.NPREdgeType"></span><span class="target" id="structlime_1_1_do_g_params_1a27d9a68fcb83c78be7cb5fa0874f3b78"></span>LIME_METHOD_API <code class="sig-name descname">DoGParams</code><span class="sig-paren">(</span>double <em>kappa</em> = 4.5, double <em>sigma</em> = 0.5, double <em>tau</em> = 0.95, double <em>phi</em> = 10.0, <a class="reference internal" href="#_CPPv4N4lime11NPREdgeTypeE" title="lime::NPREdgeType">NPREdgeType</a> <em>edgeType</em> = <a class="reference internal" href="#_CPPv4N4lime13NPR_EDGE_XDOGE" title="lime::NPR_EDGE_XDOG">NPR_EDGE_XDOG</a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4lime9DoGParams9DoGParamsEdddd11NPREdgeType" title="Permalink to this definition">¶</a><br /></dt>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 <dd><p>Constructor. </p>
 </dd></dl>
 
 </div>
 </dd></dl>
 
-<<<<<<< HEAD
-<dl class="type">
-<dt id="_CPPv3N4lime11NPREdgeTypeE">
-<span id="_CPPv2N4lime11NPREdgeTypeE"></span><span id="lime::NPREdgeType"></span><span class="target" id="namespacelime_1ab4340bc66216e353eca598f0ca487772"></span><em class="property">enum </em><code class="descclassname">lime<code class="descclassname">::</code></code><code class="descname">NPREdgeType</code><a class="headerlink" href="#_CPPv3N4lime11NPREdgeTypeE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>NPR edge types. </p>
-<p><em>Values:</em></p>
-<dl class="enumerator">
-<dt id="_CPPv3N4lime13NPR_EDGE_XDOGE">
-<span id="_CPPv2N4lime13NPR_EDGE_XDOGE"></span><span class="target" id="namespacelime_1ab4340bc66216e353eca598f0ca487772a147c83b4d93d01485375727e5e85a949"></span><code class="descname">NPR_EDGE_XDOG</code><a class="headerlink" href="#_CPPv3N4lime13NPR_EDGE_XDOGE" title="Permalink to this definition">¶</a><br /></dt>
-=======
 <dl class="enum">
 <dt id="_CPPv4N4lime11NPREdgeTypeE">
 <span id="_CPPv3N4lime11NPREdgeTypeE"></span><span id="_CPPv2N4lime11NPREdgeTypeE"></span><span class="target" id="namespacelime_1ab4340bc66216e353eca598f0ca487772"></span><em class="property">enum </em><code class="sig-prename descclassname">lime<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">NPREdgeType</code><a class="headerlink" href="#_CPPv4N4lime11NPREdgeTypeE" title="Permalink to this definition">¶</a><br /></dt>
@@ -730,18 +489,12 @@
 <dl class="enumerator">
 <dt id="_CPPv4N4lime13NPR_EDGE_XDOGE">
 <span id="_CPPv3N4lime13NPR_EDGE_XDOGE"></span><span id="_CPPv2N4lime13NPR_EDGE_XDOGE"></span><span class="target" id="namespacelime_1ab4340bc66216e353eca598f0ca487772a147c83b4d93d01485375727e5e85a949"></span><code class="sig-name descname">NPR_EDGE_XDOG</code><a class="headerlink" href="#_CPPv4N4lime13NPR_EDGE_XDOGE" title="Permalink to this definition">¶</a><br /></dt>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 <dd><p>Extended DoG (XDoG) filter. </p>
 </dd></dl>
 
 <dl class="enumerator">
-<<<<<<< HEAD
-<dt id="_CPPv3N4lime13NPR_EDGE_FDOGE">
-<span id="_CPPv2N4lime13NPR_EDGE_FDOGE"></span><span class="target" id="namespacelime_1ab4340bc66216e353eca598f0ca487772ab1c0ff0688e333f3c7bd2ac27605f007"></span><code class="descname">NPR_EDGE_FDOG</code><a class="headerlink" href="#_CPPv3N4lime13NPR_EDGE_FDOGE" title="Permalink to this definition">¶</a><br /></dt>
-=======
 <dt id="_CPPv4N4lime13NPR_EDGE_FDOGE">
 <span id="_CPPv3N4lime13NPR_EDGE_FDOGE"></span><span id="_CPPv2N4lime13NPR_EDGE_FDOGE"></span><span class="target" id="namespacelime_1ab4340bc66216e353eca598f0ca487772ab1c0ff0688e333f3c7bd2ac27605f007"></span><code class="sig-name descname">NPR_EDGE_FDOG</code><a class="headerlink" href="#_CPPv4N4lime13NPR_EDGE_FDOGE" title="Permalink to this definition">¶</a><br /></dt>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 <dd><p>Flow DoG (FDoG) filter. </p>
 </dd></dl>
 
@@ -751,17 +504,6 @@
 <div class="section" id="pde-based-filter">
 <h2>PDE-based filter<a class="headerlink" href="#pde-based-filter" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
-<<<<<<< HEAD
-<dt id="_CPPv3N4lime9pdeFilterEN2cv10InputArrayEN2cv11OutputArrayEidi">
-<span id="_CPPv2N4lime9pdeFilterEN2cv10InputArrayEN2cv11OutputArrayEidi"></span><span id="lime::pdeFilter__cv::InputArray.cv::OutputArray.i.double.i"></span><span class="target" id="namespacelime_1a8e54b1dafe3b49d74b83d4596d488e17"></span>void <code class="descclassname">lime<code class="descclassname">::</code></code><code class="descname">pdeFilter</code><span class="sig-paren">(</span>cv::InputArray <em>src</em>, cv::OutputArray <em>dst</em>, int <em>type</em>, double <em>lambda</em>, int <em>maxiter</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4lime9pdeFilterEN2cv10InputArrayEN2cv11OutputArrayEidi" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Apply PDE-based filtering (PDE = pertial differential equation). </p>
-<p><strong>Parameters</strong> <ul class="simple">
-<li><strong>src:</strong> The input floating-point, 1 or 3-channel image. </li>
-<li><strong>dst:</strong> The destination image; will have the save type as <strong>src</strong>. </li>
-<li><strong>type:</strong> Filter type (see <code class="docutils literal notranslate"><a class="reference internal" href="#namespacelime_1abe734d867b0ec867e08acc35551367e2"><span class="std std-ref"><span class="pre">lime::PDEType</span></span></a></code> ). </li>
-<li><strong>lambda:</strong> Filter strength for one iteration. </li>
-<li><strong>maxiter:</strong> # of iteration for solving the PDE.</li>
-=======
 <dt id="_CPPv4N4lime9pdeFilterEN2cv10InputArrayEN2cv11OutputArrayEidi">
 <span id="_CPPv3N4lime9pdeFilterEN2cv10InputArrayEN2cv11OutputArrayEidi"></span><span id="_CPPv2N4lime9pdeFilterEN2cv10InputArrayEN2cv11OutputArrayEidi"></span><span id="lime::pdeFilter__cv::InputArray.cv::OutputArray.i.double.i"></span><span class="target" id="namespacelime_1a8e54b1dafe3b49d74b83d4596d488e17"></span>void <code class="sig-prename descclassname">lime<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">pdeFilter</code><span class="sig-paren">(</span>cv::InputArray <em>src</em>, cv::OutputArray <em>dst</em>, int <em>type</em>, double <em>lambda</em>, int <em>maxiter</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4lime9pdeFilterEN2cv10InputArrayEN2cv11OutputArrayEidi" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Apply PDE-based filtering (PDE = pertial differential equation). </p>
@@ -771,7 +513,6 @@
 <li><p><strong>type:</strong> Filter type (see <code class="docutils literal notranslate"><a class="reference internal" href="#namespacelime_1abe734d867b0ec867e08acc35551367e2"><span class="std std-ref"><span class="pre">lime::PDEType</span></span></a></code> ). </p></li>
 <li><p><strong>lambda:</strong> Filter strength for one iteration. </p></li>
 <li><p><strong>maxiter:</strong> # of iteration for solving the PDE.</p></li>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 </ul>
 <strong>Python</strong> </p>
 <p><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python</span>
@@ -780,15 +521,6 @@
 </div>
 </p>
 <p><strong>Parameters</strong> <ul class="simple">
-<<<<<<< HEAD
-<li><strong>src</strong> - <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> : The floating-point, 1 or 3-channel image. </li>
-<li><strong>ftype</strong> - <code class="docutils literal notranslate"><span class="pre">int</span></code> : Filter type (see <code class="docutils literal notranslate"><a class="reference internal" href="#namespacelime_1abe734d867b0ec867e08acc35551367e2"><span class="std std-ref"><span class="pre">lime::PDEType</span></span></a></code> ). </li>
-<li><strong>lamdba</strong> - <code class="docutils literal notranslate"><span class="pre">double</span></code> </li>
-<li><strong>maxiter</strong> - <code class="docutils literal notranslate"><span class="pre">int</span></code> </li>
-</ul>
-<strong>Returns</strong> <ul class="simple">
-<li><strong>dst</strong> - <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> : The destination image with the same type as <strong>src</strong>. </li>
-=======
 <li><p><strong>src</strong> - <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> : The floating-point, 1 or 3-channel image. </p></li>
 <li><p><strong>ftype</strong> - <code class="docutils literal notranslate"><span class="pre">int</span></code> : Filter type (see <code class="docutils literal notranslate"><a class="reference internal" href="#namespacelime_1abe734d867b0ec867e08acc35551367e2"><span class="std std-ref"><span class="pre">lime::PDEType</span></span></a></code> ). </p></li>
 <li><p><strong>lamdba</strong> - <code class="docutils literal notranslate"><span class="pre">double</span></code> </p></li>
@@ -796,21 +528,10 @@
 </ul>
 <strong>Returns</strong> <ul class="simple">
 <li><p><strong>dst</strong> - <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> : The destination image with the same type as <strong>src</strong>. </p></li>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 </ul>
 </p>
 </dd></dl>
 
-<<<<<<< HEAD
-<dl class="type">
-<dt id="_CPPv3N4lime7PDETypeE">
-<span id="_CPPv2N4lime7PDETypeE"></span><span id="lime::PDEType"></span><span class="target" id="namespacelime_1abe734d867b0ec867e08acc35551367e2"></span><em class="property">enum </em><code class="descclassname">lime<code class="descclassname">::</code></code><code class="descname">PDEType</code><a class="headerlink" href="#_CPPv3N4lime7PDETypeE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>PDE-based filter types. </p>
-<p><em>Values:</em></p>
-<dl class="enumerator">
-<dt id="_CPPv3N4lime19PDE_ANISO_DIFFUSIONE">
-<span id="_CPPv2N4lime19PDE_ANISO_DIFFUSIONE"></span><span class="target" id="namespacelime_1abe734d867b0ec867e08acc35551367e2aa3b289127547be3beb7436ae8bcca5b5"></span><code class="descname">PDE_ANISO_DIFFUSION</code><a class="headerlink" href="#_CPPv3N4lime19PDE_ANISO_DIFFUSIONE" title="Permalink to this definition">¶</a><br /></dt>
-=======
 <dl class="enum">
 <dt id="_CPPv4N4lime7PDETypeE">
 <span id="_CPPv3N4lime7PDETypeE"></span><span id="_CPPv2N4lime7PDETypeE"></span><span class="target" id="namespacelime_1abe734d867b0ec867e08acc35551367e2"></span><em class="property">enum </em><code class="sig-prename descclassname">lime<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">PDEType</code><a class="headerlink" href="#_CPPv4N4lime7PDETypeE" title="Permalink to this definition">¶</a><br /></dt>
@@ -819,29 +540,18 @@
 <dl class="enumerator">
 <dt id="_CPPv4N4lime19PDE_ANISO_DIFFUSIONE">
 <span id="_CPPv3N4lime19PDE_ANISO_DIFFUSIONE"></span><span id="_CPPv2N4lime19PDE_ANISO_DIFFUSIONE"></span><span class="target" id="namespacelime_1abe734d867b0ec867e08acc35551367e2aa3b289127547be3beb7436ae8bcca5b5"></span><code class="sig-name descname">PDE_ANISO_DIFFUSION</code><a class="headerlink" href="#_CPPv4N4lime19PDE_ANISO_DIFFUSIONE" title="Permalink to this definition">¶</a><br /></dt>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 <dd><p>Anisotropic diffusion. </p>
 </dd></dl>
 
 <dl class="enumerator">
-<<<<<<< HEAD
-<dt id="_CPPv3N4lime16PDE_SHOCK_FILTERE">
-<span id="_CPPv2N4lime16PDE_SHOCK_FILTERE"></span><span class="target" id="namespacelime_1abe734d867b0ec867e08acc35551367e2aeed8cb99454a3b6b9c8adb2c9cf06dfd"></span><code class="descname">PDE_SHOCK_FILTER</code><a class="headerlink" href="#_CPPv3N4lime16PDE_SHOCK_FILTERE" title="Permalink to this definition">¶</a><br /></dt>
-=======
 <dt id="_CPPv4N4lime16PDE_SHOCK_FILTERE">
 <span id="_CPPv3N4lime16PDE_SHOCK_FILTERE"></span><span id="_CPPv2N4lime16PDE_SHOCK_FILTERE"></span><span class="target" id="namespacelime_1abe734d867b0ec867e08acc35551367e2aeed8cb99454a3b6b9c8adb2c9cf06dfd"></span><code class="sig-name descname">PDE_SHOCK_FILTER</code><a class="headerlink" href="#_CPPv4N4lime16PDE_SHOCK_FILTERE" title="Permalink to this definition">¶</a><br /></dt>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 <dd><p>Shock filter. </p>
 </dd></dl>
 
 <dl class="enumerator">
-<<<<<<< HEAD
-<dt id="_CPPv3N4lime18PDE_MEAN_CURVATUREE">
-<span id="_CPPv2N4lime18PDE_MEAN_CURVATUREE"></span><span class="target" id="namespacelime_1abe734d867b0ec867e08acc35551367e2af4122d4f7a8d8c7c3810808623564a66"></span><code class="descname">PDE_MEAN_CURVATURE</code><a class="headerlink" href="#_CPPv3N4lime18PDE_MEAN_CURVATUREE" title="Permalink to this definition">¶</a><br /></dt>
-=======
 <dt id="_CPPv4N4lime18PDE_MEAN_CURVATUREE">
 <span id="_CPPv3N4lime18PDE_MEAN_CURVATUREE"></span><span id="_CPPv2N4lime18PDE_MEAN_CURVATUREE"></span><span class="target" id="namespacelime_1abe734d867b0ec867e08acc35551367e2af4122d4f7a8d8c7c3810808623564a66"></span><code class="sig-name descname">PDE_MEAN_CURVATURE</code><a class="headerlink" href="#_CPPv4N4lime18PDE_MEAN_CURVATUREE" title="Permalink to this definition">¶</a><br /></dt>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 <dd><p>Mean curvature flow. </p>
 </dd></dl>
 
@@ -851,17 +561,6 @@
 <div class="section" id="vector-field-detection">
 <h2>Vector field detection<a class="headerlink" href="#vector-field-detection" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
-<<<<<<< HEAD
-<dt id="_CPPv3N4lime15calcVectorFieldEN2cv10InputArrayEN2cv11OutputArrayEiii">
-<span id="_CPPv2N4lime15calcVectorFieldEN2cv10InputArrayEN2cv11OutputArrayEiii"></span><span id="lime::calcVectorField__cv::InputArray.cv::OutputArray.i.i.i"></span><span class="target" id="namespacelime_1a46223a0908928b0bdc380cdbab340b56"></span>void <code class="descclassname">lime<code class="descclassname">::</code></code><code class="descname">calcVectorField</code><span class="sig-paren">(</span>cv::InputArray <em>input</em>, cv::OutputArray <em>angles</em>, int <em>ksize</em> = 5, int <em>vfieldType</em> = <a class="reference internal" href="#_CPPv3N4lime13VEC_FIELD_SSTE" title="lime::VEC_FIELD_SST">VEC_FIELD_SST</a>, int <em>edgeDetector</em> = <a class="reference internal" href="#_CPPv3N4lime17EDGE_DETECT_SOBELE" title="lime::EDGE_DETECT_SOBEL">EDGE_DETECT_SOBEL</a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv3N4lime15calcVectorFieldEN2cv10InputArrayEN2cv11OutputArrayEiii" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Compute smooth edge flow field from the input image. </p>
-<p><strong>Parameters</strong> <ul class="simple">
-<li><strong>img:</strong> The input 8-bit integer or floating-point, 1 or 3-channel image. </li>
-<li><strong>angles:</strong> The destination vector field; will have floating-point, 1-channel orientation angles. </li>
-<li><strong>ksize:</strong> Kernel size for smoothing the vector field </li>
-<li><strong>vfieldType:</strong> Algorithm to detect vector field (see <code class="docutils literal notranslate"><a class="reference internal" href="#namespacelime_1ada4252a07f697466d4a7d8fbb9377211"><span class="std std-ref"><span class="pre">lime::VecFieldType</span></span></a></code> ). </li>
-<li><strong>edgeDetector:</strong> Edge detection algorithm (see <code class="docutils literal notranslate"><a class="reference internal" href="#namespacelime_1a525f376bc88440c3e287fb4c6be5a1d0"><span class="std std-ref"><span class="pre">lime::EdgeDetector</span></span></a></code> ).</li>
-=======
 <dt id="_CPPv4N4lime15calcVectorFieldEN2cv10InputArrayEN2cv11OutputArrayEiii">
 <span id="_CPPv3N4lime15calcVectorFieldEN2cv10InputArrayEN2cv11OutputArrayEiii"></span><span id="_CPPv2N4lime15calcVectorFieldEN2cv10InputArrayEN2cv11OutputArrayEiii"></span><span id="lime::calcVectorField__cv::InputArray.cv::OutputArray.i.i.i"></span><span class="target" id="namespacelime_1a46223a0908928b0bdc380cdbab340b56"></span>void <code class="sig-prename descclassname">lime<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">calcVectorField</code><span class="sig-paren">(</span>cv::InputArray <em>input</em>, cv::OutputArray <em>angles</em>, int <em>ksize</em> = 5, int <em>vfieldType</em> = <a class="reference internal" href="#_CPPv4N4lime13VEC_FIELD_SSTE" title="lime::VEC_FIELD_SST">VEC_FIELD_SST</a>, int <em>edgeDetector</em> = <a class="reference internal" href="#_CPPv4N4lime17EDGE_DETECT_SOBELE" title="lime::EDGE_DETECT_SOBEL">EDGE_DETECT_SOBEL</a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4lime15calcVectorFieldEN2cv10InputArrayEN2cv11OutputArrayEiii" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Compute smooth edge flow field from the input image. </p>
@@ -871,7 +570,6 @@
 <li><p><strong>ksize:</strong> Kernel size for smoothing the vector field </p></li>
 <li><p><strong>vfieldType:</strong> Algorithm to detect vector field (see <code class="docutils literal notranslate"><a class="reference internal" href="#namespacelime_1ada4252a07f697466d4a7d8fbb9377211"><span class="std std-ref"><span class="pre">lime::VecFieldType</span></span></a></code> ). </p></li>
 <li><p><strong>edgeDetector:</strong> Edge detection algorithm (see <code class="docutils literal notranslate"><a class="reference internal" href="#namespacelime_1a525f376bc88440c3e287fb4c6be5a1d0"><span class="std std-ref"><span class="pre">lime::EdgeDetector</span></span></a></code> ).</p></li>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 </ul>
 <strong>Python</strong> </p>
 <p><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">angles</span> <span class="o">=</span> <span class="n">lime</span><span class="o">.</span><span class="n">calcVectorField</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">ksize</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">vftype</span> <span class="o">=</span> <span class="n">lime</span><span class="o">.</span><span class="n">VEC_FIELD_SST</span><span class="p">,</span> <span class="n">edtype</span> <span class="o">=</span> <span class="n">lime</span><span class="o">.</span><span class="n">EDGE_DETECT_SOBEL</span><span class="p">)</span>
@@ -879,31 +577,14 @@
 </div>
 </p>
 <p><strong>Parameters</strong> <ul class="simple">
-<<<<<<< HEAD
-<li><strong>img</strong> - <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> </li>
-<li><strong>ksize</strong> - <code class="docutils literal notranslate"><span class="pre">int</span></code> </li>
-<li><strong>vftype</strong> - <code class="docutils literal notranslate"><span class="pre">int</span></code> : Chosen from <code class="docutils literal notranslate"><a class="reference internal" href="#namespacelime_1ada4252a07f697466d4a7d8fbb9377211"><span class="std std-ref"><span class="pre">lime::VecFieldType</span></span></a></code> . </li>
-<li><strong>edtype</strong> - <code class="docutils literal notranslate"><span class="pre">int</span></code> : Chosen from <code class="docutils literal notranslate"><a class="reference internal" href="#namespacelime_1a525f376bc88440c3e287fb4c6be5a1d0"><span class="std std-ref"><span class="pre">lime::EdgeDetector</span></span></a></code> . </li>
-=======
 <li><p><strong>img</strong> - <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> </p></li>
 <li><p><strong>ksize</strong> - <code class="docutils literal notranslate"><span class="pre">int</span></code> </p></li>
 <li><p><strong>vftype</strong> - <code class="docutils literal notranslate"><span class="pre">int</span></code> : Chosen from <code class="docutils literal notranslate"><a class="reference internal" href="#namespacelime_1ada4252a07f697466d4a7d8fbb9377211"><span class="std std-ref"><span class="pre">lime::VecFieldType</span></span></a></code> . </p></li>
 <li><p><strong>edtype</strong> - <code class="docutils literal notranslate"><span class="pre">int</span></code> : Chosen from <code class="docutils literal notranslate"><a class="reference internal" href="#namespacelime_1a525f376bc88440c3e287fb4c6be5a1d0"><span class="std std-ref"><span class="pre">lime::EdgeDetector</span></span></a></code> . </p></li>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 </ul>
 </p>
 </dd></dl>
 
-<<<<<<< HEAD
-<dl class="type">
-<dt id="_CPPv3N4lime12VecFieldTypeE">
-<span id="_CPPv2N4lime12VecFieldTypeE"></span><span id="lime::VecFieldType"></span><span class="target" id="namespacelime_1ada4252a07f697466d4a7d8fbb9377211"></span><em class="property">enum </em><code class="descclassname">lime<code class="descclassname">::</code></code><code class="descname">VecFieldType</code><a class="headerlink" href="#_CPPv3N4lime12VecFieldTypeE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Vector field types. </p>
-<p><em>Values:</em></p>
-<dl class="enumerator">
-<dt id="_CPPv3N4lime13VEC_FIELD_SSTE">
-<span id="_CPPv2N4lime13VEC_FIELD_SSTE"></span><span class="target" id="namespacelime_1ada4252a07f697466d4a7d8fbb9377211aed557f9fe128c64e9225edf429e29640"></span><code class="descname">VEC_FIELD_SST</code><a class="headerlink" href="#_CPPv3N4lime13VEC_FIELD_SSTE" title="Permalink to this definition">¶</a><br /></dt>
-=======
 <dl class="enum">
 <dt id="_CPPv4N4lime12VecFieldTypeE">
 <span id="_CPPv3N4lime12VecFieldTypeE"></span><span id="_CPPv2N4lime12VecFieldTypeE"></span><span class="target" id="namespacelime_1ada4252a07f697466d4a7d8fbb9377211"></span><em class="property">enum </em><code class="sig-prename descclassname">lime<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">VecFieldType</code><a class="headerlink" href="#_CPPv4N4lime12VecFieldTypeE" title="Permalink to this definition">¶</a><br /></dt>
@@ -912,33 +593,17 @@
 <dl class="enumerator">
 <dt id="_CPPv4N4lime13VEC_FIELD_SSTE">
 <span id="_CPPv3N4lime13VEC_FIELD_SSTE"></span><span id="_CPPv2N4lime13VEC_FIELD_SSTE"></span><span class="target" id="namespacelime_1ada4252a07f697466d4a7d8fbb9377211aed557f9fe128c64e9225edf429e29640"></span><code class="sig-name descname">VEC_FIELD_SST</code><a class="headerlink" href="#_CPPv4N4lime13VEC_FIELD_SSTE" title="Permalink to this definition">¶</a><br /></dt>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 <dd><p>Smoothed structural tensor. </p>
 </dd></dl>
 
 <dl class="enumerator">
-<<<<<<< HEAD
-<dt id="_CPPv3N4lime13VEC_FIELD_ETFE">
-<span id="_CPPv2N4lime13VEC_FIELD_ETFE"></span><span class="target" id="namespacelime_1ada4252a07f697466d4a7d8fbb9377211a4d1c3c21c1af0664e27b6de9ff0da09f"></span><code class="descname">VEC_FIELD_ETF</code><a class="headerlink" href="#_CPPv3N4lime13VEC_FIELD_ETFE" title="Permalink to this definition">¶</a><br /></dt>
-=======
 <dt id="_CPPv4N4lime13VEC_FIELD_ETFE">
 <span id="_CPPv3N4lime13VEC_FIELD_ETFE"></span><span id="_CPPv2N4lime13VEC_FIELD_ETFE"></span><span class="target" id="namespacelime_1ada4252a07f697466d4a7d8fbb9377211a4d1c3c21c1af0664e27b6de9ff0da09f"></span><code class="sig-name descname">VEC_FIELD_ETF</code><a class="headerlink" href="#_CPPv4N4lime13VEC_FIELD_ETFE" title="Permalink to this definition">¶</a><br /></dt>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 <dd><p>Edge tangent filter. </p>
 </dd></dl>
 
 </dd></dl>
 
-<<<<<<< HEAD
-<dl class="type">
-<dt id="_CPPv3N4lime12EdgeDetectorE">
-<span id="_CPPv2N4lime12EdgeDetectorE"></span><span id="lime::EdgeDetector"></span><span class="target" id="namespacelime_1a525f376bc88440c3e287fb4c6be5a1d0"></span><em class="property">enum </em><code class="descclassname">lime<code class="descclassname">::</code></code><code class="descname">EdgeDetector</code><a class="headerlink" href="#_CPPv3N4lime12EdgeDetectorE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Edge detector types. </p>
-<p><em>Values:</em></p>
-<dl class="enumerator">
-<dt id="_CPPv3N4lime17EDGE_DETECT_SOBELE">
-<span id="_CPPv2N4lime17EDGE_DETECT_SOBELE"></span><span class="target" id="namespacelime_1a525f376bc88440c3e287fb4c6be5a1d0a9cfa51771044e5b279be7f7482ae845f"></span><code class="descname">EDGE_DETECT_SOBEL</code><a class="headerlink" href="#_CPPv3N4lime17EDGE_DETECT_SOBELE" title="Permalink to this definition">¶</a><br /></dt>
-=======
 <dl class="enum">
 <dt id="_CPPv4N4lime12EdgeDetectorE">
 <span id="_CPPv3N4lime12EdgeDetectorE"></span><span id="_CPPv2N4lime12EdgeDetectorE"></span><span class="target" id="namespacelime_1a525f376bc88440c3e287fb4c6be5a1d0"></span><em class="property">enum </em><code class="sig-prename descclassname">lime<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">EdgeDetector</code><a class="headerlink" href="#_CPPv4N4lime12EdgeDetectorE" title="Permalink to this definition">¶</a><br /></dt>
@@ -947,18 +612,12 @@
 <dl class="enumerator">
 <dt id="_CPPv4N4lime17EDGE_DETECT_SOBELE">
 <span id="_CPPv3N4lime17EDGE_DETECT_SOBELE"></span><span id="_CPPv2N4lime17EDGE_DETECT_SOBELE"></span><span class="target" id="namespacelime_1a525f376bc88440c3e287fb4c6be5a1d0a9cfa51771044e5b279be7f7482ae845f"></span><code class="sig-name descname">EDGE_DETECT_SOBEL</code><a class="headerlink" href="#_CPPv4N4lime17EDGE_DETECT_SOBELE" title="Permalink to this definition">¶</a><br /></dt>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 <dd><p>Sobel filter. </p>
 </dd></dl>
 
 <dl class="enumerator">
-<<<<<<< HEAD
-<dt id="_CPPv3N4lime22EDGE_DETECT_ROTATIONALE">
-<span id="_CPPv2N4lime22EDGE_DETECT_ROTATIONALE"></span><span class="target" id="namespacelime_1a525f376bc88440c3e287fb4c6be5a1d0a09fdd23d8adf0f2da7473b4f1ba3b822"></span><code class="descname">EDGE_DETECT_ROTATIONAL</code><a class="headerlink" href="#_CPPv3N4lime22EDGE_DETECT_ROTATIONALE" title="Permalink to this definition">¶</a><br /></dt>
-=======
 <dt id="_CPPv4N4lime22EDGE_DETECT_ROTATIONALE">
 <span id="_CPPv3N4lime22EDGE_DETECT_ROTATIONALE"></span><span id="_CPPv2N4lime22EDGE_DETECT_ROTATIONALE"></span><span class="target" id="namespacelime_1a525f376bc88440c3e287fb4c6be5a1d0a09fdd23d8adf0f2da7473b4f1ba3b822"></span><code class="sig-name descname">EDGE_DETECT_ROTATIONAL</code><a class="headerlink" href="#_CPPv4N4lime22EDGE_DETECT_ROTATIONALE" title="Permalink to this definition">¶</a><br /></dt>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 <dd><p>Rotationally invariant edge detector. </p>
 </dd></dl>
 
@@ -978,11 +637,7 @@
         <a href="misc.html" class="btn btn-neutral float-right" title="Misc module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-<<<<<<< HEAD
-        <a href="core.html" class="btn btn-neutral" title="Core module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-=======
         <a href="core.html" class="btn btn-neutral float-left" title="Core module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
       
     </div>
   
@@ -991,11 +646,7 @@
 
   <div role="contentinfo">
     <p>
-<<<<<<< HEAD
-        &copy; Copyright MIT License 2016-2017, Tatsuya Yatagawa (tatsy).
-=======
         &copy; Copyright MIT License 2016-2017, Tatsuya Yatagawa (tatsy)
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 
     </p>
   </div>
@@ -1012,45 +663,16 @@
   
 
 
-<<<<<<< HEAD
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'0.3.0',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-=======
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-<<<<<<< HEAD
-  </script> 
-=======
   </script>
 
   
   
     
    
->>>>>>> 6cebc6323338b1e3cff8fcc4984f3603c61b3524
 
 </body>
 </html>
