@@ -11,6 +11,7 @@ VERSION
 *.jpg
 *.jpeg
 *.gif
+!tests/data/*
 
 # VisualStudio code
 .vs/*
