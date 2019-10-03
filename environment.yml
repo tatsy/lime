@@ -8,7 +8,6 @@ dependencies:
   - opencv>=3.0.0
   - matplotlib
   - scikit-image
-  - ipython
   - jupyter
   - sphinx
   - sphinx_rtd_theme

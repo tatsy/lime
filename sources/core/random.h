@@ -5,6 +5,8 @@
 #ifndef _CORE_RANDOM_H_
 #define _CORE_RANDOM_H_
 
+#include <random>
+
 #include "common.h"
 
 namespace lime {
@@ -15,8 +17,9 @@ namespace lime {
  **/
 class LIME_API Random {
 public:
-    explicit Random(unsigned int seed = 0);
+    explicit Random(uint32_t seed = UINT_MAX);
 
+    //! Generate a random 32-bit signed integer.
     int nextInt();
 
     //! Generate a random integer from [0, n-1].
@@ -30,17 +33,7 @@ public:
 
 private:
     // Private methods
-    void init_genrand(unsigned int s);
-    unsigned int genrand_int32(void);
-    int genrand_int31(void);
-    double genrand_real2(void);
-
-    // Private parameters
-    static const int N = 624;
-    static const int M = 397;
-
-    unsigned int mt[N];
-    int mti;
+    std::mt19937 mt;
 
 };  // class Random
 

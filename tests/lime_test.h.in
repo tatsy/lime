@@ -1,0 +1,12 @@
+#ifdef _MSC_VER
+#pragma once
+#endif
+
+#ifndef _TESTS_LIME_TEST_H_
+#define _TESTS_LIME_TEST_H_
+
+#include <string>
+
+static const std::string DATA_DIR = "@LIME_TEST_ROOT@/data/";
+
+#endif  // _TESTS_LIME_TEST_H_

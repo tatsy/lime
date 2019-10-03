@@ -13,9 +13,11 @@ double MSE(cv::InputArray I_, cv::InputArray J_) {
     cv::Mat I = I_.getMat();
     cv::Mat J = J_.getMat();
 
-    Assertion(I.cols == J.cols && I.rows && J.rows, "Sizes of two images must be the same!");
+    Assertion(I.cols == J.cols && I.rows == J.rows, "Sizes of two images must be the same!");
     Assertion(I.depth() == J.depth(), "Bit depths of two images must be the same!");
-    Assertion(I.channels() == 1 && J.channels() == 1, "Two images must be grayscale!");
+    Assertion((I.channels() == 1 && J.channels() == 1) ||
+              (I.channels() == 3 && J.channels() == 3),
+              "Two images must have 1 or 3 channels!");
     Assertion((I.depth() == CV_8U && J.depth() == CV_8U) ||
               (I.depth() == CV_32F && J.depth() == CV_32F),
               "Two images must be with 8-bit unsigned integer or 32-bit floating point number");
@@ -26,6 +28,14 @@ double MSE(cv::InputArray I_, cv::InputArray J_) {
 
     if (J.depth() == CV_32F) {
         J.convertTo(J, CV_8U, 255.0);
+    }
+
+    if (I.channels() == 3) {
+        cv::cvtColor(I, I, cv::COLOR_BGR2GRAY);
+    }
+
+    if (J.channels() == 3) {
+        cv::cvtColor(J, J, cv::COLOR_BGR2GRAY);
     }
 
     const int width = I.cols;
@@ -43,6 +53,9 @@ double MSE(cv::InputArray I_, cv::InputArray J_) {
 double PSNR(cv::InputArray I, cv::InputArray J) {
     const int maxI = 255;
     const double mse = MSE(I, J);
+    if (mse == 0.0) {
+        return INFTY;
+    }
     return 10.0 * std::log10(maxI * maxI / mse);
 }
 
@@ -55,9 +68,11 @@ double SSIM(cv::InputArray I_, cv::InputArray J_) {
     cv::Mat I = I_.getMat();
     cv::Mat J = J_.getMat();
 
-    Assertion(I.cols == J.cols && I.rows && J.rows, "Sizes of two images must be the same!");
+    Assertion(I.cols == J.cols && I.rows == J.rows, "Sizes of two images must be the same!");
     Assertion(I.depth() == J.depth(), "Bit depths of two images must be the same!");
-    Assertion(I.channels() == 1 && J.channels() == 1, "Two images must be grayscale!");
+    Assertion((I.channels() == 1 && J.channels() == 1) ||
+              (I.channels() == 3 && J.channels() == 3),
+              "Two images must have 1 or 3 channels!");
     Assertion((I.depth() == CV_8U && J.depth() == CV_8U) ||
               (I.depth() == CV_32F && J.depth() == CV_32F),
               "Two images must be with 8-bit unsigned integer or 32-bit floating point number");
@@ -68,6 +83,14 @@ double SSIM(cv::InputArray I_, cv::InputArray J_) {
 
     if (J.depth() == CV_32F) {
         J.convertTo(J, CV_8U, 255.0);
+    }
+
+    if (I.channels() == 3) {
+        cv::cvtColor(I, I, cv::COLOR_BGR2GRAY);
+    }
+
+    if (J.channels() == 3) {
+        cv::cvtColor(J, J, cv::COLOR_BGR2GRAY);
     }
 
     const int width = I.cols;
@@ -94,8 +117,8 @@ double SSIM(cv::InputArray I_, cv::InputArray J_) {
             cov_xy += diff_x * diff_y;
         }
     }
-    sig_x /= totalSize;
-    sig_y /= totalSize;
+    sig_x = std::sqrt(sig_x / totalSize);
+    sig_y = std::sqrt(sig_y / totalSize);
     cov_xy /= totalSize;
 
     const double k1 = 0.01;

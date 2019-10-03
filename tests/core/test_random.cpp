@@ -6,7 +6,7 @@ using lime::Random;
 
 static const int nTest = 100;
 static const int nLoop = 50000;
-Random rng = Random((unsigned int)time(0));
+Random rng = Random();
 
 TEST(Random, RandInt) {
     int nBins = 10;
